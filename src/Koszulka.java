@@ -34,4 +34,14 @@ public class Koszulka extends Produkt{
     public void setKrojKoszulki(String krojKoszulki) {
         this.krojKoszulki = krojKoszulki;
     }
+
+     @Override
+    public String toString() {
+        return  super.toString()+
+                " Koszulka {" +
+                "rozmiar: " + rozmiarKoszulki +
+                ", dekolt: '" + dekoltKoszulki + '\'' +
+                ", krój: '" + krojKoszulki + '\'' +
+                '}';
+    }
 }
