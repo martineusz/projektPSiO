@@ -38,10 +38,10 @@ public class Obuwie extends Produkt{
     @Override
     public String toString() {
         return  super.toString()+
-                " Obuwie{" +
-                "rozmiarObuwia=" + rozmiarObuwia +
-                ", typObuwia='" + typObuwia + '\'' +
-                ", typPodeszwy='" + typPodeszwy + '\'' +
+                " Obuwie {" +
+                "rozmiar: " + rozmiarObuwia +
+                ", typ: '" + typObuwia + '\'' +
+                ", typ podeszwy: '" + typPodeszwy + '\'' +
                 '}';
     }
 }
