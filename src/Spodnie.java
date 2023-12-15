@@ -45,5 +45,16 @@ public void setKrojSpodni(String krojSpodni) {
 	this.krojSpodni=krojSpodni;
 }
 
+@Override
+public String toString() {
+    return super.toString()+
+            " Spodnie {" +
+            "rozmiar: " + rozmiarSpodni +
+            ", długość: '" + dlugoscSpodni + '\'' +
+            ", typ: '" + typSpodni + '\'' +
+            ", krój: '" + krojSpodni + '\'' +
+            '}';
+}
+}
     
 }
