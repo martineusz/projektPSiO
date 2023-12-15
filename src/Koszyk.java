@@ -13,4 +13,6 @@ public class Koszyk implements Serializable {
     public void platnosc(){
         placenieStrategia.zaplac();
     }
+
+    public void dodajDoKoszyka(Produkt produkt) {listaProduktow.add(produkt);}
 }
