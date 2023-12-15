@@ -1,10 +1,10 @@
-public class Bluzy extends Produkt{
+public class Bluza extends Produkt{
     private String rozmiarBluzy;
     private boolean czyZKapturem;
     private String dekoltBluzy;
     private String krojBluzy;
     
-    public Bluzy(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material,
+    public Bluza(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material,
                   String kolor, Producent producent, String rozmiarBluzy, boolean czyZKapturem, String dekoltBluzy, String krojBluzy){
         super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, producent);
         this.rozmiarBluzy=rozmiarBluzy;
