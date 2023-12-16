@@ -399,7 +399,7 @@ public class Sklep {
         }
     }
     public void zapiszListeKlientow(){
-        try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream(new File("ListaKlientow.ser"))){
+        try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("ListaKlientow.ser"))){
             for(int i=0; i<listaKlientow.size(); i++){
                 zapis.writeObject(listaKlientow.get(i));
             }
@@ -408,7 +408,7 @@ public class Sklep {
         }
     }
     public void wczytajListeProduktow(){
-        try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream(new File("ListaProduktow.ser"))){
+        try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("ListaProduktow.ser"))){
             Object obj = null;
             while (true) {
                 try {
