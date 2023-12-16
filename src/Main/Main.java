@@ -8,7 +8,7 @@ import Obserwator.*;
 public class Main {
     public static void main(String[] args) {
         Sklep sklep = new Sklep(new ArrayList<Klient>(), null, false, new ArrayList<Produkt>());
-        Promocja promocja = new Promocja("Promocja!");
+        Promocja promocja = new Promocja();
 
         sklep.wczytajListeProduktow();
         sklep.wczytajListeKlientow();

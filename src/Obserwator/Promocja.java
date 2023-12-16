@@ -4,22 +4,15 @@ import Produkt.*;
 import java.util.ArrayList;
 
 public class Promocja implements Podmiot {
-	
-	String nazwa;
 	ArrayList<Obserwator> obserwatorzy = new ArrayList<Obserwator>();
-	
 
-
-	public Promocja(String nazwa) {
-		this.nazwa = nazwa;
-	}
 
 	
-	public void ustawPromocjeNaProdukty(ArrayList<Produkt> produkty, float obnizka) {
+	public void ustawPromocjeNaProdukty(ArrayList<Produkt> produkty, float obnizka, String nazwa) {
 		for (Produkt produkt : produkty) {
 			produkt.setCena(produkt.getCena()*(1-obnizka));
 		}
-		powiadomObserwatorow();
+		powiadomObserwatorow(nazwa);
 	}
 	
 	@Override
@@ -33,7 +26,7 @@ public class Promocja implements Podmiot {
 	}
 
 	@Override
-	public void powiadomObserwatorow() {
+	public void powiadomObserwatorow(String nazwa) {
 		for (Obserwator obserwator : obserwatorzy) {
 			obserwator.powiadom(nazwa);
 		}
