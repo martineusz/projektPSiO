@@ -1,4 +1,5 @@
-import java.text.DecimalFormat;
+package Main;
+
 import java.util.List;
 
 public class Klient {
