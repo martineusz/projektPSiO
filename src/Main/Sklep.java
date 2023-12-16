@@ -52,7 +52,7 @@ public class Sklep {
         this.listaProduktow = listaProduktow;
     }
 
-    public void zalogujSie(){
+    public boolean zalogujSie(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Podaj login: ");
         String login=scan.nextLine();
@@ -63,10 +63,11 @@ public class Sklep {
                 this.zalogowanyKlient=listaKlientow.get(i);
                 this.czyZalogowany=true;
                 System.out.println("Zalogowano!");
-                return;
+                return true;
             }
         }
         System.out.println("Hasło lub login nieprawidłowe");
+        return false;
     }
     public void wylogujSie(){
         if(czyZalogowany) {
@@ -384,7 +385,7 @@ public class Sklep {
 
 
     public void wczytajListeKlientow(){
-        try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream(new File("ListaKlientow.ser")))) {
+        try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("ListaKlientow.ser"))) {
             Object obj = null;
             while (true) {
                 try {
@@ -399,7 +400,7 @@ public class Sklep {
         }
     }
     public void zapiszListeKlientow(){
-        try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("ListaKlientow.ser"))){
+        try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream(new File("ListaKlientow.ser")))){
             for(int i=0; i<listaKlientow.size(); i++){
                 zapis.writeObject(listaKlientow.get(i));
             }
@@ -423,7 +424,7 @@ public class Sklep {
         }
     }
     public void zapiszListeProduktow(){
-        try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream(new File("ListaProduktow.ser"))){
+        try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream(new File("ListaProduktow.ser")))){
             for(int i=0; i<listaProduktow.size(); i++){
                 zapis.writeObject(listaProduktow.get(i));
             }
