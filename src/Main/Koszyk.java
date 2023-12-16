@@ -63,7 +63,7 @@ public class Koszyk implements Serializable {
         }
     }
 
-    public void SprawdzZawartosc() {
+    public void sprawdzZawartosc() {
         if (listaProduktow.size() == 0) {
             System.out.println("PUSTY KOSZYK");
         } else {

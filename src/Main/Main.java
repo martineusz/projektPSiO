@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Sklep sklep = new Sklep(new ArrayList<Klient>(), null, false, new ArrayList<Produkt>());
         Promocja promocja = new Promocja();
+        Koszyk koszyk = new Koszyk();
 
         sklep.wczytajListeProduktow();
         sklep.wczytajListeKlientow();
@@ -40,7 +41,7 @@ public class Main {
 
                                                 break;
                                             case "2": // sprawdz zawartosc
-
+                                                koszyk.sprawdzZawartosc();
                                                 break;
                                             case "3": // zloz zamowienie
 

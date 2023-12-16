@@ -51,7 +51,7 @@ public class Sklep {
     public void setListaProduktow(List<Produkt> listaProduktow) {
         this.listaProduktow = listaProduktow;
     }
-
+    private static final long serialVersionUID = 123456789L;
     public boolean zalogujSie(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Podaj login: ");
@@ -382,8 +382,6 @@ public class Sklep {
             System.out.println("Produktu nie ma na liście!");
         }
     }
-
-
     public void wczytajListeKlientow(){
         try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("ListaKlientow.ser"))) {
             Object obj = null;
@@ -400,7 +398,7 @@ public class Sklep {
         }
     }
     public void zapiszListeKlientow(){
-        try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream(new File("ListaKlientow.ser")))){
+        try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("ListaKlientow.ser"))){
             for(int i=0; i<listaKlientow.size(); i++){
                 zapis.writeObject(listaKlientow.get(i));
             }
@@ -424,7 +422,7 @@ public class Sklep {
         }
     }
     public void zapiszListeProduktow(){
-        try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream(new File("ListaProduktow.ser")))){
+        try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("ListaProduktow.ser"))){
             for(int i=0; i<listaProduktow.size(); i++){
                 zapis.writeObject(listaProduktow.get(i));
             }
