@@ -52,7 +52,7 @@ public class Sklep {
     public void setListaProduktow(List<Produkt> listaProduktow) {
         this.listaProduktow = listaProduktow;
     }
-    private static final long serialVersionUID = 1234563789L;
+    private static final long serialVersionUID = 1234123563789L;
     public boolean zalogujSie(){
         Scanner scan = new Scanner(System.in);
         System.out.print("Podaj login: ");
@@ -394,7 +394,7 @@ public class Sklep {
                     break;
                 }
             }
-        }catch (Exception e){
+        }catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
     }
@@ -403,7 +403,7 @@ public class Sklep {
             for(int i=0; i<listaKlientow.size(); i++){
                 zapis.writeObject(listaKlientow.get(i));
             }
-        } catch (Exception e){
+        } catch (IOException e){
             e.printStackTrace();
         }
     }
@@ -418,7 +418,7 @@ public class Sklep {
                     break;
                 }
             }
-        }catch (Exception e){
+        }catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
     }
@@ -427,7 +427,7 @@ public class Sklep {
             for(int i=0; i<listaProduktow.size(); i++){
                 zapis.writeObject(listaProduktow.get(i));
             }
-        } catch (Exception e){
+        } catch (IOException e){
             e.printStackTrace();
         }
     }

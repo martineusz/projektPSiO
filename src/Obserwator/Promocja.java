@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Promocja implements Podmiot, Serializable {
 	ArrayList<Obserwator> obserwatorzy = new ArrayList<Obserwator>();
+	private static final long serialVersionUID = -5379526219749958428L;
 
 	
 	public void ustawPromocjeNaProdukty(ArrayList<Produkt> produkty, float obnizka, String nazwa) {

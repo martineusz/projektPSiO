@@ -18,6 +18,7 @@ public class Klient implements Serializable {
     final Koszyk koszyk;
     private boolean CzyPromocja;
     Obserwator obs;
+    private static final long serialVersionUID = 1275997691580326078L;
 
     public Klient(String imie, String nazwisko, String login, String haslo, String numer_telefonu) {
         this.login = login;
@@ -105,6 +106,7 @@ public class Klient implements Serializable {
             System.out.println(this.imie + "nie jest zapisany na promocje");
         }
     }
+
 
 
     private void dodajDoNewslettera(Podmiot podmiot, String rodzaj) {

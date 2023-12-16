@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 public class ObserwatorEmail implements Obserwator, Serializable {
 	String adresEmailKlienta;
+	public void x(){
+		System.out.println("ss");
+	}
 
 	public ObserwatorEmail(String adresEmailKlienta) {
 		this.adresEmailKlienta = adresEmailKlienta;

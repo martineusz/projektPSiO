@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Koszyk implements Serializable {
     private double wartoscZamowienia;
+    private static final long serialVersionUID = 5580514503487693430L;
     private ArrayList<Produkt> listaProduktow = null;
     //private PlaceniaStrategia placenieStrategia; // = new PlacenieStrategia();
     private DostawaStrategia dostawaStrategia; // -||-||-||-||-||-||-||-||-
