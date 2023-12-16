@@ -11,8 +11,12 @@ public class Main {
         Promocja promocja = new Promocja();
         Koszyk koszyk = new Koszyk();
 
+        promocja.wczytajObserwatorowPromocji();
         sklep.wczytajListeProduktow();
         sklep.wczytajListeKlientow();
+
+        promocja.dodajObserwatora(new ObserwatorEmail("weqewq"));
+        promocja.dodajObserwatora(new ObserwatorSMS("dfusjhfsuyhis"));
 
         Scanner scan = new Scanner(System.in);
         String wybor;
@@ -96,6 +100,7 @@ public class Main {
 
         sklep.zapiszListeProduktow();
         sklep.zapiszListeKlientow();
+        promocja.zapiszObserwatorowPromocji();
     }
 
     public static void menu(){
