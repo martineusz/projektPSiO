@@ -51,12 +51,12 @@ public class Sklep {
     public void setListaProduktow(List<Produkt> listaProduktow) {
         this.listaProduktow = listaProduktow;
     }
-    private static final long serialVersionUID = 123456789L;
+    private static final long serialVersionUID = 1234563789L;
     public boolean zalogujSie(){
         Scanner scan = new Scanner(System.in);
-        System.out.println("Podaj login: ");
+        System.out.print("Podaj login: ");
         String login=scan.nextLine();
-        System.out.println("Podaj haslo: ");
+        System.out.print("Podaj haslo: ");
         String haslo=scan.nextLine();
         for(int i=0; i<listaKlientow.size(); i++){
             if(login.equals(listaKlientow.get(i).getLogin())&&haslo.equals(listaKlientow.get(i).getHaslo())){
@@ -81,7 +81,7 @@ public class Sklep {
     //rejestracja
     public void zarejestruj(){
         Scanner scan = new Scanner(System.in);
-        System.out.println("Podaj login : ");
+        System.out.print("Podaj login : ");
         String login=scan.nextLine();
         if(login.equals("")){
             System.out.println("Niepoprawny login");
@@ -95,26 +95,26 @@ public class Sklep {
                 return;
             }
         }
-        System.out.println("Podaj haslo : ");
+        System.out.print("Podaj haslo : ");
         String haslo=scan.nextLine();
         if(haslo.length()<8){
             System.out.println("Haslo musi miec conajmniej 8 znakow!");
             zarejestruj();
             return;
         }
-        System.out.println("Podaj imie : ");
+        System.out.print("Podaj imie : ");
         String imie=scan.nextLine();
         if(imie.equals("")){
             zarejestruj();
             return;
         }
-        System.out.println("Podaj nazwisko : ");
+        System.out.print("Podaj nazwisko : ");
         String nazwisko=scan.nextLine();
         if(nazwisko.equals("")){
             zarejestruj();
             return;
         }
-        System.out.println("Podaj numer telefonu : ");
+        System.out.print("Podaj numer telefonu : ");
         String numerTelefonu=scan.nextLine();
         if(numerTelefonu.length()!=9){
             System.out.println("Niepoprawny numer telefonu!");
@@ -126,7 +126,7 @@ public class Sklep {
             zarejestruj();
             return;
         }
-        System.out.println("Podaj adres Email : ");
+        System.out.print("Podaj adres Email : ");
         String adresEmail=scan.nextLine();
         if(!adresEmail.contains("@")||adresEmail.indexOf("@")==0||adresEmail.indexOf("@")==adresEmail.length()-1){
             System.out.println("Email nieprawidlowy");
@@ -151,9 +151,9 @@ public class Sklep {
     public void usunKonto(){
         if(czyZalogowany) {
             Scanner scan = new Scanner(System.in);
-            System.out.println("Podaj login");
+            System.out.print("Podaj login");
             String login = scan.nextLine();
-            System.out.println("Podaj haslo");
+            System.out.print("Podaj haslo");
             String haslo = scan.nextLine();
                 if (login.equals(zalogowanyKlient.getLogin()) && haslo.equals(zalogowanyKlient.getHaslo())) {
                     if (listaKlientow.contains(zalogowanyKlient)) {
@@ -186,43 +186,43 @@ public class Sklep {
     public void dodajObuwie(){
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Podaj id produktu: ");
+        System.out.print("Podaj id produktu: ");
         String idProduktu=scan.nextLine();
 
-        System.out.println("Podaj cene: ");
+        System.out.print("Podaj cene: ");
         double cena= scan.nextDouble();
         scan.nextLine();
 
-        System.out.println("Podaj nazwe produktu: ");
+        System.out.print("Podaj nazwe produktu: ");
         String nazwa=scan.nextLine();
 
-        System.out.println("Podaj ilosc w magazynie: ");
+        System.out.print("Podaj ilosc w magazynie: ");
         int iloscWMagazynie=scan.nextInt();
         scan.nextLine();
 
-        System.out.println("Podaj opis: ");
+        System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
 
-        System.out.println("Podaj material: ");
+        System.out.print("Podaj material: ");
         String material=scan.nextLine();
 
-        System.out.println("Podaj kolor: ");
+        System.out.print("Podaj kolor: ");
         String kolor=scan.nextLine();
 
-        System.out.println("Podaj nazwe producenta: ");
+        System.out.print("Podaj nazwe producenta: ");
         String nazwaProducenta=scan.nextLine();
 
-        System.out.println("Podaj kraj pochodzenia: ");
+        System.out.print("Podaj kraj pochodzenia: ");
         String krajPochodzenia=scan.nextLine();
 
-        System.out.println("Podaj rozmiar obuwia: ");
+        System.out.print("Podaj rozmiar obuwia: ");
         float rozmiarObuwia= scan.nextFloat();
         scan.nextLine();
 
-        System.out.println("Podaj typ obuwia: ");
+        System.out.print("Podaj typ obuwia: ");
         String typObuwia=scan.nextLine();
 
-        System.out.println("podaj typ podeszwy: ");
+        System.out.print("podaj typ podeszwy: ");
         String typPodeszwy=scan.nextLine();
 
 
@@ -232,46 +232,46 @@ public class Sklep {
     public void dodajBluze(){
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Podaj id produktu: ");
+        System.out.print("Podaj id produktu: ");
         String idProduktu=scan.nextLine();
 
-        System.out.println("Podaj cene: ");
+        System.out.print("Podaj cene: ");
         double cena= scan.nextDouble();
         scan.nextLine();
 
-        System.out.println("Podaj nazwe produktu: ");
+        System.out.print("Podaj nazwe produktu: ");
         String nazwa=scan.nextLine();
 
-        System.out.println("Podaj ilosc w magazynie: ");
+        System.out.print("Podaj ilosc w magazynie: ");
         int iloscWMagazynie=scan.nextInt();
         scan.nextLine();
 
-        System.out.println("Podaj opis: ");
+        System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
 
-        System.out.println("Podaj material: ");
+        System.out.print("Podaj material: ");
         String material=scan.nextLine();
 
-        System.out.println("Podaj kolor: ");
+        System.out.print("Podaj kolor: ");
         String kolor=scan.nextLine();
 
-        System.out.println("Podaj nazwe producenta: ");
+        System.out.print("Podaj nazwe producenta: ");
         String nazwaProducenta=scan.nextLine();
 
-        System.out.println("Podaj kraj pochodzenia: ");
+        System.out.print("Podaj kraj pochodzenia: ");
         String krajPochodzenia=scan.nextLine();
 
-        System.out.println("Podaj rozmiar bluzy: ");
+        System.out.print("Podaj rozmiar bluzy: ");
         String rozmiarBluzy=scan.nextLine();
 
-        System.out.println("Czy jest z kapturem (true|false): ");
+        System.out.print("Czy jest z kapturem (true|false): ");
         boolean czyZKapturem=scan.nextBoolean();
         scan.nextLine();
 
-        System.out.println("Podaj dekolt bluzy: ");
+        System.out.print("Podaj dekolt bluzy: ");
         String dekoltBluzy=scan.nextLine();
 
-        System.out.println("Podaj kroj bluzy: ");
+        System.out.print("Podaj kroj bluzy: ");
         String krojBluzy=scan.nextLine();
 
 
@@ -281,42 +281,42 @@ public class Sklep {
     public void dodajKoszulke(){
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Podaj id produktu: ");
+        System.out.print("Podaj id produktu: ");
         String idProduktu=scan.nextLine();
 
-        System.out.println("Podaj cene: ");
+        System.out.print("Podaj cene: ");
         double cena= scan.nextDouble();
         scan.nextLine();
 
-        System.out.println("Podaj nazwe produktu: ");
+        System.out.print("Podaj nazwe produktu: ");
         String nazwa=scan.nextLine();
 
-        System.out.println("Podaj ilosc w magazynie: ");
+        System.out.print("Podaj ilosc w magazynie: ");
         int iloscWMagazynie=scan.nextInt();
         scan.nextLine();
 
-        System.out.println("Podaj opis: ");
+        System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
 
-        System.out.println("Podaj material: ");
+        System.out.print("Podaj material: ");
         String material=scan.nextLine();
 
-        System.out.println("Podaj kolor: ");
+        System.out.print("Podaj kolor: ");
         String kolor=scan.nextLine();
 
-        System.out.println("Podaj nazwe producenta: ");
+        System.out.print("Podaj nazwe producenta: ");
         String nazwaProducenta=scan.nextLine();
 
-        System.out.println("Podaj kraj pochodzenia: ");
+        System.out.print("Podaj kraj pochodzenia: ");
         String krajPochodzenia=scan.nextLine();
 
-        System.out.println("Podaj rozmiar koszulki: ");
+        System.out.print("Podaj rozmiar koszulki: ");
         String rozmiarKoszulki=scan.nextLine();
 
-        System.out.println("Podaj dekolt koszulki: ");
+        System.out.print("Podaj dekolt koszulki: ");
         String dekoltKoszulki=scan.nextLine();
 
-        System.out.println("Podaj kroj koszulki: ");
+        System.out.print("Podaj kroj koszulki: ");
         String krojKoszulki=scan.nextLine();
 
 
@@ -326,46 +326,46 @@ public class Sklep {
     public void dodajSpodnie(){
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Podaj id produktu: ");
+        System.out.print("Podaj id produktu: ");
         String idProduktu=scan.nextLine();
 
-        System.out.println("Podaj cene: ");
+        System.out.print("Podaj cene: ");
         double cena= scan.nextDouble();
         scan.nextLine();
 
-        System.out.println("Podaj nazwe produktu: ");
+        System.out.print("Podaj nazwe produktu: ");
         String nazwa=scan.nextLine();
 
-        System.out.println("Podaj ilosc w magazynie: ");
+        System.out.print("Podaj ilosc w magazynie: ");
         int iloscWMagazynie=scan.nextInt();
         scan.nextLine();
 
-        System.out.println("Podaj opis: ");
+        System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
 
-        System.out.println("Podaj material: ");
+        System.out.print("Podaj material: ");
         String material=scan.nextLine();
 
-        System.out.println("Podaj kolor: ");
+        System.out.print("Podaj kolor: ");
         String kolor=scan.nextLine();
 
-        System.out.println("Podaj nazwe producenta: ");
+        System.out.print("Podaj nazwe producenta: ");
         String nazwaProducenta=scan.nextLine();
 
-        System.out.println("Podaj kraj pochodzenia: ");
+        System.out.print("Podaj kraj pochodzenia: ");
         String krajPochodzenia=scan.nextLine();
 
-        System.out.println("Podaj rozmiar spodni: ");
+        System.out.print("Podaj rozmiar spodni: ");
         String rozmiarSpodni=scan.nextLine();
 
-        System.out.println("Podaj dlugosc spodni: ");
+        System.out.print("Podaj dlugosc spodni: ");
         float dlugoscSpodni=scan.nextFloat();
         scan.nextLine();
 
-        System.out.println("Podaj typ spodni: ");
+        System.out.print("Podaj typ spodni: ");
         String typSpodni=scan.nextLine();
 
-        System.out.println("Podaj kroj spodni: ");
+        System.out.print("Podaj kroj spodni: ");
         String krojSpodni=scan.nextLine();
 
 

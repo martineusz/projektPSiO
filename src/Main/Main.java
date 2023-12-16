@@ -49,6 +49,7 @@ public class Main {
                                             case "4": //
                                                 break Loop2;
                                         }
+                                        koszyk();
                                     }
                                     break;
                                 case "3": // promocje
@@ -68,6 +69,7 @@ public class Main {
 
                                                 break Loop3;
                                         }
+                                        promocje();
                                     }
                                     break;
 
@@ -75,6 +77,7 @@ public class Main {
                                     sklep.wylogujSie();
                                     break Lop;
                             }
+                            menuKlientZalogowany();
                         }
                     }
 
@@ -96,7 +99,7 @@ public class Main {
     }
 
     public static void menu(){
-        System.out.println("Wybierz opcje: ");
+        System.out.println("\nWybierz opcje: ");
         System.out.println("1. Zaloguj sie");
         System.out.println("2. Zarejestruj sie");
         System.out.println("Napisz 'koniec' aby zakonczyc");
@@ -104,7 +107,7 @@ public class Main {
     }
 
     public static void menuKlientZalogowany(){
-        System.out.println("Wybierz opcje: ");
+        System.out.println("\nMENU Wybierz opcje: ");
         System.out.println("1. Dodaj do koszyka");
         System.out.println("2. Koszyk");
         System.out.println("3. Promocje");
@@ -113,7 +116,7 @@ public class Main {
     }
 
     public static void koszyk(){
-        System.out.println("Wybierz opcje: ");
+        System.out.println("\nKOSZYK Wybierz opcje: ");
         System.out.println("1. Usun z koszyka");
         System.out.println("2. Sprawdz zawartosc koszyka");
         System.out.println("3. Zloz zamowienie ");
@@ -122,7 +125,7 @@ public class Main {
     }
 
     public static void promocje(){
-        System.out.println("Wybierz opcje: ");
+        System.out.println("\nPROMOCJE Wybierz opcje: ");
         System.out.println("1. Zapisz do promocji");
         System.out.println("2. Wypisz z promocji");
         System.out.println("3. Wroc");
