@@ -22,7 +22,7 @@ public class Bluza extends Produkt{
         this.rozmiarBluzy = rozmiarBluzy;
     }
 
-    public boolean isCzyZKapturem() {
+    public boolean getCzyZKapturem() {
         return czyZKapturem;
     }
 

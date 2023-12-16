@@ -5,9 +5,19 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        String wybor;
+        menu();
 
         while(scan.hasNextLine()){
+            wybor = scan.nextLine();
+            switch(wybor){
+                case "1":
 
+                    break;
+                case "2":
+
+                    break;
+            }
         }
     }
 
