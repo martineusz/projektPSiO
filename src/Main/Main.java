@@ -21,59 +21,61 @@ public class Main {
             wybor = scan.nextLine();
             switch (wybor) {
                 case "1": //zaloguj sie
-                    sklep.zalogujSie();
-                    menuKlientZalogowany();
+                    if(sklep.zalogujSie()) {
+                        menuKlientZalogowany();
 
-                    while(scan.hasNext()){
-                        wybor = scan.nextLine();
-                        switch(wybor){
-                            case "1": // dodaj do koszyka
+                        Lop: while (scan.hasNext()) {
+                            wybor = scan.nextLine();
+                            switch (wybor) {
+                                case "1": // dodaj do koszyka
 
-                                break;
-                            case "2":
-                                koszyk();
-                                Loop2: while(scan.hasNextLine()){
-                                    wybor = scan.nextLine();
-                                    switch (wybor){
-                                        case "1": // usun produkt
+                                    break;
+                                case "2":
+                                    koszyk();
+                                    Loop2:
+                                    while (scan.hasNextLine()) {
+                                        wybor = scan.nextLine();
+                                        switch (wybor) {
+                                            case "1": // usun produkt
 
-                                            break;
-                                        case "2": // sprawdz zawartosc
+                                                break;
+                                            case "2": // sprawdz zawartosc
 
-                                            break;
-                                        case "3": // zloz zamowienie
+                                                break;
+                                            case "3": // zloz zamowienie
 
-                                            break;
-                                        case "4": //
-                                            break Loop2;
+                                                break;
+                                            case "4": //
+                                                break Loop2;
+                                        }
                                     }
-                                }
-                                break;
-                            case "3": // promocje
-                                promocje();
-                                Loop3: while(scan.hasNext()){
-                                    wybor=scan.nextLine();
-                                    switch (wybor){
-                                        case "1": //zapisz na promocje
+                                    break;
+                                case "3": // promocje
+                                    promocje();
+                                    Loop3:
+                                    while (scan.hasNext()) {
+                                        wybor = scan.nextLine();
+                                        switch (wybor) {
+                                            case "1": //zapisz na promocje
 
-                                            break;
-                                        case "2": //wypisz z promocji
+                                                break;
+                                            case "2": //wypisz z promocji
 
-                                            break;
+                                                break;
 
-                                        case "3": //Wroc
+                                            case "3": //Wroc
 
-                                            break Loop3;
+                                                break Loop3;
+                                        }
                                     }
-                                }
-                                break;
+                                    break;
 
-                            case "4":
-                                sklep.wylogujSie();
-                                break;
+                                case "4":
+                                    sklep.wylogujSie();
+                                    break Lop;
+                            }
                         }
                     }
-
 
 
                     break;
