@@ -33,7 +33,7 @@ public class Main {
                             case "2":
                                 koszyk();
                                 Loop2: while(scan.hasNextLine()){
-                                    wybor = scan.nextLine;
+                                    wybor = scan.nextLine();
                                     switch (wybor){
                                         case "1": // usun produkt
 
@@ -54,7 +54,16 @@ public class Main {
                                 Loop3: while(scan.hasNext()){
                                     wybor=scan.nextLine();
                                     switch (wybor){
-                                        case "1":
+                                        case "1": //zapisz na promocje
+
+                                            break;
+                                        case "2": //wypisz z promocji
+
+                                            break;
+
+                                        case "3": //Wroc
+
+                                            break Loop3;
                                     }
                                 }
                                 break;
