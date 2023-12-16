@@ -77,17 +77,18 @@ public class Klient implements Serializable {
         return haslo;
     }
 
-    public void sprawdzKoszyk() {
-        koszyk.SprawdzZawartosc();
-    }
-
-    public void dodajProduktDoKoszyka(Produkt produkt) {
-        koszyk.dodajProdukt(produkt);
-    }
-
-    public void usunProduktZKoszyka(Produkt produkt) {
-        koszyk.dodajProdukt(produkt);
-    }
+// W KOSZYKU!!! NIE USUWAC!!!
+//    public void sprawdzKoszyk() {
+//        koszyk.SprawdzZawartosc();
+//    }
+//
+//    public void dodajProduktDoKoszyka(Produkt produkt) {
+//        koszyk.dodajProdukt(produkt);
+//    }
+//
+//    public void usunProduktZKoszyka(Produkt produkt) {
+//        koszyk.dodajProdukt(produkt);
+//    }
 
     public void zapiszNaPromocje(Promocja promocja, String rodzaj) {
         if (CzyPromocja) {
