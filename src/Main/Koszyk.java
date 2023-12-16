@@ -3,6 +3,7 @@ package Main;
 import DostawaStrategia.DostawaStrategia;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Koszyk {
     private double wartoscZamowienia;
@@ -49,6 +50,16 @@ public class Koszyk {
 
     public void zlozZamowienie(){
 
+    }
+
+    public void SprawdzZawartosc() {
+        if (listaProduktow.size() == 0) {
+            System.out.println("PUSTY KOSZYK");
+        } else {
+            for (int i = 0; i < listaProduktow.size(); i++) {
+                System.out.println(listaProduktow.get(i).toString());
+            }
+        }
     }
 
 }

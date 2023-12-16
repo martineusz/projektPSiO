@@ -64,11 +64,8 @@ public class Klient {
             this.adresEmail = adresEmail;
         }
 
-    public List<Produkt> sprawdzKoszyk() {
-            if (koszyk.listaProduktow.size() == 0) {
-                System.out.println("PUSTY KOSZYK");
-            }
-            return koszyk.listaProduktow;
+    public void sprawdzKoszyk() {
+            koszyk.SprawdzZawartosc();
         }
 
         public void dodajProduktDoKoszyka(Produkt produkt) {
