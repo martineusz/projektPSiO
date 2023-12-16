@@ -2,20 +2,31 @@ import java.util.ArrayList;
 
 public class Koszyk {
     private double wartoscZamowienia;
-    ArrayList<Produkt> listaProduktow;
+    private String adresDostawy;
+    private String sposobDostawy;
+    private ArrayList<Produkt> listaProduktow = new ArrayList<Produkt>();
+    private PlaceniaStrategia placenieStrategia;
+    private DostawaStrategia dostawaStrategia;
 
-    public Koszyk() {
-        this.listaProduktow = new ArrayList<>();
-    }
 
-    public void dodajDoKoszyka(Produkt produkt) {
+    public void dodajProdukt(Produkt produkt){
         listaProduktow.add(produkt);
     }
 
-    public void usunZKoszyka(Produkt produkt) {
+    public void usunProdukt(Produkt produkt){
         listaProduktow.remove(produkt);
     }
 
+    public void ustawMetodePlatnosci(){
 
+    }
+
+    public void ustawMetodeDostawy(){
+
+    }
+
+    public void zlozZamowienie(){
+
+    }
 
 }
