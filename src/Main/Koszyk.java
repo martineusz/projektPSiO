@@ -31,7 +31,7 @@ public class Koszyk {
     }
 
     public void ustawMetodePlatnosci(){
-
+        System.out.println("t");
     }
 
     public void ustawMetodeDostawy(DostawaStrategia dostawaStrategia){
