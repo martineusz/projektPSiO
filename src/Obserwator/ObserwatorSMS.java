@@ -10,6 +10,6 @@ public class ObserwatorSMS implements Obserwator {
 	@Override
 	public void powiadom(String nazwa) {
 		//wyslanie smsa do klienta
-		System.out.println(this.numerTelefonuKlienta + "otrzymal SMS o promocji:" + nazwa);
+		System.out.println(this.numerTelefonuKlienta + "otrzymal SMS:" + nazwa);
 	}
 }
