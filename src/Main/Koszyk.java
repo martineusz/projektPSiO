@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class Koszyk {
     private double wartoscZamowienia;
     private ArrayList<Produkt> listaProduktow = null;
-    private PlaceniaStrategia placenieStrategia; // = new PlacenieStrategia();
-    private DostawaStrategia dostawaStrategia; // -||-||-||-||-||-||-||-||-
+    private PlaceniaStrategia placenieStrategia;
+    private DostawaStrategia dostawaStrategia;
 
     public Koszyk(ArrayList<Produkt> listaProduktow) {
         this.listaProduktow = new ArrayList<Produkt>();
@@ -31,7 +31,7 @@ public class Koszyk {
     }
 
     public void ustawMetodePlatnosci(){
-        System.out.println("t");
+
     }
 
     public void ustawMetodeDostawy(DostawaStrategia dostawaStrategia){

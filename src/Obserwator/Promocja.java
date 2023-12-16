@@ -1,4 +1,6 @@
 package Obserwator;
+import Main.Produkt;
+
 
 import java.util.ArrayList;
 
@@ -7,7 +9,7 @@ public class Promocja implements Podmiot {
 	String nazwa;
 	ArrayList<Obserwator> obserwatorzy = new ArrayList<Obserwator>();
 	
-	
+
 
 	public Promocja(String nazwa) {
 		this.nazwa = nazwa;

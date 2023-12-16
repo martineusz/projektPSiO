@@ -10,6 +10,6 @@ public class ObserwatorEmail implements Obserwator {
 	@Override
 	public void powiadom(String nazwa) {
 		//wyslanie maila do klienta
-		System.out.println(this.adresEmailKlienta + "otrzymal email o promocji:" + nazwa);
+		System.out.println(this.adresEmailKlienta + "otrzymal email:" + nazwa);
 	}
 }
