@@ -4,7 +4,7 @@ public class Koszyk {
     private double wartoscZamowienia;
     private String adresDostawy;
     private String sposobDostawy;
-    private ArrayList<Produkt> listaProduktow = new ArrayList<Produkt>();
+    private ArrayList<Produkt> listaProduktow;
     private PlaceniaStrategia placenieStrategia;
     private DostawaStrategia dostawaStrategia;
 
