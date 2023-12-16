@@ -1,4 +1,5 @@
 package Main;
+import Produkt.Produkt;
 
 import DostawaStrategia.DostawaStrategia;
 

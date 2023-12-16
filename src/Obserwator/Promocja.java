@@ -1,5 +1,4 @@
 package Obserwator;
-import Main.Produkt;
 
 
 import java.util.ArrayList;
