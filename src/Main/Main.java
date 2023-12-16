@@ -1,16 +1,23 @@
 package Main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import Produkt.*;
+import Obserwator.*;
 
 public class Main {
     public static void main(String[] args) {
+        Sklep sklep = new Sklep(new ArrayList<Klient>(), null, false, new ArrayList<Produkt>());
+        sklep.wczytajListeProduktow();
+        sklep.wczytajListeKlientow();
         Scanner scan = new Scanner(System.in);
         String wybor;
         menu();
 
-        while(scan.hasNextLine()){
+        while(scan.hasNextLine()) {
+
             wybor = scan.nextLine();
-            switch(wybor){
+            switch (wybor) {
                 case "1":
 
                     break;
@@ -19,6 +26,9 @@ public class Main {
                     break;
             }
         }
+
+        sklep.zapiszListeProduktow();
+        sklep.zapiszListeKlientow();
     }
 
     public static void menu(){

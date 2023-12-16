@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import Produkt.*;
+
 
 public class Sklep {
     private List<Klient> listaKlientow;
@@ -131,7 +133,7 @@ public class Sklep {
             return;
         }
 
-        listaKlientow.add(new Klient(new Koszyk(),login,haslo,imie, nazwisko,numerTelefonu,
+        listaKlientow.add(new Klient(imie, nazwisko, login,haslo,
                 adresEmail));
         System.out.println("Rejestracja zakończona!");
         zalogowanyKlient=listaKlientow.get(listaKlientow.size()-1);
@@ -272,7 +274,7 @@ public class Sklep {
         String krojBluzy=scan.nextLine();
 
 
-        listaProduktow.add(new Bluzy(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, new Producent(nazwaProducenta,
+        listaProduktow.add(new Bluza(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, new Producent(nazwaProducenta,
                 krajPochodzenia), rozmiarBluzy, czyZKapturem, dekoltBluzy, krojBluzy));
     }
     public void dodajKoszulke(){

@@ -1,6 +1,8 @@
 package Produkt;
 
-public abstract class Produkt {
+import java.io.Serializable;
+
+public abstract class Produkt implements Serializable {
     private String idProduktu;
     private double cena;
     private String nazwa;
@@ -8,9 +10,9 @@ public abstract class Produkt {
     private String opis;
     private String material;
     private String kolor;
-    private Producent producent = null;
+    private Producent producent;
 
-    public Produkt(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material, String kolor, String marka, String krajPochodenia) {
+    public Produkt(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material, String kolor, Producent producent) {
         this.idProduktu = idProduktu;
         this.cena = cena;
         this.nazwa = nazwa;
@@ -18,7 +20,7 @@ public abstract class Produkt {
         this.opis = opis;
         this.material = material;
         this.kolor = kolor;
-        this.producent = new Producent(marka, krajPochodenia);
+        this.producent = producent;
     }
 
     public String getIdProduktu() {

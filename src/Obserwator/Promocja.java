@@ -1,6 +1,6 @@
 package Obserwator;
 
-
+import Produkt.*;
 import java.util.ArrayList;
 
 public class Promocja implements Podmiot {

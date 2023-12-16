@@ -7,8 +7,8 @@ public class Koszulka extends Produkt{
     private String dekoltKoszulki;
     private String krojKoszulki;
 
-    public Koszulka(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material, String kolor, String marka, String krajPochodenia, String rozmiarKoszulki, String dekoltKoszulki, String krojKoszulki) {
-        super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, marka, krajPochodenia);
+    public Koszulka(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material, String kolor, Producent producent, String rozmiarKoszulki, String dekoltKoszulki, String krojKoszulki) {
+        super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, producent);
         this.rozmiarKoszulki = rozmiarKoszulki;
         this.dekoltKoszulki = dekoltKoszulki;
         this.krojKoszulki = krojKoszulki;

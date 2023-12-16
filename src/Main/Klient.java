@@ -1,26 +1,30 @@
 package Main;
 
 import Obserwator.*;
+import Produkt.*;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class Klient {
+public class Klient implements Serializable {
 
         private String imie;
         private String nazwisko;
         private String login;
         private String numer_telefonu;
         private String adresEmail;
+        private String haslo;
         final Koszyk koszyk;
         private boolean CzyPromocja;
         Obserwator obs;
 
-        public Klient(String imie, String nazwisko, String login, String numer_telefonu) {
+        public Klient(String imie, String nazwisko, String login, String haslo, String numer_telefonu) {
             this.login = login;
             this.imie = imie;
             this.nazwisko = nazwisko;
             this.numer_telefonu = numer_telefonu;
+            this.haslo = haslo;
             this.koszyk = new Koszyk();
         }
 
@@ -64,7 +68,15 @@ public class Klient {
             this.adresEmail = adresEmail;
         }
 
-        public void sprawdzKoszyk() {
+    public void setHaslo(String haslo) {
+        this.haslo = haslo;
+    }
+
+    public String getHaslo() {
+        return haslo;
+    }
+
+    public void sprawdzKoszyk() {
             koszyk.SprawdzZawartosc();
         }
 

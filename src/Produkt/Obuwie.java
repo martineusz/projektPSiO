@@ -5,8 +5,8 @@ public class Obuwie extends Produkt {
     private String typObuwia;
     private String typPodeszwy;
 
-    public Obuwie(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material, String kolor, String marka, String krajPochodenia, float rozmiarObuwia, String typObuwia, String typPodeszwy) {
-        super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, marka, krajPochodenia);
+    public Obuwie(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material, String kolor, Producent producent, float rozmiarObuwia, String typObuwia, String typPodeszwy) {
+        super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, producent);
         this.rozmiarObuwia = rozmiarObuwia;
         this.typObuwia = typObuwia;
         this.typPodeszwy = typPodeszwy;

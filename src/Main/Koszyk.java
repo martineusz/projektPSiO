@@ -2,6 +2,7 @@ package Main;
 import Produkt.Produkt;
 
 import DostawaStrategia.DostawaStrategia;
+import DostawaStrategia.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 public class Koszyk {
     private double wartoscZamowienia;
     private ArrayList<Produkt> listaProduktow = null;
-    private PlaceniaStrategia placenieStrategia; // = new PlacenieStrategia();
+    //private PlaceniaStrategia placenieStrategia; // = new PlacenieStrategia();
     private DostawaStrategia dostawaStrategia; // -||-||-||-||-||-||-||-||-
 
     public Koszyk() {
@@ -50,7 +51,15 @@ public class Koszyk {
     }
 
     public void zlozZamowienie(){
-
+        System.out.println("Złożono zamówienie na ");
+        for (Produkt produkt:this.listaProduktow) {
+            System.out.println(produkt.toString());
+        }
+        if (dostawaStrategia instanceof DostawaPaczkomat) {
+            System.out.println("Paczka trafi do paczkomatu za 2 dni");
+        } else if (dostawaStrategia instanceof DostawaKurier) {
+            System.out.println("Kurier przywiezie paczkę do wskazanego adresu za 3 dni");
+        }
     }
 
     public void SprawdzZawartosc() {
@@ -61,6 +70,14 @@ public class Koszyk {
                 System.out.println(listaProduktow.get(i).toString());
             }
         }
+    }
+
+    public double obliczWartoscZamowienia() {
+        double wartoscZamowienia = 0.0;
+        for (Produkt produkt : listaProduktow) {
+            wartoscZamowienia += produkt.getCena();
+        }
+        return wartoscZamowienia;
     }
 
 }
