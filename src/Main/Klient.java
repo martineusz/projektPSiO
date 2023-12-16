@@ -64,7 +64,7 @@ public class Klient {
             this.adresEmail = adresEmail;
         }
 
-    public void sprawdzKoszyk() {
+        public void sprawdzKoszyk() {
             koszyk.SprawdzZawartosc();
         }
 
@@ -74,32 +74,39 @@ public class Klient {
 
         public void usunProduktZKoszyka(Produkt produkt) {koszyk.dodajProdukt(produkt);}
 
-        public void zapiszNaNewsletter(Promocja promocja, String rodzaj) {
+        public void zapiszNaPromocje(Promocja promocja, String rodzaj) {
             if(CzyPromocja) {
-                System.out.println(this.imie + "juz w promocji");
-            }
-            else {
-                switch(rodzaj) {
-                    case "sms":
-                        obs = new ObserwatorSMS(this.numer_telefonu);
-                        promocja.dodajObserwatora(obs);
-                        CzyPromocja = true;
-                        break;
-                    case "email":
-                        obs = new ObserwatorEmail(this.adresEmail);
-                        promocja.dodajObserwatora(obs);
-                        CzyPromocja = true;
-                        break;
-                    default:
-                        throw new IllegalArgumentException("zly rodzaj");
-                }
+                System.out.println(this.imie + "juz w newsletterze o promocjach");
+            } else {
+                dodajDoNewslettera(promocja,rodzaj);
             }
         }
-        public void wypiszZNewslettera(Promocja promocja) {
+        public void wypiszZPromocji(Promocja promocja) {
             if(CzyPromocja) {
-                promocja.usunObserwatora(obs);
+                usunZNewslettera(promocja);
             }else {
                 System.out.println(this.imie + "nie jest zapisany na promocje");
             }
+        }
+
+
+        private void dodajDoNewslettera(Podmiot podmiot, String rodzaj) {
+            switch(rodzaj) {
+                case "sms":
+                    obs = new ObserwatorSMS(this.numer_telefonu);
+                    podmiot.dodajObserwatora(obs);
+                    CzyPromocja = true;
+                    break;
+                case "email":
+                    obs = new ObserwatorEmail(this.adresEmail);
+                    podmiot.dodajObserwatora(obs);
+                    CzyPromocja = true;
+                    break;
+                default:
+                    throw new IllegalArgumentException("zly rodzaj");
+            }
+        }
+        private void usunZNewslettera(Podmiot podmiot) {
+            podmiot.usunObserwatora(obs);
         }
 }
