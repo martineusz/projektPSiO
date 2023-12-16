@@ -10,7 +10,7 @@ public class Koszyk {
     private PlaceniaStrategia placenieStrategia; // = new PlacenieStrategia();
     private DostawaStrategia dostawaStrategia; // -||-||-||-||-||-||-||-||-
 
-    public Koszyk(ArrayList<Produkt> listaProduktow) {
+    public Koszyk() {
         this.listaProduktow = new ArrayList<Produkt>();
     }
 
