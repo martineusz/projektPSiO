@@ -4,10 +4,11 @@ import Produkt.Produkt;
 import DostawaStrategia.DostawaStrategia;
 import DostawaStrategia.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Koszyk {
+public class Koszyk implements Serializable {
     private double wartoscZamowienia;
     private ArrayList<Produkt> listaProduktow = null;
     //private PlaceniaStrategia placenieStrategia; // = new PlacenieStrategia();

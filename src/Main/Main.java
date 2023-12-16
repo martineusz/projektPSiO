@@ -10,21 +10,27 @@ public class Main {
         Sklep sklep = new Sklep(new ArrayList<Klient>(), null, false, new ArrayList<Produkt>());
         sklep.wczytajListeProduktow();
         sklep.wczytajListeKlientow();
+
         Scanner scan = new Scanner(System.in);
         String wybor;
         menu();
 
-        while(scan.hasNextLine()) {
-
+        Loop: while(scan.hasNextLine()) {
             wybor = scan.nextLine();
             switch (wybor) {
                 case "1":
+                    sklep.zalogujSie();
 
                     break;
                 case "2":
-
+                    sklep.zarejestruj();
                     break;
+                case "koniec":
+                    break Loop;
+                default:
+                    System.out.println("Wprowadzono nieprawidlowa opcje!");;
             }
+            menu();
         }
 
         sklep.zapiszListeProduktow();
@@ -35,6 +41,7 @@ public class Main {
         System.out.println("Wybierz opcje: ");
         System.out.println("1. Zaloguj sie");
         System.out.println("2. Zarejestruj sie");
+        System.out.println("Napisz 'koniec' aby zakonczyc");
         System.out.print("Wybor: ");
     }
 }
