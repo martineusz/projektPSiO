@@ -39,18 +39,24 @@ public class Main {
                                     System.out.print("Wybor (0 - cofnij): ");
                                     LoopDodawanie:
                                     while (scan.hasNextLine()) {
-                                        wyborInt = Integer.parseInt(scan.nextLine());
-                                        switch(wyborInt) {
-                                            case 0:
-                                                break LoopDodawanie;
-                                            default:
-                                                try {
-                                                    sklep.zalogowanyKlient.koszyk.dodajProdukt(sklep.getListaProduktow().get(wyborInt - 1));
-                                                } catch(Exception e) {
-                                                    System.out.println("numer niemozliwy do wybrania");
-                                                }
-                                                break;
-                                        }
+                                        if (scan.hasNextInt()) {
+                                            wyborInt = scan.nextInt();
+
+
+                                            switch(wyborInt) {
+                                                case 0:
+                                                    break LoopDodawanie;
+                                                default:
+                                                    try {
+                                                        sklep.zalogowanyKlient.koszyk.dodajProdukt(sklep.getListaProduktow().get(wyborInt - 1));
+                                                    } catch (Exception e) {
+                                                        System.out.println("Numer niemożliwy do wybrania");
+                                                    }
+                                                    break;
+                                            }}
+                                        else {
+                                                System.out.println("Podano nieprawidłową liczbę.");
+                                                scan.nextLine();}
                                         System.out.println("WYBIERZ PRODUKT KTORY CHCESZ KUPIC: ");
                                         sklep.wypiszWszystkieProdukty();
                                         System.out.print("Wybor (0 - cofnij): ");
@@ -69,50 +75,59 @@ public class Main {
                                                 System.out.print("Wybor(0 - cofnij): ");
                                                 LoopUsuwanie:
                                                 while (scan.hasNextLine()) {
-                                                    wyborInt = Integer.parseInt(scan.nextLine());
-                                                    switch(wyborInt) {
-                                                        case 0:
-                                                            break LoopUsuwanie;
-                                                        default:
-                                                            try {
-                                                                sklep.zalogowanyKlient.koszyk.usunProdukt( wyborInt- 1);
-                                                            } catch(Exception e) {
-                                                                System.out.println("numer niemozliwy do wybrania");
-                                                            }
-                                                            break LoopUsuwanie;
-                                                    }
+                                                    if (scan.hasNextInt()) {
+                                                        wyborInt = scan.nextInt();
+
+                                                        switch(wyborInt) {
+                                                            case 0:
+                                                                break LoopUsuwanie;
+                                                            default:
+                                                                try {
+                                                                    sklep.zalogowanyKlient.koszyk.usunProdukt( wyborInt- 1);
+                                                                } catch(Exception e) {
+                                                                    System.out.println("numer niemozliwy do wybrania");
+                                                                }
+                                                                break LoopUsuwanie;
+                                                        }}
+                                                    else {
+                                                            System.out.println("Podano nieprawidłową wartość.");
+                                                            scan.nextLine();}
                                                 }
                                                 break;
                                             case "2": // sprawdz zawartosc
                                                 sklep.zalogowanyKlient.koszyk.sprawdzZawartosc();
                                                 break;
                                             case "3": // zloz zamowienie
-                                                zamawianieDostawa();
-                                                LoopZamawianie:
-                                                while (scan.hasNext()) {
-                                                    wybor = scan.nextLine();
-                                                    switch (wybor) {
-                                                        case "1":
-                                                            sklep.zalogowanyKlient.koszyk.ustawMetodeDostawy(new DostawaPaczkomat());
-
-                                                            System.out.println("Koncowy koszt: " + (15.99 + sklep.zalogowanyKlient.koszyk.obliczWartoscZamowienia()));
-                                                            System.out.print("Wpisz adres paczkomatu (Wroc - 0): ");
-                                                            wybor = scan.nextLine();
-                                                            sklep.zalogowanyKlient.koszyk.zrealizujDostawe(wybor);
-                                                            break;
-                                                        case "2":
-                                                            sklep.zalogowanyKlient.koszyk.ustawMetodeDostawy(new DostawaKurier());
-                                                            System.out.println("Koncowy koszt: "+ (19.99 + sklep.zalogowanyKlient.koszyk.obliczWartoscZamowienia()));
-                                                            System.out.print("Wpisz adres zamieszkania (Wroc - 0): ");
-                                                            wybor = scan.nextLine();
-                                                            sklep.zalogowanyKlient.koszyk.zrealizujDostawe(wybor);
-                                                            break;
-                                                        case "3":
-                                                            break LoopZamawianie;
+                                                if (sklep.zalogowanyKlient.koszyk.czyKoszykMaProdukty()) {
+                                                    zamawianieDostawa();
+                                                    LoopZamawianie:
+                                                    while (scan.hasNext()) {
+                                                        wybor = scan.nextLine();
+                                                        switch (wybor) {
+                                                            case "1":
+                                                                sklep.zalogowanyKlient.koszyk.ustawMetodeDostawy(new DostawaPaczkomat());
+                                                                System.out.println("Koncowy koszt: " + (15.99 + sklep.zalogowanyKlient.koszyk.obliczWartoscZamowienia()));
+                                                                System.out.print("Wpisz adres paczkomatu (Wroc - 0): ");
+                                                                wybor = scan.nextLine();
+                                                                sklep.zalogowanyKlient.koszyk.zrealizujDostawe(wybor);
+                                                                break;
+                                                            case "2":
+                                                                sklep.zalogowanyKlient.koszyk.ustawMetodeDostawy(new DostawaKurier());
+                                                                System.out.println("Koncowy koszt: "+ (19.99 + sklep.zalogowanyKlient.koszyk.obliczWartoscZamowienia()));
+                                                                System.out.print("Wpisz adres zamieszkania (Wroc - 0): ");
+                                                                wybor = scan.nextLine();
+                                                                sklep.zalogowanyKlient.koszyk.zrealizujDostawe(wybor);
+                                                                break;
+                                                            case "3":
+                                                                break LoopZamawianie;
+                                                        }
+                                                    zamawianieDostawa();
                                                     }
-                                                zamawianieDostawa();
+                                                    break;}
+                                                else {
+                                                    System.out.println("W koszyku nie ma produktów");
+                                                    break;
                                                 }
-                                                break;
                                             case "4": //
                                                 break Loop2;
                                         }
@@ -177,18 +192,22 @@ public class Main {
                                 System.out.print("Wybor (0 - cofnij): ");
                                 LoopDodajPromocje:
                                 while (scan.hasNextLine()) {
-                                    wyborInt = Integer.parseInt(scan.nextLine());
-                                    switch(wyborInt) {
-                                        case 0:
-                                            break LoopDodajPromocje;
-                                        default:
-                                            try {
-                                                sklep.promocja.ustawPromocjeNaProdukt(sklep.getListaProduktow().get(wyborInt - 1));
-                                            } catch(Exception e) {
-                                                System.out.println("numer niemozliwy do wybrania");
-                                            }
-                                            break;
-                                    }
+                                    if (scan.hasNextInt()) {
+                                        wyborInt = scan.nextInt();
+                                        switch(wyborInt) {
+                                            case 0:
+                                                break LoopDodajPromocje;
+                                            default:
+                                                try {
+                                                    sklep.promocja.ustawPromocjeNaProdukt(sklep.getListaProduktow().get(wyborInt - 1));
+                                                } catch(Exception e) {
+                                                    System.out.println("numer niemozliwy do wybrania");
+                                                }
+                                                break;
+                                        }}
+                                     else {
+                                            System.out.println("Podano nieprawidłową wartość.");
+                                            scan.nextLine();}
                                     System.out.println("WYBIERZ PRODUKT KTORY CHCESZ PRZECENIC: ");
                                     sklep.wypiszWszystkieProdukty();
                                     System.out.print("Wybor (0 - cofnij): ");
@@ -198,6 +217,9 @@ public class Main {
                                 sklep.dodajProdukt();
                                 break;
                             case "3":
+                                sklep.usunProdukt();
+                                break;
+                            case "4":
                                 break LoopAdmin;
                         }
                         admin();
@@ -271,7 +293,8 @@ public class Main {
         System.out.println("\nMENU ADMIN: Wybierz opcje: ");
         System.out.println("1. Dodaj promocje");
         System.out.println("2. Dodaj produkt do sklepu");
-        System.out.println("3. Wroc");
+        System.out.println("3. Usun produkt ze sklepu");
+        System.out.println("4. Wroc");
         System.out.print("Wybor: ");
     }
 }

@@ -173,7 +173,7 @@ public class Sklep {
     public void dodajProdukt(){
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Ty produktu do dodania (obuwie, bluza, koszulka, spodnie)");
+        System.out.print("Podaj typ produktu do dodania (obuwie, bluza, koszulka, spodnie)");
         String wybor=scan.nextLine();
         switch (wybor){
             case"obuwie":  dodajObuwie();  break;
@@ -235,15 +235,13 @@ public class Sklep {
         String idProduktu=scan.nextLine();
 
         System.out.print("Podaj cene: ");
-        double cena= scan.nextDouble();
-        scan.nextLine();
+        double cena= Double.parseDouble(scan.nextLine());
 
         System.out.print("Podaj nazwe produktu: ");
         String nazwa=scan.nextLine();
 
         System.out.print("Podaj ilosc w magazynie: ");
-        int iloscWMagazynie=scan.nextInt();
-        scan.nextLine();
+        int iloscWMagazynie=Integer.parseInt(scan.nextLine());
 
         System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
@@ -264,8 +262,7 @@ public class Sklep {
         String rozmiarBluzy=scan.nextLine();
 
         System.out.print("Czy jest z kapturem (true|false): ");
-        boolean czyZKapturem=scan.nextBoolean();
-        scan.nextLine();
+        boolean czyZKapturem=Boolean.parseBoolean(scan.nextLine());
 
         System.out.print("Podaj dekolt bluzy: ");
         String dekoltBluzy=scan.nextLine();
@@ -284,15 +281,13 @@ public class Sklep {
         String idProduktu=scan.nextLine();
 
         System.out.print("Podaj cene: ");
-        double cena= scan.nextDouble();
-        scan.nextLine();
+        double cena= Double.parseDouble(scan.nextLine());
 
         System.out.print("Podaj nazwe produktu: ");
         String nazwa=scan.nextLine();
 
         System.out.print("Podaj ilosc w magazynie: ");
-        int iloscWMagazynie=scan.nextInt();
-        scan.nextLine();
+        int iloscWMagazynie=Integer.parseInt(scan.nextLine());
 
         System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
@@ -329,15 +324,13 @@ public class Sklep {
         String idProduktu=scan.nextLine();
 
         System.out.print("Podaj cene: ");
-        double cena= scan.nextDouble();
-        scan.nextLine();
+        double cena= Double.parseDouble(scan.nextLine());
 
         System.out.print("Podaj nazwe produktu: ");
         String nazwa=scan.nextLine();
 
         System.out.print("Podaj ilosc w magazynie: ");
-        int iloscWMagazynie=scan.nextInt();
-        scan.nextLine();
+        int iloscWMagazynie=Integer.parseInt(scan.nextLine());
 
         System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
@@ -358,8 +351,7 @@ public class Sklep {
         String rozmiarSpodni=scan.nextLine();
 
         System.out.print("Podaj dlugosc spodni: ");
-        float dlugoscSpodni=scan.nextFloat();
-        scan.nextLine();
+        float dlugoscSpodni=Float.parseFloat(scan.nextLine());
 
         System.out.print("Podaj typ spodni: ");
         String typSpodni=scan.nextLine();
@@ -372,14 +364,18 @@ public class Sklep {
                 rozmiarSpodni, dlugoscSpodni, typSpodni, krojSpodni));
     }
 
-    public void usunProdukt(Produkt produkt){
-        if(listaProduktow.contains(produkt)){
-            listaProduktow.remove(produkt);
-            System.out.println("Produkt został usunięty z listy!");
+    public void usunProdukt(){
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Podaj id produktu ktory chcesz usunac: ");
+        String id=scan.nextLine();
+        for(int i=0; i<listaProduktow.size(); i++){
+            if(listaProduktow.get(i).getIdProduktu().equals(id)){
+                listaProduktow.remove(i);
+                System.out.println("Produkt zostal usuniety!");
+                return;
+            }
         }
-        else{
-            System.out.println("Produktu nie ma na liście!");
-        }
+        System.out.println("Produktu nie ma na liscie.");
     }
     public void wczytajListeKlientow(){
         try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("ListaKlientow.ser"))) {
