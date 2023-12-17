@@ -6,9 +6,7 @@ public class DostawaKurier implements DostawaStrategia {
     private boolean statusDostawy;
 
     public void dodajKoszt(Koszyk koszyk){
-        if(koszyk.getWartoscZamowienia()<200){
             koszyk.setWartoscZamowienia(koszyk.getWartoscZamowienia()+19.99);
-        }
     }
 
 

@@ -93,7 +93,7 @@ public class Klient implements Serializable {
 
     public void zapiszNaPromocje(Promocja promocja, String rodzaj) {
         if (CzyPromocja) {
-            System.out.println(this.imie + "juz w newsletterze o promocjach");
+            System.out.println(this.imie + " jest juz w newsletterze o promocjach");
         } else {
             dodajDoNewslettera(promocja, rodzaj);
         }
@@ -102,8 +102,9 @@ public class Klient implements Serializable {
     public void wypiszZPromocji(Promocja promocja) {
         if (CzyPromocja) {
             usunZNewslettera(promocja);
+            System.out.println(this.imie + " wypisany newslettera o promocjach");
         } else {
-            System.out.println(this.imie + "nie jest zapisany na promocje");
+            System.out.println(this.imie + " nie jest zapisany na promocje");
         }
     }
 
@@ -128,5 +129,6 @@ public class Klient implements Serializable {
 
     private void usunZNewslettera(Podmiot podmiot) {
         podmiot.usunObserwatora(obs);
+        CzyPromocja = false;
     }
 }

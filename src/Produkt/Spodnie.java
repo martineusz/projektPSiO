@@ -49,9 +49,9 @@ public class Spodnie extends Produkt{
     @Override
     public String toString() {
         return super.toString() +
-                    "Rozmiar spodni: " +rozmiarSpodni+
-                    "Dlugosc spodni: " +dlugoscSpodni+
-                    "Typ spodni: "+typSpodni+
-                    "Kroj spodni: "+ krojSpodni;
+                    "\nRozmiar spodni: " +rozmiarSpodni+
+                    "\nDlugosc spodni: " +dlugoscSpodni+
+                    "\nTyp spodni: "+typSpodni+
+                    "\nKroj spodni: "+ krojSpodni;
     }
 }

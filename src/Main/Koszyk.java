@@ -31,8 +31,8 @@ public class Koszyk implements Serializable {
         listaProduktow.add(produkt);
     }
 
-    public void usunProdukt(Produkt produkt){
-        listaProduktow.remove(produkt);
+    public void usunProdukt(int i){
+        listaProduktow.remove(i);
     }
 
     public void ustawMetodePlatnosci(){
@@ -43,35 +43,47 @@ public class Koszyk implements Serializable {
         this.dostawaStrategia = dostawaStrategia;
     }
 
-    public void zrealizujDostawe(String adres){
+    public void zrealizujDostawe(String adres) {
+        for (Produkt produkt : this.listaProduktow) {
+            if(produkt.sprawdzDostepnoscProduktu() == false) {
+                System.out.println("zamowienie niezrealizowane");
+                break;
+            }
+        }
+        for (Produkt produkt : this.listaProduktow) {
+            produkt.setIloscWMagazynie(produkt.getIloscWMagazynie() - 1);
+        }
         if(dostawaStrategia != null){
+            dostawaStrategia.dodajKoszt(this);
             dostawaStrategia.wyslijPaczke(adres);
         }
         else {
             System.out.println("Nie wybrano strategii dostawy!");
         }
     }
-
-    public void zlozZamowienie(){
-        System.out.println("Złożono zamówienie na ");
-        for (Produkt produkt:this.listaProduktow) {
-            System.out.println(produkt.toString());
-        }
-        if (dostawaStrategia instanceof DostawaPaczkomat) {
-            System.out.println("Paczka trafi do paczkomatu za 2 dni");
-        } else if (dostawaStrategia instanceof DostawaKurier) {
-            System.out.println("Kurier przywiezie paczkę do wskazanego adresu za 3 dni");
-        }
-    }
+//
+//    public void zlozZamowienie(){
+//        System.out.println("Złożono zamówienie na ");
+//        for (Produkt produkt:this.listaProduktow) {
+//            System.out.println(produkt.toString());
+//        }
+//        if (dostawaStrategia instanceof DostawaPaczkomat) {
+//            System.out.println("Paczka trafi do paczkomatu za 2 dni");
+//        } else if (dostawaStrategia instanceof DostawaKurier) {
+//            System.out.println("Kurier przywiezie paczkę do wskazanego adresu za 3 dni");
+//        }
+//    }
 
     public void sprawdzZawartosc() {
         if (listaProduktow.size() == 0) {
             System.out.println("PUSTY KOSZYK");
         } else {
             for (int i = 0; i < listaProduktow.size(); i++) {
+                System.out.print((i+1) + ".");
                 System.out.println(listaProduktow.get(i).toString());
             }
         }
+        System.out.println("LACZNA CENA: " + obliczWartoscZamowienia());
     }
 
     public double obliczWartoscZamowienia() {

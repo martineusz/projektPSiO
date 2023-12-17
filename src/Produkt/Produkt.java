@@ -12,6 +12,8 @@ public abstract class Produkt implements Serializable {
     private String kolor;
     private Producent producent;
 
+    private static final long serialVersionUID = 6522259357006993860L;
+
     public Produkt(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material, String kolor, Producent producent) {
         this.idProduktu = idProduktu;
         this.cena = cena;
@@ -87,13 +89,8 @@ public abstract class Produkt implements Serializable {
         this.producent = producent;
     }
 
-    public boolean sprawdzDostepnoscProduktu(Produkt produkt, String idProduktu){
-        if (produkt.getIdProduktu()==idProduktu){
-            return true;
-        }
-        else{
-            return false;
-        }
+    public boolean sprawdzDostepnoscProduktu(){
+        return iloscWMagazynie > 0;
     }
 
     public void zwiekszIlosc(Produkt produkt, int zwiekszIlosc){

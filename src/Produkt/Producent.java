@@ -1,6 +1,8 @@
 package Produkt;
 
-public class Producent {
+import java.io.Serializable;
+
+public class Producent implements Serializable {
     private String marka;
     private String krajPochodenia;
 

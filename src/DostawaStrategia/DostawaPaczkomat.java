@@ -5,9 +5,7 @@ public class DostawaPaczkomat implements DostawaStrategia {
     private String numerTelefonuKlienta;
 
     public void dodajKoszt(Koszyk koszyk){
-        if(koszyk.getWartoscZamowienia()<200){
-            koszyk.setWartoscZamowienia(koszyk.getWartoscZamowienia()+15.99);
-        }
+        koszyk.setWartoscZamowienia(koszyk.getWartoscZamowienia()+15.99);
     }
 
 

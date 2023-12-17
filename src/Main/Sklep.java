@@ -10,7 +10,8 @@ import Obserwator.*;
 
 public class Sklep {
     private List<Klient> listaKlientow;
-    private Klient zalogowanyKlient;
+    public Klient zalogowanyKlient;
+    public Promocja promocja;
     private boolean czyZalogowany;
     private List<Produkt> listaProduktow;
 
@@ -19,6 +20,7 @@ public class Sklep {
         this.zalogowanyKlient = zalogowanyKlient;
         this.czyZalogowany = czyZalogowany;
         this.listaProduktow = listaProduktow;
+        this.promocja = new Promocja();
     }
 
     public List<Klient> getListaKlientow() {
@@ -188,18 +190,16 @@ public class Sklep {
         Scanner scan = new Scanner(System.in);
 
         System.out.print("Podaj id produktu: ");
-        String idProduktu=scan.nextLine();
+        String idProduktu = scan.nextLine();
 
         System.out.print("Podaj cene: ");
-        double cena= scan.nextDouble();
-        scan.nextLine();
+        double cena = Double.parseDouble(scan.nextLine());
 
         System.out.print("Podaj nazwe produktu: ");
-        String nazwa=scan.nextLine();
+        String nazwa = scan.nextLine();
 
         System.out.print("Podaj ilosc w magazynie: ");
-        int iloscWMagazynie=scan.nextInt();
-        scan.nextLine();
+        int iloscWMagazynie= Integer.parseInt(scan.nextLine());
 
         System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
@@ -217,8 +217,7 @@ public class Sklep {
         String krajPochodzenia=scan.nextLine();
 
         System.out.print("Podaj rozmiar obuwia: ");
-        float rozmiarObuwia= scan.nextFloat();
-        scan.nextLine();
+        float rozmiarObuwia= Float.parseFloat(scan.nextLine());
 
         System.out.print("Podaj typ obuwia: ");
         String typObuwia=scan.nextLine();
@@ -429,6 +428,13 @@ public class Sklep {
             }
         } catch (IOException e){
             e.printStackTrace();
+        }
+    }
+
+    public void wypiszWszystkieProdukty() {
+        for (int i = 0; i < listaProduktow.size(); i++) {
+            System.out.print((i+1) + ".");
+            System.out.println(listaProduktow.get(i).toString());
         }
     }
 

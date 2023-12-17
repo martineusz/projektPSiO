@@ -4,16 +4,27 @@ import Produkt.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Promocja implements Podmiot, Serializable {
 	ArrayList<Obserwator> obserwatorzy = new ArrayList<Obserwator>();
 	private static final long serialVersionUID = -5379526219749958428L;
 
-	
-	public void ustawPromocjeNaProdukty(ArrayList<Produkt> produkty, float obnizka, String nazwa) {
-		for (Produkt produkt : produkty) {
-			produkt.setCena(produkt.getCena()*(1-obnizka));
+	public void ustawPromocjeNaProdukt(Produkt produkt) {
+		Scanner scan = new Scanner(System.in);
+
+		System.out.print("Podaj obnizke (0 - 1): ");
+		float obnizka = Float.parseFloat(scan.nextLine());
+		if(obnizka > 1 || obnizka < 0) {
+			System.out.println("bledna obnizka");
+			return;
 		}
+
+		System.out.print("Podaj nazwe promocji: ");
+		String nazwa = scan.nextLine();
+
+		produkt.setCena(Math.round(produkt.getCena()*(1-obnizka)*100)/100);
+
 		powiadomObserwatorow(nazwa);
 	}
 	
