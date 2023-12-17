@@ -15,4 +15,5 @@ public class ObserwatorSMS implements Obserwator, Serializable {
 		//wyslanie smsa do klienta
 		System.out.println(this.numerTelefonuKlienta + " otrzymal SMS: " + nazwa);
 	}
+
 }

@@ -11,6 +11,7 @@ public class Producent implements Serializable {
         this.marka = marka;
         this.krajPochodenia = krajPochodenia;
     }
+    private static final long serialVersionUID = 1_275_997_691_580_326_078L;
 
     public String getMarka() {
         return marka;

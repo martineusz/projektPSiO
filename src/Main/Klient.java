@@ -29,8 +29,6 @@ public class Klient implements Serializable {
         this.adresEmail = adresEmail;
         this.koszyk = new Koszyk();
     }
-
-
     public String getLogin() {
         return login;
     }
@@ -132,4 +130,5 @@ public class Klient implements Serializable {
         podmiot.usunObserwatora(obs);
         CzyPromocja = false;
     }
+
 }

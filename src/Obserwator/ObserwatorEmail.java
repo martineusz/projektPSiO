@@ -15,4 +15,5 @@ public class ObserwatorEmail implements Obserwator, Serializable {
 		//wyslanie maila do klienta
 		System.out.println(this.adresEmailKlienta + " otrzymal email: " + nazwa);
 	}
+
 }

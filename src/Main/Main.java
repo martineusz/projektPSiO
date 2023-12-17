@@ -108,6 +108,7 @@ public class Main {
                                                                 sklep.zalogowanyKlient.koszyk.ustawMetodeDostawy(new DostawaPaczkomat());
                                                                 System.out.println("Koncowy koszt: " + (15.99 + sklep.zalogowanyKlient.koszyk.obliczWartoscZamowienia()));
                                                                 System.out.print("Wpisz adres paczkomatu (Wroc - 0): ");
+
                                                                 wybor = scan.nextLine();
                                                                 sklep.zalogowanyKlient.koszyk.zrealizujDostawe(wybor);
                                                                 break;
@@ -115,6 +116,7 @@ public class Main {
                                                                 sklep.zalogowanyKlient.koszyk.ustawMetodeDostawy(new DostawaKurier());
                                                                 System.out.println("Koncowy koszt: "+ (19.99 + sklep.zalogowanyKlient.koszyk.obliczWartoscZamowienia()));
                                                                 System.out.print("Wpisz adres zamieszkania (Wroc - 0): ");
+
                                                                 wybor = scan.nextLine();
                                                                 sklep.zalogowanyKlient.koszyk.zrealizujDostawe(wybor);
                                                                 break;
