@@ -14,7 +14,7 @@ public class Spodnie extends Produkt{
         this.typSpodni=typSpodni;
         this.krojSpodni=krojSpodni;
     }
-}
+
 
 public String getRozmiarSpodni() {
 	return rozmiarSpodni;
