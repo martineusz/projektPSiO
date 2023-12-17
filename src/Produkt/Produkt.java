@@ -1,5 +1,4 @@
 package Produkt;
-
 import java.io.Serializable;
 
 public abstract class Produkt implements Serializable {
@@ -12,9 +11,8 @@ public abstract class Produkt implements Serializable {
     private String kolor;
     private Producent producent;
 
-    private static final long serialVersionUID = 6522259357006993860L;
-
-    public Produkt(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material, String kolor, Producent producent) {
+    public Produkt(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material,
+                   String kolor, Producent producent) {
         this.idProduktu = idProduktu;
         this.cena = cena;
         this.nazwa = nazwa;
@@ -88,25 +86,26 @@ public abstract class Produkt implements Serializable {
     public void setProducent(Producent producent) {
         this.producent = producent;
     }
-
+    
     public boolean sprawdzDostepnoscProduktu(){
-        return iloscWMagazynie > 0;
+        return this.iloscWMagazynie>0;
     }
-
+    
     public void zwiekszIlosc(Produkt produkt, int zwiekszIlosc){
         produkt.setIloscWMagazynie(getIloscWMagazynie()+zwiekszIlosc);
     }
 
     @Override
     public String toString() {
-        super.toString();
-        return  "\nNazwa: " + nazwa +
-                "\nID produktu: "  + idProduktu +
-                "\nCena: " + cena +
-                "\nIlosc w magazynie: " + iloscWMagazynie +
-                "\nOpis: " + opis +
-                "\nMaterial: " + material +
-                "\nKolor: " + kolor +
-                "\nProducent: " + producent.toString();
+        return "Produkt {" +
+                "ID: '" + idProduktu + '\'' +
+                ", cena: " + cena +
+                ", nazwa: '" + nazwa + '\'' +
+                ", ilość w magazynie" + iloscWMagazynie +
+                ", opis: '" + opis + '\'' +
+                ", materiał: '" + material + '\'' +
+                ", kolor: '" + kolor + '\'' +
+                ", producent: " + producent +
+                '}';
     }
 }

@@ -4,14 +4,15 @@ public class Bluza extends Produkt{
     private String rozmiarBluzy;
     private boolean czyZKapturem;
     private String dekoltBluzy;
-    String krojBluzy;
-
-    public Bluza(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material, String kolor, Producent producent, String rozmiarBluzy, boolean czyZKapturem, String dekoltBluzy, String krojBluzy) {
+    private String krojBluzy;
+    
+    public Bluza(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material,
+                  String kolor, Producent producent, String rozmiarBluzy, boolean czyZKapturem, String dekoltBluzy, String krojBluzy){
         super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, producent);
-        this.rozmiarBluzy = rozmiarBluzy;
-        this.czyZKapturem = czyZKapturem;
-        this.dekoltBluzy = dekoltBluzy;
-        this.krojBluzy = krojBluzy;
+        this.rozmiarBluzy=rozmiarBluzy;
+        this.czyZKapturem=czyZKapturem;
+        this.dekoltBluzy=dekoltBluzy;
+        this.krojBluzy=krojBluzy;
     }
 
     public String getRozmiarBluzy() {
@@ -22,7 +23,7 @@ public class Bluza extends Produkt{
         this.rozmiarBluzy = rozmiarBluzy;
     }
 
-    public boolean getCzyZKapturem() {
+    public boolean isCzyZKapturem() {
         return czyZKapturem;
     }
 
@@ -48,10 +49,13 @@ public class Bluza extends Produkt{
 
     @Override
     public String toString() {
-        return super.toString() +
-                "\nRozmiar bluzy: " + rozmiarBluzy +
-                "\nCzy z kapturem: " + czyZKapturem +
-                "\nDekolt bluzy: " + dekoltBluzy +
-                "\nKroj bluzy: " + krojBluzy;
+        return  super.toString()+
+                " Bluza {" +
+                "rozmiar: " + rozmiarBluzy +
+                ", kaptur: '" + czyZKapturem ? "tak" : "nie" + '\'' +
+                ", dekolt: '" + dekoltBluzy + '\'' +
+                ", krój: '" + krojBluzy + '\'' +
+                '}';
     }
+}
 }

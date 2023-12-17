@@ -1,17 +1,16 @@
 package Produkt;
 
-import javax.print.DocFlavor;
-
 public class Koszulka extends Produkt{
     private String rozmiarKoszulki;
     private String dekoltKoszulki;
     private String krojKoszulki;
 
-    public Koszulka(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material, String kolor, Producent producent, String rozmiarKoszulki, String dekoltKoszulki, String krojKoszulki) {
+    public Koszulka(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material,
+                  String kolor, Producent producent, String rozmiarKoszulki, String dekoltKoszulki, String krojKoszulki){
         super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, producent);
-        this.rozmiarKoszulki = rozmiarKoszulki;
-        this.dekoltKoszulki = dekoltKoszulki;
-        this.krojKoszulki = krojKoszulki;
+        this.rozmiarKoszulki=rozmiarKoszulki;
+        this.dekoltKoszulki=dekoltKoszulki;
+        this.krojKoszulki=krojKoszulki;
     }
 
     public String getRozmiarKoszulki() {
@@ -38,11 +37,13 @@ public class Koszulka extends Produkt{
         this.krojKoszulki = krojKoszulki;
     }
 
-    @Override
+     @Override
     public String toString() {
-        return super.toString()+
-                "\nRozmiar koszulki: " + rozmiarKoszulki +
-                "\nDekolt koszulki: " + dekoltKoszulki +
-                "\nKroj koszulki: " + krojKoszulki;
+        return  super.toString()+
+                " Koszulka {" +
+                "rozmiar: " + rozmiarKoszulki +
+                ", dekolt: '" + dekoltKoszulki + '\'' +
+                ", krój: '" + krojKoszulki + '\'' +
+                '}';
     }
 }
