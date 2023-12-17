@@ -39,18 +39,24 @@ public class Main {
                                     System.out.print("Wybor (0 - cofnij): ");
                                     LoopDodawanie:
                                     while (scan.hasNextLine()) {
-                                        wyborInt = Integer.parseInt(scan.nextLine());
-                                        switch(wyborInt) {
-                                            case 0:
-                                                break LoopDodawanie;
-                                            default:
-                                                try {
-                                                    sklep.zalogowanyKlient.koszyk.dodajProdukt(sklep.getListaProduktow().get(wyborInt - 1));
-                                                } catch(Exception e) {
-                                                    System.out.println("numer niemozliwy do wybrania");
-                                                }
-                                                break;
-                                        }
+                                        if (scan.hasNextInt()) {
+                                            wyborInt = scan.nextInt();
+
+
+                                            switch(wyborInt) {
+                                                case 0:
+                                                    break LoopDodawanie;
+                                                default:
+                                                    try {
+                                                        sklep.zalogowanyKlient.koszyk.dodajProdukt(sklep.getListaProduktow().get(wyborInt - 1));
+                                                    } catch (Exception e) {
+                                                        System.out.println("Numer niemożliwy do wybrania");
+                                                    }
+                                                    break;
+                                            }}
+                                        else {
+                                                System.out.println("Podano nieprawidłową liczbę.");
+                                                scan.nextLine();}
                                         System.out.println("WYBIERZ PRODUKT KTORY CHCESZ KUPIC: ");
                                         sklep.wypiszWszystkieProdukty();
                                         System.out.print("Wybor (0 - cofnij): ");
@@ -69,18 +75,23 @@ public class Main {
                                                 System.out.print("Wybor(0 - cofnij): ");
                                                 LoopUsuwanie:
                                                 while (scan.hasNextLine()) {
-                                                    wyborInt = Integer.parseInt(scan.nextLine());
-                                                    switch(wyborInt) {
-                                                        case 0:
-                                                            break LoopUsuwanie;
-                                                        default:
-                                                            try {
-                                                                sklep.zalogowanyKlient.koszyk.usunProdukt( wyborInt- 1);
-                                                            } catch(Exception e) {
-                                                                System.out.println("numer niemozliwy do wybrania");
-                                                            }
-                                                            break LoopUsuwanie;
-                                                    }
+                                                    if (scan.hasNextInt()) {
+                                                        wyborInt = scan.nextInt();
+
+                                                        switch(wyborInt) {
+                                                            case 0:
+                                                                break LoopUsuwanie;
+                                                            default:
+                                                                try {
+                                                                    sklep.zalogowanyKlient.koszyk.usunProdukt( wyborInt- 1);
+                                                                } catch(Exception e) {
+                                                                    System.out.println("numer niemozliwy do wybrania");
+                                                                }
+                                                                break LoopUsuwanie;
+                                                        }}
+                                                    else {
+                                                            System.out.println("Podano nieprawidłową wartość.");
+                                                            scan.nextLine();}
                                                 }
                                                 break;
                                             case "2": // sprawdz zawartosc
