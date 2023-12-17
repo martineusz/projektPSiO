@@ -20,12 +20,13 @@ public class Klient implements Serializable {
     Obserwator obs;
     private static final long serialVersionUID = 1275997691580326078L;
 
-    public Klient(String imie, String nazwisko, String login, String haslo, String numer_telefonu) {
+    public Klient(String imie, String nazwisko, String login, String haslo, String numer_telefonu, String adresEmail) {
         this.login = login;
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.numer_telefonu = numer_telefonu;
         this.haslo = haslo;
+        this.adresEmail = adresEmail;
         this.koszyk = new Koszyk();
     }
 
@@ -112,13 +113,13 @@ public class Klient implements Serializable {
 
     private void dodajDoNewslettera(Podmiot podmiot, String rodzaj) {
         switch (rodzaj) {
-            case "sms":
-                obs = new ObserwatorSMS(this.numer_telefonu);
+            case "email":
+                obs = new ObserwatorEmail(this.adresEmail);
                 podmiot.dodajObserwatora(obs);
                 CzyPromocja = true;
                 break;
-            case "email":
-                obs = new ObserwatorEmail(this.adresEmail);
+            case "sms":
+                obs = new ObserwatorSMS(this.numer_telefonu);
                 podmiot.dodajObserwatora(obs);
                 CzyPromocja = true;
                 break;

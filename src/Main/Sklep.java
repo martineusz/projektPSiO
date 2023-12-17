@@ -137,8 +137,7 @@ public class Sklep {
             return;
         }
 
-        listaKlientow.add(new Klient(imie, nazwisko, login,haslo,
-                adresEmail));
+        listaKlientow.add(new Klient(imie, nazwisko, login, haslo, numerTelefonu, adresEmail));
         System.out.println("Rejestracja zakończona!");
         zalogowanyKlient=listaKlientow.get(listaKlientow.size()-1);
         czyZalogowany=true;
