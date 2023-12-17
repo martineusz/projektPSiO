@@ -98,43 +98,52 @@ public class Sklep {
                 return;
             }
         }
-        System.out.print("Podaj haslo : ");
-        String haslo=scan.nextLine();
-        if(haslo.length()<8){
-            System.out.println("Haslo musi miec conajmniej 8 znakow!");
-            zarejestruj();
-            return;
+        String haslo;
+        while(true) {
+            System.out.print("Podaj haslo : ");
+            haslo = scan.nextLine();
+            if (haslo.length() < 8) {
+                System.out.println("Haslo musi miec conajmniej 8 znakow!");
+            }
+            else{
+                break;
+            }
         }
-        System.out.print("Podaj imie : ");
-        String imie=scan.nextLine();
-        if(imie.equals("")){
-            zarejestruj();
-            return;
+
+        String imie;
+        do {
+            System.out.print("Podaj imie : ");
+            imie = scan.nextLine();
+        } while (imie.equals(""));
+
+        String nazwisko;
+        do {
+            System.out.print("Podaj nazwisko : ");
+            nazwisko = scan.nextLine();
+        }while(nazwisko.equals(""));
+
+        String numerTelefonu;
+        while(true) {
+            System.out.print("Podaj numer telefonu : ");
+            numerTelefonu = scan.nextLine();
+            if (!isNumeric(numerTelefonu)||numerTelefonu.length()!= 9) {
+                System.out.println("Niepoprawny numer telefonu!");
+            }
+            else{
+                break;
+            }
         }
-        System.out.print("Podaj nazwisko : ");
-        String nazwisko=scan.nextLine();
-        if(nazwisko.equals("")){
-            zarejestruj();
-            return;
-        }
-        System.out.print("Podaj numer telefonu : ");
-        String numerTelefonu=scan.nextLine();
-        if(numerTelefonu.length()!=9){
-            System.out.println("Niepoprawny numer telefonu!");
-            zarejestruj();
-            return;
-        }
-        if(!isNumeric(numerTelefonu)){
-            System.out.println("Niepoprawny numer telefonu!");
-            zarejestruj();
-            return;
-        }
-        System.out.print("Podaj adres Email : ");
-        String adresEmail=scan.nextLine();
-        if(!adresEmail.contains("@")||adresEmail.indexOf("@")==0||adresEmail.indexOf("@")==adresEmail.length()-1){
-            System.out.println("Email nieprawidlowy");
-            zarejestruj();
-            return;
+
+
+        String adresEmail;
+        while(true) {
+            System.out.print("Podaj adres Email : ");
+            adresEmail=scan.nextLine();
+            if (!adresEmail.contains("@") || adresEmail.indexOf("@") == 0 || adresEmail.indexOf("@") == adresEmail.length() - 1) {
+                System.out.println("Email nieprawidlowy");
+            }else{
+                break;
+            }
         }
 
         listaKlientow.add(new Klient(imie, nazwisko, login, haslo, numerTelefonu, adresEmail));
