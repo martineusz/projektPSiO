@@ -3,6 +3,7 @@ import Produkt.Produkt;
 
 import DostawaStrategia.DostawaStrategia;
 import DostawaStrategia.*;
+import PlacenieStrategia.PlacenieStrategia;
 import java.text.DecimalFormat;
 
 import java.io.Serializable;
@@ -13,7 +14,7 @@ public class Koszyk implements Serializable {
     private double wartoscZamowienia;
     private static final long serialVersionUID = 5580514503487693430L;
     private ArrayList<Produkt> listaProduktow = null;
-    //private PlaceniaStrategia placenieStrategia; // = new PlacenieStrategia();
+    private PlacenieStrategia placenieStrategia; // = new PlacenieStrategia();
     private DostawaStrategia dostawaStrategia; // -||-||-||-||-||-||-||-||-
 
     public Koszyk() {
@@ -37,8 +38,8 @@ public class Koszyk implements Serializable {
         listaProduktow.remove(i);
     }
 
-    public void ustawMetodePlatnosci(){
-        System.out.println("t");
+    public void ustawMetodePlatnosci(PlacenieStrategia placenieStrategia){
+        this.placenieStrategia = placenieStrategia;
     }
 
     public void ustawMetodeDostawy(DostawaStrategia dostawaStrategia){
@@ -46,8 +47,6 @@ public class Koszyk implements Serializable {
     }
 
     public void zrealizujDostawe(String adres) {
-
-
         if(dostawaStrategia != null){
             for (Produkt produkt : this.listaProduktow) {
                 if(!produkt.sprawdzDostepnoscProduktu()) {
@@ -55,12 +54,20 @@ public class Koszyk implements Serializable {
                     return;
                 }
             }
-            for (Produkt produkt : this.listaProduktow) {
-                produkt.setIloscWMagazynie(produkt.getIloscWMagazynie() - 1);
-            }
+
             dostawaStrategia.dodajKoszt(this);
-            dostawaStrategia.wyslijPaczke(adres);
-            this.listaProduktow.clear();
+
+            placenieStrategia.wprowadzDane();
+            if (placenieStrategia.plac()) {
+                for (Produkt produkt : this.listaProduktow) {
+                    produkt.setIloscWMagazynie(produkt.getIloscWMagazynie() - 1);
+                }
+                dostawaStrategia.wyslijPaczke(adres);
+                this.listaProduktow.clear();
+            }
+            else {
+                System.out.println("Płatność zakończona niepowodzeniem. Proszę zweryfikować poprawność danych.");
+            }
         }
         else {
             System.out.println("Nie wybrano strategii dostawy!");
