@@ -3,6 +3,7 @@ import Produkt.Produkt;
 
 import DostawaStrategia.DostawaStrategia;
 import DostawaStrategia.*;
+import java.text.DecimalFormat;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class Koszyk implements Serializable {
     }
 
     public void setWartoscZamowienia(double wartoscZamowienia) {
+        DecimalFormat df = new DecimalFormat("#.##");
         this.wartoscZamowienia = wartoscZamowienia;
     }
 

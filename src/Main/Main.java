@@ -27,7 +27,7 @@ public class Main {
         Loop: while(scan.hasNextLine()) {
             wybor = scan.nextLine();
             switch (wybor) {
-                case "1": //zaloguj sie
+                case "1": //zaloguj się
                     if(sklep.zalogujSie()) {
                         menuKlientZalogowany();
                         LoopKlient: while (scan.hasNext()) {

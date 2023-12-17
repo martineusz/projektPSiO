@@ -402,12 +402,15 @@ public class Sklep {
         }
     }
     public void wczytajListeProduktow(){
+        utworzListeDostepnychProduktow();
         try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("ListaProduktow.ser"))){
             Object obj = null;
             while (true) {
                 try {
                     obj = odczyt.readObject();
+
                     listaProduktow.add((Produkt) obj);
+
                 } catch (EOFException e) {
                     break;
                 }
@@ -417,6 +420,7 @@ public class Sklep {
         }
     }
     public void zapiszListeProduktow(){
+        utworzListeDostepnychProduktow();
         try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("ListaProduktow.ser"))){
             for(int i=0; i<listaProduktow.size(); i++){
                 zapis.writeObject(listaProduktow.get(i));
@@ -427,6 +431,7 @@ public class Sklep {
     }
 
     public void wypiszWszystkieProdukty() {
+        utworzListeDostepnychProduktow();
         for (int i = 0; i < listaProduktow.size(); i++) {
             System.out.println((i+1) + ".");
             //System.out.println(listaProduktow.get(i).toString());
@@ -436,4 +441,15 @@ public class Sklep {
         }
     }
 
+    public void utworzListeDostepnychProduktow() {
+        List<Produkt> listaDostepnychProduktow = new ArrayList<>();
+
+        for (Produkt produkt : listaProduktow) {
+            if (produkt.getIloscWMagazynie() > 0) {
+                listaDostepnychProduktow.add(produkt);
+            }
+        }
+
+        listaProduktow = listaDostepnychProduktow;
+    }
 }
