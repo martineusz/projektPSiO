@@ -448,7 +448,6 @@ public class Sklep {
                 listaDostepnychProduktow.add(produkt);
             }
         }
-
         listaProduktow = listaDostepnychProduktow;
     }
 }
