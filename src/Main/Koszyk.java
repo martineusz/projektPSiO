@@ -44,18 +44,21 @@ public class Koszyk implements Serializable {
     }
 
     public void zrealizujDostawe(String adres) {
-        for (Produkt produkt : this.listaProduktow) {
-            if(produkt.sprawdzDostepnoscProduktu() == false) {
-                System.out.println("zamowienie niezrealizowane");
-                break;
-            }
-        }
-        for (Produkt produkt : this.listaProduktow) {
-            produkt.setIloscWMagazynie(produkt.getIloscWMagazynie() - 1);
-        }
+
+
         if(dostawaStrategia != null){
+            for (Produkt produkt : this.listaProduktow) {
+                if(!produkt.sprawdzDostepnoscProduktu()) {
+                    System.out.println("Zamówienie niezrealizowane");
+                    return;
+                }
+            }
+            for (Produkt produkt : this.listaProduktow) {
+                produkt.setIloscWMagazynie(produkt.getIloscWMagazynie() - 1);
+            }
             dostawaStrategia.dodajKoszt(this);
             dostawaStrategia.wyslijPaczke(adres);
+            this.listaProduktow.clear();
         }
         else {
             System.out.println("Nie wybrano strategii dostawy!");
@@ -94,4 +97,10 @@ public class Koszyk implements Serializable {
         return wartoscZamowienia;
     }
 
+    public boolean czyKoszykMaProdukty() {
+        if (this.listaProduktow.size() > 0) {
+            return true;
+        }
+        else {return false;}
+    }
 }
