@@ -173,7 +173,7 @@ public class Sklep {
     public void dodajProdukt(){
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Podaj typ produktu do dodania (obuwie, bluza, koszulka, spodnie)");
+        System.out.print("Podaj typ produktu do dodania (obuwie, bluza, koszulka, spodnie)");
         String wybor=scan.nextLine();
         switch (wybor){
             case"obuwie":  dodajObuwie();  break;
@@ -364,14 +364,18 @@ public class Sklep {
                 rozmiarSpodni, dlugoscSpodni, typSpodni, krojSpodni));
     }
 
-    public void usunProdukt(Produkt produkt){
-        if(listaProduktow.contains(produkt)){
-            listaProduktow.remove(produkt);
-            System.out.println("Produkt został usunięty z listy!");
+    public void usunProdukt(){
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Podaj id produktu ktory chcesz usunac: ");
+        String id=scan.nextLine();
+        for(int i=0; i<listaProduktow.size(); i++){
+            if(listaProduktow.get(i).getIdProduktu().equals(id)){
+                listaProduktow.remove(i);
+                System.out.println("Produkt zostal usuniety!");
+                return;
+            }
         }
-        else{
-            System.out.println("Produktu nie ma na liście!");
-        }
+        System.out.println("Produktu nie ma na liscie.");
     }
     public void wczytajListeKlientow(){
         try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("ListaKlientow.ser"))) {

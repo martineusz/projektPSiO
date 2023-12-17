@@ -198,6 +198,9 @@ public class Main {
                                 sklep.dodajProdukt();
                                 break;
                             case "3":
+                                sklep.usunProdukt();
+                                break;
+                            case "4":
                                 break LoopAdmin;
                         }
                         admin();
@@ -271,7 +274,8 @@ public class Main {
         System.out.println("\nMENU ADMIN: Wybierz opcje: ");
         System.out.println("1. Dodaj promocje");
         System.out.println("2. Dodaj produkt do sklepu");
-        System.out.println("3. Wroc");
+        System.out.println("3. Usun produkt ze sklepu");
+        System.out.println("4. Wroc");
         System.out.print("Wybor: ");
     }
 }
