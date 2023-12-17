@@ -408,6 +408,7 @@ public class Sklep {
                 try {
                     obj = odczyt.readObject();
                     listaProduktow.add((Produkt) obj);
+
                 } catch (EOFException e) {
                     break;
                 }
@@ -419,7 +420,9 @@ public class Sklep {
     public void zapiszListeProduktow(){
         try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("ListaProduktow.ser"))){
             for(int i=0; i<listaProduktow.size(); i++){
-                zapis.writeObject(listaProduktow.get(i));
+                if(listaProduktow.get(i).sprawdzDostepnoscProduktu()){
+                    zapis.writeObject(listaProduktow.get(i));
+                }
             }
         } catch (IOException e){
             e.printStackTrace();
@@ -429,10 +432,7 @@ public class Sklep {
     public void wypiszWszystkieProdukty() {
         for (int i = 0; i < listaProduktow.size(); i++) {
             System.out.println((i+1) + ".");
-            //System.out.println(listaProduktow.get(i).toString());
-            System.out.println("ID produktu: " + listaProduktow.get(i).getIdProduktu());
-            System.out.println("Nazwa produktu: " + listaProduktow.get(i).getNazwa()+"\n");
-
+            System.out.println(listaProduktow.get(i).toString());
         }
     }
 
