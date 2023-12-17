@@ -55,7 +55,7 @@ public class Sklep {
         this.listaProduktow = listaProduktow;
     }
     private static final long serialVersionUID = 1234123563789L;
-    public boolean zalogujSie(){
+    public void zalogujSie(){
         Scanner scan = new Scanner(System.in);
         System.out.print("Podaj login: ");
         String login=scan.nextLine();
@@ -66,15 +66,15 @@ public class Sklep {
                 this.zalogowanyKlient=listaKlientow.get(i);
                 this.czyZalogowany=true;
                 System.out.println("Zalogowano!");
-                return true;
+                return;
             }
         }
         System.out.println("Hasło lub login nieprawidłowe");
-        return false;
     }
     public void wylogujSie(){
         if(czyZalogowany) {
             this.zalogowanyKlient = null;
+            this.czyZalogowany=false;
             System.out.println("Wylogowano!");
         }
         else{

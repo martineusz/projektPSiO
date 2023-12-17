@@ -27,8 +27,17 @@ public class Main {
         Loop: while(scan.hasNextLine()) {
             wybor = scan.nextLine();
             switch (wybor) {
+                case "2": // zarejestruj sie
+                    sklep.zarejestruj();
+                    if(!sklep.isCzyZalogowany()){
+                        break;
+                    }
                 case "1": //zaloguj się
-                    if(sklep.zalogujSie()) {
+                    if(!sklep.isCzyZalogowany())
+                    {
+                        sklep.zalogujSie();
+                    }
+                    if(sklep.isCzyZalogowany()){
                         menuKlientZalogowany();
                         LoopKlient: while (scan.hasNext()) {
                             wybor = scan.nextLine();
@@ -178,9 +187,6 @@ public class Main {
                     }
 
 
-                    break;
-                case "2": // zarejestruj sie
-                    sklep.zarejestruj();
                     break;
                 case "3":
                     admin();
