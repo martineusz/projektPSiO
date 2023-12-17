@@ -100,8 +100,8 @@ public abstract class Produkt implements Serializable {
     @Override
     public String toString() {
         super.toString();
-        return  "\nNazwa='" + nazwa +
-                "\nID produktu='" + idProduktu +
+        return  "\nNazwa: " + nazwa +
+                "\nID produktu: "  + idProduktu +
                 "\nCena=" + cena +
                 "\nIlosc w magazynie=" + iloscWMagazynie +
                 "\nOpis='" + opis +

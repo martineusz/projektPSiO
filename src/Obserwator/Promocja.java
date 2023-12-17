@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 public class Promocja implements Podmiot, Serializable {
 	ArrayList<Obserwator> obserwatorzy = new ArrayList<Obserwator>();
-	private static final long serialVersionUID = -5379526219749958428L;
 
 	public void ustawPromocjeNaProdukt(Produkt produkt) {
 		Scanner scan = new Scanner(System.in);
