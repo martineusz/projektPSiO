@@ -173,7 +173,7 @@ public class Sklep {
     public void dodajProdukt(){
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Ty produktu do dodania (obuwie, bluza, koszulka, spodnie)");
+        System.out.println("Podaj typ produktu do dodania (obuwie, bluza, koszulka, spodnie)");
         String wybor=scan.nextLine();
         switch (wybor){
             case"obuwie":  dodajObuwie();  break;
@@ -235,15 +235,13 @@ public class Sklep {
         String idProduktu=scan.nextLine();
 
         System.out.print("Podaj cene: ");
-        double cena= scan.nextDouble();
-        scan.nextLine();
+        double cena= Double.parseDouble(scan.nextLine());
 
         System.out.print("Podaj nazwe produktu: ");
         String nazwa=scan.nextLine();
 
         System.out.print("Podaj ilosc w magazynie: ");
-        int iloscWMagazynie=scan.nextInt();
-        scan.nextLine();
+        int iloscWMagazynie=Integer.parseInt(scan.nextLine());
 
         System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
@@ -264,8 +262,7 @@ public class Sklep {
         String rozmiarBluzy=scan.nextLine();
 
         System.out.print("Czy jest z kapturem (true|false): ");
-        boolean czyZKapturem=scan.nextBoolean();
-        scan.nextLine();
+        boolean czyZKapturem=Boolean.parseBoolean(scan.nextLine());
 
         System.out.print("Podaj dekolt bluzy: ");
         String dekoltBluzy=scan.nextLine();
@@ -284,15 +281,13 @@ public class Sklep {
         String idProduktu=scan.nextLine();
 
         System.out.print("Podaj cene: ");
-        double cena= scan.nextDouble();
-        scan.nextLine();
+        double cena= Double.parseDouble(scan.nextLine());
 
         System.out.print("Podaj nazwe produktu: ");
         String nazwa=scan.nextLine();
 
         System.out.print("Podaj ilosc w magazynie: ");
-        int iloscWMagazynie=scan.nextInt();
-        scan.nextLine();
+        int iloscWMagazynie=Integer.parseInt(scan.nextLine());
 
         System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
@@ -329,15 +324,13 @@ public class Sklep {
         String idProduktu=scan.nextLine();
 
         System.out.print("Podaj cene: ");
-        double cena= scan.nextDouble();
-        scan.nextLine();
+        double cena= Double.parseDouble(scan.nextLine());
 
         System.out.print("Podaj nazwe produktu: ");
         String nazwa=scan.nextLine();
 
         System.out.print("Podaj ilosc w magazynie: ");
-        int iloscWMagazynie=scan.nextInt();
-        scan.nextLine();
+        int iloscWMagazynie=Integer.parseInt(scan.nextLine());
 
         System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
@@ -358,8 +351,7 @@ public class Sklep {
         String rozmiarSpodni=scan.nextLine();
 
         System.out.print("Podaj dlugosc spodni: ");
-        float dlugoscSpodni=scan.nextFloat();
-        scan.nextLine();
+        float dlugoscSpodni=Float.parseFloat(scan.nextLine());
 
         System.out.print("Podaj typ spodni: ");
         String typSpodni=scan.nextLine();
