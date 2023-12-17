@@ -41,8 +41,8 @@ public class Koszulka extends Produkt{
     @Override
     public String toString() {
         return super.toString()+
-                "Rozmiar koszulki: " + rozmiarKoszulki +
-                "Dekolt koszulki: " + dekoltKoszulki +
-                "Kroj koszulki: " + krojKoszulki;
+                "\nRozmiar koszulki: " + rozmiarKoszulki +
+                "\nDekolt koszulki: " + dekoltKoszulki +
+                "\nKroj koszulki: " + krojKoszulki;
     }
 }

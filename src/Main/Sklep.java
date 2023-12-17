@@ -432,8 +432,11 @@ public class Sklep {
 
     public void wypiszWszystkieProdukty() {
         for (int i = 0; i < listaProduktow.size(); i++) {
-            System.out.print((i+1) + ".");
-            System.out.println(listaProduktow.get(i).toString());
+            System.out.println((i+1) + ".");
+            //System.out.println(listaProduktow.get(i).toString());
+            System.out.println("ID produktu: " + listaProduktow.get(i).getIdProduktu());
+            System.out.println("Nazwa produktu: " + listaProduktow.get(i).getNazwa()+"\n");
+
         }
     }
 

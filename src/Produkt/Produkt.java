@@ -102,11 +102,11 @@ public abstract class Produkt implements Serializable {
         super.toString();
         return  "\nNazwa: " + nazwa +
                 "\nID produktu: "  + idProduktu +
-                "\nCena=" + cena +
-                "\nIlosc w magazynie=" + iloscWMagazynie +
-                "\nOpis='" + opis +
-                "\nMaterial='" + material +
-                "\nKolor='" + kolor +
-                "\nProducent=" + producent.toString();
+                "\nCena: " + cena +
+                "\nIlosc w magazynie: " + iloscWMagazynie +
+                "\nOpis: " + opis +
+                "\nMaterial: " + material +
+                "\nKolor: " + kolor +
+                "\nProducent: " + producent.toString();
     }
 }

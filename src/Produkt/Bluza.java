@@ -49,9 +49,9 @@ public class Bluza extends Produkt{
     @Override
     public String toString() {
         return super.toString() +
-                "Rozmiar bluzy: " + rozmiarBluzy +
-                "Czy z kapturem: " + czyZKapturem +
-                "Dekolt bluzy: " + dekoltBluzy +
-                "Kroj bluzy: " + krojBluzy;
+                "\nRozmiar bluzy: " + rozmiarBluzy +
+                "\nCzy z kapturem: " + czyZKapturem +
+                "\nDekolt bluzy: " + dekoltBluzy +
+                "\nKroj bluzy: " + krojBluzy;
     }
 }

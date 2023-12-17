@@ -1,9 +1,13 @@
 package DostawaStrategia;
 import Main.Koszyk;
-public class DostawaKurier implements DostawaStrategia {
+
+import java.io.Serializable;
+
+public class DostawaKurier implements DostawaStrategia, Serializable {
     private String adresKlienta;
     private String numerTelefonuKlienta;
     private boolean statusDostawy;
+    private static final long serialVersionUID = 2414353077718088096L;
 
     public void dodajKoszt(Koszyk koszyk){
             koszyk.setWartoscZamowienia(koszyk.getWartoscZamowienia()+19.99);
