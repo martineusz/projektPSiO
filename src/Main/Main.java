@@ -1,9 +1,11 @@
 package Main;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 import DostawaStrategia.*;
+import PlacenieStrategia.*;
 import Produkt.*;
 import Obserwator.*;
 
@@ -27,17 +29,8 @@ public class Main {
         Loop: while(scan.hasNextLine()) {
             wybor = scan.nextLine();
             switch (wybor) {
-                case "2": // zarejestruj sie
-                    sklep.zarejestruj();
-                    if(!sklep.isCzyZalogowany()){
-                        break;
-                    }
                 case "1": //zaloguj się
-                    if(!sklep.isCzyZalogowany())
-                    {
-                        sklep.zalogujSie();
-                    }
-                    if(sklep.isCzyZalogowany()){
+                    if(sklep.zalogujSie()) {
                         menuKlientZalogowany();
                         LoopKlient: while (scan.hasNext()) {
                             wybor = scan.nextLine();
@@ -108,6 +101,8 @@ public class Main {
                                                 break;
                                             case "3": // zloz zamowienie
                                                 if (sklep.zalogowanyKlient.koszyk.czyKoszykMaProdukty()) {
+                                                    String adres = null;
+                                                    boolean zamowienie = false;
                                                     zamawianieDostawa();
                                                     LoopZamawianie:
                                                     while (scan.hasNext()) {
@@ -117,24 +112,46 @@ public class Main {
                                                                 sklep.zalogowanyKlient.koszyk.ustawMetodeDostawy(new DostawaPaczkomat());
                                                                 System.out.println("Koncowy koszt: " + (15.99 + sklep.zalogowanyKlient.koszyk.obliczWartoscZamowienia()));
                                                                 System.out.print("Wpisz adres paczkomatu (Wroc - 0): ");
-
-                                                                wybor = scan.nextLine();
-                                                                sklep.zalogowanyKlient.koszyk.zrealizujDostawe(wybor);
+                                                                adres = scan.nextLine();
+                                                                if (!Objects.equals(adres, "0")) {
+                                                                    zamowienie = true;
+                                                                }
                                                                 break;
                                                             case "2":
                                                                 sklep.zalogowanyKlient.koszyk.ustawMetodeDostawy(new DostawaKurier());
                                                                 System.out.println("Koncowy koszt: "+ (19.99 + sklep.zalogowanyKlient.koszyk.obliczWartoscZamowienia()));
                                                                 System.out.print("Wpisz adres zamieszkania (Wroc - 0): ");
-
-                                                                wybor = scan.nextLine();
-                                                                sklep.zalogowanyKlient.koszyk.zrealizujDostawe(wybor);
+                                                                adres = scan.nextLine();
+                                                                if (!Objects.equals(adres, "0")) {
+                                                                    zamowienie = true;
+                                                                }
                                                                 break;
                                                             case "3":
                                                                 break LoopZamawianie;
                                                         }
-                                                    zamawianieDostawa();
+                                                        if (zamowienie) {
+                                                            zamawianiePlatnosc();
+                                                            while (scan.hasNext()) {
+                                                                wybor = scan.nextLine();
+                                                                switch (wybor) {
+                                                                    case "1":
+                                                                        sklep.zalogowanyKlient.koszyk.ustawMetodePlatnosci(new placBlikiem());
+                                                                        sklep.zalogowanyKlient.koszyk.zrealizujDostawe(adres);
+                                                                        break LoopZamawianie;
+                                                                    case "2":
+                                                                        sklep.zalogowanyKlient.koszyk.ustawMetodePlatnosci(new placKarta());
+                                                                        sklep.zalogowanyKlient.koszyk.zrealizujDostawe(adres);
+                                                                        break LoopZamawianie;
+                                                                    case "3":
+                                                                        break LoopZamawianie;
+                                                                }
+                                                                zamawianiePlatnosc();
+                                                            }
+                                                        }
+                                                        else zamawianieDostawa();
                                                     }
-                                                    break;}
+                                                break;
+                                                }
                                                 else {
                                                     System.out.println("W koszyku nie ma produktów");
                                                     break;
@@ -187,6 +204,9 @@ public class Main {
                     }
 
 
+                    break;
+                case "2": // zarejestruj sie
+                    sklep.zarejestruj();
                     break;
                 case "3":
                     admin();
@@ -293,6 +313,14 @@ public class Main {
         System.out.println("\nSposob dostawy: Wybierz opcje: ");
         System.out.println("1. Paczkomat (15.99 zl)");
         System.out.println("2. Kurier (19.99 zl)");
+        System.out.println("3. Wroc");
+        System.out.print("Wybor: ");
+    }
+
+    public static void zamawianiePlatnosc() {
+        System.out.println("\nSposob płatności: Wybierz opcje: ");
+        System.out.println("1. BLIK");
+        System.out.println("2. Karta płatnicza");
         System.out.println("3. Wroc");
         System.out.print("Wybor: ");
     }
