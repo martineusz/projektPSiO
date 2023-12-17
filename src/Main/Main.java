@@ -188,18 +188,22 @@ public class Main {
                                 System.out.print("Wybor (0 - cofnij): ");
                                 LoopDodajPromocje:
                                 while (scan.hasNextLine()) {
-                                    wyborInt = Integer.parseInt(scan.nextLine());
-                                    switch(wyborInt) {
-                                        case 0:
-                                            break LoopDodajPromocje;
-                                        default:
-                                            try {
-                                                sklep.promocja.ustawPromocjeNaProdukt(sklep.getListaProduktow().get(wyborInt - 1));
-                                            } catch(Exception e) {
-                                                System.out.println("numer niemozliwy do wybrania");
-                                            }
-                                            break;
-                                    }
+                                    if (scan.hasNextInt()) {
+                                        wyborInt = scan.nextInt();
+                                        switch(wyborInt) {
+                                            case 0:
+                                                break LoopDodajPromocje;
+                                            default:
+                                                try {
+                                                    sklep.promocja.ustawPromocjeNaProdukt(sklep.getListaProduktow().get(wyborInt - 1));
+                                                } catch(Exception e) {
+                                                    System.out.println("numer niemozliwy do wybrania");
+                                                }
+                                                break;
+                                        }}
+                                     else {
+                                            System.out.println("Podano nieprawidłową wartość.");
+                                            scan.nextLine();}
                                     System.out.println("WYBIERZ PRODUKT KTORY CHCESZ PRZECENIC: ");
                                     sklep.wypiszWszystkieProdukty();
                                     System.out.print("Wybor (0 - cofnij): ");
