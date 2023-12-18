@@ -103,7 +103,7 @@ public abstract class Produkt implements Serializable {
                 "ID: '" + idProduktu + '\'' +
                 ", cena: " + cena +
                 ", nazwa: '" + nazwa + '\'' +
-                ", ilość w magazynie" + iloscWMagazynie +
+                ", ilość w magazynie: " + iloscWMagazynie +
                 ", opis: '" + opis + '\'' +
                 ", materiał: '" + material + '\'' +
                 ", kolor: '" + kolor + '\'' +

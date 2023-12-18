@@ -26,12 +26,12 @@ public class Koszyk implements Serializable {
     }
 
     public void setWartoscZamowienia(double wartoscZamowienia) {
-        DecimalFormat df = new DecimalFormat("#.##");
         this.wartoscZamowienia = wartoscZamowienia;
     }
 
     public void dodajProdukt(Produkt produkt){
         listaProduktow.add(produkt);
+        produkt.setIloscWMagazynie(produkt.getIloscWMagazynie()-1);
     }
 
     public void usunProdukt(int i){
