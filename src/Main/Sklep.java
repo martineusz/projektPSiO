@@ -159,6 +159,21 @@ public class Sklep {
             return false;
         }
     }
+    private boolean isNumericF(String str){
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
+    private boolean isBoolean(String str){
+        if(str.equals("true")||str.equals("false")){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public void usunKonto(){
         if(czyZalogowany) {
             Scanner scan = new Scanner(System.in);
@@ -199,15 +214,38 @@ public class Sklep {
 
         System.out.print("Podaj id produktu: ");
         String idProduktu = scan.nextLine();
+        for(int i=0; i<listaProduktow.size(); i++){
+            if(idProduktu.equals(listaProduktow.get(i).getIdProduktu())){
+                System.out.println("To id jest juz uzyte!");
+                dodajObuwie();
+                return;
+            }
+        }
 
-        System.out.print("Podaj cene: ");
-        double cena = Double.parseDouble(scan.nextLine());
+        String cena;
+        while(true) {
+            System.out.print("Podaj cene: ");
+            cena = scan.nextLine();
+            if(isNumericF(cena)){
+                break;
+            }else{
+                System.out.println("Musi byc liczba!");
+            }
+        }
 
         System.out.print("Podaj nazwe produktu: ");
         String nazwa = scan.nextLine();
 
-        System.out.print("Podaj ilosc w magazynie: ");
-        int iloscWMagazynie= Integer.parseInt(scan.nextLine());
+        String iloscWMagazynie;
+        while (true) {
+            System.out.print("Podaj ilosc w magazynie: ");
+            iloscWMagazynie = scan.nextLine();
+            if(isNumeric(iloscWMagazynie)){
+                break;
+            }else{
+                System.out.println("Musi byc liczba calkowita!");
+            }
+        }
 
         System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
@@ -224,8 +262,17 @@ public class Sklep {
         System.out.print("Podaj kraj pochodzenia: ");
         String krajPochodzenia=scan.nextLine();
 
-        System.out.print("Podaj rozmiar obuwia: ");
-        float rozmiarObuwia= Float.parseFloat(scan.nextLine());
+        String rozmiarObuwia;
+        while(true) {
+            System.out.print("Podaj rozmiar obuwia: ");
+            rozmiarObuwia = scan.nextLine();
+            if(isNumericF(rozmiarObuwia)){
+                break;
+            }else{
+                System.out.println("Musi byc liczba!");
+            }
+
+        }
 
         System.out.print("Podaj typ obuwia: ");
         String typObuwia=scan.nextLine();
@@ -234,23 +281,46 @@ public class Sklep {
         String typPodeszwy=scan.nextLine();
 
 
-        listaProduktow.add(new Obuwie(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, new Producent(nazwaProducenta,
-                krajPochodzenia), rozmiarObuwia, typObuwia, typPodeszwy));
+        listaProduktow.add(new Obuwie(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta,
+                krajPochodzenia), Float.parseFloat(rozmiarObuwia), typObuwia, typPodeszwy));
     }
     public void dodajBluze(){
         Scanner scan = new Scanner(System.in);
 
         System.out.print("Podaj id produktu: ");
         String idProduktu=scan.nextLine();
+        for(int i=0; i<listaProduktow.size(); i++){
+            if(idProduktu.equals(listaProduktow.get(i).getIdProduktu())){
+                System.out.println("To id jest juz uzyte!");
+                dodajBluze();
+                return;
+            }
+        }
 
-        System.out.print("Podaj cene: ");
-        double cena= Double.parseDouble(scan.nextLine());
+        String cena;
+        while(true) {
+            System.out.print("Podaj cene: ");
+            cena = scan.nextLine();
+            if(isNumericF(cena)){
+                break;
+            }else{
+                System.out.println("Musi byc liczba!");
+            }
+        }
 
         System.out.print("Podaj nazwe produktu: ");
         String nazwa=scan.nextLine();
 
-        System.out.print("Podaj ilosc w magazynie: ");
-        int iloscWMagazynie=Integer.parseInt(scan.nextLine());
+        String iloscWMagazynie;
+        while (true) {
+            System.out.print("Podaj ilosc w magazynie: ");
+            iloscWMagazynie = scan.nextLine();
+            if(isNumeric(iloscWMagazynie)){
+                break;
+            }else{
+                System.out.println("Musi byc liczba calkowita!");
+            }
+        }
 
         System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
@@ -270,8 +340,16 @@ public class Sklep {
         System.out.print("Podaj rozmiar bluzy: ");
         String rozmiarBluzy=scan.nextLine();
 
-        System.out.print("Czy jest z kapturem (true|false): ");
-        boolean czyZKapturem=Boolean.parseBoolean(scan.nextLine());
+        String czyZKapturem;
+        while(true) {
+            System.out.print("Czy jest z kapturem (true|false): ");
+            czyZKapturem = scan.nextLine();
+            if(isBoolean(czyZKapturem)){
+                break;
+            }else{
+                System.out.println("Musi byc true lub false");
+            }
+        }
 
         System.out.print("Podaj dekolt bluzy: ");
         String dekoltBluzy=scan.nextLine();
@@ -280,23 +358,46 @@ public class Sklep {
         String krojBluzy=scan.nextLine();
 
 
-        listaProduktow.add(new Bluza(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, new Producent(nazwaProducenta,
-                krajPochodzenia), rozmiarBluzy, czyZKapturem, dekoltBluzy, krojBluzy));
+        listaProduktow.add(new Bluza(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta,
+                krajPochodzenia), rozmiarBluzy, Boolean.parseBoolean(czyZKapturem), dekoltBluzy, krojBluzy));
     }
     public void dodajKoszulke(){
         Scanner scan = new Scanner(System.in);
 
         System.out.print("Podaj id produktu: ");
         String idProduktu=scan.nextLine();
+        for(int i=0; i<listaProduktow.size(); i++){
+            if(idProduktu.equals(listaProduktow.get(i).getIdProduktu())){
+                System.out.println("To id jest juz uzyte!");
+                dodajKoszulke();
+                return;
+            }
+        }
 
-        System.out.print("Podaj cene: ");
-        double cena= Double.parseDouble(scan.nextLine());
+        String cena;
+        while(true) {
+            System.out.print("Podaj cene: ");
+            cena = scan.nextLine();
+            if(isNumericF(cena)){
+                break;
+            }else{
+                System.out.println("Musi byc liczba!");
+            }
+        }
 
         System.out.print("Podaj nazwe produktu: ");
         String nazwa=scan.nextLine();
 
-        System.out.print("Podaj ilosc w magazynie: ");
-        int iloscWMagazynie=Integer.parseInt(scan.nextLine());
+        String iloscWMagazynie;
+        while (true) {
+            System.out.print("Podaj ilosc w magazynie: ");
+            iloscWMagazynie = scan.nextLine();
+            if(isNumeric(iloscWMagazynie)){
+                break;
+            }else{
+                System.out.println("Musi byc liczba calkowita!");
+            }
+        }
 
         System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
@@ -323,7 +424,7 @@ public class Sklep {
         String krojKoszulki=scan.nextLine();
 
 
-        listaProduktow.add(new Koszulka(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, new Producent(nazwaProducenta, krajPochodzenia),
+        listaProduktow.add(new Koszulka(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta, krajPochodzenia),
                 rozmiarKoszulki, dekoltKoszulki, krojKoszulki));
     }
     public void dodajSpodnie(){
@@ -331,15 +432,38 @@ public class Sklep {
 
         System.out.print("Podaj id produktu: ");
         String idProduktu=scan.nextLine();
+        for(int i=0; i<listaProduktow.size(); i++){
+            if(idProduktu.equals(listaProduktow.get(i).getIdProduktu())){
+                System.out.println("To id jest juz uzyte!");
+                dodajSpodnie();
+                return;
+            }
+        }
 
-        System.out.print("Podaj cene: ");
-        double cena= Double.parseDouble(scan.nextLine());
+        String cena;
+        while(true) {
+            System.out.print("Podaj cene: ");
+            cena = scan.nextLine();
+            if(isNumericF(cena)){
+                break;
+            }else{
+                System.out.println("Musi byc liczba!");
+            }
+        }
 
         System.out.print("Podaj nazwe produktu: ");
         String nazwa=scan.nextLine();
 
-        System.out.print("Podaj ilosc w magazynie: ");
-        int iloscWMagazynie=Integer.parseInt(scan.nextLine());
+        String iloscWMagazynie;
+        while (true) {
+            System.out.print("Podaj ilosc w magazynie: ");
+            iloscWMagazynie = scan.nextLine();
+            if(isNumeric(iloscWMagazynie)){
+                break;
+            }else{
+                System.out.println("Musi byc liczba calkowita!");
+            }
+        }
 
         System.out.print("Podaj opis: ");
         String opis=scan.nextLine();
@@ -359,8 +483,16 @@ public class Sklep {
         System.out.print("Podaj rozmiar spodni: ");
         String rozmiarSpodni=scan.nextLine();
 
-        System.out.print("Podaj dlugosc spodni: ");
-        float dlugoscSpodni=Float.parseFloat(scan.nextLine());
+        String dlugoscSpodni;
+        while(true) {
+            System.out.print("Podaj dlugosc spodni: ");
+            dlugoscSpodni = scan.nextLine();
+            if(isNumericF(dlugoscSpodni)){
+                break;
+            }else{
+                System.out.println("Musi byc liczba");
+            }
+        }
 
         System.out.print("Podaj typ spodni: ");
         String typSpodni=scan.nextLine();
@@ -369,8 +501,8 @@ public class Sklep {
         String krojSpodni=scan.nextLine();
 
 
-        listaProduktow.add(new Spodnie(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, new Producent(nazwaProducenta, krajPochodzenia),
-                rozmiarSpodni, dlugoscSpodni, typSpodni, krojSpodni));
+        listaProduktow.add(new Spodnie(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta, krajPochodzenia),
+                rozmiarSpodni, Float.parseFloat(dlugoscSpodni), typSpodni, krojSpodni));
     }
 
     public void usunProdukt(){
