@@ -44,27 +44,23 @@ public class Promocja implements Podmiot, Serializable {
 		}
 	}
 
-	public void wczytajObserwatorowPromocji(){
-		try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("PromocjaObserwatorzy.ser"))){
+	public void wczytajObserwatorowPromocji() {
+		try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("PromocjaObserwatorzy.ser"))) {
 			Object obj = null;
-			while (true) {
-				try {
-					obj = odczyt.readObject();
-					if(obj instanceof ObserwatorEmail) {
-						dodajObserwatora((ObserwatorEmail) obj);
-					}
-					else if(obj instanceof ObserwatorSMS){
-						dodajObserwatora((ObserwatorSMS) obj);
-					}
-				} catch (EOFException e) {
-					break;
+			while ((obj = odczyt.readObject()) != null) {
+				if (obj instanceof ObserwatorEmail) {
+					dodajObserwatora((ObserwatorEmail) obj);
+				} else if (obj instanceof ObserwatorSMS) {
+					dodajObserwatora((ObserwatorSMS) obj);
 				}
 			}
-
-		}catch (Exception e){
+		} catch (EOFException ignored) {
+			// koniec pliku - czyli zakonczyc program
+		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
+
 	public void zapiszObserwatorowPromocji(){
 		try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("PromocjaObserwatorzy.ser"))){
 			for(int i=0; i<obserwatorzy.size(); i++){
