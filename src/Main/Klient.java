@@ -101,7 +101,7 @@ public class Klient implements Serializable {
     public void wypiszZPromocji(Promocja promocja) {
         if (CzyPromocja) {
             usunZNewslettera(promocja);
-            System.out.println(this.imie + " wypisany newslettera o promocjach");
+            System.out.println(this.imie + " wypisany z newslettera o promocjach");
         } else {
             System.out.println(this.imie + " nie jest zapisany na promocje");
         }
