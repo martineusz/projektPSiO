@@ -547,7 +547,6 @@ public class Sklep {
                 }
             }
         } catch (EOFException ignored) {
-            // Złapany koniec pliku - zakończ odczyt
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -572,7 +571,6 @@ public class Sklep {
                 }
             }
         } catch (EOFException ignored) {
-            // Złapany koniec pliku - zakończ odczyt
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
