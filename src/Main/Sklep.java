@@ -542,15 +542,17 @@ public class Sklep {
         try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("ListaKlientow.ser"))) {
             Object obj = null;
             while ((obj = odczyt.readObject()) != null) {
-                obj = odczyt.readObject();
-                listaKlientow.add((Klient) obj);
+                if (obj instanceof Klient) {
+                    listaKlientow.add((Klient) obj);
+                }
             }
         } catch (EOFException ignored) {
-
+            // Złapany koniec pliku - zakończ odczyt
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
+
         public void zapiszListeKlientow () {
             try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("ListaKlientow.ser"))) {
                 for (int i = 0; i < listaKlientow.size(); i++) {
@@ -560,20 +562,21 @@ public class Sklep {
                 e.printStackTrace();
             }
         }
-        public void wczytajListeProduktow () {
-            utworzListeDostepnychProduktow();
-            try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("ListaProduktow.ser"))) {
-                Object obj = null;
-                while ((obj = odczyt.readObject()) != null) {
-                    obj = odczyt.readObject();
+    public void wczytajListeProduktow() {
+        utworzListeDostepnychProduktow();
+        try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("ListaProduktow.ser"))) {
+            Object obj = null;
+            while ((obj = odczyt.readObject()) != null) {
+                if (obj instanceof Produkt) {
                     listaProduktow.add((Produkt) obj);
                 }
-            } catch (EOFException ignored) {
-
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
             }
+        } catch (EOFException ignored) {
+            // Złapany koniec pliku - zakończ odczyt
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
+    }
         public void zapiszListeProduktow () {
             utworzListeDostepnychProduktow();
             try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("ListaProduktow.ser"))) {
