@@ -552,59 +552,60 @@ public class Sklep {
         }
     }
 
-        public void zapiszListeKlientow () {
-            try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("ListaKlientow.ser"))) {
-                for (int i = 0; i < listaKlientow.size(); i++) {
-                    zapis.writeObject(listaKlientow.get(i));
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+    public void zapiszListeKlientow () {
+        try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("ListaKlientow.ser"))) {
+            for (int i = 0; i < listaKlientow.size(); i++) {
+                zapis.writeObject(listaKlientow.get(i));
             }
-        }
-    public void wczytajListeProduktow() {
-        utworzListeDostepnychProduktow();
-        try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("ListaProduktow.ser"))) {
-            Object obj = null;
-            while ((obj = odczyt.readObject()) != null) {
-                if (obj instanceof Produkt) {
-                    listaProduktow.add((Produkt) obj);
-                }
-            }
-        } catch (EOFException ignored) {
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-        public void zapiszListeProduktow () {
-            utworzListeDostepnychProduktow();
-            try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("ListaProduktow.ser"))) {
-                for (int i = 0; i < listaProduktow.size(); i++) {
-                    if (listaProduktow.get(i).sprawdzDostepnoscProduktu()) {
-                        zapis.writeObject(listaProduktow.get(i));
-                    }
+    public void wczytajListeProduktow(){
+        utworzListeDostepnychProduktow();
+        try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("ListaProduktow.ser"))){
+            Object obj;
+            while ((obj = odczyt.readObject()) != null) {
+                Produkt produkt = (Produkt) obj;
+                if (produkt.getIloscWMagazynie() > 0) {
+                    listaProduktow.add(produkt);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        } catch (EOFException e) {
+            // Ignorujemy, gdyż ten wyjątek oznacza koniec pliku
+        } catch (IOException | ClassNotFoundException e){
+            e.printStackTrace();
         }
-
-        public void wypiszWszystkieProdukty () {
-            utworzListeDostepnychProduktow();
-            for (int i = 0; i < listaProduktow.size(); i++) {
-                System.out.println((i + 1) + ".");
-                System.out.println(listaProduktow.get(i).toString());
-            }
-        }
-
-        public void utworzListeDostepnychProduktow () {
-            List<Produkt> listaDostepnychProduktow = new ArrayList<>();
-
+    }
+    public void zapiszListeProduktow(){
+        utworzListeDostepnychProduktow();
+        try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("ListaProduktow.ser"))){
             for (Produkt produkt : listaProduktow) {
                 if (produkt.getIloscWMagazynie() > 0) {
-                    listaDostepnychProduktow.add(produkt);
+                    zapis.writeObject(produkt);
                 }
             }
-            listaProduktow = listaDostepnychProduktow;
+        } catch (IOException e){
+            e.printStackTrace();
         }
     }
 
+    public void wypiszWszystkieProdukty() {
+        List<Produkt> dostepneProdukty = utworzListeDostepnychProduktow();
+        for (int i = 0; i < dostepneProdukty.size(); i++) {
+            System.out.println((i+1) + ".");
+            System.out.println(dostepneProdukty.get(i).toString());
+        }
+    }
+
+    public List<Produkt> utworzListeDostepnychProduktow() {
+        List<Produkt> listaDostepnychProduktow = new ArrayList<>();
+
+        for (Produkt produkt : listaProduktow) {
+            if (produkt.getIloscWMagazynie() > 0) {
+                listaDostepnychProduktow.add(produkt);
+            }
+        }
+        return listaDostepnychProduktow;
+    }
+}
