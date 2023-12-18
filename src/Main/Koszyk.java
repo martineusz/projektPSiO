@@ -37,7 +37,7 @@ public class Koszyk implements Serializable {
     public void usunProdukt(int i){
         Produkt produkt = listaProduktow.get(i);
         listaProduktow.remove(i);
-        produkt.setIloscWMagazynie(produkt.getIloscWMagazynie()+1);
+        produkt.setIloscWMagazynie (produkt.getIloscWMagazynie()+1);
     }
 
     public void ustawMetodePlatnosci(PlacenieStrategia placenieStrategia){
