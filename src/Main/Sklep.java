@@ -214,6 +214,13 @@ public class Sklep {
 
         System.out.print("Podaj id produktu: ");
         String idProduktu = scan.nextLine();
+        for(int i=0; i<listaProduktow.size(); i++){
+            if(idProduktu.equals(listaProduktow.get(i).getIdProduktu())){
+                System.out.println("To id jest juz uzyte!");
+                dodajObuwie();
+                return;
+            }
+        }
 
         String cena;
         while(true) {
@@ -282,6 +289,13 @@ public class Sklep {
 
         System.out.print("Podaj id produktu: ");
         String idProduktu=scan.nextLine();
+        for(int i=0; i<listaProduktow.size(); i++){
+            if(idProduktu.equals(listaProduktow.get(i).getIdProduktu())){
+                System.out.println("To id jest juz uzyte!");
+                dodajBluze();
+                return;
+            }
+        }
 
         String cena;
         while(true) {
@@ -352,6 +366,13 @@ public class Sklep {
 
         System.out.print("Podaj id produktu: ");
         String idProduktu=scan.nextLine();
+        for(int i=0; i<listaProduktow.size(); i++){
+            if(idProduktu.equals(listaProduktow.get(i).getIdProduktu())){
+                System.out.println("To id jest juz uzyte!");
+                dodajKoszulke();
+                return;
+            }
+        }
 
         String cena;
         while(true) {
@@ -411,6 +432,13 @@ public class Sklep {
 
         System.out.print("Podaj id produktu: ");
         String idProduktu=scan.nextLine();
+        for(int i=0; i<listaProduktow.size(); i++){
+            if(idProduktu.equals(listaProduktow.get(i).getIdProduktu())){
+                System.out.println("To id jest juz uzyte!");
+                dodajSpodnie();
+                return;
+            }
+        }
 
         String cena;
         while(true) {
