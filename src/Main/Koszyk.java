@@ -31,13 +31,11 @@ public class Koszyk implements Serializable {
 
     public void dodajProdukt(Produkt produkt){
         listaProduktow.add(produkt);
-        produkt.setIloscWMagazynie(produkt.getIloscWMagazynie()-1);
     }
 
     public void usunProdukt(int i){
-        Produkt produkt = listaProduktow.get(i);
         listaProduktow.remove(i);
-        produkt.setIloscWMagazynie (produkt.getIloscWMagazynie()+1);
+
     }
 
     public void ustawMetodePlatnosci(PlacenieStrategia placenieStrategia){
@@ -107,6 +105,7 @@ public class Koszyk implements Serializable {
         for (Produkt produkt : listaProduktow) {
             wartoscZamowienia += produkt.getCena();
         }
+        DecimalFormat df = new DecimalFormat("#.##");
         return wartoscZamowienia;
     }
 

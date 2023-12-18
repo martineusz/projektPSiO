@@ -571,8 +571,8 @@ public class Sklep {
                     listaProduktow.add(produkt);
                 }
             }
-        } catch (EOFException e) {
-            // Ignorujemy, gdyż ten wyjątek oznacza koniec pliku
+        } catch (EOFException ignored) {
+
         } catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }

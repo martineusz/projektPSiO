@@ -7,6 +7,7 @@ import java.util.Scanner;
 import DostawaStrategia.*;
 import PlacenieStrategia.*;
 import Produkt.*;
+import java.text.DecimalFormat;
 import Obserwator.*;
 
 public class Main {
@@ -115,10 +116,11 @@ public class Main {
                                                     LoopZamawianie:
                                                     while (scan.hasNext()) {
                                                         wybor = scan.nextLine();
+                                                        DecimalFormat decfor = new DecimalFormat("0.00");
                                                         switch (wybor) {
                                                             case "1":
                                                                 sklep.zalogowanyKlient.koszyk.ustawMetodeDostawy(new DostawaPaczkomat());
-                                                                System.out.println("Koncowy koszt: " + (15.99 + sklep.zalogowanyKlient.koszyk.obliczWartoscZamowienia()));
+                                                                System.out.println("Koncowy koszt: " + decfor.format((15.99 + sklep.zalogowanyKlient.koszyk.obliczWartoscZamowienia())));
                                                                 System.out.print("Wpisz adres paczkomatu (Wroc - 0): ");
                                                                 adres = scan.nextLine();
                                                                 if (!Objects.equals(adres, "0")) {
@@ -127,7 +129,7 @@ public class Main {
                                                                 break;
                                                             case "2":
                                                                 sklep.zalogowanyKlient.koszyk.ustawMetodeDostawy(new DostawaKurier());
-                                                                System.out.println("Koncowy koszt: "+ (19.99 + sklep.zalogowanyKlient.koszyk.obliczWartoscZamowienia()));
+                                                                System.out.println("Koncowy koszt: "+ decfor.format((19.99 + sklep.zalogowanyKlient.koszyk.obliczWartoscZamowienia())));
                                                                 System.out.print("Wpisz adres zamieszkania (Wroc - 0): ");
                                                                 adres = scan.nextLine();
                                                                 if (!Objects.equals(adres, "0")) {
