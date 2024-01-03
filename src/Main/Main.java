@@ -8,7 +8,8 @@ import DostawaStrategia.*;
 import PlacenieStrategia.*;
 import Produkt.*;
 import java.text.DecimalFormat;
-import Obserwator.*;
+
+import InterfejsGraficzny.Rejestracja;
 
 public class Main {
     public static void main(String[] args) {
@@ -31,15 +32,16 @@ public class Main {
             wybor = scan.nextLine();
             switch (wybor) {
                 case "2": // zarejestruj sie
-                    sklep.zarejestruj();
+                    Rejestracja.RejestrPage(sklep);
                     if(!sklep.isCzyZalogowany()){
                         break;
                     }
                 case "1": //zaloguj się
                     if(!sklep.isCzyZalogowany()){
-                        sklep.zalogujSie();
+                        Rejestracja.ShopPage(sklep);
                     }
                     if(sklep.isCzyZalogowany()){
+
                         menuKlientZalogowany();
                         LoopKlient: while (scan.hasNext()) {
                             wybor = scan.nextLine();

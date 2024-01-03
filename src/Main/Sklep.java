@@ -57,21 +57,19 @@ public class Sklep {
 
     private static final long serialVersionUID = 1234123563789L;
 
-    public void zalogujSie() {
-        Scanner scan = new Scanner(System.in);
-        System.out.print("Podaj login: ");
-        String login = scan.nextLine();
-        System.out.print("Podaj haslo: ");
-        String haslo = scan.nextLine();
+    public boolean zalogujSie(String login, String haslo) {
+        boolean zalogowano = false;
         for (int i = 0; i < listaKlientow.size(); i++) {
             if (login.equals(listaKlientow.get(i).getLogin()) && haslo.equals(listaKlientow.get(i).getHaslo())) {
                 this.zalogowanyKlient = listaKlientow.get(i);
                 this.czyZalogowany = true;
                 System.out.println("Zalogowano!");
-                return;
+                zalogowano = true;
             }
+            else {
+                System.out.println("Hasło lub login nieprawidłowe");}
         }
-        System.out.println("Hasło lub login nieprawidłowe");
+        return zalogowano;
     }
 
     public void wylogujSie() {
