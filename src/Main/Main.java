@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 import DostawaStrategia.*;
+import InterfejsGraficzny.GUIadmin;
 import PlacenieStrategia.*;
 import Produkt.*;
 import java.text.DecimalFormat;
@@ -219,6 +220,7 @@ public class Main {
                     break;
                 case "3":
                     admin();
+                    GUIadmin.openAdmin(sklep);
                     LoopAdmin:
                     while (scan.hasNext()) {
                         wybor = scan.nextLine();
@@ -251,10 +253,10 @@ public class Main {
                                 }
                                 break;
                             case "2":
-                                sklep.dodajProdukt();
+
                                 break;
                             case "3":
-                                sklep.usunProdukt();
+
                                 break;
                             case "4":
                                 break LoopAdmin;

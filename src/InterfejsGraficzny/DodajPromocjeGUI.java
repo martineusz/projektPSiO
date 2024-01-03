@@ -1,4 +1,6 @@
-package Main;
+package InterfejsGraficzny;
+
+import Main.Sklep;
 
 import javax.swing.*;
 import java.awt.*;
@@ -84,7 +86,7 @@ public class DodajPromocjeGUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==zatwierdz){
-            //dodanie danej promocji do danych checkboxow
+
         }
     }
 }

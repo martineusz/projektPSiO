@@ -1,4 +1,6 @@
-package Main;
+package InterfejsGraficzny;
+
+import Main.Sklep;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
