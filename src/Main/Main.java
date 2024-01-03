@@ -238,7 +238,7 @@ public class Main {
                                                 break LoopDodajPromocje;
                                             default:
                                                 try {
-                                                    sklep.promocja.ustawPromocjeNaProdukt(sklep.getListaProduktow().get(wyborInt - 1));
+                                                    sklep.promocja.ustawPromocjeNaProdukt(sklep.getListaProduktow().get(wyborInt - 1), 0.1F, "Obnizka default");
                                                 } catch(Exception e) {
                                                     System.out.println("numer niemozliwy do wybrania");
                                                 }
