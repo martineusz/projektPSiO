@@ -1,5 +1,5 @@
 package Main;
-import Produkt.Produkt;
+import Produkt.*;
 
 import DostawaStrategia.DostawaStrategia;
 import DostawaStrategia.*;
@@ -114,5 +114,13 @@ public class Koszyk implements Serializable {
             return true;
         }
         else {return false;}
+    }
+
+    public ArrayList<Produkt> getListaProduktow() {
+        return listaProduktow;
+    }
+
+    public void setListaProduktow(ArrayList<Produkt> listaProduktow) {
+        this.listaProduktow = listaProduktow;
     }
 }

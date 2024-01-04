@@ -20,9 +20,6 @@ public class Main {
         sklep.wczytajListeProduktow();
         sklep.wczytajListeKlientow();
 
-        //
-        //sklep.dodajProdukt();
-        //
 
         Scanner scan = new Scanner(System.in);
         String wybor;
