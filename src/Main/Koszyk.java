@@ -22,6 +22,10 @@ public class Koszyk implements Serializable {
     }
 
     public double getWartoscZamowienia() {
+        wartoscZamowienia = 0.00;
+        for (Produkt produkt : getListaProduktow()) {
+            wartoscZamowienia += produkt.getCena();
+        }
         return wartoscZamowienia;
     }
 
@@ -97,17 +101,16 @@ public class Koszyk implements Serializable {
                 System.out.println("Nazwa produktu: " + listaProduktow.get(i).getNazwa()+"\n");
             }
         }
-        System.out.println("LACZNA CENA: " + obliczWartoscZamowienia());
+        System.out.println("LACZNA CENA: " + getWartoscZamowienia());
     }
 
-    public double obliczWartoscZamowienia() {
-        double wartoscZamowienia = 0.0;
+/*    public double obliczWartoscZamowienia() {
+        double wartoscZamowienia = 0;
         for (Produkt produkt : listaProduktow) {
             wartoscZamowienia += produkt.getCena();
         }
-        DecimalFormat df = new DecimalFormat("#.##");
         return wartoscZamowienia;
-    }
+    }*/
 
     public boolean czyKoszykMaProdukty() {
         if (this.listaProduktow.size() > 0) {

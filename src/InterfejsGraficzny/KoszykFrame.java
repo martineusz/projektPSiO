@@ -12,8 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KoszykFrame extends JFrame implements ActionListener {
-    double sumaCen;
+    double dostawaCena = 0;
     JLabel labelSumaCen;
+    JLabel labelCenaKoszyka;
+    JLabel labelCenaDostawy;
     JPanel panelPodsumowanie;
     Koszyk koszyk;
     JPanel panelKoszyk;
@@ -169,22 +171,29 @@ public class KoszykFrame extends JFrame implements ActionListener {
         //PANEL PRODUKT
         for (int i = 0; i < koszyk.getListaProduktow().size(); i++) {
             JButton buttonUsun = new JButton();
+            buttonUsun.setBounds(450,40,30,30);
             buttonUsun.setText("X");
-            buttonUsun.setPreferredSize(new Dimension(25,25));
             buttonUsun.addActionListener(this);
+            buttonUsun.setFocusable(false);
+            buttonUsun.setFont(new Font(null, Font.BOLD, 20));
+            buttonUsun.setBackground(Color.WHITE);
+            buttonUsun.setForeground(Color.RED);
+            buttonUsun.setBorder(BorderFactory.createEtchedBorder());
 
             Produkt produkt = koszyk.getListaProduktow().get(i);
 
             JLabel labelNazwa = new JLabel();
-            labelNazwa.setText("CENA: " + String.valueOf(produkt.getCena()));
+            labelNazwa.setBounds(20,45,400,40);
+            labelNazwa.setText("CENA: " + produkt.getCena() + " PLN");
             labelNazwa.setFont(new Font(null, Font.BOLD, 20));
 
             JLabel labelCena = new JLabel();
+            labelCena.setBounds(20,20,400,40);
             labelCena.setText("NAZWA: " + produkt.getNazwa());
             labelCena.setFont(new Font(null, Font.BOLD, 20));
 
             JPanel panelProdukt = new JPanel();
-            panelProdukt.setLayout(new BoxLayout(panelProdukt, BoxLayout.Y_AXIS));
+            panelProdukt.setLayout(null);
             panelProdukt.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             panelProdukt.setPreferredSize(new Dimension(500,100));
 
@@ -214,9 +223,6 @@ public class KoszykFrame extends JFrame implements ActionListener {
         panelDostawa.setVisible(false);
         panelGlowny.add(panelDostawa);
 
-
-
-
         //PANEL PODSUMOWANIE
         panelPodsumowanie.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panelPodsumowanie.setBounds(1000,105,400,450);
@@ -224,25 +230,55 @@ public class KoszykFrame extends JFrame implements ActionListener {
 
         //BUTTON PODSUMOWANIE
         buttonZamowienie = new JButton();
-        buttonZamowienie.setText("ZŁÓŻ ZAMÓWIENIE");
-        buttonZamowienie.setPreferredSize(new Dimension(200,50));
-        buttonZamowienie.setBounds(0,300,400,80);
+        buttonZamowienie.setBounds(25,300,350,80);
         buttonZamowienie.addActionListener(this);
-        //buttonZamowienie.setFont(new Font(null));
+        buttonZamowienie.setText("ZŁÓŻ ZAMÓWIENIE");
+        buttonZamowienie.setFocusable(false);
+        buttonZamowienie.setFont(new Font(null, Font.BOLD, 20));
+        buttonZamowienie.setBackground(Color.WHITE);
+        buttonZamowienie.setBorder(BorderFactory.createEtchedBorder());
         panelPodsumowanie.add(buttonZamowienie);
+
+        //PODSUMOWANIE LABEL
+        JLabel labelPodsumowanie = new JLabel();
+        labelPodsumowanie.setText("PODSUMOWANIE");
+        labelPodsumowanie.setBounds(75,0,400,100);
+        labelPodsumowanie.setFont(new Font(null, Font.BOLD, 30));
+        panelPodsumowanie.add(labelPodsumowanie);
+
+        //KOSZYK CENA LABEL
+        labelCenaKoszyka = new JLabel("KOSZYK: " + koszyk.getWartoscZamowienia() + " PLN");
+        labelCenaKoszyka.setBounds(25,75,200,100);
+        labelCenaKoszyka.setFont(new Font(null, Font.BOLD, 15));
+        panelPodsumowanie.add(labelCenaKoszyka);
+
+        //KOSZYK DOSTAWA CENA LABEL
+        labelCenaDostawy = new JLabel("DOSTAWA" + dostawaCena + " PLN");
+        labelCenaDostawy.setBounds(25,125,200,100);
+        labelCenaDostawy.setFont(new Font(null, Font.BOLD, 15));
+        panelPodsumowanie.add(labelCenaDostawy);
+
+        //SUMA CEN WSZYSTKO
+        labelSumaCen = new JLabel();
+        labelSumaCen.setText("SUMA: " + (dostawaCena + koszyk.getWartoscZamowienia()) + " PLN");
+        labelSumaCen.setBounds(25,175,200,100);
+        labelSumaCen.setFont(new Font(null, Font.BOLD, 20));
+        panelPodsumowanie.add(labelSumaCen);
 
         //BUTTON DOSTAWA
         buttonDostawa = new JButton();
         buttonDostawa.setText("FINALIZUJ DOSTAWE");
-        buttonDostawa.setPreferredSize(new Dimension(200,50));
-        buttonDostawa.setBounds(0,300,400,80);
+        buttonDostawa.setBounds(25,300,350,80);
+        buttonDostawa.setFocusable(false);
         buttonDostawa.addActionListener(this);
-        //buttonZamowienie.setFont(new Font(null));
+        buttonDostawa.setFont(new Font(null, Font.BOLD, 20));
+        buttonDostawa.setBackground(Color.WHITE);
+        buttonDostawa.setBorder(BorderFactory.createEtchedBorder());
         panelPodsumowanie.add(buttonDostawa);
         buttonDostawa.setVisible(false);
 
 
-// CHECKBOX PACZKOMAT
+        // CHECKBOX PACZKOMAT
         boxPaczkomat = new JCheckBox("Paczkomat");
         boxPaczkomat.setBounds(20, 20, 100, 20);
         boxPaczkomat.setFocusable(true);
@@ -250,34 +286,13 @@ public class KoszykFrame extends JFrame implements ActionListener {
         boxPaczkomat.addActionListener(this);
         boxPaczkomat.setSelected(true);
         boxPaczkomat.setEnabled(false);
-// CHECKBOX KURIER
+
+        // CHECKBOX KURIER
         boxKurier = new JCheckBox("Kurier");
         boxKurier.setBounds(20, 50, 100, 20);
         boxKurier.setFocusable(true);
         panelDostawa.add(boxKurier);
         boxKurier.addActionListener(this);
-
-        //PODSUMOWANIE LABEL
-        JLabel labelPodsumowanie = new JLabel();
-        labelPodsumowanie.setText("PODSUMOWANIE");
-        labelPodsumowanie.setBounds(25,0,200,100);
-        labelPodsumowanie.setFont(new Font(null, Font.BOLD, 20));
-        panelPodsumowanie.add(labelPodsumowanie);
-
-        //SUMA CEN PRODUKTOW Z KOSZYKA LABELLLL
-        labelSumaCen = new JLabel();
-        sumaCen = 0;
-
-        for (int i = 0; i < koszyk.getListaProduktow().size(); i++) {
-            sumaCen+=koszyk.getListaProduktow().get(i).getCena();
-        }
-
-        labelSumaCen.setText("SUMA: " + sumaCen);
-        labelSumaCen.setBounds(25,50,200,100);
-        labelSumaCen.setFont(new Font(null, Font.BOLD, 20));
-        panelPodsumowanie.add(labelSumaCen);
-
-
 
         //PANEL DOLNY
         panelDolny.setPreferredSize(new Dimension(0, 180));
@@ -297,23 +312,25 @@ public class KoszykFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == boxPaczkomat) {
             if (boxPaczkomat.isSelected()) {
-                boxKurier.setSelected(false); // Jeśli paczkomat jest zaznaczony, odznacz kuriera
+                boxKurier.setSelected(false);
                 boxKurier.setFocusable(true);
                 boxKurier.setEnabled(true);
                 boxPaczkomat.setFocusable(false);
                 boxPaczkomat.setEnabled(false);
-                sumaCen += 4;
-                labelSumaCen.setText(String.valueOf("SUMA: " + sumaCen));
+                dostawaCena = 15.99;
+                labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
+                labelSumaCen.setText("SUMA: " + (dostawaCena + koszyk.getWartoscZamowienia()) + " PLN");
             }
         } else if (e.getSource() == boxKurier) {
             if (boxKurier.isSelected()) {
-                boxPaczkomat.setSelected(false); // Jeśli kurier jest zaznaczony, odznacz paczkomat
+                boxPaczkomat.setSelected(false);
                 boxPaczkomat.setFocusable(true);
                 boxPaczkomat.setEnabled(true);
                 boxKurier.setFocusable(false);
                 boxKurier.setEnabled(false);
-                sumaCen -= 4;
-                labelSumaCen.setText(String.valueOf("SUMA: " + sumaCen));
+                dostawaCena = 19.99;
+                labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
+                labelSumaCen.setText("SUMA: " + (dostawaCena + koszyk.getWartoscZamowienia()) + " PLN");
             }
         }
 
@@ -322,12 +339,13 @@ public class KoszykFrame extends JFrame implements ActionListener {
             Produkt produktToRemove = buttonProduktMap.get(sourceButton);
 
             if (produktToRemove != null) {
-                sumaCen -= produktToRemove.getCena();
                 koszyk.getListaProduktow().remove(produktToRemove);
                 panelKoszyk.remove(sourceButton.getParent()); // Usunięcie całego panelu produktu
                 panelKoszyk.revalidate();
                 panelKoszyk.repaint();
-                labelSumaCen.setText(String.valueOf("SUMA: " + sumaCen));
+                labelCenaKoszyka.setText("KOSZYK: " + koszyk.getWartoscZamowienia() + " PLN");
+                labelSumaCen.setText("SUMA: " + koszyk.getWartoscZamowienia() + " PLN");
+
             }
             if(e.getSource() == buttonZamowienie) {
                 panelKoszyk.setVisible(false);
@@ -339,14 +357,15 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 panelDostawa.repaint();
                 buttonZamowienie.setVisible(false);
                 scrollPane.setVisible(false);
-                sumaCen += 15.99;
-                labelSumaCen.setText(String.valueOf("SUMA: " + sumaCen));
+                dostawaCena = 15.99;
+                labelSumaCen.setText("SUMA: " + (dostawaCena + koszyk.getWartoscZamowienia()) + " PLN");
+                labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
             }
         }
     }
 
     public static void main(String[] args) {
-        Sklep sklep = new Sklep(new ArrayList<Klient>(), null, false, new ArrayList<Produkt>());
+        Sklep sklep = new Sklep(new ArrayList<>(), null, false, new ArrayList<>());
         sklep.wczytajListeProduktow();
         sklep.wczytajListeKlientow();
 
