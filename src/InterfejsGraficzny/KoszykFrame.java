@@ -13,6 +13,9 @@ import java.util.Map;
 
 public class KoszykFrame extends JFrame implements ActionListener {
     double dostawaCena = 0;
+    String numerTelefonu;
+    String Email;
+    String adres;
     JLabel labelSumaCen;
     JLabel labelCenaKoszyka;
     JLabel labelCenaDostawy;
@@ -23,9 +26,11 @@ public class KoszykFrame extends JFrame implements ActionListener {
     Map<JButton, Produkt> buttonProduktMap;
     JButton buttonZamowienie;
     JButton buttonDostawa;
+    JButton buttonPlatnosc;
     JCheckBox boxPaczkomat;
     JCheckBox boxKurier;
     JPanel panelGlowny;
+    JPanel panelPlatnosc;
     JScrollPane scrollPane;
     //text filedy
     JTextField textImie;
@@ -216,12 +221,21 @@ public class KoszykFrame extends JFrame implements ActionListener {
         panelGlowny.add(scrollPane);
 
         //PANEL DOSTAWA
-        panelDostawa.setBorder(BorderFactory.createLineBorder(Color.red));
+        panelDostawa.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panelDostawa.setSize(new Dimension(600, 450));
         panelDostawa.setBounds(100,105,600, 450);
         panelDostawa.setLayout(null);
         panelDostawa.setVisible(false);
         panelGlowny.add(panelDostawa);
+
+        //PANEL PLATNOSC
+        panelPlatnosc = new JPanel();
+        panelPlatnosc.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        panelPlatnosc.setSize(new Dimension(600, 450));
+        panelPlatnosc.setBounds(100,105,600, 450);
+        panelPlatnosc.setLayout(null);
+        panelPlatnosc.setVisible(false);
+        panelGlowny.add(panelPlatnosc);
 
         //PANEL PODSUMOWANIE
         panelPodsumowanie.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -276,6 +290,18 @@ public class KoszykFrame extends JFrame implements ActionListener {
         buttonDostawa.setBorder(BorderFactory.createEtchedBorder());
         panelPodsumowanie.add(buttonDostawa);
         buttonDostawa.setVisible(false);
+
+        //BUTTON PLATNOSC
+        buttonPlatnosc = new JButton();
+        buttonPlatnosc .setText("FINALIZUJ ZAMOWIENIE #es");
+        buttonPlatnosc .setBounds(25,300,350,80);
+        buttonPlatnosc .setFocusable(false);
+        buttonPlatnosc .addActionListener(this);
+        buttonPlatnosc .setFont(new Font(null, Font.BOLD, 20));
+        buttonPlatnosc .setBackground(Color.WHITE);
+        buttonPlatnosc .setBorder(BorderFactory.createEtchedBorder());
+        panelPodsumowanie.add(buttonPlatnosc );
+        buttonPlatnosc .setVisible(false);
 
 
         // CHECKBOX PACZKOMAT
@@ -360,6 +386,22 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 dostawaCena = 15.99;
                 labelSumaCen.setText("SUMA: " + (dostawaCena + koszyk.getWartoscZamowienia()) + " PLN");
                 labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
+            }
+            if(e.getSource() == buttonDostawa){
+                buttonDostawa.setVisible(false);
+                panelDostawa.setVisible(false);
+                buttonPlatnosc.setVisible(true);
+                panelPlatnosc.setVisible(true);
+
+                numerTelefonu = labelNumerTelefonu.getText();
+                Email = labelEmail.getText();
+                adres = labelImie.getText() +
+                        " " + labelNazwisko.getText() +
+                        "\n" + labelUlica.getText() +
+                        " " + labelNumerDomu.getText() +
+                        "\n" + labelKodPocztowy.getText() +
+                        " " + labelMiejscowosc.getText() +
+                        " " + labelKraj.getText();
             }
         }
     }
