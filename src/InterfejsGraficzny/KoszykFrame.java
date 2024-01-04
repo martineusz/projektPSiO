@@ -27,9 +27,12 @@ public class KoszykFrame extends JFrame implements ActionListener {
     JButton buttonZamowienie;
     JButton buttonDostawa;
     JButton buttonPlatnosc;
+    JButton cofnijDostawa;
+    JButton cofnijPlatnosc;
     JCheckBox boxPaczkomat;
     JCheckBox boxKurier;
     JPanel panelGlowny;
+    JPanel panelGorny;
     JPanel panelPlatnosc;
     JScrollPane scrollPane;
     //text filedy
@@ -42,7 +45,6 @@ public class KoszykFrame extends JFrame implements ActionListener {
     JTextField textKraj;
     JTextField textNumerTelefonu;
     JTextField textEmail;
-
     JLabel labelImie;
     JLabel labelNazwisko;
     JLabel labelUlica;
@@ -55,7 +57,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
 
     KoszykFrame(Koszyk koszyk) {
         this.koszyk = koszyk;
-        JPanel panelGorny = new JPanel();
+        panelGorny = new JPanel();
         panelGlowny = new JPanel();
         JPanel panelDolny = new JPanel();
         panelKoszyk = new JPanel();
@@ -291,17 +293,45 @@ public class KoszykFrame extends JFrame implements ActionListener {
         panelPodsumowanie.add(buttonDostawa);
         buttonDostawa.setVisible(false);
 
+
         //BUTTON PLATNOSC
         buttonPlatnosc = new JButton();
-        buttonPlatnosc .setText("FINALIZUJ ZAMOWIENIE #es");
-        buttonPlatnosc .setBounds(25,300,350,80);
-        buttonPlatnosc .setFocusable(false);
-        buttonPlatnosc .addActionListener(this);
-        buttonPlatnosc .setFont(new Font(null, Font.BOLD, 20));
-        buttonPlatnosc .setBackground(Color.WHITE);
-        buttonPlatnosc .setBorder(BorderFactory.createEtchedBorder());
+        buttonPlatnosc.setText("FINALIZUJ ZAMOWIENIE #es");
+        buttonPlatnosc.setBounds(25,300,350,80);
+        buttonPlatnosc.setFocusable(false);
+        buttonPlatnosc.addActionListener(this);
+        buttonPlatnosc.setFont(new Font(null, Font.BOLD, 20));
+        buttonPlatnosc.setBackground(Color.WHITE);
+        buttonPlatnosc.setBorder(BorderFactory.createEtchedBorder());
         panelPodsumowanie.add(buttonPlatnosc );
-        buttonPlatnosc .setVisible(false);
+        buttonPlatnosc.setVisible(false);
+
+        ImageIcon cofnijImage = new ImageIcon("src/Obrazki/cofnij.png");
+        Image originalImage = cofnijImage.getImage();
+
+        cofnijImage = new ImageIcon(originalImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+
+
+        //BUTTON COFNIj PLATNOSC
+        cofnijPlatnosc = new JButton();
+        cofnijPlatnosc.addActionListener(this);
+        cofnijPlatnosc.setIcon(cofnijImage);
+        cofnijPlatnosc.setBorder(BorderFactory.createEtchedBorder());
+        cofnijPlatnosc.setFocusable(false);
+        cofnijPlatnosc.setBackground(Color.WHITE);
+        cofnijPlatnosc.setVisible(false);
+        panelGorny.add(cofnijPlatnosc);
+
+
+        //BUTTON COFNIJ DOSTAWA
+        cofnijDostawa = new JButton();
+        cofnijDostawa.addActionListener(this);
+        cofnijDostawa.setIcon(cofnijImage);
+        cofnijDostawa.setBorder(BorderFactory.createEtchedBorder());
+        cofnijDostawa.setFocusable(false);
+        cofnijDostawa.setBackground(Color.WHITE);
+        cofnijDostawa.setVisible(false);
+        panelGorny.add(cofnijDostawa);
 
 
         // CHECKBOX PACZKOMAT
@@ -374,8 +404,12 @@ public class KoszykFrame extends JFrame implements ActionListener {
 
             }
             if(e.getSource() == buttonZamowienie) {
+                cofnijDostawa.setVisible(true);
+                buttonPlatnosc.setVisible(true);
                 panelKoszyk.setVisible(false);
                 buttonDostawa.setVisible(true);
+                panelGorny.revalidate();
+                panelGorny.repaint();
                 panelKoszyk.revalidate();
                 panelKoszyk.repaint();
                 panelDostawa.setVisible(true);
@@ -388,6 +422,10 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
             }
             if(e.getSource() == buttonDostawa){
+                cofnijPlatnosc.setVisible(true);
+                cofnijDostawa.setVisible(false);
+                buttonPlatnosc.setVisible(false);
+                buttonDostawa.setVisible(true);
                 buttonDostawa.setVisible(false);
                 panelDostawa.setVisible(false);
                 buttonPlatnosc.setVisible(true);
@@ -402,6 +440,29 @@ public class KoszykFrame extends JFrame implements ActionListener {
                         "\n" + labelKodPocztowy.getText() +
                         " " + labelMiejscowosc.getText() +
                         " " + labelKraj.getText();
+            }
+            if(e.getSource() == cofnijPlatnosc){
+                cofnijPlatnosc.setVisible(false);
+                cofnijDostawa.setVisible(true);
+                buttonPlatnosc.setVisible(true);
+                buttonDostawa.setVisible(false);
+                buttonDostawa.setVisible(true);
+                panelDostawa.setVisible(true);
+                buttonPlatnosc.setVisible(false);
+                panelPlatnosc.setVisible(false);
+            }
+
+            if(e.getSource() == cofnijDostawa){
+                cofnijDostawa.setVisible(false);
+                panelKoszyk.setVisible(true);
+                buttonDostawa.setVisible(false);
+                panelKoszyk.revalidate();
+                panelKoszyk.repaint();
+                panelDostawa.setVisible(false);
+                panelDostawa.revalidate();
+                panelDostawa.repaint();
+                buttonZamowienie.setVisible(true);
+                scrollPane.setVisible(true);
             }
         }
     }
