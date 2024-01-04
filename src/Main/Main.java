@@ -124,7 +124,7 @@ public class Main {
                                                         switch (wybor) {
                                                             case "1":
                                                                 sklep.zalogowanyKlient.koszyk.ustawMetodeDostawy(new DostawaPaczkomat());
-                                                                System.out.println("Koncowy koszt: " + decfor.format((15.99 + sklep.zalogowanyKlient.koszyk.obliczWartoscZamowienia())));
+                                                                System.out.println("Koncowy koszt: " + decfor.format((15.99 + sklep.zalogowanyKlient.koszyk.getWartoscZamowienia())));
                                                                 System.out.print("Wpisz adres paczkomatu (Wroc - 0): ");
                                                                 adres = scan.nextLine();
                                                                 if (!Objects.equals(adres, "0")) {
@@ -133,7 +133,7 @@ public class Main {
                                                                 break;
                                                             case "2":
                                                                 sklep.zalogowanyKlient.koszyk.ustawMetodeDostawy(new DostawaKurier());
-                                                                System.out.println("Koncowy koszt: "+ decfor.format((19.99 + sklep.zalogowanyKlient.koszyk.obliczWartoscZamowienia())));
+                                                                System.out.println("Koncowy koszt: "+ decfor.format((19.99 + sklep.zalogowanyKlient.koszyk.getWartoscZamowienia())));
                                                                 System.out.print("Wpisz adres zamieszkania (Wroc - 0): ");
                                                                 adres = scan.nextLine();
                                                                 if (!Objects.equals(adres, "0")) {

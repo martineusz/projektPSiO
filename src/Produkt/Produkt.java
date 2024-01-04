@@ -1,5 +1,8 @@
 package Produkt;
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 public abstract class Produkt implements Serializable {
     private String idProduktu;
@@ -34,6 +37,7 @@ public abstract class Produkt implements Serializable {
     }
 
     public double getCena() {
+        cena = (Math.floor(cena * 100.0) / 100.0);
         return cena;
     }
 
