@@ -41,6 +41,18 @@ public class GUIadmin implements ActionListener {
         usunProduktButton.addActionListener(this);
         powrotButton.addActionListener(this);
 
+        dodajPromocjeButton.setBackground(Color.WHITE);
+        dodajPromocjeButton.setMargin(new Insets(10, 20, 10, 20));
+
+        dodajProduktButton.setBackground(Color.WHITE);
+        dodajProduktButton.setMargin(new Insets(10, 20, 10, 20));
+
+        usunProduktButton.setBackground(Color.WHITE);
+        usunProduktButton.setMargin(new Insets(10, 20, 10, 20));
+
+        powrotButton.setBackground(Color.WHITE);
+        powrotButton.setMargin(new Insets(10, 20, 10, 20));
+
         JPanel panel = new JPanel();
 
         panel.setLayout(new GridLayout(4,1, 20, 20));

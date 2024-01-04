@@ -41,6 +41,8 @@ public class UsunProduktGUI implements ActionListener {
         JPanel usunProduktPanel = new JPanel();
 
         usunButton = new JButton("usun");
+        usunButton.setBackground(Color.WHITE);
+        usunButton.setMargin(new Insets(10, 20, 10, 20));
         usunButton.addActionListener(this);
 
 
@@ -69,6 +71,8 @@ public class UsunProduktGUI implements ActionListener {
 
         //return button
         returnButton = new JButton("powrot");
+        returnButton.setBackground(Color.WHITE);
+        returnButton.setMargin(new Insets(10, 20, 10, 20));
         returnButton.addActionListener(this);
 
 
@@ -91,8 +95,12 @@ public class UsunProduktGUI implements ActionListener {
             for(int i=0; i<sklep.getListaProduktow().size(); i++){
                 if(checkBox[i].isSelected()){
                     sklep.usunProdukt(i);
-                    ramka.dispose();
+                    ramka.getContentPane().removeAll();
+                    ramka.revalidate();
+                    ramka.repaint();
+                    ramka.setLayout(null);
                     usunProduktGUI(sklep, ramka);
+
                 }
             }
         }

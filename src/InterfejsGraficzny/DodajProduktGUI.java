@@ -45,6 +45,8 @@ public class DodajProduktGUI implements ActionListener {
         radioButtonSpodnie = new JRadioButton("Spodnie");
 
         zatwierdzTyp = new JButton("zatwierdz");
+        zatwierdzTyp.setBackground(Color.WHITE);
+        zatwierdzTyp.setMargin(new Insets(10, 20, 10, 20));
         zatwierdzTyp.addActionListener(this);
 
         JPanel panelWyboru = new JPanel();
@@ -70,6 +72,8 @@ public class DodajProduktGUI implements ActionListener {
 
 
         returnButton = new JButton("powrot");
+        returnButton.setBackground(Color.WHITE);
+        returnButton.setMargin(new Insets(10, 20, 10, 20));
         returnButton.addActionListener(this);
 
 
@@ -113,6 +117,8 @@ public class DodajProduktGUI implements ActionListener {
         labelObuwie[2] = new JLabel("typ podeszwy:");
 
         dodajProdukt = new JButton("dodaj produkt");
+        dodajProdukt.setBackground(Color.WHITE);
+        dodajProdukt.setMargin(new Insets(10, 20, 10, 20));
         dodajProdukt.addActionListener(this);
 
         for(int i=0; i<3; i++){
@@ -134,6 +140,8 @@ public class DodajProduktGUI implements ActionListener {
         labelBluza[3] = new JLabel("kroj:");
 
         dodajProdukt = new JButton("dodaj produkt");
+        dodajProdukt.setBackground(Color.WHITE);
+        dodajProdukt.setMargin(new Insets(10, 20, 10, 20));
         dodajProdukt.addActionListener(this);
 
         for(int i=0; i<4; i++){
@@ -157,6 +165,8 @@ public class DodajProduktGUI implements ActionListener {
         labelKoszulka[2] = new JLabel("kroj:");
 
         dodajProdukt = new JButton("dodaj produkt");
+        dodajProdukt.setBackground(Color.WHITE);
+        dodajProdukt.setMargin(new Insets(10, 20, 10, 20));
         dodajProdukt.addActionListener(this);
 
         for(int i=0; i<3; i++){
@@ -177,6 +187,8 @@ public class DodajProduktGUI implements ActionListener {
         labelSpodnie[3] = new JLabel("kroj:");
 
         dodajProdukt = new JButton("dodaj produkt");
+        dodajProdukt.setBackground(Color.WHITE);
+        dodajProdukt.setMargin(new Insets(10, 20, 10, 20));
         dodajProdukt.addActionListener(this);
 
         for(int i=0; i<4; i++){
