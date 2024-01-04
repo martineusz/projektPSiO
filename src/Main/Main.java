@@ -12,9 +12,13 @@ import java.text.DecimalFormat;
 
 import InterfejsGraficzny.Rejestracja;
 
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
         Sklep sklep = new Sklep(new ArrayList<Klient>(), null, false, new ArrayList<Produkt>());
+
+        JFrame jFrame = new JFrame();
 
         sklep.promocja.wczytajObserwatorowPromocji();
         sklep.wczytajListeProduktow();
@@ -30,13 +34,13 @@ public class Main {
             wybor = scan.nextLine();
             switch (wybor) {
                 case "2": // zarejestruj sie
-                    Rejestracja.RejestrPage(sklep);
+                    Rejestracja.RejestrPage(sklep, jFrame);
                     if(!sklep.isCzyZalogowany()){
                         break;
                     }
                 case "1": //zaloguj się
                     if(!sklep.isCzyZalogowany()){
-                        Rejestracja.ShopPage(sklep);
+                        Rejestracja.ShopPage(sklep, jFrame);
                     }
                     if(sklep.isCzyZalogowany()){
 

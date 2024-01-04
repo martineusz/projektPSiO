@@ -16,13 +16,14 @@ import java.util.List;
 public class Rejestracja  {
 
     private static JTextField jTextField6;
-    private static JFrame jframe;
     private static JTextField jTextField1;
     private static JTextField jTextField2;
     private static JTextField jTextField3;
     private static JTextField jTextField4;
     private static JTextField jTextField5;
-    private static JFrame rejestrFrame;
+    private static JTextField jTextFieldLogowanie;
+    private static JTextField jTextFieldHaslo;
+    private static JLabel error;
 
     private static JLabel e1;
     private static JLabel e2;
@@ -31,23 +32,19 @@ public class Rejestracja  {
     private static JLabel e5;
     private static JLabel e6;
 
-    public static void ShopPage(Sklep sklep) {
-        jframe = new JFrame();
-        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jframe.setResizable(false);
-        jframe.setTitle("Sklep");
-        jframe.setSize(1000, 500);
-
-
+    public static void ShopPage(Sklep sklep, JFrame frame) {
+        JPanel shopJpanel = new JPanel();
         JPanel jpanel1 = new JPanel();
         jpanel1.setBackground(Color.ORANGE);
         jpanel1.setBounds(0,0, 400, 500);
-        jframe.add(jpanel1);
+        shopJpanel.add(jpanel1);
+
         jpanel1.setLayout(null);
+        shopJpanel.setBounds(0,0,1000,500);
 
         JPanel jPanel2 = new JPanel();
         jPanel2.setBounds(400, 0, 600, 500);
-        jframe.add(jPanel2);
+        shopJpanel.add(jPanel2);
         jPanel2.setLayout(null);
 
         Label label1 = new Label("LOGIN");
@@ -57,46 +54,61 @@ public class Rejestracja  {
 
         label1.setForeground(Color.black);
         label3.setForeground(Color.black);
-        JTextField jTextField1 = new JTextField();
-        JTextField jTextField2 = new JTextField();
+        jTextFieldLogowanie = new JTextField();
+        jTextFieldHaslo = new JTextField();
         Label label2 = new Label("HASŁO");
         Button apllyButton = new Button("Zatwierdź");
         label2.setForeground(Color.black);
 
-        jPanel2.add(jTextField1);
-        jPanel2.add(jTextField2);
+        error = new JLabel("");
+        error.setForeground(Color.RED);
+        jPanel2.add(error);
+        error.setBounds(200, 70, 250, 20);
+        JCheckBox adminBox = new JCheckBox("Zaloguj jako administrator");
+
+
+        jPanel2.add(jTextFieldLogowanie);
+        jPanel2.add(jTextFieldHaslo);
         jPanel2.add(label1);
         jPanel2.add(label2);
         jPanel2.add(label3);
+        jPanel2.add(adminBox);
         jPanel2.add(apllyButton);
         jPanel2.add(rejestrButton);
         label1.setBounds(100, 110, 50, 10);
         label2.setBounds(100,160,50,10);
         label3.setBounds(185, 350, 130, 20);
-        jTextField1.setBounds(150, 100, 300, 30);
-        jTextField2.setBounds(150, 150, 300,30);
+        jTextFieldLogowanie.setBounds(150, 100, 300, 30);
+        jTextFieldHaslo.setBounds(150, 150, 300,30);
         apllyButton.setBounds(275, 200, 53, 15);
-        apllyButton.addActionListener(e -> {if (sklep.zalogujSie(jTextField1.getText(), jTextField2.getText())){
-            jframe.dispose();
+        adminBox.setBounds(325,10, 225,30);
+        apllyButton.addActionListener(e -> {if (!adminBox.isSelected()){
+        loguj(sklep, frame);
         }
-        else {jTextField1.setText("");
-        jTextField2.setText("");}
+        else {
+            logujJakoAdmin(frame, sklep);
+        }
         });
-        rejestrButton.addActionListener(e -> RejestrPage(sklep));
+        rejestrButton.addActionListener(e -> RejestrPage(sklep, frame));
         rejestrButton.setBounds(350, 350, 80, 20);
 
-        jframe.setLayout(null);
-        jframe.setVisible(true);
+        shopJpanel.setLayout(null);
+        frame.add(shopJpanel);
+        frame.setBounds(0,0,1000,500);
+        frame.setLayout(null);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
 
 
-    public static void RejestrPage(Sklep sklep) {
-        rejestrFrame = new JFrame();
-        rejestrFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        rejestrFrame.setSize(500, 500);
-        rejestrFrame.setLayout(null);
-        rejestrFrame.setTitle("REJESTRACJA");
+    public static void RejestrPage(Sklep sklep, JFrame frame) {
+        frame.getContentPane().removeAll();
+        frame.revalidate();
+        frame.repaint();
+        JPanel rejestrPanel = new JPanel();
+        rejestrPanel.setBounds(0,0,500,500);
+        rejestrPanel.setLayout(null);
 
         JLabel l1 = new JLabel("Imię: ");
         JLabel l2 = new JLabel("Nazwisko: ");
@@ -125,7 +137,7 @@ public class Rejestracja  {
             JLabel.setFont(JLabel.getFont().deriveFont(10.0f));
             JLabel.setBounds(160, i,250, 20);
             i += 50;
-            rejestrFrame.add(JLabel);
+            rejestrPanel.add(JLabel);
         }
 
 
@@ -147,22 +159,22 @@ public class Rejestracja  {
         i = 50;
         for (JTextField textField: textFields) {
             textField.setBounds(160,i,250,30);
-            rejestrFrame.add(textField);
+            rejestrPanel.add(textField);
             i += 50;
         }
 
         l1.setBounds(50,50,100,20);
-        rejestrFrame.add(l1);
+        rejestrPanel.add(l1);
         l2.setBounds(50,100,100,20);
-        rejestrFrame.add(l2);
+        rejestrPanel.add(l2);
         l3.setBounds(50,150,100,20);
-        rejestrFrame.add(l3);
+        rejestrPanel.add(l3);
         l4.setBounds(50,200,100,20);
-        rejestrFrame.add(l4);
+        rejestrPanel.add(l4);
         l5.setBounds(50,250,100,20);
-        rejestrFrame.add(l5);
+        rejestrPanel.add(l5);
         l6.setBounds(50,300,100,20);
-        rejestrFrame.add(l6);
+        rejestrPanel.add(l6);
 
         Button buttonRejestr = new Button("Zatwierdź");
         buttonRejestr.setBounds(245, 350, 80, 30);
@@ -172,14 +184,24 @@ public class Rejestracja  {
                     sklep.getListaKlientow().add(new Klient(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField6.getText()));
                     sklep.setZalogowanyKlient(sklep.getListaKlientow().get(sklep.getListaKlientow().size() - 1));
                     sklep.setCzyZalogowany(true);
-                    rejestrFrame.dispose();
+                    frame.getContentPane().removeAll();
+                    frame.revalidate();
+                    frame.repaint();
+                    frame.setSize(1000, 500);
                 };
 
             }
         });
 
-        rejestrFrame.add(buttonRejestr);
-        rejestrFrame.setVisible(true);
+        rejestrPanel.add(buttonRejestr);
+        rejestrPanel.setVisible(true);
+        rejestrPanel.setBounds(0,0,500,500);
+        frame.setSize(500,500);
+        frame.add(rejestrPanel);
+        frame.setVisible(true);
+        frame.setSize(500,500);
+        frame.setLayout(null);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public static boolean CheckIfCorrect() {
@@ -241,6 +263,31 @@ public class Rejestracja  {
             return true;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+
+    public static void loguj(Sklep sklep, JFrame frame) {{if (sklep.zalogujSie(jTextFieldLogowanie.getText(), jTextFieldHaslo.getText())){
+        frame.getContentPane().removeAll();
+        frame.revalidate();
+        frame.repaint();
+    }
+    else {jTextFieldLogowanie.setText("");
+        jTextFieldHaslo.setText("");}
+        error.setText("Niepoprawny login lub hasło");
+    }}
+
+    public static void logujJakoAdmin(JFrame frame, Sklep sklep) {
+        if (jTextFieldLogowanie.getText().equals("admin") && jTextFieldHaslo.getText().equals("12345678")) {
+            System.out.println("zalogowano jako admin");
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            GUIadmin.openAdmin(sklep);
+        }
+        else {
+            jTextFieldLogowanie.setText("");
+            jTextFieldHaslo.setText("");
+            error.setText("Niepoprawny login lub hasło");
         }
     }
 }
