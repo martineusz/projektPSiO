@@ -33,14 +33,22 @@ public class Koszyk implements Serializable {
         this.wartoscZamowienia = wartoscZamowienia;
     }
 
+    public boolean czyZawieraProdukt(Produkt produkt) {
+    	return listaProduktow.contains(produkt);
+    }
+
     public void dodajProdukt(Produkt produkt){
         listaProduktow.add(produkt);
     }
 
     public void usunProdukt(int i){
         listaProduktow.remove(i);
-
     }
+
+    public void usunProdukt(Produkt produkt) {
+    	listaProduktow.remove(produkt);
+    }
+
 
     public void ustawMetodePlatnosci(PlacenieStrategia placenieStrategia){
         this.placenieStrategia = placenieStrategia;
