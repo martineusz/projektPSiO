@@ -21,6 +21,7 @@ public class DodajProduktGUI implements ActionListener {
     private JRadioButton radioButtonBluza;
     private JRadioButton radioButtonKoszulka;
     private JRadioButton radioButtonSpodnie;
+    private JButton returnButton;
     private JButton zatwierdzTyp;
     private JButton dodajProdukt;
     private JFrame ramka;
@@ -45,12 +46,12 @@ public class DodajProduktGUI implements ActionListener {
         JPanel panelWyboru = new JPanel();
         dodajProduktBaza();
 
-        ramka.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        ramka.getContentPane().add(BorderLayout.WEST, panelWyboru);
+
 
         panelWyboru.setLayout(new BoxLayout(panelWyboru, BoxLayout.Y_AXIS));
 
         ButtonGroup grupa = new ButtonGroup();
+
 
         panelWyboru.add(radioButtonObuwie);
         panelWyboru.add(radioButtonBluza);
@@ -63,6 +64,14 @@ public class DodajProduktGUI implements ActionListener {
         grupa.add(radioButtonKoszulka);
         grupa.add(radioButtonSpodnie);
 
+
+        returnButton = new JButton("powrot");
+        returnButton.addActionListener(this);
+
+
+        ramka.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        ramka.getContentPane().add(BorderLayout.WEST, panelWyboru);
+        ramka.getContentPane().add(BorderLayout.SOUTH, returnButton);
         ramka.setSize(400, 600);
         ramka.pack();
         ramka.setResizable(false);
@@ -212,6 +221,10 @@ public class DodajProduktGUI implements ActionListener {
                 sklep.dodajSpodnie(podstawoweDaneTextField[0].getText(), podstawoweDaneTextField[1].getText(), podstawoweDaneTextField[2].getText(), podstawoweDaneTextField[3].getText(), podstawoweDaneTextField[4].getText(), podstawoweDaneTextField[5].getText(), podstawoweDaneTextField[6].getText(), podstawoweDaneTextField[7].getText(), podstawoweDaneTextField[8].getText(),
                         textFieldSpodnie[0].getText(), textFieldSpodnie[1].getText(), textFieldSpodnie[2].getText(), textFieldSpodnie[3].getText());
             }
+        }
+        if(e.getSource()==returnButton){
+            ramka.dispose();
+            GUIadmin.openAdmin(sklep);
         }
     }
 }

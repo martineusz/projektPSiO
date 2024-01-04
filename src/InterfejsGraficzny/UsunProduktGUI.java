@@ -11,6 +11,7 @@ public class UsunProduktGUI implements ActionListener {
 
     private Sklep sklep;
     private JButton usunButton;
+    private JButton returnButton;
     private JCheckBox[] checkBox;
     private JFrame ramka;
 
@@ -63,12 +64,18 @@ public class UsunProduktGUI implements ActionListener {
         tabela.setRowHeight(20);
 
 
+        //return button
+        returnButton = new JButton("powrot");
+        returnButton.addActionListener(this);
+
+
         ramka.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JScrollPane scrollPane = new JScrollPane(tabela);
         ramka.add(scrollPane, BorderLayout.CENTER);
         ramka.add(panelCheckBox, BorderLayout.WEST);
         ramka.add(usunProduktPanel, BorderLayout.EAST);
+        ramka.add(returnButton, BorderLayout.SOUTH);
 
         ramka.setSize(1000,600);
         ramka.pack();
@@ -86,6 +93,10 @@ public class UsunProduktGUI implements ActionListener {
                     usunProduktGUI(sklep);
                 }
             }
+        }
+        if(e.getSource()==returnButton){
+            ramka.dispose();
+            GUIadmin.openAdmin(sklep);
         }
     }
 }

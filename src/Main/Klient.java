@@ -131,4 +131,7 @@ public class Klient implements Serializable {
         CzyPromocja = false;
     }
 
+    public Koszyk getKoszyk() {
+        return koszyk;
+    }
 }

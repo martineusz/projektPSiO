@@ -9,18 +9,16 @@ import java.util.Scanner;
 public class Promocja implements Podmiot, Serializable {
 	ArrayList<Obserwator> obserwatorzy = new ArrayList<Obserwator>();
 
-	public void ustawPromocjeNaProdukt(Produkt produkt) {
-		Scanner scan = new Scanner(System.in);
+	public void ustawPromocjeNaProdukt(Produkt produkt, float obnizka, String nazwa) {
+
 
 		System.out.print("Podaj obnizke (0 - 1): ");
-		float obnizka = Float.parseFloat(scan.nextLine());
 		if(obnizka > 1 || obnizka < 0) {
 			System.out.println("bledna obnizka");
 			return;
 		}
 
 		System.out.print("Podaj nazwe promocji: ");
-		String nazwa = scan.nextLine();
 
 		produkt.setCena(Math.round(produkt.getCena()*(1-obnizka)*100)/100);
 
