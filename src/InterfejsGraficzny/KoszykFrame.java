@@ -12,10 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KoszykFrame extends JFrame implements ActionListener {
-    JButton dalej;
     Koszyk koszyk;
     JPanel panelKoszyk;
     Map<JButton, Produkt> buttonProduktMap;
+    JButton buttonZamowienie;
 
     KoszykFrame(Koszyk koszyk){
         this.koszyk = koszyk;
@@ -26,6 +26,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
         JPanel panelPodsumowanie = new JPanel();
         buttonProduktMap = new HashMap<>();
         ImageIcon koszykImage = new ImageIcon("src/Obrazki/koszyk.png");
+
 
 
         //MOJ KOSZYK label
@@ -51,9 +52,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
         panelGlowny.add(panelKoszyk);
         panelGlowny.add(panelPodsumowanie);
 
-        //PANEL KOSZYK
-        panelKoszyk.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        panelKoszyk.setBounds(100,105,600,450);
+
 
         //PANEL PRODUKT
         for (int i = 0; i < koszyk.getListaProduktow().size(); i++) {
@@ -85,9 +84,29 @@ public class KoszykFrame extends JFrame implements ActionListener {
             buttonProduktMap.put(buttonUsun, produkt);
         }
 
+        //PANEL KOSZYK
+        panelKoszyk.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        panelKoszyk.setPreferredSize(new Dimension(600, panelKoszyk.getComponentCount() * 100));
+
+        JScrollPane scrollPane = new JScrollPane(panelKoszyk);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setBounds(100, 105, 600, 450);
+        panelGlowny.add(scrollPane);
+
         //PANEL PODSUMOWANIE
         panelPodsumowanie.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panelPodsumowanie.setBounds(1000,105,400,450);
+        panelPodsumowanie.setLayout(null);
+
+        buttonZamowienie = new JButton();
+        buttonZamowienie.setText("ZŁÓŻ ZAMÓWIENIE");
+        buttonZamowienie.setPreferredSize(new Dimension(200,50));
+        buttonZamowienie.setBounds(0,300,400,80);
+        buttonZamowienie.addActionListener(this);
+        //buttonZamowienie.setFont(new Font(null));
+        panelPodsumowanie.add(buttonZamowienie);
+
 
 
         //PANEL DOLNY
@@ -112,6 +131,11 @@ public class KoszykFrame extends JFrame implements ActionListener {
         if (produktToRemove != null) {
             koszyk.getListaProduktow().remove(produktToRemove);
             panelKoszyk.remove(sourceButton.getParent()); // Usunięcie całego panelu produktu
+            panelKoszyk.revalidate();
+            panelKoszyk.repaint();
+        }
+        if(e.getSource() == buttonZamowienie) {
+//            panelKoszyk.removeAll();
             panelKoszyk.revalidate();
             panelKoszyk.repaint();
         }
