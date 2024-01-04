@@ -18,13 +18,16 @@ public class DodajPromocjeGUI implements ActionListener {
     private JCheckBox[] checkBox;
     private float wartoscPromocji;
 
-    public static void openGUI(Sklep sklep){
+    public static void openGUI(Sklep sklep, JFrame ramka){
         DodajPromocjeGUI GUI = new DodajPromocjeGUI();
-        GUI.dodajPromocjeGUI(sklep);
+        GUI.dodajPromocjeGUI(sklep, ramka);
     }
-    public void dodajPromocjeGUI(Sklep sklep){
+    public void dodajPromocjeGUI(Sklep sklep, JFrame ramka){
         this.sklep=sklep;
-        ramka = new JFrame();
+        this.ramka=ramka;
+
+        JPanel panelGlowny = new JPanel();
+        panelGlowny.setLayout(new BorderLayout());
 
         //checkboxy
         JPanel panelCheckBox = new JPanel();
@@ -64,7 +67,7 @@ public class DodajPromocjeGUI implements ActionListener {
         zatwierdz = new JButton("dodaj");
         zatwierdz.addActionListener(this);
 
-        panelPromocji.setLayout(new GridLayout(5,2,5,5));
+        panelPromocji.setLayout(new GridLayout(0,2,5,5));
 
         panelPromocji.add(znizka);
         panelPromocji.add(slider);
@@ -98,17 +101,15 @@ public class DodajPromocjeGUI implements ActionListener {
         returnButton = new JButton("powrot");
         returnButton.addActionListener(this);
 
-        ramka.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JScrollPane scrollPane = new JScrollPane(tabela);
-        ramka.add(scrollPane, BorderLayout.CENTER);
-        ramka.add(panelCheckBox, BorderLayout.WEST);
-        ramka.add(promocjaPolnoc, BorderLayout.EAST);
-        ramka.add(returnButton, BorderLayout.SOUTH);
+        panelGlowny.add(scrollPane, BorderLayout.CENTER);
+        panelGlowny.add(panelCheckBox, BorderLayout.WEST);
+        panelGlowny.add(promocjaPolnoc, BorderLayout.EAST);
+        panelGlowny.add(returnButton, BorderLayout.SOUTH);
 
-        ramka.setSize(1000,600);
-        ramka.pack();
-        ramka.setResizable(false);
+        ramka.setLayout(null);
+        ramka.setContentPane(panelGlowny);
         ramka.setVisible(true);
     }
 
@@ -120,12 +121,16 @@ public class DodajPromocjeGUI implements ActionListener {
                     sklep.promocja.ustawPromocjeNaProdukt(sklep.getListaProduktow().get(i), wartoscPromocji, nazwaPromocji.getText());
                 }
             }
-            ramka.dispose();
-            dodajPromocjeGUI(sklep);
+
+            dodajPromocjeGUI(sklep, ramka);
         }
         if(e.getSource()==returnButton){
-            ramka.dispose();
-            GUIadmin.openAdmin(sklep);
+            ramka.getContentPane().removeAll();
+            ramka.revalidate();
+            ramka.repaint();
+            ramka.setLayout(null);
+
+            GUIadmin.openAdmin(sklep, ramka);
         }
     }
 }

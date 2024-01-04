@@ -282,7 +282,9 @@ public class Rejestracja  {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            GUIadmin.openAdmin(sklep);
+            frame.setLayout(null);
+
+            GUIadmin.openAdmin(sklep, frame);
         }
         else {
             jTextFieldLogowanie.setText("");

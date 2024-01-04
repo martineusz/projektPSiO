@@ -10,22 +10,26 @@ import java.awt.event.ActionListener;
 
 public class GUIadmin implements ActionListener {
     private Sklep sklep;
-
-
     private JFrame ramka;
+
+
+    private JPanel panelGlowny;
     private JButton dodajPromocjeButton;
     private JButton dodajProduktButton;
     private JButton usunProduktButton;
     private JButton powrotButton;
 
 
-    public static void openAdmin(Sklep sklep){
+    public static void openAdmin(Sklep sklep, JFrame ramka){
         GUIadmin GUI = new GUIadmin();
-        GUI.adminMenu(sklep);
+        GUI.adminMenu(sklep, ramka);
     }
-    public void adminMenu(Sklep sklep){
+    public void adminMenu(Sklep sklep, JFrame ramka){
         this.sklep=sklep;
-        ramka = new JFrame();
+        this.ramka=ramka;
+
+        panelGlowny = new JPanel();
+        panelGlowny.setLayout(new BorderLayout());
 
         dodajPromocjeButton = new JButton("DODAJ PROMOCJE");
         dodajProduktButton = new JButton("DODAJ PRODUKT");
@@ -47,8 +51,7 @@ public class GUIadmin implements ActionListener {
         panel.add(usunProduktButton);
         panel.add(powrotButton);
 
-        ramka.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ramka.getContentPane().add(BorderLayout.CENTER, panel);
+        panelGlowny.add(BorderLayout.CENTER, panel);
 
 
 
@@ -58,9 +61,9 @@ public class GUIadmin implements ActionListener {
         panel.add(powrotButton);
 
 
-        ramka.setSize(300,600);
-        ramka.pack();
-        ramka.setResizable(false);
+
+        ramka.setLayout(null);
+        ramka.setContentPane(panelGlowny);
         ramka.setVisible(true);
 
     }
@@ -69,19 +72,34 @@ public class GUIadmin implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == dodajPromocjeButton){
-            ramka.dispose();
-            DodajPromocjeGUI.openGUI(sklep);
+            ramka.getContentPane().removeAll();
+            ramka.revalidate();
+            ramka.repaint();
+            ramka.setLayout(null);
+
+            DodajPromocjeGUI.openGUI(sklep, ramka);
         }
         if(e.getSource() == dodajProduktButton){
-            ramka.dispose();
-            DodajProduktGUI.openGUI(sklep);
+            ramka.getContentPane().removeAll();
+            ramka.revalidate();
+            ramka.repaint();
+            ramka.setLayout(null);
+            DodajProduktGUI.openGUI(sklep, ramka);
         }
         if(e.getSource() == usunProduktButton){
-            ramka.dispose();
-            UsunProduktGUI.openGUI(sklep);
+            ramka.getContentPane().removeAll();
+            ramka.revalidate();
+            ramka.repaint();
+            ramka.setLayout(null);
+
+            UsunProduktGUI.openGUI(sklep, ramka);
         }
         if(e.getSource() == powrotButton){
-            ramka.dispose();
+            ramka.getContentPane().removeAll();
+            ramka.revalidate();
+            ramka.repaint();
+            ramka.setLayout(null);
+            Rejestracja.ShopPage(sklep, ramka);
         }
     }
 }

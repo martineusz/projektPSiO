@@ -10,7 +10,7 @@ import PlacenieStrategia.*;
 import Produkt.*;
 import java.text.DecimalFormat;
 
-import InterfejsGraficzny.Rejestracja;
+import InterfejsGraficzny.*;
 
 import javax.swing.*;
 
@@ -24,6 +24,8 @@ public class Main {
         sklep.wczytajListeProduktow();
         sklep.wczytajListeKlientow();
 
+
+        Rejestracja.ShopPage(sklep, jFrame);
 
         Scanner scan = new Scanner(System.in);
         String wybor;
@@ -221,7 +223,7 @@ public class Main {
                     break;
                 case "3":
                     admin();
-                    GUIadmin.openAdmin(sklep);
+                    GUIadmin.openAdmin(sklep, jFrame);
                     LoopAdmin:
                     while (scan.hasNext()) {
                         wybor = scan.nextLine();
