@@ -4,6 +4,8 @@ import Produkt.*;
 import DostawaStrategia.DostawaStrategia;
 import DostawaStrategia.*;
 import PlacenieStrategia.PlacenieStrategia;
+
+import javax.swing.*;
 import java.text.DecimalFormat;
 
 import java.io.Serializable;
@@ -69,7 +71,7 @@ public class Koszyk implements Serializable {
 
             dostawaStrategia.dodajKoszt(this);
 
-            placenieStrategia.wprowadzDane();
+            placenieStrategia.wprowadzDane(new JPanel());
             if (placenieStrategia.plac()) {
                 for (Produkt produkt : this.listaProduktow) {
                     produkt.setIloscWMagazynie(produkt.getIloscWMagazynie() - 1);

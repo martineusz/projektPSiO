@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
 
 public class placKarta implements PlacenieStrategia, Serializable {
     private static final long serialVersionUID = -9214117519616244433L;
@@ -44,7 +46,7 @@ public class placKarta implements PlacenieStrategia, Serializable {
     }
 
     @Override
-    public void wprowadzDane() {
+    public void wprowadzDane(JPanel panelPlacenie) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Uzupełnianie danych karty płatniczej:");
         System.out.println("Wprowadź numer karty:");

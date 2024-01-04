@@ -31,6 +31,8 @@ public class KoszykFrame extends JFrame implements ActionListener {
     JButton cofnijPlatnosc;
     JCheckBox boxPaczkomat;
     JCheckBox boxKurier;
+    JCheckBox boxBlik;
+    JCheckBox boxKarta;
     JPanel panelGlowny;
     JPanel panelGorny;
     JPanel panelPlatnosc;
@@ -45,6 +47,12 @@ public class KoszykFrame extends JFrame implements ActionListener {
     JTextField textKraj;
     JTextField textNumerTelefonu;
     JTextField textEmail;
+    JTextField textKodBlik;
+    JTextField textNumerKarty;
+    JTextField textDataWygasniecia;
+    JTextField textCvv;
+    JTextField textKartaImie;
+    JTextField textKartaNazwisko;
     JLabel labelImie;
     JLabel labelNazwisko;
     JLabel labelUlica;
@@ -54,6 +62,12 @@ public class KoszykFrame extends JFrame implements ActionListener {
     JLabel labelKraj;
     JLabel labelNumerTelefonu;
     JLabel labelEmail;
+    JLabel labelKodBlik;
+    JLabel labelNumerKarty;
+    JLabel labelDataWygasniecia;
+    JLabel labelCvv;
+    JLabel labelKartaImie;
+    JLabel labelKartaNazwisko;
 
     KoszykFrame(Koszyk koszyk) {
         this.koszyk = koszyk;
@@ -63,6 +77,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
         panelKoszyk = new JPanel();
         panelDostawa = new JPanel();
         panelPodsumowanie = new JPanel();
+        panelPlatnosc = new JPanel();
         buttonProduktMap = new HashMap<>();
         ImageIcon koszykImage = new ImageIcon("src/Obrazki/koszyk.png");
 
@@ -149,6 +164,60 @@ public class KoszykFrame extends JFrame implements ActionListener {
         labelEmail.setText("EMAIL");
         panelDostawa.add(labelEmail);
 
+        textKodBlik = new JTextField();
+        textKodBlik.setPreferredSize(new Dimension(250,40));
+        textKodBlik.setBounds(20,70,250,40);
+        panelPlatnosc.add(textKodBlik);
+        labelKodBlik = new JLabel();
+        labelKodBlik.setBounds(20,55,120,10);
+        labelKodBlik.setText("KOD BLIK");
+        panelPlatnosc.add(labelKodBlik);
+
+        textNumerKarty = new JTextField();
+        textNumerKarty.setPreferredSize(new Dimension(250,40));
+        textNumerKarty.setBounds(20,210,250,40);
+        panelPlatnosc.add(textNumerKarty);
+        labelNumerKarty = new JLabel();
+        labelNumerKarty.setBounds(20,195,120,10);
+        labelNumerKarty.setText("NUMER KARTY");
+        panelPlatnosc.add(labelNumerKarty);
+
+        textDataWygasniecia = new JTextField();
+        textDataWygasniecia.setPreferredSize(new Dimension(250,40));
+        textDataWygasniecia.setBounds(20,275,150,40);
+        panelPlatnosc.add(textDataWygasniecia);
+        labelDataWygasniecia = new JLabel();
+        labelDataWygasniecia.setBounds(20,260,120,10);
+        labelDataWygasniecia.setText("DATA WYGAŚNIĘCIA");
+        panelPlatnosc.add(labelDataWygasniecia);
+
+        textCvv = new JTextField();
+        textCvv.setPreferredSize(new Dimension(250,40));
+        textCvv.setBounds(190,275,80,40);
+        panelPlatnosc.add(textCvv);
+        labelCvv = new JLabel();
+        labelCvv.setBounds(190,260,120,10);
+        labelCvv.setText("CVV");
+        panelPlatnosc.add(labelCvv);
+
+        textKartaImie = new JTextField();
+        textKartaImie.setPreferredSize(new Dimension(250,40));
+        textKartaImie.setBounds(290,210,250,40);
+        panelPlatnosc.add(textKartaImie);
+        labelKartaImie = new JLabel();
+        labelKartaImie.setBounds(290,195,120,10);
+        labelKartaImie.setText("IMIĘ");
+        panelPlatnosc.add(labelKartaImie);
+
+        textKartaNazwisko = new JTextField();
+        textKartaNazwisko.setPreferredSize(new Dimension(250,40));
+        textKartaNazwisko.setBounds(290,275,250,40);
+        panelPlatnosc.add(textKartaNazwisko);
+        labelKartaNazwisko = new JLabel();
+        labelKartaNazwisko.setBounds(290,260,120,10);
+        labelKartaNazwisko.setText("NAZWISKO");
+        panelPlatnosc.add(labelKartaNazwisko);
+
         //MOJ KOSZYK label
         JLabel mojKoszyk = new JLabel();
         mojKoszyk.setText("MOJ KOSZYK");
@@ -231,7 +300,6 @@ public class KoszykFrame extends JFrame implements ActionListener {
         panelGlowny.add(panelDostawa);
 
         //PANEL PLATNOSC
-        panelPlatnosc = new JPanel();
         panelPlatnosc.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panelPlatnosc.setSize(new Dimension(600, 450));
         panelPlatnosc.setBounds(100,105,600, 450);
@@ -296,14 +364,14 @@ public class KoszykFrame extends JFrame implements ActionListener {
 
         //BUTTON PLATNOSC
         buttonPlatnosc = new JButton();
-        buttonPlatnosc.setText("FINALIZUJ ZAMOWIENIE #es");
+        buttonPlatnosc.setText("ZREALIZUJ ZAMÓWIENIE");
         buttonPlatnosc.setBounds(25,300,350,80);
         buttonPlatnosc.setFocusable(false);
         buttonPlatnosc.addActionListener(this);
         buttonPlatnosc.setFont(new Font(null, Font.BOLD, 20));
         buttonPlatnosc.setBackground(Color.WHITE);
         buttonPlatnosc.setBorder(BorderFactory.createEtchedBorder());
-        panelPodsumowanie.add(buttonPlatnosc );
+        panelPodsumowanie.add(buttonPlatnosc);
         buttonPlatnosc.setVisible(false);
 
         ImageIcon cofnijImage = new ImageIcon("src/Obrazki/cofnij.png");
@@ -350,6 +418,32 @@ public class KoszykFrame extends JFrame implements ActionListener {
         panelDostawa.add(boxKurier);
         boxKurier.addActionListener(this);
 
+        //CHECKBOX BLIK
+        boxBlik = new JCheckBox("Blik");
+        boxBlik.setBounds(20, 20, 100, 20);
+        boxBlik.setFocusable(true);
+        panelPlatnosc.add(boxBlik);
+        boxBlik.addActionListener(this);
+        boxBlik.setSelected(true);
+        boxBlik.setEnabled(false);
+        textKartaNazwisko.setEnabled(false);
+        labelKartaNazwisko.setEnabled(false);
+        textKartaImie.setEnabled(false);
+        labelKartaImie.setEnabled(false);
+        textNumerKarty.setEnabled(false);
+        labelNumerKarty.setEnabled(false);
+        textCvv.setEnabled(false);
+        labelCvv.setEnabled(false);
+        textDataWygasniecia.setEnabled(false);
+        labelDataWygasniecia.setEnabled(false);
+
+        //CHECKBOX KARTA
+        boxKarta = new JCheckBox("Karta");
+        boxKarta.setBounds(20, 160, 100, 20);
+        boxKarta.setFocusable(true);
+        panelPlatnosc.add(boxKarta);
+        boxKarta.addActionListener(this);
+
         //PANEL DOLNY
         panelDolny.setPreferredSize(new Dimension(0, 180));
         panelDolny.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -387,6 +481,50 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 dostawaCena = 19.99;
                 labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
                 labelSumaCen.setText("SUMA: " + (dostawaCena + koszyk.getWartoscZamowienia()) + " PLN");
+            }
+        } else if (e.getSource() == boxBlik) {
+            if (boxBlik.isSelected()) {
+                boxKarta.setSelected(false);
+                boxKarta.setFocusable(true);
+                boxKarta.setEnabled(true);
+                boxBlik.setFocusable(false);
+                boxBlik.setEnabled(false);
+
+                textKodBlik.setEnabled(true);
+                labelKodBlik.setEnabled(true);
+
+                textKartaNazwisko.setEnabled(false);
+                labelKartaNazwisko.setEnabled(false);
+                textKartaImie.setEnabled(false);
+                labelKartaImie.setEnabled(false);
+                textNumerKarty.setEnabled(false);
+                labelNumerKarty.setEnabled(false);
+                textCvv.setEnabled(false);
+                labelCvv.setEnabled(false);
+                textDataWygasniecia.setEnabled(false);
+                labelDataWygasniecia.setEnabled(false);
+            }
+        } else if (e.getSource() == boxKarta) {
+            if (boxKarta.isSelected()) {
+                boxBlik.setSelected(false);
+                boxBlik.setFocusable(true);
+                boxBlik.setEnabled(true);
+                boxKarta.setFocusable(false);
+                boxKarta.setEnabled(false);
+
+                textKodBlik.setEnabled(false);
+                labelKodBlik.setEnabled(false);
+
+                textKartaNazwisko.setEnabled(true);
+                labelKartaNazwisko.setEnabled(true);
+                textKartaImie.setEnabled(true);
+                labelKartaImie.setEnabled(true);
+                textNumerKarty.setEnabled(true);
+                labelNumerKarty.setEnabled(true);
+                textCvv.setEnabled(true);
+                labelCvv.setEnabled(true);
+                textDataWygasniecia.setEnabled(true);
+                labelDataWygasniecia.setEnabled(true);
             }
         }
 
