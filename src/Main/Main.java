@@ -150,16 +150,16 @@ public class Main {
                                                             while (scan.hasNext()) {
                                                                 wybor = scan.nextLine();
                                                                 switch (wybor) {
-                                                                    case "1":
-                                                                        sklep.zalogowanyKlient.koszyk.ustawMetodePlatnosci(new placBlikiem());
-                                                                        sklep.zalogowanyKlient.koszyk.zrealizujDostawe(adres);
-                                                                        break LoopZamawianie;
-                                                                    case "2":
-                                                                        sklep.zalogowanyKlient.koszyk.ustawMetodePlatnosci(new placKarta());
-                                                                        sklep.zalogowanyKlient.koszyk.zrealizujDostawe(adres);
-                                                                        break LoopZamawianie;
-                                                                    case "3":
-                                                                        break LoopZamawianie;
+//                                                                    case "1":
+//                                                                        sklep.zalogowanyKlient.koszyk.ustawMetodePlatnosci(new placBlikiem());
+//                                                                        sklep.zalogowanyKlient.koszyk.zrealizujDostawe(adres);
+//                                                                        break LoopZamawianie;
+//                                                                    case "2":
+//                                                                        sklep.zalogowanyKlient.koszyk.ustawMetodePlatnosci(new placKarta());
+//                                                                        sklep.zalogowanyKlient.koszyk.zrealizujDostawe(adres);
+//                                                                        break LoopZamawianie;
+//                                                                    case "3":
+//                                                                        break LoopZamawianie;
                                                                 }
                                                                 zamawianiePlatnosc();
                                                             }

@@ -1,5 +1,9 @@
 package InterfejsGraficzny;
 
+import DostawaStrategia.DostawaKurier;
+import DostawaStrategia.DostawaPaczkomat;
+import PlacenieStrategia.placBlikiem;
+import PlacenieStrategia.placKarta;
 import Produkt.*;
 import Main.*;
 
@@ -231,6 +235,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
         //PANEL GORNY
         panelGorny.setPreferredSize(new Dimension(0,150));
         panelGorny.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        panelGorny.setLayout(null);
 
         //PANEL GLOWNY
         panelGlowny.setPreferredSize(new Dimension(0,750));
@@ -388,6 +393,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
         cofnijPlatnosc.setFocusable(false);
         cofnijPlatnosc.setBackground(Color.WHITE);
         cofnijPlatnosc.setVisible(false);
+        cofnijPlatnosc.setBounds(10,10,100,100);
         panelGorny.add(cofnijPlatnosc);
 
 
@@ -399,6 +405,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
         cofnijDostawa.setFocusable(false);
         cofnijDostawa.setBackground(Color.WHITE);
         cofnijDostawa.setVisible(false);
+        cofnijDostawa.setBounds(10,10,100,100);
         panelGorny.add(cofnijDostawa);
 
 
@@ -410,6 +417,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
         boxPaczkomat.addActionListener(this);
         boxPaczkomat.setSelected(true);
         boxPaczkomat.setEnabled(false);
+        koszyk.ustawMetodeDostawy(new DostawaPaczkomat());
 
         // CHECKBOX KURIER
         boxKurier = new JCheckBox("Kurier");
@@ -426,6 +434,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
         boxBlik.addActionListener(this);
         boxBlik.setSelected(true);
         boxBlik.setEnabled(false);
+        koszyk.ustawMetodePlatnosci(new placBlikiem());
         textKartaNazwisko.setEnabled(false);
         labelKartaNazwisko.setEnabled(false);
         textKartaImie.setEnabled(false);
@@ -462,6 +471,8 @@ public class KoszykFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == boxPaczkomat) {
             if (boxPaczkomat.isSelected()) {
+                koszyk.ustawMetodeDostawy(new DostawaPaczkomat());
+
                 boxKurier.setSelected(false);
                 boxKurier.setFocusable(true);
                 boxKurier.setEnabled(true);
@@ -473,6 +484,8 @@ public class KoszykFrame extends JFrame implements ActionListener {
             }
         } else if (e.getSource() == boxKurier) {
             if (boxKurier.isSelected()) {
+                koszyk.ustawMetodeDostawy(new DostawaKurier());
+
                 boxPaczkomat.setSelected(false);
                 boxPaczkomat.setFocusable(true);
                 boxPaczkomat.setEnabled(true);
@@ -484,6 +497,8 @@ public class KoszykFrame extends JFrame implements ActionListener {
             }
         } else if (e.getSource() == boxBlik) {
             if (boxBlik.isSelected()) {
+                koszyk.ustawMetodePlatnosci(new placBlikiem());
+
                 boxKarta.setSelected(false);
                 boxKarta.setFocusable(true);
                 boxKarta.setEnabled(true);
@@ -506,6 +521,8 @@ public class KoszykFrame extends JFrame implements ActionListener {
             }
         } else if (e.getSource() == boxKarta) {
             if (boxKarta.isSelected()) {
+                koszyk.ustawMetodePlatnosci(new placKarta());
+
                 boxBlik.setSelected(false);
                 boxBlik.setFocusable(true);
                 boxBlik.setEnabled(true);
@@ -569,15 +586,15 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 buttonPlatnosc.setVisible(true);
                 panelPlatnosc.setVisible(true);
 
-                numerTelefonu = labelNumerTelefonu.getText();
-                Email = labelEmail.getText();
-                adres = labelImie.getText() +
-                        " " + labelNazwisko.getText() +
-                        "\n" + labelUlica.getText() +
-                        " " + labelNumerDomu.getText() +
-                        "\n" + labelKodPocztowy.getText() +
-                        " " + labelMiejscowosc.getText() +
-                        " " + labelKraj.getText();
+                numerTelefonu = textNumerTelefonu.getText();
+                Email = textEmail.getText();
+                adres = textImie.getText() +
+                        " " + textNazwisko.getText() +
+                        "\n" + textUlica.getText() +
+                        " " + textNumerDomu.getText() +
+                        "\n" + textKodPocztowy.getText() +
+                        " " + textMiejscowosc.getText() +
+                        " " + textKraj.getText();
             }
             if(e.getSource() == cofnijPlatnosc){
                 cofnijPlatnosc.setVisible(false);
@@ -601,6 +618,15 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 panelDostawa.repaint();
                 buttonZamowienie.setVisible(true);
                 scrollPane.setVisible(true);
+            }
+            if(e.getSource() == buttonPlatnosc) {
+                JOptionPane warning = new JOptionPane();
+                if(koszyk.zrealizujDostawe(adres, textKodBlik.getText(), textNumerKarty.getText(), textDataWygasniecia.getText(), textCvv.getText(), textKartaImie.getText(), textKartaNazwisko.getText())){
+                    warning.showMessageDialog(null,"Wysłano paczkę na adres: " + adres, "ZAMÓWIENIE WYSŁANE", JOptionPane.INFORMATION_MESSAGE);
+                    //WYJSCIE Z MENU SKLEPU
+                }else{
+                    warning.showMessageDialog(null, "Nie zrealizowano zamówienia", "BŁĄD", JOptionPane.WARNING_MESSAGE);
+                }
             }
         }
     }

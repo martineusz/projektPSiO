@@ -3,7 +3,7 @@ import Produkt.*;
 
 import DostawaStrategia.DostawaStrategia;
 import DostawaStrategia.*;
-import PlacenieStrategia.PlacenieStrategia;
+import PlacenieStrategia.*;
 
 import javax.swing.*;
 import java.text.DecimalFormat;
@@ -60,31 +60,39 @@ public class Koszyk implements Serializable {
         this.dostawaStrategia = dostawaStrategia;
     }
 
-    public void zrealizujDostawe(String adres) {
+    public boolean zrealizujDostawe(String adres, String kodBlik, String numerKarty, String dataWygasniecia,String cvv, String imie, String nazwisko) {
         if(dostawaStrategia != null){
             for (Produkt produkt : this.listaProduktow) {
                 if(!produkt.sprawdzDostepnoscProduktu()) {
                     System.out.println("Zamówienie niezrealizowane");
-                    return;
+                    return false;
                 }
             }
 
             dostawaStrategia.dodajKoszt(this);
 
-            placenieStrategia.wprowadzDane(new JPanel());
+            if(placenieStrategia instanceof placBlikiem) {
+                placenieStrategia.wprowadzDane(kodBlik);
+            } else if(placenieStrategia instanceof placKarta){
+                placenieStrategia.wprowadzDane(numerKarty,dataWygasniecia,cvv,imie,nazwisko);
+            }
+
             if (placenieStrategia.plac()) {
                 for (Produkt produkt : this.listaProduktow) {
                     produkt.setIloscWMagazynie(produkt.getIloscWMagazynie() - 1);
                 }
                 dostawaStrategia.wyslijPaczke(adres);
                 this.listaProduktow.clear();
+                return true;
             }
             else {
                 System.out.println("Płatność zakończona niepowodzeniem. Proszę zweryfikować poprawność danych.");
+                return false;
             }
         }
         else {
             System.out.println("Nie wybrano strategii dostawy!");
+            return false;
         }
     }
 //
