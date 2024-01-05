@@ -79,6 +79,8 @@ public class KoszykFrame extends JFrame implements ActionListener {
     JLabel labelKartaImie;
     JLabel labelKartaNazwisko;
     JComboBox ComboBombo;
+    ImageIcon obrazek;
+    JLabel labelObrazek;
 
     KoszykFrame(Koszyk koszyk) {
         this.koszyk = koszyk;
@@ -273,14 +275,14 @@ public class KoszykFrame extends JFrame implements ActionListener {
             Produkt produkt = koszyk.getListaProduktow().get(i);
 
             JLabel labelNazwa = new JLabel();
-            labelNazwa.setBounds(20,45,400,40);
+            labelNazwa.setBounds(110,45,400,40);
             labelNazwa.setText("CENA: " + produkt.getCena() + " PLN");
-            labelNazwa.setFont(new Font(null, Font.BOLD, 20));
+            labelNazwa.setFont(new Font(null, Font.BOLD, 18));
 
             JLabel labelCena = new JLabel();
-            labelCena.setBounds(20,20,400,40);
+            labelCena.setBounds(110,20,400,40);
             labelCena.setText("NAZWA: " + produkt.getNazwa());
-            labelCena.setFont(new Font(null, Font.BOLD, 20));
+            labelCena.setFont(new Font(null, Font.BOLD, 18));
 
             JPanel panelProdukt = new JPanel();
             panelProdukt.setLayout(null);
@@ -297,6 +299,13 @@ public class KoszykFrame extends JFrame implements ActionListener {
             comboList.get(i).addActionListener(this);
             comboList.get(i).setSelectedItem(0);
 
+            obrazek = new ImageIcon();
+            obrazek = produkt.getIcon(75,75);
+            labelObrazek = new JLabel();
+            labelObrazek.setIcon(obrazek);
+            labelObrazek.setBounds(20,15,75,75);
+
+            panelProdukt.add(labelObrazek);
             panelProdukt.add(comboList.get(i));
             panelProdukt.add(buttonUsun);
             panelProdukt.add(labelCena);
@@ -483,7 +492,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
         this.add(panelDolny);
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         this.setSize(new Dimension(1980, 1080));
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setTitle("Koszyk");
         this.setVisible(true);
     }
@@ -696,7 +705,6 @@ public class KoszykFrame extends JFrame implements ActionListener {
                                     System.out.println(koszyk.getListaProduktow().get(i).toString());
                                 }
                             } //DZIALA ZOBACZ KONSOLE I KOSZYK PO REALIZACJI ZAMOWIENIA
-
                     //WYJSCIE Z MENU SKLEPU
                 }else{
                     warning.showMessageDialog(null, "Nie zrealizowano zamówienia", "BŁĄD", JOptionPane.WARNING_MESSAGE);
@@ -715,7 +723,6 @@ public class KoszykFrame extends JFrame implements ActionListener {
         sklep.zalogowanyKlient = sklep.getListaKlientow().get(0);
         sklep.zalogowanyKlient.getKoszyk().dodajProdukt(sklep.getListaProduktow().get(0));
         sklep.zalogowanyKlient.getKoszyk().dodajProdukt(sklep.getListaProduktow().get(1));
-        sklep.zalogowanyKlient.getKoszyk().dodajProdukt(sklep.getListaProduktow().get(0));
 
         if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size() == 0) {
             System.out.println("PUSTY KOSZYK");
@@ -728,6 +735,8 @@ public class KoszykFrame extends JFrame implements ActionListener {
 
         new KoszykFrame(sklep.zalogowanyKlient.getKoszyk());
 
+        sklep.wczytajListeProduktow();
+        sklep.wczytajListeKlientow();
 
     }
 }
