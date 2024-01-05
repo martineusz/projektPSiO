@@ -1,17 +1,21 @@
 package Produkt;
 
-public class Koszulka extends Produkt{
+import javax.swing.*;
+import java.io.Serializable;
+
+public class Koszulka extends Produkt implements Serializable {
     private String rozmiarKoszulki;
     private String dekoltKoszulki;
     private String krojKoszulki;
 
     public Koszulka(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material,
-                  String kolor, Producent producent, String rozmiarKoszulki, String dekoltKoszulki, String krojKoszulki){
-        super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, producent);
+                  String kolor, Producent producent, String rozmiarKoszulki, String dekoltKoszulki, String krojKoszulki, ImageIcon icon){
+        super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, producent, icon);
         this.rozmiarKoszulki=rozmiarKoszulki;
         this.dekoltKoszulki=dekoltKoszulki;
         this.krojKoszulki=krojKoszulki;
     }
+    private static final long serialVersionUID = -4985346083138998214L;
 
     public String getRozmiarKoszulki() {
         return rozmiarKoszulki;
