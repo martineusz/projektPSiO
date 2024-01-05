@@ -14,7 +14,8 @@ public class InvalidFileFormatException extends Exception {
         if (!fileName.endsWith(".png") && !fileName.endsWith(".jpg") && !fileName.endsWith(".jpeg")) {
             throw new InvalidFileFormatException("Niewłaściwy format pliku. Akceptowalne formaty to PNG i JPG.");
         }
-    }}
+    }
+}
 
 //    @Override
 //    public void actionPerformed(ActionEvent e) {

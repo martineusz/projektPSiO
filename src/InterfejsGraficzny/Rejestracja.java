@@ -194,6 +194,20 @@ public class Rejestracja  {
             }
         });
 
+        Button buttonWrocRej = new Button("Wróć");
+        buttonWrocRej.setBounds(45, 350, 80, 30);
+        buttonWrocRej.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                frame.setLayout(null);
+                Rejestracja.ShopPage(sklep, frame);
+
+            }
+        });
+        rejestrPanel.add(buttonWrocRej);
+
         rejestrPanel.add(buttonRejestr);
         rejestrPanel.setVisible(true);
         rejestrPanel.setBounds(0,0,500,500);

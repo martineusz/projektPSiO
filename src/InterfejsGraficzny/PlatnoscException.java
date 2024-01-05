@@ -16,7 +16,7 @@ public class PlatnoscException extends Exception{
             throw new PlatnoscException("Nieprawidlowy kod BLIK");
         }
     }
-    public static void checkKarta(String numer, String dataWygasniecia, String cvv) throws PlatnoscException{
+    public static void checkKarta(String numer, String dataWygasniecia, String cvv) throws PlatnoscException {
         if (numer.length() == 16 && numer.matches("[0-9]+")) {
             if (dataWygasniecia.length() == 4 && dataWygasniecia.matches("[0-9]+")) {
                 Date data = new Date();
