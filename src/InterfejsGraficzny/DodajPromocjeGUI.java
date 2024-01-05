@@ -21,6 +21,7 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
     private JPanel promocjaPolnoc;
     private JPanel panelGlowny;
     private JPanel tabelka2Panel;
+    private JPanel panelDodawania;
     private JButton zatwierdz;
     private JButton returnButton;
     private JTextField nazwaPromocji;
@@ -39,6 +40,9 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
     public void dodajPromocjeGUI(Sklep sklep, JFrame ramka){
         this.sklep=sklep;
         this.ramka=ramka;
+
+        panelDodawania = new JPanel();
+        panelDodawania.setLayout(new BorderLayout());
 
         panelGlowny = new JPanel();
         panelGlowny.setLayout(new BorderLayout());
@@ -121,7 +125,7 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
         }
 
         JTable tabela = new JTable(komorka, kolumny);
-        tabela.setRowHeight(20);
+        tabela.setRowHeight(21);
 
 
         //tabelka promocje
@@ -143,6 +147,9 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
         JTable produktPoPrzeceniePanel = new JTable(model);
 
         scrollPane2 = new JScrollPane(produktPoPrzeceniePanel);
+        scrollPane2.setPreferredSize(new Dimension(scrollPane2.getPreferredSize().width, produktPoPrzeceniePanel.getRowHeight() * 15));
+        scrollPane2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane2.getVerticalScrollBar().setUnitIncrement(16);
         tabelka2Panel.add(scrollPane2);
         promocjaPolnoc.add(tabelka2Panel, BorderLayout.CENTER);
 
@@ -152,10 +159,22 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
         returnButton.setMargin(new Insets(10, 20, 10, 20));
         returnButton.addActionListener(this);
 
+        JLabel labelTytul = new JLabel("Produkty do promocji");
 
-        JScrollPane scrollPane = new JScrollPane(tabela);
+        JPanel panelTabeli = new JPanel(new BorderLayout());
+        panelTabeli.add(tabela.getTableHeader(), BorderLayout.NORTH);
+        panelTabeli.add(tabela, BorderLayout.CENTER);
+
+        panelDodawania.add(labelTytul, BorderLayout.NORTH);
+        panelDodawania.add(panelCheckBox, BorderLayout.WEST);
+        panelDodawania.add(panelTabeli, BorderLayout.CENTER);
+
+        JScrollPane scrollPane = new JScrollPane(panelDodawania);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+
+
         panelGlowny.add(scrollPane, BorderLayout.CENTER);
-        panelGlowny.add(panelCheckBox, BorderLayout.WEST);
         panelGlowny.add(promocjaPolnoc, BorderLayout.EAST);
         panelGlowny.add(returnButton, BorderLayout.SOUTH);
 
