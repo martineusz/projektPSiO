@@ -250,6 +250,10 @@ public class DodajProduktGUI implements ActionListener {
                 sklep.dodajSpodnie(podstawoweDaneTextField[0].getText(), podstawoweDaneTextField[1].getText(), podstawoweDaneTextField[2].getText(), podstawoweDaneTextField[3].getText(), podstawoweDaneTextField[4].getText(), podstawoweDaneTextField[5].getText(), podstawoweDaneTextField[6].getText(), podstawoweDaneTextField[7].getText(), podstawoweDaneTextField[8].getText(),
                         textFieldSpodnie[0].getText(), textFieldSpodnie[1].getText(), textFieldSpodnie[2].getText(), textFieldSpodnie[3].getText(), icon);
             }
+            JOptionPane.showMessageDialog(null, "Produkt dodany pomyślnie", "ADMIN",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            sklep.zapiszListeProduktow();
         }
         if(e.getSource()==returnButton){
             ramka.getContentPane().removeAll();

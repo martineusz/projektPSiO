@@ -97,17 +97,21 @@ public class UsunProduktGUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==usunButton){
+            int counter=0;
             for(int i=0; i<sklep.getListaProduktow().size(); i++){
                 if(checkBox[i].isSelected()){
-                    sklep.usunProdukt(i);
-                    ramka.getContentPane().removeAll();
-                    ramka.revalidate();
-                    ramka.repaint();
-                    ramka.setLayout(null);
-                    usunProduktGUI(sklep, ramka);
-
+                    sklep.usunProdukt(i-counter);
+                    counter++;
                 }
             }
+            JOptionPane.showMessageDialog(null, "Produkty usuniete", "ADMIN",
+                    JOptionPane.INFORMATION_MESSAGE);
+            sklep.zapiszListeProduktow();
+            ramka.getContentPane().removeAll();
+            ramka.revalidate();
+            ramka.repaint();
+            ramka.setLayout(null);
+            usunProduktGUI(sklep, ramka);
         }
         if(e.getSource()==returnButton){
             ramka.getContentPane().removeAll();
