@@ -46,18 +46,18 @@ public class placKarta implements PlacenieStrategia, Serializable {
     }
 
     @Override
-    public void wprowadzDane(JPanel panelPlacenie) {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Uzupełnianie danych karty płatniczej:");
-        System.out.println("Wprowadź numer karty:");
-        numer = scan.nextLine();
-        System.out.println("Wprowadź datę ważności (MMYY):");
-        dataWygasniecia = scan.nextLine();
-        System.out.println("Wprowadź kod CVV:");
-        cvv = scan.nextLine();
-        System.out.println("Wprowadź imię:");
-        imie = scan.nextLine();
-        System.out.println("Wprowadź nazwisko:");
-        nazwisko = scan.nextLine();
+    public void wprowadzDane(String numerKarty, String dataWygasniecia,String cvv, String imie, String nazwisko) {
+        this.numer = numerKarty;
+        this.dataWygasniecia = dataWygasniecia;
+        this.cvv = cvv;
+        this.imie = imie;
+        this. nazwisko = nazwisko;
+    }
+
+
+    //USELESS
+    @Override
+    public void wprowadzDane(String kodBlik) {
+
     }
 }

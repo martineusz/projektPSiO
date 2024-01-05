@@ -6,5 +6,6 @@ import java.awt.*;
 public interface PlacenieStrategia {
     boolean plac();
 
-    void wprowadzDane(JPanel panelPlacenie);
+    void wprowadzDane(String kodBlik);
+    void wprowadzDane(String numerKarty, String dataWygasniecia,String cvv, String imie, String nazwisko);
 }
