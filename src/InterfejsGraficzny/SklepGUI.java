@@ -391,6 +391,8 @@ public class SklepGUI {
             addButton.addActionListener(e -> {
                 System.out.println("Dodano " + name);
                 listaProduktowWKoszyku.add(name);
+                JOptionPane.showMessageDialog(null, "Dodano do koszyka", "Info",
+                        JOptionPane.INFORMATION_MESSAGE);
             });
 
             return productPanel;
