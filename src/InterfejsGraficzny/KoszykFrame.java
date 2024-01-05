@@ -663,13 +663,46 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 scrollPane.setVisible(true);
             }
             if(e.getSource() == buttonPlatnosc) {
+
+                //TEST CZY DZIALA
+                System.out.println("\n\n\n\n");
+                if (koszyk.getListaProduktow().size() == 0) {
+                    System.out.println("PUSTY KOSZYK");
+                } else {
+                    for (int i = 0; i < koszyk.getListaProduktow().size(); i++) {
+                        System.out.println((i+1) + ".");
+                        System.out.println(koszyk.getListaProduktow().get(i).toString());
+                    }
+                } //DZIALA ZOBACZ KONSOLE I KOSZYK PO REALIZACJI ZAMOWIENIA
+
                 JOptionPane warning = new JOptionPane();
                 if(koszyk.zrealizujDostawe(adres, textKodBlik.getText(), textNumerKarty.getText(), textDataWygasniecia.getText(), textCvv.getText(), textKartaImie.getText(), textKartaNazwisko.getText())){
                     warning.showMessageDialog(null,"Wysłano paczkę na adres: " + adres, "ZAMÓWIENIE WYSŁANE", JOptionPane.INFORMATION_MESSAGE);
+
+
+
+                    for (int j = 0; j < comboList.size(); j++) {
+                            Produkt x = comboProduktMap.get(comboList.get(j));
+                            x.setIloscWMagazynie(x.getIloscWMagazynie() - (Integer.parseInt((comboList.get(j).getSelectedItem()).toString())));
+                            panelKoszyk.removeAll();
+                    }
+                            //TEST CZY DZIALA
+                            System.out.println("\n\n\n\n");
+                            if (koszyk.getListaProduktow().size() == 0) {
+                                System.out.println("PUSTY KOSZYK");
+                            } else {
+                                for (int i = 0; i < koszyk.getListaProduktow().size(); i++) {
+                                    System.out.println((i+1) + ".");
+                                    System.out.println(koszyk.getListaProduktow().get(i).toString());
+                                }
+                            } //DZIALA ZOBACZ KONSOLE I KOSZYK PO REALIZACJI ZAMOWIENIA
+
                     //WYJSCIE Z MENU SKLEPU
                 }else{
                     warning.showMessageDialog(null, "Nie zrealizowano zamówienia", "BŁĄD", JOptionPane.WARNING_MESSAGE);
                 }
+
+
             }
         }
     }
@@ -694,6 +727,8 @@ public class KoszykFrame extends JFrame implements ActionListener {
         }
 
         new KoszykFrame(sklep.zalogowanyKlient.getKoszyk());
+
+
     }
 }
 
