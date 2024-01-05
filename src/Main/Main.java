@@ -24,8 +24,6 @@ public class Main {
         sklep.wczytajListeProduktow();
         sklep.wczytajListeKlientow();
 
-
-
         Rejestracja.ShopPage(sklep, jFrame);
 
         Scanner scan = new Scanner(System.in);

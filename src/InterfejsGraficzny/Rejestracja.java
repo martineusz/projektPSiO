@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 
 
 public class Rejestracja  {
@@ -40,7 +41,7 @@ public class Rejestracja  {
         shopJpanel.add(jpanel1);
 
         jpanel1.setLayout(null);
-        shopJpanel.setBounds(0,0,1000,500);
+        shopJpanel.setBounds(0,0,1050,500);
 
         JPanel jPanel2 = new JPanel();
         jPanel2.setBounds(400, 0, 600, 500);
@@ -66,7 +67,6 @@ public class Rejestracja  {
         error.setBounds(200, 70, 250, 20);
         JCheckBox adminBox = new JCheckBox("Zaloguj jako administrator");
 
-
         jPanel2.add(jTextFieldLogowanie);
         jPanel2.add(jTextFieldHaslo);
         jPanel2.add(label1);
@@ -75,6 +75,7 @@ public class Rejestracja  {
         jPanel2.add(adminBox);
         jPanel2.add(apllyButton);
         jPanel2.add(rejestrButton);
+
         label1.setBounds(100, 110, 50, 10);
         label2.setBounds(100,160,50,10);
         label3.setBounds(185, 350, 130, 20);
@@ -94,7 +95,7 @@ public class Rejestracja  {
 
         shopJpanel.setLayout(null);
         frame.add(shopJpanel);
-        frame.setBounds(0,0,1000,500);
+        frame.setBounds(0,0,1050,500);
         frame.setLayout(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -270,6 +271,7 @@ public class Rejestracja  {
         frame.getContentPane().removeAll();
         frame.revalidate();
         frame.repaint();
+        SklepGUI.openSklepGUI(frame, sklep);
     }
     else {jTextFieldLogowanie.setText("");
         jTextFieldHaslo.setText("");}

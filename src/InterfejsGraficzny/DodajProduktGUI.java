@@ -24,6 +24,7 @@ public class DodajProduktGUI implements ActionListener {
     private JRadioButton radioButtonKoszulka;
     private JRadioButton radioButtonSpodnie;
     private JButton returnButton;
+    private JButton dodajzdjecie;
     private JButton zatwierdzTyp;
     private JButton dodajProdukt;
     private JButton przyciskWyboru;

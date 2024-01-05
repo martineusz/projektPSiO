@@ -31,7 +31,6 @@ public abstract class Produkt implements Serializable {
     }
     private static final long serialVersionUID = 4362596792216997619L;
 
-
     public String getIdProduktu() {
         return idProduktu;
     }
