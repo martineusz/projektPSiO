@@ -53,7 +53,7 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
 
         panelCheckBox.setLayout(new BoxLayout(panelCheckBox, BoxLayout.Y_AXIS));
 
-        //panelCheckBox.add(Box.createVerticalStrut(20));
+        panelCheckBox.add(Box.createVerticalStrut(20));
 
         for(int i=0; i<sklep.getListaProduktow().size(); i++){
             panelCheckBox.add(checkBox[i]= new JCheckBox());
@@ -147,6 +147,7 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
         JTable produktPoPrzeceniePanel = new JTable(model);
 
         scrollPane2 = new JScrollPane(produktPoPrzeceniePanel);
+        scrollPane2.setPreferredSize(new Dimension(scrollPane2.getPreferredSize().width, produktPoPrzeceniePanel.getRowHeight() * 15));
         scrollPane2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane2.getVerticalScrollBar().setUnitIncrement(16);
         tabelka2Panel.add(scrollPane2);
@@ -160,13 +161,19 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
 
         JLabel labelTytul = new JLabel("Produkty do promocji");
 
+        JPanel panelTabeli = new JPanel(new BorderLayout());
+        panelTabeli.add(tabela.getTableHeader(), BorderLayout.NORTH);
+        panelTabeli.add(tabela, BorderLayout.CENTER);
+
         panelDodawania.add(labelTytul, BorderLayout.NORTH);
         panelDodawania.add(panelCheckBox, BorderLayout.WEST);
-        panelDodawania.add(tabela, BorderLayout.CENTER);
+        panelDodawania.add(panelTabeli, BorderLayout.CENTER);
 
         JScrollPane scrollPane = new JScrollPane(panelDodawania);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+
+
         panelGlowny.add(scrollPane, BorderLayout.CENTER);
         panelGlowny.add(promocjaPolnoc, BorderLayout.EAST);
         panelGlowny.add(returnButton, BorderLayout.SOUTH);

@@ -49,12 +49,10 @@ public class UsunProduktGUI implements ActionListener {
 
         usunProduktPanel.setLayout(new BoxLayout(usunProduktPanel, BoxLayout.Y_AXIS));
         usunProduktPanel.add(Box.createVerticalStrut(20));
-
         usunProduktPanel.add(usunButton);
 
 
         String[] kolumny = new String[] {"Id", "Nazwa", "Cena", "Marka"};
-
         Object[][] komorka = new Object[sklep.getListaProduktow().size()][4];
 
         for(int i=0; i<sklep.getListaProduktow().size(); i++){
@@ -66,7 +64,7 @@ public class UsunProduktGUI implements ActionListener {
 
         JTable tabela = new JTable(komorka, kolumny);
 
-        tabela.setRowHeight(20);
+        tabela.setRowHeight(21);
 
 
         //return button
@@ -75,12 +73,19 @@ public class UsunProduktGUI implements ActionListener {
         returnButton.setMargin(new Insets(10, 20, 10, 20));
         returnButton.addActionListener(this);
 
+        JPanel panelTabeli = new JPanel(new BorderLayout());
+        panelTabeli.add(tabela.getTableHeader(), BorderLayout.NORTH);
+        panelTabeli.add(tabela, BorderLayout.CENTER);
 
-        ramka.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panelScroll = new JPanel();
+        panelScroll.setLayout(new BorderLayout());
+        panelScroll.add(panelTabeli, BorderLayout.CENTER);
+        panelScroll.add(panelCheckBox, BorderLayout.WEST);
 
-        JScrollPane scrollPane = new JScrollPane(tabela);
+        JScrollPane scrollPane = new JScrollPane(panelScroll);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+
         panelGlowny.add(scrollPane, BorderLayout.CENTER);
-        panelGlowny.add(panelCheckBox, BorderLayout.WEST);
         panelGlowny.add(usunProduktPanel, BorderLayout.EAST);
         panelGlowny.add(returnButton, BorderLayout.SOUTH);
 
