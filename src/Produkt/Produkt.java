@@ -100,6 +100,7 @@ public abstract class Produkt implements Serializable {
     public ImageIcon getIcon(int x, int y) {
         Image img = icon.getImage();
         Image newImg = img.getScaledInstance(x, y, java.awt.Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newImg);
         return icon;
     }
 

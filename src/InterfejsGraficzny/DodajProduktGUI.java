@@ -263,12 +263,18 @@ public class DodajProduktGUI implements ActionListener {
             int response = fileChooser.showOpenDialog(null);
 
             if (response == JFileChooser.APPROVE_OPTION) {
-                String filePath = fileChooser.getSelectedFile().getAbsolutePath();
-                icon = new ImageIcon(filePath);
-                Image img = icon.getImage();
-                Image newImg = img.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
-                icon = new ImageIcon(newImg);
-                przyciskWyboru.setIcon(icon);
+                try {
+                InvalidFileFormatException.checkFileFormat(fileChooser.getSelectedFile());
+                    String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+
+                    icon = new ImageIcon(filePath);
+                    Image img = icon.getImage();
+                    Image newImg = img.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
+                    icon = new ImageIcon(newImg);
+                    przyciskWyboru.setIcon(icon);
+            } catch (InvalidFileFormatException ex) {
+               JOptionPane.showMessageDialog(ramka, ex.getMessage(), "Błąd formatu pliku", JOptionPane.ERROR_MESSAGE);
+            }
             }
         }
     }
