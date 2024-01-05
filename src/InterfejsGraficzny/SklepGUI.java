@@ -35,7 +35,7 @@ public class SklepGUI {
         public static  void openSklepGUI (JFrame frame, Sklep sklep) {
             listaProduktowWKoszyku = new ArrayList<>();
 
-
+            frame.setSize(1050,700);
             int liczbaBluz = 0;
             int liczbaButow = 0;
             int liczbaKoszulek = 0;
