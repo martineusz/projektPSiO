@@ -16,7 +16,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KoszykFrame extends JFrame implements ActionListener {
+    Map<JButton, Produkt> buttonProduktMap;
+    Map<JComboBox, Produkt> comboProduktMap;
+    ArrayList<JComboBox> comboList;
+    double cenaKoszyk =0;
+    double cenaZaWszystko = 0;
     double dostawaCena = 0;
+    String[] opcjeWyboru;
     String numerTelefonu;
     String Email;
     String adres;
@@ -27,12 +33,12 @@ public class KoszykFrame extends JFrame implements ActionListener {
     Koszyk koszyk;
     JPanel panelKoszyk;
     JPanel panelDostawa;
-    Map<JButton, Produkt> buttonProduktMap;
     JButton buttonZamowienie;
     JButton buttonDostawa;
     JButton buttonPlatnosc;
     JButton cofnijDostawa;
     JButton cofnijPlatnosc;
+    JButton buttonOpcjeWyobru;
     JCheckBox boxPaczkomat;
     JCheckBox boxKurier;
     JCheckBox boxBlik;
@@ -72,6 +78,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
     JLabel labelCvv;
     JLabel labelKartaImie;
     JLabel labelKartaNazwisko;
+    JComboBox ComboBombo;
 
     KoszykFrame(Koszyk koszyk) {
         this.koszyk = koszyk;
@@ -83,6 +90,8 @@ public class KoszykFrame extends JFrame implements ActionListener {
         panelPodsumowanie = new JPanel();
         panelPlatnosc = new JPanel();
         buttonProduktMap = new HashMap<>();
+        comboProduktMap = new HashMap<>();
+        comboList = new ArrayList<>();
         ImageIcon koszykImage = new ImageIcon("src/Obrazki/koszyk.png");
 
 //        TEXT FIELDY
@@ -278,11 +287,23 @@ public class KoszykFrame extends JFrame implements ActionListener {
             panelProdukt.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             panelProdukt.setPreferredSize(new Dimension(500,100));
 
+            opcjeWyboru = new String[produkt.getIloscWMagazynie()];
+            for (int j = 1; j <= produkt.getIloscWMagazynie(); j++) {
+                opcjeWyboru[j-1] = String.valueOf(j);
+            }
+
+            comboList.add(ComboBombo = new JComboBox(opcjeWyboru));
+            comboList.get(i).setBounds(400,35,40,40);
+            comboList.get(i).addActionListener(this);
+            comboList.get(i).setSelectedItem(0);
+
+            panelProdukt.add(comboList.get(i));
             panelProdukt.add(buttonUsun);
             panelProdukt.add(labelCena);
             panelProdukt.add(labelNazwa);
             panelKoszyk.add(panelProdukt);
 
+            comboProduktMap.put(comboList.get(i), produkt);
             buttonProduktMap.put(buttonUsun, produkt);
         }
 
@@ -479,8 +500,9 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 boxPaczkomat.setFocusable(false);
                 boxPaczkomat.setEnabled(false);
                 dostawaCena = 15.99;
+                cenaZaWszystko = cenaKoszyk + dostawaCena;
                 labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
-                labelSumaCen.setText("SUMA: " + (dostawaCena + koszyk.getWartoscZamowienia()) + " PLN");
+                labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
             }
         } else if (e.getSource() == boxKurier) {
             if (boxKurier.isSelected()) {
@@ -492,8 +514,9 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 boxKurier.setFocusable(false);
                 boxKurier.setEnabled(false);
                 dostawaCena = 19.99;
+                cenaZaWszystko = cenaKoszyk + dostawaCena;
                 labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
-                labelSumaCen.setText("SUMA: " + (dostawaCena + koszyk.getWartoscZamowienia()) + " PLN");
+                labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
             }
         } else if (e.getSource() == boxBlik) {
             if (boxBlik.isSelected()) {
@@ -545,6 +568,24 @@ public class KoszykFrame extends JFrame implements ActionListener {
             }
         }
 
+        for (int j = 0; j < comboList.size(); j++) {
+            if(e.getSource() == comboList.get(j)){
+                Produkt x;
+                ComboBombo.getSelectedItem();
+                cenaKoszyk = 0;
+
+                for (int i = 0; i < comboList.size(); i++) {
+                    x = comboProduktMap.get(comboList.get(i));
+                    cenaKoszyk += x.getCena() * (Integer.parseInt((comboList.get(i).getSelectedItem()).toString()));
+                }
+
+                cenaZaWszystko = cenaKoszyk + dostawaCena;
+                labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
+                labelCenaKoszyka.setText("KOSZYK: " + cenaKoszyk + " PLN");
+            }
+        }
+
+
         if(e.getSource() instanceof JButton){
             JButton sourceButton = (JButton) e.getSource();
             Produkt produktToRemove = buttonProduktMap.get(sourceButton);
@@ -554,8 +595,9 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 panelKoszyk.remove(sourceButton.getParent()); // Usunięcie całego panelu produktu
                 panelKoszyk.revalidate();
                 panelKoszyk.repaint();
-                labelCenaKoszyka.setText("KOSZYK: " + koszyk.getWartoscZamowienia() + " PLN");
-                labelSumaCen.setText("SUMA: " + koszyk.getWartoscZamowienia() + " PLN");
+                cenaZaWszystko = cenaKoszyk + dostawaCena;
+                labelCenaKoszyka.setText("KOSZYK: " + cenaKoszyk + " PLN");
+                labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
 
             }
             if(e.getSource() == buttonZamowienie) {
@@ -573,7 +615,8 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 buttonZamowienie.setVisible(false);
                 scrollPane.setVisible(false);
                 dostawaCena = 15.99;
-                labelSumaCen.setText("SUMA: " + (dostawaCena + koszyk.getWartoscZamowienia()) + " PLN");
+                cenaZaWszystko = (dostawaCena + cenaKoszyk);
+                labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
                 labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
             }
             if(e.getSource() == buttonDostawa){
@@ -639,6 +682,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
         sklep.zalogowanyKlient = sklep.getListaKlientow().get(0);
         sklep.zalogowanyKlient.getKoszyk().dodajProdukt(sklep.getListaProduktow().get(0));
         sklep.zalogowanyKlient.getKoszyk().dodajProdukt(sklep.getListaProduktow().get(1));
+        sklep.zalogowanyKlient.getKoszyk().dodajProdukt(sklep.getListaProduktow().get(0));
 
         if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size() == 0) {
             System.out.println("PUSTY KOSZYK");
