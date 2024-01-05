@@ -629,24 +629,33 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
             }
             if(e.getSource() == buttonDostawa){
-                cofnijPlatnosc.setVisible(true);
-                cofnijDostawa.setVisible(false);
-                buttonPlatnosc.setVisible(false);
-                buttonDostawa.setVisible(true);
-                buttonDostawa.setVisible(false);
-                panelDostawa.setVisible(false);
-                buttonPlatnosc.setVisible(true);
-                panelPlatnosc.setVisible(true);
+                try {
+                    ZlyAdresException.checkIfEmpty(textImie.getText(), textNazwisko.getText(), textUlica.getText(), textNumerDomu.getText(),
+                            textMiejscowosc.getText(), textKraj.getText());
+                    ZlyAdresException.checkPhoneNumber(textNumerTelefonu.getText());
+                    ZlyAdresException.checkEmail(textEmail.getText());
+                    ZlyAdresException.checkKodPocztowy(textKodPocztowy.getText());
+                    cofnijPlatnosc.setVisible(true);
+                    cofnijDostawa.setVisible(false);
+                    buttonPlatnosc.setVisible(false);
+                    buttonDostawa.setVisible(true);
+                    buttonDostawa.setVisible(false);
+                    panelDostawa.setVisible(false);
+                    buttonPlatnosc.setVisible(true);
+                    panelPlatnosc.setVisible(true);
 
-                numerTelefonu = textNumerTelefonu.getText();
-                Email = textEmail.getText();
-                adres = textImie.getText() +
-                        " " + textNazwisko.getText() +
-                        "\n" + textUlica.getText() +
-                        " " + textNumerDomu.getText() +
-                        "\n" + textKodPocztowy.getText() +
-                        " " + textMiejscowosc.getText() +
-                        " " + textKraj.getText();
+                    numerTelefonu = textNumerTelefonu.getText();
+                    Email = textEmail.getText();
+                    adres = textImie.getText() +
+                            " " + textNazwisko.getText() +
+                            "\n" + textUlica.getText() +
+                            " " + textNumerDomu.getText() +
+                            "\n" + textKodPocztowy.getText() +
+                            " " + textMiejscowosc.getText() +
+                            " " + textKraj.getText();
+                }catch (ZlyAdresException e1){
+                    JOptionPane.showMessageDialog(null, e1.getMessage(), "Błąd", JOptionPane.ERROR_MESSAGE);
+                }
             }
             if(e.getSource() == cofnijPlatnosc){
                 cofnijPlatnosc.setVisible(false);
@@ -695,19 +704,17 @@ public class KoszykFrame extends JFrame implements ActionListener {
                             x.setIloscWMagazynie(x.getIloscWMagazynie() - (Integer.parseInt((comboList.get(j).getSelectedItem()).toString())));
                             panelKoszyk.removeAll();
                     }
-                            //TEST CZY DZIALA
-                            System.out.println("\n\n\n\n");
-                            if (koszyk.getListaProduktow().size() == 0) {
-                                System.out.println("PUSTY KOSZYK");
-                            } else {
-                                for (int i = 0; i < koszyk.getListaProduktow().size(); i++) {
-                                    System.out.println((i+1) + ".");
-                                    System.out.println(koszyk.getListaProduktow().get(i).toString());
-                                }
-                            } //DZIALA ZOBACZ KONSOLE I KOSZYK PO REALIZACJI ZAMOWIENIA
-                    //WYJSCIE Z MENU SKLEPU
-                }else{
-                    warning.showMessageDialog(null, "Nie zrealizowano zamówienia", "BŁĄD", JOptionPane.WARNING_MESSAGE);
+//                            //TEST CZY DZIALA
+//                            System.out.println("\n\n\n\n");
+//                            if (koszyk.getListaProduktow().size() == 0) {
+//                                System.out.println("PUSTY KOSZYK");
+//                            } else {
+//                                for (int i = 0; i < koszyk.getListaProduktow().size(); i++) {
+//                                    System.out.println((i+1) + ".");
+//                                    System.out.println(koszyk.getListaProduktow().get(i).toString());
+//                                }
+//                            } //DZIALA ZOBACZ KONSOLE I KOSZYK PO REALIZACJI ZAMOWIENIA
+//                    //WYJSCIE Z MENU SKLEPU
                 }
 
 

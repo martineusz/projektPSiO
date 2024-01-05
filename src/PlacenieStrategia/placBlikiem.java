@@ -1,5 +1,8 @@
 package PlacenieStrategia;
 
+import InterfejsGraficzny.PlatnoscException;
+import InterfejsGraficzny.ZlyAdresException;
+
 import java.io.Serializable;
 import java.util.Scanner;
 import javax.swing.*;
@@ -11,8 +14,13 @@ public class placBlikiem implements PlacenieStrategia, Serializable {
 
     @Override
     public boolean plac() {
-        if (kodBlik.length() == 6 && kodBlik.matches("[0-9]+")) return true;
-        else return false;
+        try{
+            PlatnoscException.checkBlik(kodBlik);
+            return true;
+        }catch (PlatnoscException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Błędny kod BLIK", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
     }
 
     @Override
