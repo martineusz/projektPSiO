@@ -1,20 +1,23 @@
 package Produkt;
 
-public class Spodnie extends Produkt{
+import javax.swing.*;
+import java.io.Serializable;
+
+public class Spodnie extends Produkt implements Serializable {
     private String rozmiarSpodni;
     private float dlugoscSpodni;
     private String typSpodni;
     private String krojSpodni;
     
     public Spodnie(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material,
-                  String kolor, Producent producent, String rozmiarSpodni, float dlugoscSpodni, String typSpodni, String krojSpodni){
-        super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, producent);
+                   String kolor, Producent producent, String rozmiarSpodni, float dlugoscSpodni, String typSpodni, String krojSpodni, ImageIcon icon){
+        super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, producent, icon);
         this.rozmiarSpodni=rozmiarSpodni;
         this.dlugoscSpodni=dlugoscSpodni;
         this.typSpodni=typSpodni;
         this.krojSpodni=krojSpodni;
     }
-
+    private static final long serialVersionUID = 802590927388564171L;
 
 public String getRozmiarSpodni() {
 	return rozmiarSpodni;

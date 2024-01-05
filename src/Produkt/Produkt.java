@@ -1,4 +1,6 @@
 package Produkt;
+import javax.swing.*;
+import java.awt.*;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -13,9 +15,10 @@ public abstract class Produkt implements Serializable {
     private String material;
     private String kolor;
     private Producent producent;
+    private ImageIcon icon;
 
     public Produkt(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material,
-                   String kolor, Producent producent) {
+                   String kolor, Producent producent, ImageIcon icon) {
         this.idProduktu = idProduktu;
         this.cena = cena;
         this.nazwa = nazwa;
@@ -24,6 +27,7 @@ public abstract class Produkt implements Serializable {
         this.material = material;
         this.kolor = kolor;
         this.producent = producent;
+        this.icon = icon;
     }
     private static final long serialVersionUID = 4362596792216997619L;
 
@@ -92,7 +96,17 @@ public abstract class Produkt implements Serializable {
     public void setProducent(Producent producent) {
         this.producent = producent;
     }
-    
+
+    public ImageIcon getIcon(int x, int y) {
+        Image img = icon.getImage();
+        Image newImg = img.getScaledInstance(x, y, java.awt.Image.SCALE_SMOOTH);
+        return icon;
+    }
+
+    public void setIcon(ImageIcon icon) {
+        this.icon = icon;
+    }
+
     public boolean sprawdzDostepnoscProduktu(){
         return this.iloscWMagazynie>0;
     }
