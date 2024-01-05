@@ -1,5 +1,9 @@
 package InterfejsGraficzny;
 
+import DostawaStrategia.DostawaKurier;
+import DostawaStrategia.DostawaPaczkomat;
+import PlacenieStrategia.placBlikiem;
+import PlacenieStrategia.placKarta;
 import Produkt.*;
 import Main.*;
 
@@ -13,6 +17,9 @@ import java.util.Map;
 
 public class KoszykFrame extends JFrame implements ActionListener {
     double dostawaCena = 0;
+    String numerTelefonu;
+    String Email;
+    String adres;
     JLabel labelSumaCen;
     JLabel labelCenaKoszyka;
     JLabel labelCenaDostawy;
@@ -23,9 +30,16 @@ public class KoszykFrame extends JFrame implements ActionListener {
     Map<JButton, Produkt> buttonProduktMap;
     JButton buttonZamowienie;
     JButton buttonDostawa;
+    JButton buttonPlatnosc;
+    JButton cofnijDostawa;
+    JButton cofnijPlatnosc;
     JCheckBox boxPaczkomat;
     JCheckBox boxKurier;
+    JCheckBox boxBlik;
+    JCheckBox boxKarta;
     JPanel panelGlowny;
+    JPanel panelGorny;
+    JPanel panelPlatnosc;
     JScrollPane scrollPane;
     //text filedy
     JTextField textImie;
@@ -37,7 +51,12 @@ public class KoszykFrame extends JFrame implements ActionListener {
     JTextField textKraj;
     JTextField textNumerTelefonu;
     JTextField textEmail;
-
+    JTextField textKodBlik;
+    JTextField textNumerKarty;
+    JTextField textDataWygasniecia;
+    JTextField textCvv;
+    JTextField textKartaImie;
+    JTextField textKartaNazwisko;
     JLabel labelImie;
     JLabel labelNazwisko;
     JLabel labelUlica;
@@ -47,15 +66,22 @@ public class KoszykFrame extends JFrame implements ActionListener {
     JLabel labelKraj;
     JLabel labelNumerTelefonu;
     JLabel labelEmail;
+    JLabel labelKodBlik;
+    JLabel labelNumerKarty;
+    JLabel labelDataWygasniecia;
+    JLabel labelCvv;
+    JLabel labelKartaImie;
+    JLabel labelKartaNazwisko;
 
     KoszykFrame(Koszyk koszyk) {
         this.koszyk = koszyk;
-        JPanel panelGorny = new JPanel();
+        panelGorny = new JPanel();
         panelGlowny = new JPanel();
         JPanel panelDolny = new JPanel();
         panelKoszyk = new JPanel();
         panelDostawa = new JPanel();
         panelPodsumowanie = new JPanel();
+        panelPlatnosc = new JPanel();
         buttonProduktMap = new HashMap<>();
         ImageIcon koszykImage = new ImageIcon("src/Obrazki/koszyk.png");
 
@@ -142,6 +168,60 @@ public class KoszykFrame extends JFrame implements ActionListener {
         labelEmail.setText("EMAIL");
         panelDostawa.add(labelEmail);
 
+        textKodBlik = new JTextField();
+        textKodBlik.setPreferredSize(new Dimension(250,40));
+        textKodBlik.setBounds(20,70,250,40);
+        panelPlatnosc.add(textKodBlik);
+        labelKodBlik = new JLabel();
+        labelKodBlik.setBounds(20,55,120,10);
+        labelKodBlik.setText("KOD BLIK");
+        panelPlatnosc.add(labelKodBlik);
+
+        textNumerKarty = new JTextField();
+        textNumerKarty.setPreferredSize(new Dimension(250,40));
+        textNumerKarty.setBounds(20,210,250,40);
+        panelPlatnosc.add(textNumerKarty);
+        labelNumerKarty = new JLabel();
+        labelNumerKarty.setBounds(20,195,120,10);
+        labelNumerKarty.setText("NUMER KARTY");
+        panelPlatnosc.add(labelNumerKarty);
+
+        textDataWygasniecia = new JTextField();
+        textDataWygasniecia.setPreferredSize(new Dimension(250,40));
+        textDataWygasniecia.setBounds(20,275,150,40);
+        panelPlatnosc.add(textDataWygasniecia);
+        labelDataWygasniecia = new JLabel();
+        labelDataWygasniecia.setBounds(20,260,120,10);
+        labelDataWygasniecia.setText("DATA WYGAŚNIĘCIA");
+        panelPlatnosc.add(labelDataWygasniecia);
+
+        textCvv = new JTextField();
+        textCvv.setPreferredSize(new Dimension(250,40));
+        textCvv.setBounds(190,275,80,40);
+        panelPlatnosc.add(textCvv);
+        labelCvv = new JLabel();
+        labelCvv.setBounds(190,260,120,10);
+        labelCvv.setText("CVV");
+        panelPlatnosc.add(labelCvv);
+
+        textKartaImie = new JTextField();
+        textKartaImie.setPreferredSize(new Dimension(250,40));
+        textKartaImie.setBounds(290,210,250,40);
+        panelPlatnosc.add(textKartaImie);
+        labelKartaImie = new JLabel();
+        labelKartaImie.setBounds(290,195,120,10);
+        labelKartaImie.setText("IMIĘ");
+        panelPlatnosc.add(labelKartaImie);
+
+        textKartaNazwisko = new JTextField();
+        textKartaNazwisko.setPreferredSize(new Dimension(250,40));
+        textKartaNazwisko.setBounds(290,275,250,40);
+        panelPlatnosc.add(textKartaNazwisko);
+        labelKartaNazwisko = new JLabel();
+        labelKartaNazwisko.setBounds(290,260,120,10);
+        labelKartaNazwisko.setText("NAZWISKO");
+        panelPlatnosc.add(labelKartaNazwisko);
+
         //MOJ KOSZYK label
         JLabel mojKoszyk = new JLabel();
         mojKoszyk.setText("MOJ KOSZYK");
@@ -155,6 +235,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
         //PANEL GORNY
         panelGorny.setPreferredSize(new Dimension(0,150));
         panelGorny.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        panelGorny.setLayout(null);
 
         //PANEL GLOWNY
         panelGlowny.setPreferredSize(new Dimension(0,750));
@@ -216,12 +297,20 @@ public class KoszykFrame extends JFrame implements ActionListener {
         panelGlowny.add(scrollPane);
 
         //PANEL DOSTAWA
-        panelDostawa.setBorder(BorderFactory.createLineBorder(Color.red));
+        panelDostawa.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panelDostawa.setSize(new Dimension(600, 450));
         panelDostawa.setBounds(100,105,600, 450);
         panelDostawa.setLayout(null);
         panelDostawa.setVisible(false);
         panelGlowny.add(panelDostawa);
+
+        //PANEL PLATNOSC
+        panelPlatnosc.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        panelPlatnosc.setSize(new Dimension(600, 450));
+        panelPlatnosc.setBounds(100,105,600, 450);
+        panelPlatnosc.setLayout(null);
+        panelPlatnosc.setVisible(false);
+        panelGlowny.add(panelPlatnosc);
 
         //PANEL PODSUMOWANIE
         panelPodsumowanie.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -278,6 +367,48 @@ public class KoszykFrame extends JFrame implements ActionListener {
         buttonDostawa.setVisible(false);
 
 
+        //BUTTON PLATNOSC
+        buttonPlatnosc = new JButton();
+        buttonPlatnosc.setText("ZREALIZUJ ZAMÓWIENIE");
+        buttonPlatnosc.setBounds(25,300,350,80);
+        buttonPlatnosc.setFocusable(false);
+        buttonPlatnosc.addActionListener(this);
+        buttonPlatnosc.setFont(new Font(null, Font.BOLD, 20));
+        buttonPlatnosc.setBackground(Color.WHITE);
+        buttonPlatnosc.setBorder(BorderFactory.createEtchedBorder());
+        panelPodsumowanie.add(buttonPlatnosc);
+        buttonPlatnosc.setVisible(false);
+
+        ImageIcon cofnijImage = new ImageIcon("src/Obrazki/cofnij.png");
+        Image originalImage = cofnijImage.getImage();
+
+        cofnijImage = new ImageIcon(originalImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+
+
+        //BUTTON COFNIj PLATNOSC
+        cofnijPlatnosc = new JButton();
+        cofnijPlatnosc.addActionListener(this);
+        cofnijPlatnosc.setIcon(cofnijImage);
+        cofnijPlatnosc.setBorder(BorderFactory.createEtchedBorder());
+        cofnijPlatnosc.setFocusable(false);
+        cofnijPlatnosc.setBackground(Color.WHITE);
+        cofnijPlatnosc.setVisible(false);
+        cofnijPlatnosc.setBounds(10,10,100,100);
+        panelGorny.add(cofnijPlatnosc);
+
+
+        //BUTTON COFNIJ DOSTAWA
+        cofnijDostawa = new JButton();
+        cofnijDostawa.addActionListener(this);
+        cofnijDostawa.setIcon(cofnijImage);
+        cofnijDostawa.setBorder(BorderFactory.createEtchedBorder());
+        cofnijDostawa.setFocusable(false);
+        cofnijDostawa.setBackground(Color.WHITE);
+        cofnijDostawa.setVisible(false);
+        cofnijDostawa.setBounds(10,10,100,100);
+        panelGorny.add(cofnijDostawa);
+
+
         // CHECKBOX PACZKOMAT
         boxPaczkomat = new JCheckBox("Paczkomat");
         boxPaczkomat.setBounds(20, 20, 100, 20);
@@ -286,6 +417,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
         boxPaczkomat.addActionListener(this);
         boxPaczkomat.setSelected(true);
         boxPaczkomat.setEnabled(false);
+        koszyk.ustawMetodeDostawy(new DostawaPaczkomat());
 
         // CHECKBOX KURIER
         boxKurier = new JCheckBox("Kurier");
@@ -293,6 +425,33 @@ public class KoszykFrame extends JFrame implements ActionListener {
         boxKurier.setFocusable(true);
         panelDostawa.add(boxKurier);
         boxKurier.addActionListener(this);
+
+        //CHECKBOX BLIK
+        boxBlik = new JCheckBox("Blik");
+        boxBlik.setBounds(20, 20, 100, 20);
+        boxBlik.setFocusable(true);
+        panelPlatnosc.add(boxBlik);
+        boxBlik.addActionListener(this);
+        boxBlik.setSelected(true);
+        boxBlik.setEnabled(false);
+        koszyk.ustawMetodePlatnosci(new placBlikiem());
+        textKartaNazwisko.setEnabled(false);
+        labelKartaNazwisko.setEnabled(false);
+        textKartaImie.setEnabled(false);
+        labelKartaImie.setEnabled(false);
+        textNumerKarty.setEnabled(false);
+        labelNumerKarty.setEnabled(false);
+        textCvv.setEnabled(false);
+        labelCvv.setEnabled(false);
+        textDataWygasniecia.setEnabled(false);
+        labelDataWygasniecia.setEnabled(false);
+
+        //CHECKBOX KARTA
+        boxKarta = new JCheckBox("Karta");
+        boxKarta.setBounds(20, 160, 100, 20);
+        boxKarta.setFocusable(true);
+        panelPlatnosc.add(boxKarta);
+        boxKarta.addActionListener(this);
 
         //PANEL DOLNY
         panelDolny.setPreferredSize(new Dimension(0, 180));
@@ -312,6 +471,8 @@ public class KoszykFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == boxPaczkomat) {
             if (boxPaczkomat.isSelected()) {
+                koszyk.ustawMetodeDostawy(new DostawaPaczkomat());
+
                 boxKurier.setSelected(false);
                 boxKurier.setFocusable(true);
                 boxKurier.setEnabled(true);
@@ -323,6 +484,8 @@ public class KoszykFrame extends JFrame implements ActionListener {
             }
         } else if (e.getSource() == boxKurier) {
             if (boxKurier.isSelected()) {
+                koszyk.ustawMetodeDostawy(new DostawaKurier());
+
                 boxPaczkomat.setSelected(false);
                 boxPaczkomat.setFocusable(true);
                 boxPaczkomat.setEnabled(true);
@@ -331,6 +494,54 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 dostawaCena = 19.99;
                 labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
                 labelSumaCen.setText("SUMA: " + (dostawaCena + koszyk.getWartoscZamowienia()) + " PLN");
+            }
+        } else if (e.getSource() == boxBlik) {
+            if (boxBlik.isSelected()) {
+                koszyk.ustawMetodePlatnosci(new placBlikiem());
+
+                boxKarta.setSelected(false);
+                boxKarta.setFocusable(true);
+                boxKarta.setEnabled(true);
+                boxBlik.setFocusable(false);
+                boxBlik.setEnabled(false);
+
+                textKodBlik.setEnabled(true);
+                labelKodBlik.setEnabled(true);
+
+                textKartaNazwisko.setEnabled(false);
+                labelKartaNazwisko.setEnabled(false);
+                textKartaImie.setEnabled(false);
+                labelKartaImie.setEnabled(false);
+                textNumerKarty.setEnabled(false);
+                labelNumerKarty.setEnabled(false);
+                textCvv.setEnabled(false);
+                labelCvv.setEnabled(false);
+                textDataWygasniecia.setEnabled(false);
+                labelDataWygasniecia.setEnabled(false);
+            }
+        } else if (e.getSource() == boxKarta) {
+            if (boxKarta.isSelected()) {
+                koszyk.ustawMetodePlatnosci(new placKarta());
+
+                boxBlik.setSelected(false);
+                boxBlik.setFocusable(true);
+                boxBlik.setEnabled(true);
+                boxKarta.setFocusable(false);
+                boxKarta.setEnabled(false);
+
+                textKodBlik.setEnabled(false);
+                labelKodBlik.setEnabled(false);
+
+                textKartaNazwisko.setEnabled(true);
+                labelKartaNazwisko.setEnabled(true);
+                textKartaImie.setEnabled(true);
+                labelKartaImie.setEnabled(true);
+                textNumerKarty.setEnabled(true);
+                labelNumerKarty.setEnabled(true);
+                textCvv.setEnabled(true);
+                labelCvv.setEnabled(true);
+                textDataWygasniecia.setEnabled(true);
+                labelDataWygasniecia.setEnabled(true);
             }
         }
 
@@ -348,8 +559,12 @@ public class KoszykFrame extends JFrame implements ActionListener {
 
             }
             if(e.getSource() == buttonZamowienie) {
+                cofnijDostawa.setVisible(true);
+                buttonPlatnosc.setVisible(true);
                 panelKoszyk.setVisible(false);
                 buttonDostawa.setVisible(true);
+                panelGorny.revalidate();
+                panelGorny.repaint();
                 panelKoszyk.revalidate();
                 panelKoszyk.repaint();
                 panelDostawa.setVisible(true);
@@ -360,6 +575,58 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 dostawaCena = 15.99;
                 labelSumaCen.setText("SUMA: " + (dostawaCena + koszyk.getWartoscZamowienia()) + " PLN");
                 labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
+            }
+            if(e.getSource() == buttonDostawa){
+                cofnijPlatnosc.setVisible(true);
+                cofnijDostawa.setVisible(false);
+                buttonPlatnosc.setVisible(false);
+                buttonDostawa.setVisible(true);
+                buttonDostawa.setVisible(false);
+                panelDostawa.setVisible(false);
+                buttonPlatnosc.setVisible(true);
+                panelPlatnosc.setVisible(true);
+
+                numerTelefonu = textNumerTelefonu.getText();
+                Email = textEmail.getText();
+                adres = textImie.getText() +
+                        " " + textNazwisko.getText() +
+                        "\n" + textUlica.getText() +
+                        " " + textNumerDomu.getText() +
+                        "\n" + textKodPocztowy.getText() +
+                        " " + textMiejscowosc.getText() +
+                        " " + textKraj.getText();
+            }
+            if(e.getSource() == cofnijPlatnosc){
+                cofnijPlatnosc.setVisible(false);
+                cofnijDostawa.setVisible(true);
+                buttonPlatnosc.setVisible(true);
+                buttonDostawa.setVisible(false);
+                buttonDostawa.setVisible(true);
+                panelDostawa.setVisible(true);
+                buttonPlatnosc.setVisible(false);
+                panelPlatnosc.setVisible(false);
+            }
+
+            if(e.getSource() == cofnijDostawa){
+                cofnijDostawa.setVisible(false);
+                panelKoszyk.setVisible(true);
+                buttonDostawa.setVisible(false);
+                panelKoszyk.revalidate();
+                panelKoszyk.repaint();
+                panelDostawa.setVisible(false);
+                panelDostawa.revalidate();
+                panelDostawa.repaint();
+                buttonZamowienie.setVisible(true);
+                scrollPane.setVisible(true);
+            }
+            if(e.getSource() == buttonPlatnosc) {
+                JOptionPane warning = new JOptionPane();
+                if(koszyk.zrealizujDostawe(adres, textKodBlik.getText(), textNumerKarty.getText(), textDataWygasniecia.getText(), textCvv.getText(), textKartaImie.getText(), textKartaNazwisko.getText())){
+                    warning.showMessageDialog(null,"Wysłano paczkę na adres: " + adres, "ZAMÓWIENIE WYSŁANE", JOptionPane.INFORMATION_MESSAGE);
+                    //WYJSCIE Z MENU SKLEPU
+                }else{
+                    warning.showMessageDialog(null, "Nie zrealizowano zamówienia", "BŁĄD", JOptionPane.WARNING_MESSAGE);
+                }
             }
         }
     }

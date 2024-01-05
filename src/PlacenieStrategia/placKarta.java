@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
 
 public class placKarta implements PlacenieStrategia, Serializable {
     private static final long serialVersionUID = -9214117519616244433L;
@@ -44,18 +46,18 @@ public class placKarta implements PlacenieStrategia, Serializable {
     }
 
     @Override
-    public void wprowadzDane() {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Uzupełnianie danych karty płatniczej:");
-        System.out.println("Wprowadź numer karty:");
-        numer = scan.nextLine();
-        System.out.println("Wprowadź datę ważności (MMYY):");
-        dataWygasniecia = scan.nextLine();
-        System.out.println("Wprowadź kod CVV:");
-        cvv = scan.nextLine();
-        System.out.println("Wprowadź imię:");
-        imie = scan.nextLine();
-        System.out.println("Wprowadź nazwisko:");
-        nazwisko = scan.nextLine();
+    public void wprowadzDane(String numerKarty, String dataWygasniecia,String cvv, String imie, String nazwisko) {
+        this.numer = numerKarty;
+        this.dataWygasniecia = dataWygasniecia;
+        this.cvv = cvv;
+        this.imie = imie;
+        this. nazwisko = nazwisko;
+    }
+
+
+    //USELESS
+    @Override
+    public void wprowadzDane(String kodBlik) {
+
     }
 }

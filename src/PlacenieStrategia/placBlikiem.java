@@ -2,6 +2,8 @@ package PlacenieStrategia;
 
 import java.io.Serializable;
 import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
 
 public class placBlikiem implements PlacenieStrategia, Serializable {
     private String kodBlik;
@@ -14,9 +16,13 @@ public class placBlikiem implements PlacenieStrategia, Serializable {
     }
 
     @Override
-    public void wprowadzDane() {
-        System.out.println("Wprowadź kod BLIK z aplikacji bankowej:");
-        Scanner scan = new Scanner(System.in);
-        kodBlik = scan.nextLine();
+    public void wprowadzDane(String kodBlik) {
+        this.kodBlik = kodBlik;
+    }
+
+    //USELESS
+    @Override
+    public void wprowadzDane(String numerKarty, String dataWygasniecia, String cvv, String imie, String nazwisko) {
+
     }
 }

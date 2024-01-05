@@ -13,17 +13,20 @@ public class UsunProduktGUI implements ActionListener {
     private JButton usunButton;
     private JButton returnButton;
     private JCheckBox[] checkBox;
+    private JPanel panelGlowny;
     private JFrame ramka;
 
 
-    public static void openGUI(Sklep sklep){
+    public static void openGUI(Sklep sklep, JFrame ramka){
         UsunProduktGUI GUI = new UsunProduktGUI();
-        GUI.usunProduktGUI(sklep);
+        GUI.usunProduktGUI(sklep, ramka);
     }
-    public void usunProduktGUI(Sklep sklep) {
+    public void usunProduktGUI(Sklep sklep, JFrame ramka) {
         this.sklep = sklep;
+        this.ramka = ramka;
 
-        ramka = new JFrame();
+        panelGlowny = new JPanel();
+        panelGlowny.setLayout(new BorderLayout());
 
         JPanel panelCheckBox = new JPanel();
         checkBox = new JCheckBox[sklep.getListaProduktow().size()];
@@ -38,6 +41,8 @@ public class UsunProduktGUI implements ActionListener {
         JPanel usunProduktPanel = new JPanel();
 
         usunButton = new JButton("usun");
+        usunButton.setBackground(Color.WHITE);
+        usunButton.setMargin(new Insets(10, 20, 10, 20));
         usunButton.addActionListener(this);
 
 
@@ -66,20 +71,21 @@ public class UsunProduktGUI implements ActionListener {
 
         //return button
         returnButton = new JButton("powrot");
+        returnButton.setBackground(Color.WHITE);
+        returnButton.setMargin(new Insets(10, 20, 10, 20));
         returnButton.addActionListener(this);
 
 
         ramka.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JScrollPane scrollPane = new JScrollPane(tabela);
-        ramka.add(scrollPane, BorderLayout.CENTER);
-        ramka.add(panelCheckBox, BorderLayout.WEST);
-        ramka.add(usunProduktPanel, BorderLayout.EAST);
-        ramka.add(returnButton, BorderLayout.SOUTH);
+        panelGlowny.add(scrollPane, BorderLayout.CENTER);
+        panelGlowny.add(panelCheckBox, BorderLayout.WEST);
+        panelGlowny.add(usunProduktPanel, BorderLayout.EAST);
+        panelGlowny.add(returnButton, BorderLayout.SOUTH);
 
-        ramka.setSize(1000,600);
-        ramka.pack();
-        ramka.setResizable(false);
+        ramka.setLayout(null);
+        ramka.setContentPane(panelGlowny);
         ramka.setVisible(true);
     }
 
@@ -89,14 +95,21 @@ public class UsunProduktGUI implements ActionListener {
             for(int i=0; i<sklep.getListaProduktow().size(); i++){
                 if(checkBox[i].isSelected()){
                     sklep.usunProdukt(i);
-                    ramka.dispose();
-                    usunProduktGUI(sklep);
+                    ramka.getContentPane().removeAll();
+                    ramka.revalidate();
+                    ramka.repaint();
+                    ramka.setLayout(null);
+                    usunProduktGUI(sklep, ramka);
+
                 }
             }
         }
         if(e.getSource()==returnButton){
-            ramka.dispose();
-            GUIadmin.openAdmin(sklep);
+            ramka.getContentPane().removeAll();
+            ramka.revalidate();
+            ramka.repaint();
+            ramka.setLayout(null);
+            GUIadmin.openAdmin(sklep, ramka);
         }
     }
 }

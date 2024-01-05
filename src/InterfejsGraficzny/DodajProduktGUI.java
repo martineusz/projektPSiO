@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 public class DodajProduktGUI implements ActionListener {
 
     private Sklep sklep;
+    private JFrame ramka;
+
     private JTextField[] podstawoweDaneTextField = new JTextField[9];
     private JTextField[] textFieldObuwie = new JTextField[3];
     private JTextField[] textFieldBluza = new JTextField[4];
@@ -24,16 +26,18 @@ public class DodajProduktGUI implements ActionListener {
     private JButton returnButton;
     private JButton zatwierdzTyp;
     private JButton dodajProdukt;
-    private JFrame ramka;
     private JPanel panelPodstawowy;
-    public static void openGUI(Sklep sklep){
+    private JPanel panelGlowny;
+    public static void openGUI(Sklep sklep, JFrame ramka){
         DodajProduktGUI GUI = new DodajProduktGUI();
-        GUI.dodajProduktGUI(sklep);
+        GUI.dodajProduktGUI(sklep, ramka);
     }
-    public void dodajProduktGUI(Sklep sklep){
+    public void dodajProduktGUI(Sklep sklep, JFrame ramka){
         this.sklep = sklep;
+        this.ramka=ramka;
 
-        ramka = new JFrame();
+        panelGlowny = new JPanel();
+        panelGlowny.setLayout(new BorderLayout());
 
         radioButtonObuwie = new JRadioButton("Obuwie");
         radioButtonBluza = new JRadioButton("Bluza");
@@ -41,6 +45,8 @@ public class DodajProduktGUI implements ActionListener {
         radioButtonSpodnie = new JRadioButton("Spodnie");
 
         zatwierdzTyp = new JButton("zatwierdz");
+        zatwierdzTyp.setBackground(Color.WHITE);
+        zatwierdzTyp.setMargin(new Insets(10, 20, 10, 20));
         zatwierdzTyp.addActionListener(this);
 
         JPanel panelWyboru = new JPanel();
@@ -66,15 +72,16 @@ public class DodajProduktGUI implements ActionListener {
 
 
         returnButton = new JButton("powrot");
+        returnButton.setBackground(Color.WHITE);
+        returnButton.setMargin(new Insets(10, 20, 10, 20));
         returnButton.addActionListener(this);
 
 
-        ramka.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        ramka.getContentPane().add(BorderLayout.WEST, panelWyboru);
-        ramka.getContentPane().add(BorderLayout.SOUTH, returnButton);
-        ramka.setSize(400, 600);
-        ramka.pack();
-        ramka.setResizable(false);
+        panelGlowny.add(BorderLayout.WEST, panelWyboru);
+        panelGlowny.add(BorderLayout.SOUTH, returnButton);
+
+        ramka.setLayout(null);
+        ramka.setContentPane(panelGlowny);
         ramka.setVisible(true);
     }
     public void dodajProduktBaza(){
@@ -93,7 +100,7 @@ public class DodajProduktGUI implements ActionListener {
         podstawoweDaneLabel[8] = new JLabel("kraj producnta:");
 
 
-        ramka.getContentPane().add(BorderLayout.CENTER, panelPodstawowy);
+        panelGlowny.add(BorderLayout.CENTER, panelPodstawowy);
         panelPodstawowy.setLayout(new GridLayout(14,2));
 
         for(int i=0; i<9; i++){
@@ -110,6 +117,8 @@ public class DodajProduktGUI implements ActionListener {
         labelObuwie[2] = new JLabel("typ podeszwy:");
 
         dodajProdukt = new JButton("dodaj produkt");
+        dodajProdukt.setBackground(Color.WHITE);
+        dodajProdukt.setMargin(new Insets(10, 20, 10, 20));
         dodajProdukt.addActionListener(this);
 
         for(int i=0; i<3; i++){
@@ -131,6 +140,8 @@ public class DodajProduktGUI implements ActionListener {
         labelBluza[3] = new JLabel("kroj:");
 
         dodajProdukt = new JButton("dodaj produkt");
+        dodajProdukt.setBackground(Color.WHITE);
+        dodajProdukt.setMargin(new Insets(10, 20, 10, 20));
         dodajProdukt.addActionListener(this);
 
         for(int i=0; i<4; i++){
@@ -154,6 +165,8 @@ public class DodajProduktGUI implements ActionListener {
         labelKoszulka[2] = new JLabel("kroj:");
 
         dodajProdukt = new JButton("dodaj produkt");
+        dodajProdukt.setBackground(Color.WHITE);
+        dodajProdukt.setMargin(new Insets(10, 20, 10, 20));
         dodajProdukt.addActionListener(this);
 
         for(int i=0; i<3; i++){
@@ -174,6 +187,8 @@ public class DodajProduktGUI implements ActionListener {
         labelSpodnie[3] = new JLabel("kroj:");
 
         dodajProdukt = new JButton("dodaj produkt");
+        dodajProdukt.setBackground(Color.WHITE);
+        dodajProdukt.setMargin(new Insets(10, 20, 10, 20));
         dodajProdukt.addActionListener(this);
 
         for(int i=0; i<4; i++){
@@ -187,7 +202,7 @@ public class DodajProduktGUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == zatwierdzTyp) {
-            ramka.remove(panelPodstawowy);
+            panelGlowny.remove(panelPodstawowy);
             dodajProduktBaza();
             if (radioButtonObuwie.isSelected()) {
                 dodajObuwie();
@@ -223,8 +238,11 @@ public class DodajProduktGUI implements ActionListener {
             }
         }
         if(e.getSource()==returnButton){
-            ramka.dispose();
-            GUIadmin.openAdmin(sklep);
+            ramka.getContentPane().removeAll();
+            ramka.revalidate();
+            ramka.repaint();
+            ramka.setLayout(null);
+            GUIadmin.openAdmin(sklep, ramka);
         }
     }
 }
