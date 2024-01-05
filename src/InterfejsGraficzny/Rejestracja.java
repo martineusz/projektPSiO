@@ -271,7 +271,7 @@ public class Rejestracja  {
         frame.getContentPane().removeAll();
         frame.revalidate();
         frame.repaint();
-        SklepGUI.openSklepGUI(frame, sklep);
+        SklepGUI.openSklepGUI(frame,sklep);
     }
     else {jTextFieldLogowanie.setText("");
         jTextFieldHaslo.setText("");}
