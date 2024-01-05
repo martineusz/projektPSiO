@@ -7,6 +7,8 @@ import java.util.Scanner;
 import Produkt.*;
 import Obserwator.*;
 
+import javax.swing.*;
+
 
 public class Sklep {
     private List<Klient> listaKlientow;
@@ -197,24 +199,32 @@ public class Sklep {
         }
     }
 
-    public void dodajObuwie(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material, String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarObuwia, String typObuwia, String typPodeszwy) {
+    public void dodajObuwie(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material,
+                            String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarObuwia, String typObuwia,
+                            String typPodeszwy, ImageIcon icon) {
         listaProduktow.add(new Obuwie(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta,
-                krajPochodzenia), Float.parseFloat(rozmiarObuwia), typObuwia, typPodeszwy));
+                krajPochodzenia), Float.parseFloat(rozmiarObuwia), typObuwia, typPodeszwy, icon));
     }
 
-    public void dodajBluze(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material, String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarBluzy, boolean czyZKapturem, String dekoltBluzy, String krojBluzy) {
+    public void dodajBluze(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material,
+                           String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarBluzy, boolean czyZKapturem,
+                           String dekoltBluzy, String krojBluzy, ImageIcon icon) {
         listaProduktow.add(new Bluza(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta,
-                krajPochodzenia), rozmiarBluzy, czyZKapturem, dekoltBluzy, krojBluzy));
+                krajPochodzenia), rozmiarBluzy, czyZKapturem, dekoltBluzy, krojBluzy, icon));
     }
 
-    public void dodajKoszulke(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material, String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarKoszulki, String dekoltKoszulki, String krojKoszulki) {
+    public void dodajKoszulke(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material,
+                              String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarKoszulki,
+                              String dekoltKoszulki, String krojKoszulki, ImageIcon icon) {
         listaProduktow.add(new Koszulka(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta, krajPochodzenia),
-                rozmiarKoszulki, dekoltKoszulki, krojKoszulki));
+                rozmiarKoszulki, dekoltKoszulki, krojKoszulki, icon));
     }
 
-    public void dodajSpodnie(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material, String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarSpodni, String dlugoscSpodni, String typSpodni, String krojSpodni) {
+    public void dodajSpodnie(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material,
+                             String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarSpodni,
+                             String dlugoscSpodni, String typSpodni, String krojSpodni, ImageIcon icon) {
         listaProduktow.add(new Spodnie(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta, krajPochodzenia),
-                rozmiarSpodni, Float.parseFloat(dlugoscSpodni), typSpodni, krojSpodni));
+                rozmiarSpodni, Float.parseFloat(dlugoscSpodni), typSpodni, krojSpodni, icon));
     }
 
     public void usunProdukt(int i) {

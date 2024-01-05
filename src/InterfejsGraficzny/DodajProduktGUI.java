@@ -26,8 +26,10 @@ public class DodajProduktGUI implements ActionListener {
     private JButton returnButton;
     private JButton zatwierdzTyp;
     private JButton dodajProdukt;
+    private JButton przyciskWyboru;
     private JPanel panelPodstawowy;
     private JPanel panelGlowny;
+    private ImageIcon icon;
     public static void openGUI(Sklep sklep, JFrame ramka){
         DodajProduktGUI GUI = new DodajProduktGUI();
         GUI.dodajProduktGUI(sklep, ramka);
@@ -76,7 +78,19 @@ public class DodajProduktGUI implements ActionListener {
         returnButton.setMargin(new Insets(10, 20, 10, 20));
         returnButton.addActionListener(this);
 
+        //dodawanie ikony
+        JPanel dodawanieIkonyPanel = new JPanel();
+        JLabel ikonaLabel = new JLabel("Wybierz obraz");
 
+        przyciskWyboru= new JButton();
+        przyciskWyboru.addActionListener(this);
+
+        dodawanieIkonyPanel.setLayout(new BorderLayout());
+        dodawanieIkonyPanel.add(BorderLayout.CENTER, przyciskWyboru);
+        dodawanieIkonyPanel.add(BorderLayout.SOUTH, ikonaLabel);
+
+
+        panelGlowny.add(BorderLayout.EAST, dodawanieIkonyPanel);
         panelGlowny.add(BorderLayout.WEST, panelWyboru);
         panelGlowny.add(BorderLayout.SOUTH, returnButton);
 
@@ -222,19 +236,19 @@ public class DodajProduktGUI implements ActionListener {
         if(e.getSource() == dodajProdukt){
             if (radioButtonObuwie.isSelected()) {
                 sklep.dodajObuwie(podstawoweDaneTextField[0].getText(), podstawoweDaneTextField[1].getText(), podstawoweDaneTextField[2].getText(), podstawoweDaneTextField[3].getText(), podstawoweDaneTextField[4].getText(), podstawoweDaneTextField[5].getText(), podstawoweDaneTextField[6].getText(), podstawoweDaneTextField[7].getText(), podstawoweDaneTextField[8].getText(),
-                        textFieldObuwie[0].getText(), textFieldObuwie[1].getText(), textFieldObuwie[2].getText());
+                        textFieldObuwie[0].getText(), textFieldObuwie[1].getText(), textFieldObuwie[2].getText(), icon);
             }
             if (radioButtonBluza.isSelected()) {
                 sklep.dodajBluze(podstawoweDaneTextField[0].getText(), podstawoweDaneTextField[1].getText(), podstawoweDaneTextField[2].getText(), podstawoweDaneTextField[3].getText(), podstawoweDaneTextField[4].getText(), podstawoweDaneTextField[5].getText(), podstawoweDaneTextField[6].getText(), podstawoweDaneTextField[7].getText(), podstawoweDaneTextField[8].getText(),
-                        textFieldBluza[0].getText(), czyZKapturem.isSelected(), textFieldBluza[2].getText(), textFieldBluza[3].getText());
+                        textFieldBluza[0].getText(), czyZKapturem.isSelected(), textFieldBluza[2].getText(), textFieldBluza[3].getText(), icon);
             }
             if (radioButtonKoszulka.isSelected()) {
                 sklep.dodajKoszulke(podstawoweDaneTextField[0].getText(), podstawoweDaneTextField[1].getText(), podstawoweDaneTextField[2].getText(), podstawoweDaneTextField[3].getText(), podstawoweDaneTextField[4].getText(), podstawoweDaneTextField[5].getText(), podstawoweDaneTextField[6].getText(), podstawoweDaneTextField[7].getText(), podstawoweDaneTextField[8].getText(),
-                        textFieldKoszulka[0].getText(), textFieldKoszulka[1].getText(), textFieldKoszulka[2].getText());
+                        textFieldKoszulka[0].getText(), textFieldKoszulka[1].getText(), textFieldKoszulka[2].getText(), icon);
             }
             if (radioButtonSpodnie.isSelected()) {
                 sklep.dodajSpodnie(podstawoweDaneTextField[0].getText(), podstawoweDaneTextField[1].getText(), podstawoweDaneTextField[2].getText(), podstawoweDaneTextField[3].getText(), podstawoweDaneTextField[4].getText(), podstawoweDaneTextField[5].getText(), podstawoweDaneTextField[6].getText(), podstawoweDaneTextField[7].getText(), podstawoweDaneTextField[8].getText(),
-                        textFieldSpodnie[0].getText(), textFieldSpodnie[1].getText(), textFieldSpodnie[2].getText(), textFieldSpodnie[3].getText());
+                        textFieldSpodnie[0].getText(), textFieldSpodnie[1].getText(), textFieldSpodnie[2].getText(), textFieldSpodnie[3].getText(), icon);
             }
         }
         if(e.getSource()==returnButton){
@@ -243,6 +257,19 @@ public class DodajProduktGUI implements ActionListener {
             ramka.repaint();
             ramka.setLayout(null);
             GUIadmin.openAdmin(sklep, ramka);
+        }
+        if (e.getSource() == przyciskWyboru) {
+            JFileChooser fileChooser = new JFileChooser();
+            int response = fileChooser.showOpenDialog(null);
+
+            if (response == JFileChooser.APPROVE_OPTION) {
+                String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+                icon = new ImageIcon(filePath);
+                Image img = icon.getImage();
+                Image newImg = img.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
+                icon = new ImageIcon(newImg);
+                przyciskWyboru.setIcon(icon);
+            }
         }
     }
 }

@@ -25,6 +25,7 @@ public class Main {
         sklep.wczytajListeKlientow();
 
 
+
         Rejestracja.ShopPage(sklep, jFrame);
 
         Scanner scan = new Scanner(System.in);
@@ -72,8 +73,8 @@ public class Main {
                                                     break;
                                             }}
                                         else {
-                                                System.out.println("Podano nieprawidłową liczbę.");
-                                                scan.nextLine();}
+                                            System.out.println("Podano nieprawidłową liczbę.");
+                                            scan.nextLine();}
                                         System.out.println("WYBIERZ PRODUKT KTORY CHCESZ KUPIC: ");
                                         sklep.wypiszWszystkieProdukty();
                                         System.out.print("Wybor (0 - cofnij): ");
@@ -107,8 +108,8 @@ public class Main {
                                                                 break LoopUsuwanie;
                                                         }}
                                                     else {
-                                                            System.out.println("Podano nieprawidłową wartość.");
-                                                            scan.nextLine();}
+                                                        System.out.println("Podano nieprawidłową wartość.");
+                                                        scan.nextLine();}
                                                 }
                                                 break;
                                             case "2": // sprawdz zawartosc
@@ -166,7 +167,7 @@ public class Main {
                                                         }
                                                         else zamawianieDostawa();
                                                     }
-                                                break;
+                                                    break;
                                                 }
                                                 else {
                                                     System.out.println("W koszyku nie ma produktów");
@@ -247,9 +248,9 @@ public class Main {
                                                 }
                                                 break;
                                         }}
-                                     else {
-                                            System.out.println("Podano nieprawidłową wartość.");
-                                            scan.nextLine();}
+                                    else {
+                                        System.out.println("Podano nieprawidłową wartość.");
+                                        scan.nextLine();}
                                     System.out.println("WYBIERZ PRODUKT KTORY CHCESZ PRZECENIC: ");
                                     sklep.wypiszWszystkieProdukty();
                                     System.out.print("Wybor (0 - cofnij): ");

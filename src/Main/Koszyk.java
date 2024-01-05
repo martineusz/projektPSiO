@@ -78,12 +78,12 @@ public class Koszyk implements Serializable {
             }
 
             if (placenieStrategia.plac()) {
-                for (Produkt produkt : this.listaProduktow) {
+                /*for (Produkt produkt : this.listaProduktow) {
                     produkt.setIloscWMagazynie(produkt.getIloscWMagazynie() - 1);
-                }
+                }*/
                 dostawaStrategia.wyslijPaczke(adres);
-                this.listaProduktow.clear();
-                return true;
+                //this.listaProduktow.clear();
+                return true; //zakreskowane bo impostor to dodal :)
             }
             else {
                 System.out.println("Płatność zakończona niepowodzeniem. Proszę zweryfikować poprawność danych.");

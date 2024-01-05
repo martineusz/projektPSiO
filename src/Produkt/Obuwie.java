@@ -1,16 +1,21 @@
 package Produkt;
-public class Obuwie extends Produkt{
+
+import javax.swing.*;
+import java.io.Serializable;
+
+public class Obuwie extends Produkt implements Serializable {
     private float rozmiarObuwia;
     private String typObuwia;
     private String typPodeszwy;
 
     public Obuwie(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material,
-                  String kolor, Producent producent, float rozmiarObuwia, String typObuwia, String typPodeszwy){
-        super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, producent);
+                  String kolor, Producent producent, float rozmiarObuwia, String typObuwia, String typPodeszwy, ImageIcon icon){
+        super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, producent, icon);
         this.rozmiarObuwia=rozmiarObuwia;
         this.typObuwia=typObuwia;
         this.typPodeszwy=typPodeszwy;
     }
+    private static final long serialVersionUID = 4206840118419129017L;
 
     public float getRozmiarObuwia() {
         return rozmiarObuwia;
