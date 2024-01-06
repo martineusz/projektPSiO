@@ -55,24 +55,19 @@ public class SklepGUI {
             int liczbaSpodni = 0;
 
             for (Produkt produkt: sklep.getListaProduktow())
-                if (produkt instanceof Bluza) {
-                    liczbaBluz += 1;
+                if (produkt instanceof Bluza && !listaBluz.contains(produkt)) {
                     listaBluz.add((Bluza) produkt);
                 }
-                else if (produkt instanceof Obuwie) {
-                    liczbaButow += 1;
+                else if (produkt instanceof Obuwie && !listaButow.contains(produkt)) {
                     listaButow.add((Obuwie) produkt);
                 }
-                else if (produkt instanceof Spodnie) {
-                    liczbaSpodni += 1;
+                else if (produkt instanceof Spodnie && !listaSpodni.contains(produkt)) {
                     listaSpodni.add((Spodnie) produkt);
                 }
-                else if (produkt instanceof Koszulka) {
-                    liczbaKoszulek += 1;
+                else if (produkt instanceof Koszulka && !listaKoszulek.contains(produkt)) {
                     listaKoszulek.add((Koszulka) produkt);
                 }
 
-            int liczbaProduktow = sklep.getListaProduktow().size();
             wysokoscProduktu = 250;
             liczbaKolumn = 2;
 
@@ -250,47 +245,7 @@ public class SklepGUI {
                 @Override
                 public void actionPerformed(ActionEvent e
                 ) {
-                    scrollPane.setVisible(false);
-                    scrollPaneButy.setVisible(false);
-                    scrollPaneKoszulki.setVisible(false);
-                    scrollPaneSpodnie.setVisible(false);
-                    frame.revalidate();
-                    buttonKoszulki.setEnabled(true);
-                    buttonButy.setEnabled(true);
-                    buttonSpodnie.setEnabled(true);
-                    buttonWszystko.setEnabled(true);
-
-                    if (scrollPaneButy != null) {
-                        frame.remove(scrollPaneButy);
-                    }
-                    if (scrollPaneSpodnie != null) {
-                        frame.remove(scrollPaneSpodnie);
-                    }
-                    if (scrollPaneKoszulki != null) {
-                        frame.remove(scrollPaneKoszulki);
-                    }
-                    if (scrollPane!=null) {
-                        frame.remove(scrollPane);
-                    }
-
-                    // Utwórz nowy panel dla butów
-                    panelBluza = new JPanel(new GridLayout(0, 3, 0, 0));
-                    panelBluza.setPreferredSize(new Dimension(750, policzNewHeight(finalLiczbaBluz)));
-
-                    for (Bluza bluza : listaBluz) {
-                        panelBluza.add(createProductPanel(bluza.getNazwa(), bluza.getIcon(225,225), String.valueOf(bluza.getCena()), sklep, bluza));
-                    }
-
-                    scrollPaneBluza = new JScrollPane(panelBluza);
-                    scrollPaneBluza.setBounds(300, 70, 737, 630);
-                    scrollPaneBluza.getVerticalScrollBar().setUnitIncrement(16);
-                    frame.add(scrollPaneBluza);
-
-                    // Odświeżanie widoku
-                    panelBluza.revalidate();
-                    panelBluza.repaint();
-
-                    buttonBluza.setEnabled(false);
+                    pokazWszystkieBluzy(frame, sklep);
                 }
             });
 
@@ -323,7 +278,7 @@ public class SklepGUI {
                     }
 
                     panelButy = new JPanel(new GridLayout(0, 3, 0, 0));
-                    panelButy.setPreferredSize(new Dimension(750, policzNewHeight(finalLiczbaButow)));
+                    panelButy.setPreferredSize(new Dimension(750, policzNewHeight(listaButow.size())));
 
                     for (Obuwie obuwie : listaButow) {
                         panelButy.add(createProductPanel(obuwie.getNazwa(), obuwie.getIcon(225,225), String.valueOf(obuwie.getCena()), sklep, obuwie));
@@ -370,7 +325,7 @@ public class SklepGUI {
                     }
 
                     panelKoszulki = new JPanel(new GridLayout(0, 3, 0, 0));
-                    panelKoszulki.setPreferredSize(new Dimension(750, policzNewHeight(finalLiczbaKoszulek)));
+                    panelKoszulki.setPreferredSize(new Dimension(750, policzNewHeight(listaKoszulek.size())));
 
                     for (Koszulka koszulka : listaKoszulek) {
                         panelKoszulki.add(createProductPanel(koszulka.getNazwa(), koszulka.getIcon(225,225), String.valueOf(koszulka.getCena()), sklep, koszulka));
@@ -388,50 +343,10 @@ public class SklepGUI {
                 }
             });
 
-            int finalLiczbaSpodni = liczbaSpodni;
             buttonSpodnie.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    scrollPane.setVisible(false);
-                    scrollPaneBluza.setVisible(false);
-                    scrollPaneButy.setVisible(false);
-                    scrollPaneKoszulki.setVisible(false);
-                    frame.revalidate();
-                    buttonKoszulki.setEnabled(true);
-                    buttonButy.setEnabled(true);
-                    buttonBluza.setEnabled(true);
-                    buttonWszystko.setEnabled(true);
-
-                    if (scrollPaneButy != null) {
-                        frame.remove(scrollPaneButy);
-                    }
-                    if (scrollPane != null) {
-                        frame.remove(scrollPane);
-                    }
-                    if (scrollPaneKoszulki != null) {
-                        frame.remove(scrollPaneKoszulki);
-                    }
-                    if (scrollPaneBluza != null) {
-                        frame.remove(scrollPaneBluza);
-                    }
-
-                    panelSpodnie = new JPanel(new GridLayout(0, 3, 0, 0));
-                    panelSpodnie.setPreferredSize(new Dimension(750, policzNewHeight(finalLiczbaSpodni)));
-
-                    for (Spodnie spodnie : listaSpodni) {
-                        if (spodnie.getIcon(225, 225) != null) {
-                            panelSpodnie.add(createProductPanel(spodnie.getNazwa(), spodnie.getIcon(225,225), String.valueOf(spodnie.getCena()), sklep, spodnie));}
-                        }
-
-                    scrollPaneSpodnie = new JScrollPane(panelSpodnie);
-                    scrollPaneSpodnie.setBounds(300, 70, 737, 630);
-                    scrollPaneSpodnie.getVerticalScrollBar().setUnitIncrement(16);
-                    frame.add(scrollPaneSpodnie);
-
-                    panelSpodnie.revalidate();
-                    panelSpodnie.repaint();
-
-                    buttonSpodnie.setEnabled(false);
+                    pokazWszystkieSpodnie(frame, sklep);
                 }
             });
 
@@ -533,6 +448,7 @@ public class SklepGUI {
             scrollPaneButy.setVisible(false);
             scrollPaneKoszulki.setVisible(false);
             scrollPane.setVisible(true);
+            panelGlowny.removeAll();
 
             frame.revalidate();
             buttonKoszulki.setEnabled(true);
@@ -575,4 +491,91 @@ public class SklepGUI {
 
             buttonWszystko.setEnabled(false);
         }
+
+        public static void pokazWszystkieSpodnie(JFrame frame, Sklep sklep) {
+            scrollPane.setVisible(false);
+            scrollPaneBluza.setVisible(false);
+            scrollPaneButy.setVisible(false);
+            scrollPaneKoszulki.setVisible(false);
+            frame.revalidate();
+            buttonKoszulki.setEnabled(true);
+            buttonButy.setEnabled(true);
+            buttonBluza.setEnabled(true);
+            buttonWszystko.setEnabled(true);
+
+            if (scrollPaneButy != null) {
+                frame.remove(scrollPaneButy);
+            }
+            if (scrollPane != null) {
+                frame.remove(scrollPane);
+            }
+            if (scrollPaneKoszulki != null) {
+                frame.remove(scrollPaneKoszulki);
+            }
+            if (scrollPaneBluza != null) {
+                frame.remove(scrollPaneBluza);
+            }
+
+            panelSpodnie = new JPanel(new GridLayout(0, 3, 0, 0));
+            panelSpodnie.setPreferredSize(new Dimension(750, policzNewHeight(listaSpodni.size())));
+
+            for (Spodnie spodnie : listaSpodni) {
+                if (spodnie.getIcon(225, 225) != null) {
+                    panelSpodnie.add(createProductPanel(spodnie.getNazwa(), spodnie.getIcon(225,225), String.valueOf(spodnie.getCena()), sklep, spodnie));}
+            }
+
+            scrollPaneSpodnie = new JScrollPane(panelSpodnie);
+            scrollPaneSpodnie.setBounds(300, 70, 737, 630);
+            scrollPaneSpodnie.getVerticalScrollBar().setUnitIncrement(16);
+            frame.add(scrollPaneSpodnie);
+
+            panelSpodnie.revalidate();
+            panelSpodnie.repaint();
+
+            buttonSpodnie.setEnabled(false);
+        }
+
+    public static void pokazWszystkieBluzy(JFrame frame, Sklep sklep) {
+        scrollPane.setVisible(false);
+        scrollPaneButy.setVisible(false);
+        scrollPaneKoszulki.setVisible(false);
+        scrollPaneSpodnie.setVisible(false);
+        frame.revalidate();
+        buttonKoszulki.setEnabled(true);
+        buttonButy.setEnabled(true);
+        buttonSpodnie.setEnabled(true);
+        buttonWszystko.setEnabled(true);
+
+        if (scrollPaneButy != null) {
+            frame.remove(scrollPaneButy);
+        }
+        if (scrollPaneSpodnie != null) {
+            frame.remove(scrollPaneSpodnie);
+        }
+        if (scrollPaneKoszulki != null) {
+            frame.remove(scrollPaneKoszulki);
+        }
+        if (scrollPane!=null) {
+            frame.remove(scrollPane);
+        }
+
+        // Utwórz nowy panel dla butów
+        panelBluza = new JPanel(new GridLayout(0, 3, 0, 0));
+        panelBluza.setPreferredSize(new Dimension(750, policzNewHeight(listaBluz.size())));
+
+        for (Bluza bluza : listaBluz) {
+            panelBluza.add(createProductPanel(bluza.getNazwa(), bluza.getIcon(225,225), String.valueOf(bluza.getCena()), sklep, bluza));
+        }
+
+        scrollPaneBluza = new JScrollPane(panelBluza);
+        scrollPaneBluza.setBounds(300, 70, 737, 630);
+        scrollPaneBluza.getVerticalScrollBar().setUnitIncrement(16);
+        frame.add(scrollPaneBluza);
+
+        // Odświeżanie widoku
+        panelBluza.revalidate();
+        panelBluza.repaint();
+
+        buttonBluza.setEnabled(false);
+    }
 }
