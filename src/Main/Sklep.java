@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import InterfejsGraficzny.DaneProduktuException;
 import Produkt.*;
 import Obserwator.*;
 
@@ -202,29 +204,112 @@ public class Sklep {
     public void dodajObuwie(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material,
                             String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarObuwia, String typObuwia,
                             String typPodeszwy, ImageIcon icon) {
-        listaProduktow.add(new Obuwie(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta,
-                krajPochodzenia), Float.parseFloat(rozmiarObuwia), typObuwia, typPodeszwy, icon));
+        try {
+            DaneProduktuException.pusteException(idProduktu);
+            Float temp = Float.parseFloat(cena);
+            DaneProduktuException.pusteException(nazwa);
+            DaneProduktuException.notNumericException(iloscWMagazynie);
+            DaneProduktuException.pusteException(opis);
+            DaneProduktuException.pusteException(material);
+            DaneProduktuException.pusteException(kolor);
+            DaneProduktuException.pusteException(nazwaProducenta);
+            DaneProduktuException.pusteException(krajPochodzenia);
+            DaneProduktuException.pusteException(typObuwia);
+            DaneProduktuException.pusteException(typPodeszwy);
+
+            listaProduktow.add(new Obuwie(idProduktu, temp, nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta,
+                    krajPochodzenia), Float.parseFloat(rozmiarObuwia), typObuwia, typPodeszwy, icon));
+            JOptionPane.showMessageDialog(null, "Produkt dodany pomyślnie", "ADMIN",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            zapiszListeProduktow();
+        }catch (DaneProduktuException | NumberFormatException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Nieprawidłowe dane", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void dodajBluze(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material,
                            String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarBluzy, boolean czyZKapturem,
                            String dekoltBluzy, String krojBluzy, ImageIcon icon) {
-        listaProduktow.add(new Bluza(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta,
-                krajPochodzenia), rozmiarBluzy, czyZKapturem, dekoltBluzy, krojBluzy, icon));
+        try {
+            DaneProduktuException.pusteException(idProduktu);
+            Float temp = Float.parseFloat(cena);
+            DaneProduktuException.pusteException(nazwa);
+            DaneProduktuException.notNumericException(iloscWMagazynie);
+            DaneProduktuException.pusteException(opis);
+            DaneProduktuException.pusteException(material);
+            DaneProduktuException.pusteException(kolor);
+            DaneProduktuException.pusteException(nazwaProducenta);
+            DaneProduktuException.pusteException(krajPochodzenia);
+            DaneProduktuException.pusteException(rozmiarBluzy);
+            DaneProduktuException.pusteException(dekoltBluzy);
+            DaneProduktuException.pusteException(krojBluzy);
+
+            listaProduktow.add(new Bluza(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta,
+                    krajPochodzenia), rozmiarBluzy, czyZKapturem, dekoltBluzy, krojBluzy, icon));
+            JOptionPane.showMessageDialog(null, "Produkt dodany pomyślnie", "ADMIN",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            zapiszListeProduktow();
+        }catch (DaneProduktuException | NumberFormatException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Nieprawidłowe dane", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void dodajKoszulke(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material,
                               String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarKoszulki,
                               String dekoltKoszulki, String krojKoszulki, ImageIcon icon) {
-        listaProduktow.add(new Koszulka(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta, krajPochodzenia),
-                rozmiarKoszulki, dekoltKoszulki, krojKoszulki, icon));
+        try {
+            DaneProduktuException.pusteException(idProduktu);
+            Float temp = Float.parseFloat(cena);
+            DaneProduktuException.pusteException(nazwa);
+            DaneProduktuException.notNumericException(iloscWMagazynie);
+            DaneProduktuException.pusteException(opis);
+            DaneProduktuException.pusteException(material);
+            DaneProduktuException.pusteException(kolor);
+            DaneProduktuException.pusteException(nazwaProducenta);
+            DaneProduktuException.pusteException(krajPochodzenia);
+            DaneProduktuException.pusteException(rozmiarKoszulki);
+            DaneProduktuException.pusteException(dekoltKoszulki);
+            DaneProduktuException.pusteException(krojKoszulki);
+
+            listaProduktow.add(new Koszulka(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta, krajPochodzenia),
+                    rozmiarKoszulki, dekoltKoszulki, krojKoszulki, icon));
+            JOptionPane.showMessageDialog(null, "Produkt dodany pomyślnie", "ADMIN",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            zapiszListeProduktow();
+        }catch (DaneProduktuException | NumberFormatException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Nieprawidłowe dane", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void dodajSpodnie(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material,
                              String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarSpodni,
                              String dlugoscSpodni, String typSpodni, String krojSpodni, ImageIcon icon) {
-        listaProduktow.add(new Spodnie(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta, krajPochodzenia),
-                rozmiarSpodni, Float.parseFloat(dlugoscSpodni), typSpodni, krojSpodni, icon));
+        try {
+            DaneProduktuException.pusteException(idProduktu);
+            Float temp = Float.parseFloat(cena);
+            DaneProduktuException.pusteException(nazwa);
+            DaneProduktuException.notNumericException(iloscWMagazynie);
+            DaneProduktuException.pusteException(opis);
+            DaneProduktuException.pusteException(material);
+            DaneProduktuException.pusteException(kolor);
+            DaneProduktuException.pusteException(nazwaProducenta);
+            DaneProduktuException.pusteException(krajPochodzenia);
+            DaneProduktuException.pusteException(rozmiarSpodni);
+            DaneProduktuException.pusteException(typSpodni);
+            DaneProduktuException.pusteException(krojSpodni);
+
+            listaProduktow.add(new Spodnie(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta, krajPochodzenia),
+                    rozmiarSpodni, Float.parseFloat(dlugoscSpodni), typSpodni, krojSpodni, icon));
+            JOptionPane.showMessageDialog(null, "Produkt dodany pomyślnie", "ADMIN",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            zapiszListeProduktow();
+        }catch (DaneProduktuException | NumberFormatException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Nieprawidłowe dane", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void usunProdukt(int i) {
