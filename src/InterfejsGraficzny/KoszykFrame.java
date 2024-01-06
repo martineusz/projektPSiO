@@ -604,6 +604,8 @@ public class KoszykFrame extends JPanel implements ActionListener {
                 cenaZaWszystko = cenaKoszyk + dostawaCena;
                 labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
                 labelCenaKoszyka.setText("KOSZYK: " + cenaKoszyk + " PLN");
+                panelPodsumowanie.revalidate();
+                panelPodsumowanie.repaint();
             }
         }
 
@@ -617,6 +619,7 @@ public class KoszykFrame extends JPanel implements ActionListener {
                 panelKoszyk.remove(sourceButton.getParent()); // Usunięcie całego panelu produktu
                 panelKoszyk.revalidate();
                 panelKoszyk.repaint();
+
                 cenaZaWszystko = cenaKoszyk + dostawaCena;
                 labelCenaKoszyka.setText("KOSZYK: " + cenaKoszyk + " PLN");
                 labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
@@ -640,6 +643,7 @@ public class KoszykFrame extends JPanel implements ActionListener {
                     buttonZamowienie.setVisible(false);
                     scrollPane.setVisible(false);
                     dostawaCena = 15.99;
+
                     cenaZaWszystko = (dostawaCena + cenaKoszyk);
                     labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
                     labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
