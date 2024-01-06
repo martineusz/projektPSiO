@@ -98,14 +98,9 @@ public class SklepGUI {
 
 
         //POWIADOMIENIA!!!!!! DODAWANIE RECZNE DLA TESTU (DO USUNIECIA JAK PIHI SKONCZY SIE OPIERDALAC)
-        sklep.getZalogowanyKlient().zapiszNaPromocje(sklep.promocja, "sms");
-        sklep.getZalogowanyKlient().zapiszNaPromocje(sklep.promocja, "email");
-        sklep.zalogowanyKlient.obs.getPowiadomienia().add("Promocja1");
-        sklep.zalogowanyKlient.obs.getPowiadomienia().add("Promocja2");
-        sklep.zalogowanyKlient.obs.getPowiadomienia().add("Promocja3");
-        sklep.zalogowanyKlient.obs.getPowiadomienia().add("Promocja4");
-        sklep.zalogowanyKlient.obs.getPowiadomienia().add("Promocja5");
-        sklep.zalogowanyKlient.obs.getPowiadomienia().add("Promocja6");
+        sklep.zalogowanyKlient.obs.getPowiadomienia().add("TURN ON SKLEP (usun z kodu)");
+        //POWIADOMIENIA!!!!!! DODAWANIE RECZNE DLA TESTU (DO USUNIECIA JAK PIHI SKONCZY SIE OPIERDALAC)
+
 
 
             if (sklep.zalogowanyKlient.obs != null) {
@@ -146,7 +141,7 @@ public class SklepGUI {
                             panelPowiadomienia.remove(sourceButton.getParent());
                             panelPowiadomienia.revalidate();
                             panelPowiadomienia.repaint();
-                            panelPowiadomienia.setPreferredSize(new Dimension(300,panelPowiadomienia.getComponentCount() * 110));
+                            panelPowiadomienia.setPreferredSize(new Dimension(300,panelPowiadomienia.getComponentCount() * 105));
                         }
                     });
                 }
@@ -161,7 +156,7 @@ public class SklepGUI {
         panelPowiadomienia.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panelPowiadomienia.setEnabled(false);
         panelPowiadomienia.setVisible(false);
-        panelPowiadomienia.setPreferredSize(new Dimension(300,panelPowiadomienia.getComponentCount() * 110));
+        panelPowiadomienia.setPreferredSize(new Dimension(300,panelPowiadomienia.getComponentCount() * 105));
 
         szybkoscScroll.setUnitIncrement(20);
         szybkoscScroll.setBlockIncrement(40);
