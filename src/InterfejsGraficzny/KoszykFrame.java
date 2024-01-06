@@ -728,10 +728,13 @@ public class KoszykFrame extends JPanel implements ActionListener {
                     for (int j = 0; j < comboList.size(); j++) {
                             Produkt x = comboProduktMap.get(comboList.get(j));
                             x.setIloscWMagazynie(x.getIloscWMagazynie() - (Integer.parseInt((comboList.get(j).getSelectedItem()).toString())));
-                            panelKoszyk.removeAll();
                             koszyk.getListaProduktow().remove(x);
                             sklep.getListaProduktow().remove(x);
                     }
+                    frame.getContentPane().removeAll();
+                    frame.revalidate();
+                    frame.repaint();
+                    SklepGUI.openSklepGUI(frame,sklep);
 //                    //WYJSCIE Z MENU SKLEPU
                 }
 
