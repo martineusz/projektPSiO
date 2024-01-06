@@ -98,7 +98,9 @@ public class SklepGUI {
             scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
             panelPowiadomienia = new JPanel();
-            panelPowiadomienia.setBounds(400,400,200,300);
+            panelPowiadomienia.setBounds(800,70,200,300);
+            panelPowiadomienia.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            frame.add(panelPowiadomienia);
 
 
 
@@ -131,6 +133,7 @@ public class SklepGUI {
             radioEmail.setEnabled(false);
             radioSMS.setEnabled(false);
 
+
             buttonKoszyk = new JButton();
             panelGora.add(buttonKoszyk);
             buttonKoszyk.setBounds(900, 17, 40, 40);
@@ -142,6 +145,8 @@ public class SklepGUI {
             buttonMail.setBounds(840, 17, 40, 40);
             buttonMail.setFocusable(false);
             buttonMail.setIcon(scaledMailIcon);
+
+            buttonMail.setEnabled(false);
 
             buttonButy = new JButton("Buty");
             buttonKoszulki = new JButton("Koszulki");
@@ -185,7 +190,7 @@ public class SklepGUI {
             frame.add(panelLewy);
             frame.add(panelGora);
             frame.setVisible(true);
-            frame.add(panelPowiadomienia);
+
 
             boxPowiadomienia.addActionListener(new ActionListener() {
                 @Override
@@ -194,9 +199,11 @@ public class SklepGUI {
                         if(boxPowiadomienia.isSelected()){
                             radioEmail.setEnabled(true);
                             radioSMS.setEnabled(true);
+                            buttonMail.setEnabled(true);
                         } else {
                             radioEmail.setEnabled(false);
                             radioSMS.setEnabled(false);
+                            buttonMail.setEnabled(false);
 
                             radioPowiadomienia.clearSelection();
                         }
