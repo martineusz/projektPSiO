@@ -646,6 +646,9 @@ public class KoszykFrame extends JPanel implements ActionListener {
                     scrollPane.setVisible(false);
                     dostawaCena = 15.99;
 
+                    if (cenaKoszyk == 0){
+                        cenaKoszyk = koszyk.getWartoscZamowienia();
+                    }
                     cenaZaWszystko = (dostawaCena + cenaKoszyk);
                     labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
                     labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
