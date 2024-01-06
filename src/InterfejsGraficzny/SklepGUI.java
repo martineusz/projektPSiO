@@ -39,6 +39,7 @@ public class SklepGUI {
     private static JButton buttonWszystko;
     private static JButton buttonBluza;
     private static JButton buttonKoszyk;
+    private static JButton buttonWyloguj;
     private static JCheckBox boxPowiadomienia;
     private static ButtonGroup radioPowiadomienia;
     private static JRadioButton radioSMS;
@@ -98,7 +99,7 @@ public class SklepGUI {
 
 
         //POWIADOMIENIA!!!!!! DODAWANIE RECZNE DLA TESTU (DO USUNIECIA JAK PIHI SKONCZY SIE OPIERDALAC)
-        sklep.zalogowanyKlient.obs.getPowiadomienia().add("TURN ON SKLEP (usun z kodu)");
+        //sklep.zalogowanyKlient.obs.getPowiadomienia().add("TURN ON SKLEP (usun z kodu)");
         //POWIADOMIENIA!!!!!! DODAWANIE RECZNE DLA TESTU (DO USUNIECIA JAK PIHI SKONCZY SIE OPIERDALAC)
 
 
@@ -205,6 +206,12 @@ public class SklepGUI {
         buttonKoszyk.setBounds(900, 17, 40, 40);
         buttonKoszyk.setFocusable(false);
         buttonKoszyk.setIcon(scaledIcon);
+
+        buttonWyloguj = new JButton("wyloguj");
+        panelGora.add(buttonWyloguj);
+        buttonWyloguj.setBackground(Color.WHITE);
+        buttonWyloguj.setBounds(960, 17, 80, 40);
+        buttonWyloguj.setFocusable(false);
 
         JButton buttonMail = new JButton();
         panelGora.add(buttonMail);
@@ -314,6 +321,17 @@ public class SklepGUI {
                         panelPowiadomienia.repaint();
                     }
                 }
+            }
+        });
+
+        buttonWyloguj.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sklep.zalogowanyKlient=null;
+                frame.getContentPane().removeAll();
+                frame.repaint();
+                frame.revalidate();
+                Rejestracja.ShopPage(sklep, frame);
             }
         });
 
