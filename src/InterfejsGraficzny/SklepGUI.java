@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 
 
 import Main.Sklep;
@@ -36,6 +37,7 @@ public class SklepGUI {
         private static JButton buttonWszystko;
         private static JButton buttonBluza;
         private static JButton buttonKoszyk;
+        private static Map<JButton, String> buttonPromocje;
         private static JCheckBox boxPowiadomienia;
         private static ButtonGroup radioPowiadomienia;
         private static JRadioButton radioSMS;
@@ -100,6 +102,66 @@ public class SklepGUI {
             frame.add(panelPowiadomienia);
 
 
+            //POWIADOMIENIA!!!!!!
+//            for (int i = 0; i < sklep.zalogowanyKlient.obs.getPowiadomienia().size(); i++) {
+//                JButton buttonUsun = new JButton();
+//                buttonUsun.setBounds(450,40,30,30);
+//                buttonUsun.setText("X");
+//                buttonUsun.addActionListener(new ActionListener() {
+//                    @Override
+//                    public void actionPerformed(ActionEvent e) {
+//
+//                    }
+//                });
+//                buttonUsun.setFocusable(false);
+//                buttonUsun.setFont(new Font(null, Font.BOLD, 20));
+//                buttonUsun.setBackground(Color.WHITE);
+//                buttonUsun.setForeground(Color.RED);
+//                buttonUsun.setBorder(BorderFactory.createEtchedBorder());
+//
+//                Produkt produkt = koszyk.getListaProduktow().get(i);
+//
+//                JLabel labelNazwa = new JLabel();
+//                labelNazwa.setBounds(110,45,400,40);
+//                labelNazwa.setText("CENA: " + produkt.getCena() + " PLN");
+//                labelNazwa.setFont(new Font(null, Font.BOLD, 18));
+//
+//                JLabel labelCena = new JLabel();
+//                labelCena.setBounds(110,20,400,40);
+//                labelCena.setText("NAZWA: " + produkt.getNazwa());
+//                labelCena.setFont(new Font(null, Font.BOLD, 18));
+//
+//                JPanel panelProdukt = new JPanel();
+//                panelProdukt.setLayout(null);
+//                panelProdukt.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+//                panelProdukt.setPreferredSize(new Dimension(500,100));
+//
+//                opcjeWyboru = new String[produkt.getIloscWMagazynie()];
+//                for (int j = 1; j <= produkt.getIloscWMagazynie(); j++) {
+//                    opcjeWyboru[j-1] = String.valueOf(j);
+//                }
+//
+//                comboList.add(ComboBombo = new JComboBox(opcjeWyboru));
+//                comboList.get(i).setBounds(400,35,40,40);
+//                comboList.get(i).addActionListener(this);
+//                comboList.get(i).setSelectedItem(0);
+//
+//                obrazek = new ImageIcon();
+//                obrazek = produkt.getIcon(75,75);
+//                labelObrazek = new JLabel();
+//                labelObrazek.setIcon(obrazek);
+//                labelObrazek.setBounds(20,15,75,75);
+//
+//                panelProdukt.add(labelObrazek);
+//                panelProdukt.add(comboList.get(i));
+//                panelProdukt.add(buttonUsun);
+//                panelProdukt.add(labelCena);
+//                panelProdukt.add(labelNazwa);
+//                panelKoszyk.add(panelProdukt);
+//
+//                comboProduktMap.put(comboList.get(i), produkt);
+//                buttonProduktMap.put(buttonUsun, produkt);
+//            }
 
 
             ImageIcon carticon = new ImageIcon("cart.jpg");

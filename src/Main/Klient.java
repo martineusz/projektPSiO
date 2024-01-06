@@ -17,7 +17,7 @@ public class Klient implements Serializable {
     private String haslo;
     final Koszyk koszyk;
     private boolean CzyPromocja;
-    Obserwator obs;
+    public Obserwator obs;
     private static final long serialVersionUID = 1275997691580326078L;
 
     public Klient(String imie, String nazwisko, String login, String haslo, String numer_telefonu, String adresEmail) {
