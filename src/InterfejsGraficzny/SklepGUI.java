@@ -99,7 +99,9 @@ public class SklepGUI {
 
 
         //POWIADOMIENIA!!!!!! DODAWANIE RECZNE DLA TESTU (DO USUNIECIA JAK PIHI SKONCZY SIE OPIERDALAC)
-        //sklep.zalogowanyKlient.obs.getPowiadomienia().add("TURN ON SKLEP (usun z kodu)");
+        sklep.getZalogowanyKlient().zapiszNaPromocje(sklep.promocja, "sms");
+        sklep.getZalogowanyKlient().zapiszNaPromocje(sklep.promocja, "email");
+        sklep.zalogowanyKlient.obs.getPowiadomienia().add("TURN ON SKLEP (usun z kodu)");
         //POWIADOMIENIA!!!!!! DODAWANIE RECZNE DLA TESTU (DO USUNIECIA JAK PIHI SKONCZY SIE OPIERDALAC)
 
 

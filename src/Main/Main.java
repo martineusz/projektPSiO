@@ -41,24 +41,26 @@ public class Main {
         });
 
 
-        /*Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
         String wybor;
-        int wyborInt;
+       // int wyborInt;
 
-        menu();
+       // menu();
         Loop: while(scan.hasNextLine()) {
             wybor = scan.nextLine();
             switch (wybor) {
                 case "2": // zarejestruj sie
                     Rejestracja.RejestrPage(sklep, jFrame);
-                    if(!sklep.isCzyZalogowany()){
+                    if (!sklep.isCzyZalogowany()) {
                         break;
                     }
                 case "1": //zaloguj się
-                    if(!sklep.isCzyZalogowany()){
+                    if (!sklep.isCzyZalogowany()) {
                         Rejestracja.ShopPage(sklep, jFrame);
                     }
-                    if(sklep.isCzyZalogowany()){
+            }
+        }
+             /*       if(sklep.isCzyZalogowany()){
 
                         menuKlientZalogowany();
                         LoopKlient: while (scan.hasNext()) {
