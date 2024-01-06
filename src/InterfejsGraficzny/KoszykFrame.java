@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class KoszykFrame extends JFrame implements ActionListener {
+public class KoszykFrame extends JPanel implements ActionListener {
     Map<JButton, Produkt> buttonProduktMap;
     Map<JComboBox, Produkt> comboProduktMap;
     ArrayList<JComboBox> comboList;
@@ -31,6 +31,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
     JLabel labelCenaDostawy;
     JPanel panelPodsumowanie;
     Koszyk koszyk;
+    Sklep sklep;
     JPanel panelKoszyk;
     JPanel panelDostawa;
     JButton buttonZamowienie;
@@ -38,6 +39,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
     JButton buttonPlatnosc;
     JButton cofnijDostawa;
     JButton cofnijPlatnosc;
+    JButton cofnijKoszyk;
     JButton buttonOpcjeWyobru;
     JCheckBox boxPaczkomat;
     JCheckBox boxKurier;
@@ -81,9 +83,12 @@ public class KoszykFrame extends JFrame implements ActionListener {
     JComboBox ComboBombo;
     ImageIcon obrazek;
     JLabel labelObrazek;
+    JFrame frame;
 
-    KoszykFrame(Koszyk koszyk) {
-        this.koszyk = koszyk;
+    KoszykFrame(JFrame frame, Sklep sklep) {
+        this.frame = frame;
+        this.sklep = sklep;
+        this.koszyk = this.sklep.zalogowanyKlient.getKoszyk();
         panelGorny = new JPanel();
         panelGlowny = new JPanel();
         JPanel panelDolny = new JPanel();
@@ -438,6 +443,16 @@ public class KoszykFrame extends JFrame implements ActionListener {
         cofnijDostawa.setBounds(10,10,100,100);
         panelGorny.add(cofnijDostawa);
 
+        //BUTTON COFNIJ KOSZYK
+        cofnijKoszyk = new JButton();
+        cofnijKoszyk.addActionListener(this);
+        cofnijKoszyk.setIcon(cofnijImage);
+        cofnijKoszyk.setBorder(BorderFactory.createEtchedBorder());
+        cofnijKoszyk.setBackground(Color.WHITE);
+        cofnijKoszyk.setBounds(10,10,100,100);
+        panelGorny.add(cofnijKoszyk);
+
+
 
         // CHECKBOX PACZKOMAT
         boxPaczkomat = new JCheckBox("Paczkomat");
@@ -490,10 +505,8 @@ public class KoszykFrame extends JFrame implements ActionListener {
         this.add(panelGorny);
         this.add(panelGlowny);
         this.add(panelDolny);
-        this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setSize(new Dimension(1980, 1080));
-        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        this.setTitle("Koszyk");
         this.setVisible(true);
     }
 
@@ -610,23 +623,31 @@ public class KoszykFrame extends JFrame implements ActionListener {
 
             }
             if(e.getSource() == buttonZamowienie) {
-                cofnijDostawa.setVisible(true);
-                buttonPlatnosc.setVisible(true);
-                panelKoszyk.setVisible(false);
-                buttonDostawa.setVisible(true);
-                panelGorny.revalidate();
-                panelGorny.repaint();
-                panelKoszyk.revalidate();
-                panelKoszyk.repaint();
-                panelDostawa.setVisible(true);
-                panelDostawa.revalidate();
-                panelDostawa.repaint();
-                buttonZamowienie.setVisible(false);
-                scrollPane.setVisible(false);
-                dostawaCena = 15.99;
-                cenaZaWszystko = (dostawaCena + cenaKoszyk);
-                labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
-                labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
+                try{
+                    PustyKoszykException.checkIfEmpty(koszyk);
+
+                    cofnijDostawa.setVisible(true);
+                    buttonPlatnosc.setVisible(true);
+                    panelKoszyk.setVisible(false);
+                    buttonDostawa.setVisible(true);
+                    panelGorny.revalidate();
+                    panelGorny.repaint();
+                    panelKoszyk.revalidate();
+                    panelKoszyk.repaint();
+                    panelDostawa.setVisible(true);
+                    panelDostawa.revalidate();
+                    panelDostawa.repaint();
+                    buttonZamowienie.setVisible(false);
+                    scrollPane.setVisible(false);
+                    dostawaCena = 15.99;
+                    cenaZaWszystko = (dostawaCena + cenaKoszyk);
+                    labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
+                    labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
+                }catch(PustyKoszykException e2){
+                    JOptionPane.showMessageDialog(null, e2.getMessage(), "Błąd", JOptionPane.ERROR_MESSAGE);
+                }
+
+
             }
             if(e.getSource() == buttonDostawa){
                 try {
@@ -680,19 +701,13 @@ public class KoszykFrame extends JFrame implements ActionListener {
                 buttonZamowienie.setVisible(true);
                 scrollPane.setVisible(true);
             }
+            if(e.getSource() == cofnijKoszyk){
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                SklepGUI.openSklepGUI(frame,sklep);
+            }
             if(e.getSource() == buttonPlatnosc) {
-
-                //TEST CZY DZIALA
-                System.out.println("\n\n\n\n");
-                if (koszyk.getListaProduktow().size() == 0) {
-                    System.out.println("PUSTY KOSZYK");
-                } else {
-                    for (int i = 0; i < koszyk.getListaProduktow().size(); i++) {
-                        System.out.println((i+1) + ".");
-                        System.out.println(koszyk.getListaProduktow().get(i).toString());
-                    }
-                } //DZIALA ZOBACZ KONSOLE I KOSZYK PO REALIZACJI ZAMOWIENIA
-
                 JOptionPane warning = new JOptionPane();
                 if(koszyk.zrealizujDostawe(adres, textKodBlik.getText(), textNumerKarty.getText(), textDataWygasniecia.getText(), textCvv.getText(), textKartaImie.getText(), textKartaNazwisko.getText())){
                     warning.showMessageDialog(null,"Wysłano paczkę na adres: " + adres, "ZAMÓWIENIE WYSŁANE", JOptionPane.INFORMATION_MESSAGE);
@@ -704,16 +719,6 @@ public class KoszykFrame extends JFrame implements ActionListener {
                             x.setIloscWMagazynie(x.getIloscWMagazynie() - (Integer.parseInt((comboList.get(j).getSelectedItem()).toString())));
                             panelKoszyk.removeAll();
                     }
-//                            //TEST CZY DZIALA
-//                            System.out.println("\n\n\n\n");
-//                            if (koszyk.getListaProduktow().size() == 0) {
-//                                System.out.println("PUSTY KOSZYK");
-//                            } else {
-//                                for (int i = 0; i < koszyk.getListaProduktow().size(); i++) {
-//                                    System.out.println((i+1) + ".");
-//                                    System.out.println(koszyk.getListaProduktow().get(i).toString());
-//                                }
-//                            } //DZIALA ZOBACZ KONSOLE I KOSZYK PO REALIZACJI ZAMOWIENIA
 //                    //WYJSCIE Z MENU SKLEPU
                 }
 
@@ -722,30 +727,30 @@ public class KoszykFrame extends JFrame implements ActionListener {
         }
     }
 
-    public static void main(String[] args) {
-        Sklep sklep = new Sklep(new ArrayList<>(), null, false, new ArrayList<>());
-        sklep.wczytajListeProduktow();
-        sklep.wczytajListeKlientow();
-
-        sklep.zalogowanyKlient = sklep.getListaKlientow().get(0);
-        sklep.zalogowanyKlient.getKoszyk().dodajProdukt(sklep.getListaProduktow().get(0));
-        sklep.zalogowanyKlient.getKoszyk().dodajProdukt(sklep.getListaProduktow().get(1));
-
-        if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size() == 0) {
-            System.out.println("PUSTY KOSZYK");
-        } else {
-            for (int i = 0; i < sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size(); i++) {
-                System.out.println((i+1) + ".");
-                System.out.println(sklep.zalogowanyKlient.getKoszyk().getListaProduktow().get(i).toString());
-            }
-        }
-
-        new KoszykFrame(sklep.zalogowanyKlient.getKoszyk());
-
-        sklep.wczytajListeProduktow();
-        sklep.wczytajListeKlientow();
-
-    }
+//    public static void main(String[] args) {
+//        Sklep sklep = new Sklep(new ArrayList<>(), null, false, new ArrayList<>());
+//        sklep.wczytajListeProduktow();
+//        sklep.wczytajListeKlientow();
+//
+//        sklep.zalogowanyKlient = sklep.getListaKlientow().get(0);
+//        sklep.zalogowanyKlient.getKoszyk().dodajProdukt(sklep.getListaProduktow().get(0));
+//        sklep.zalogowanyKlient.getKoszyk().dodajProdukt(sklep.getListaProduktow().get(1));
+//
+//        if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size() == 0) {
+//            System.out.println("PUSTY KOSZYK");
+//        } else {
+//            for (int i = 0; i < sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size(); i++) {
+//                System.out.println((i+1) + ".");
+//                System.out.println(sklep.zalogowanyKlient.getKoszyk().getListaProduktow().get(i).toString());
+//            }
+//        }
+//
+//        //new KoszykFrame(sklep.zalogowanyKlient.getKoszyk());
+//
+//        sklep.wczytajListeProduktow();
+//        sklep.wczytajListeKlientow();
+//
+//    }
 }
 
 
