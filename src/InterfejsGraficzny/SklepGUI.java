@@ -29,6 +29,7 @@ public class SklepGUI {
         private static JPanel panelKoszulki = new JPanel();
         private static JPanel panelSpodnie = new JPanel();
         private static JPanel panelGlowny = new JPanel();
+        private static JPanel panelPowiadomienia;
         private static JButton buttonKoszulki;
         private static JButton buttonSpodnie;
         private static JButton buttonButy;
@@ -36,6 +37,9 @@ public class SklepGUI {
         private static JButton buttonBluza;
         private static JButton buttonKoszyk;
         private static JCheckBox boxPowiadomienia;
+        private static ButtonGroup radioPowiadomienia;
+        private static JRadioButton radioSMS;
+        private static JRadioButton radioEmail;
         private static ArrayList<Bluza> listaBluz = new ArrayList<>();
         private static ArrayList<Obuwie> listaButow = new ArrayList<>();
         private static ArrayList<Koszulka> listaKoszulek = new ArrayList<>();
@@ -93,6 +97,14 @@ public class SklepGUI {
             scrollPane.setBounds(300, 70, 737, 630);
             scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
+            panelPowiadomienia = new JPanel();
+            panelPowiadomienia.setBounds(800,70,200,300);
+            panelPowiadomienia.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            frame.add(panelPowiadomienia);
+
+
+
+
             ImageIcon carticon = new ImageIcon("cart.jpg");
             Image originalImage = carticon.getImage();
             Image scaledImage = originalImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
@@ -105,9 +117,21 @@ public class SklepGUI {
 
             boxPowiadomienia = new JCheckBox();
             panelGora.add(boxPowiadomienia);
-            boxPowiadomienia.setBounds(400, 17, 375, 40);
+            boxPowiadomienia.setBounds(100, 17, 340, 40);
             boxPowiadomienia.setText("Czy chcesz otrzymywać powiadomienia o promocjach?");
             //boxPowiadomienia.setFocusable(false);
+
+            radioSMS = new JRadioButton("sms");
+            radioEmail = new JRadioButton("email");
+            radioPowiadomienia = new ButtonGroup();
+            radioPowiadomienia.add(radioEmail);
+            radioPowiadomienia.add(radioSMS);
+            panelGora.add(radioEmail);
+            panelGora.add(radioSMS);
+            radioEmail.setBounds(550, 17, 100, 40);
+            radioSMS.setBounds(650, 17, 100, 40);
+            radioEmail.setEnabled(false);
+            radioSMS.setEnabled(false);
 
 
             buttonKoszyk = new JButton();
@@ -121,6 +145,8 @@ public class SklepGUI {
             buttonMail.setBounds(840, 17, 40, 40);
             buttonMail.setFocusable(false);
             buttonMail.setIcon(scaledMailIcon);
+
+            buttonMail.setEnabled(false);
 
             buttonButy = new JButton("Buty");
             buttonKoszulki = new JButton("Koszulki");
@@ -165,14 +191,21 @@ public class SklepGUI {
             frame.add(panelGora);
             frame.setVisible(true);
 
+
             boxPowiadomienia.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(e.getSource() ==  boxPowiadomienia){
                         if(boxPowiadomienia.isSelected()){
-                            //ZAPISZ NA POWIADOMIENIA O PROMOCJACH
+                            radioEmail.setEnabled(true);
+                            radioSMS.setEnabled(true);
+                            buttonMail.setEnabled(true);
                         } else {
-                             //WYPISZ Z POWIADOMIEN
+                            radioEmail.setEnabled(false);
+                            radioSMS.setEnabled(false);
+                            buttonMail.setEnabled(false);
+
+                            radioPowiadomienia.clearSelection();
                         }
                     }
                 }
@@ -418,9 +451,23 @@ public class SklepGUI {
 
             addButton.addActionListener(e -> {
                 System.out.println("Dodano " + name);
-                sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt);
-                JOptionPane.showMessageDialog(null, "Dodano do koszyka", "Info",
-                        JOptionPane.INFORMATION_MESSAGE);
+                boolean xd = false;
+                if(sklep.zalogowanyKlient.getKoszyk().getListaProduktow().isEmpty()){
+                    sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt);
+                }
+                else {
+                    for (int i = 0; i < sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size(); i++) {
+                        if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().get(i) != produkt) {
+                            xd = true;
+                        }
+                    }
+                    if (xd){
+                        sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Produkt jest juz w koszyku, bro", "NIE MOZESZ TEGO ZROBIC", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
             });
 
             return productPanel;
