@@ -35,6 +35,7 @@ public class SklepGUI {
         private static JButton buttonWszystko;
         private static JButton buttonBluza;
         private static JButton buttonKoszyk;
+        private static JCheckBox boxPowiadomienia;
         private static ArrayList<Bluza> listaBluz = new ArrayList<>();
         private static ArrayList<Obuwie> listaButow = new ArrayList<>();
         private static ArrayList<Koszulka> listaKoszulek = new ArrayList<>();
@@ -102,6 +103,13 @@ public class SklepGUI {
             Image scaledMailImage = originalMailImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
             ImageIcon scaledMailIcon = new ImageIcon(scaledMailImage);
 
+            boxPowiadomienia = new JCheckBox();
+            panelGora.add(boxPowiadomienia);
+            boxPowiadomienia.setBounds(400, 17, 375, 40);
+            boxPowiadomienia.setText("Czy chcesz otrzymywać powiadomienia o promocjach?");
+            //boxPowiadomienia.setFocusable(false);
+
+
             buttonKoszyk = new JButton();
             panelGora.add(buttonKoszyk);
             buttonKoszyk.setBounds(900, 17, 40, 40);
@@ -157,12 +165,32 @@ public class SklepGUI {
             frame.add(panelGora);
             frame.setVisible(true);
 
+            boxPowiadomienia.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(e.getSource() ==  boxPowiadomienia){
+                        if(boxPowiadomienia.isSelected()){
+                            //ZAPISZ NA POWIADOMIENIA O PROMOCJACH
+                        } else {
+                             //WYPISZ Z POWIADOMIEN
+                        }
+                    }
+                }
+            });
+
             buttonKoszyk.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("");
-                    for (String name : listaProduktowWKoszyku) {
-                        System.out.println(name);
+                    if(e.getSource() == buttonKoszyk){
+                        frame.getContentPane().removeAll();
+                        frame.revalidate();
+                        frame.repaint();
+                        frame.setSize(new Dimension(1920,1080));
+                        frame.add(new KoszykFrame(frame,sklep));
+                        frame.revalidate();
+                        frame.repaint();
+
+
                     }
                 }
             });
