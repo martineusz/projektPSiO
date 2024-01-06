@@ -22,6 +22,7 @@ public class GUIadmin implements ActionListener {
 
     public static void openAdmin(Sklep sklep, JFrame ramka){
         GUIadmin GUI = new GUIadmin();
+        ramka.setSize(400,600);
         GUI.adminMenu(sklep, ramka);
     }
     public void adminMenu(Sklep sklep, JFrame ramka){
@@ -78,6 +79,7 @@ public class GUIadmin implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        ramka.setSize(1000,500);
         if(e.getSource() == dodajPromocjeButton){
             ramka.getContentPane().removeAll();
             ramka.revalidate();
