@@ -48,7 +48,7 @@ public class KoszykFrame extends JPanel implements ActionListener {
     JPanel panelGlowny;
     JPanel panelGorny;
     JPanel panelPlatnosc;
-    JScrollPane scrollPane;
+    JScrollPane scrollPaneKoszyk;
     //text filedy
     JTextField textImie;
     JTextField textNazwisko;
@@ -87,6 +87,7 @@ public class KoszykFrame extends JPanel implements ActionListener {
 
     KoszykFrame(JFrame frame, Sklep sklep) {
         this.frame = frame;
+        frame.setResizable(false);
         this.sklep = sklep;
         this.koszyk = this.sklep.zalogowanyKlient.getKoszyk();
         panelGorny = new JPanel();
@@ -325,11 +326,15 @@ public class KoszykFrame extends JPanel implements ActionListener {
         panelKoszyk.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panelKoszyk.setPreferredSize(new Dimension(600, panelKoszyk.getComponentCount() * 110));
 
-        scrollPane = new JScrollPane(panelKoszyk);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBounds(100, 105, 600, 450);
-        panelGlowny.add(scrollPane);
+        scrollPaneKoszyk = new JScrollPane(panelKoszyk);
+        JScrollBar szybkoscScrollPaneKoszyk = scrollPaneKoszyk.getVerticalScrollBar();
+        szybkoscScrollPaneKoszyk.setUnitIncrement(20);
+        szybkoscScrollPaneKoszyk.setBlockIncrement(40);
+
+        scrollPaneKoszyk.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPaneKoszyk.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPaneKoszyk.setBounds(100, 105, 600, 450);
+        panelGlowny.add(scrollPaneKoszyk);
 
         //PANEL DOSTAWA
         panelDostawa.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -619,6 +624,8 @@ public class KoszykFrame extends JPanel implements ActionListener {
                 panelKoszyk.remove(sourceButton.getParent()); // Usunięcie całego panelu produktu
                 panelKoszyk.revalidate();
                 panelKoszyk.repaint();
+                panelKoszyk.setPreferredSize(new Dimension(600, panelKoszyk.getComponentCount() * 110));
+
 
                 cenaZaWszystko = cenaKoszyk + dostawaCena;
                 labelCenaKoszyka.setText("KOSZYK: " + cenaKoszyk + " PLN");
@@ -643,7 +650,7 @@ public class KoszykFrame extends JPanel implements ActionListener {
                     panelDostawa.revalidate();
                     panelDostawa.repaint();
                     buttonZamowienie.setVisible(false);
-                    scrollPane.setVisible(false);
+                    scrollPaneKoszyk.setVisible(false);
                     dostawaCena = 15.99;
 
                     if (cenaKoszyk == 0){
@@ -710,7 +717,7 @@ public class KoszykFrame extends JPanel implements ActionListener {
                 panelDostawa.revalidate();
                 panelDostawa.repaint();
                 buttonZamowienie.setVisible(true);
-                scrollPane.setVisible(true);
+                scrollPaneKoszyk.setVisible(true);
             }
             if(e.getSource() == cofnijKoszyk){
                 frame.getContentPane().removeAll();

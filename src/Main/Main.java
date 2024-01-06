@@ -1,5 +1,7 @@
 package Main;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -19,6 +21,7 @@ public class Main {
         Sklep sklep = new Sklep(new ArrayList<Klient>(), null, false, new ArrayList<Produkt>());
 
         JFrame jFrame = new JFrame();
+        jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         sklep.promocja.wczytajObserwatorowPromocji();
         sklep.wczytajListeProduktow();
@@ -26,7 +29,19 @@ public class Main {
 
         Rejestracja.ShopPage(sklep, jFrame);
 
-        Scanner scan = new Scanner(System.in);
+        jFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("Dziala");
+                sklep.zapiszListeProduktow();
+                sklep.zapiszListeKlientow();
+                sklep.promocja.zapiszObserwatorowPromocji();
+                jFrame.setVisible(false);
+            }
+        });
+
+
+        /*Scanner scan = new Scanner(System.in);
         String wybor;
         int wyborInt;
 
@@ -272,78 +287,75 @@ public class Main {
                     System.out.println("Wprowadzono nieprawidlowa opcje!");;
             }
             menu();
-        }
+        }*/
 
-        sklep.zapiszListeProduktow();
-        sklep.zapiszListeKlientow();
-        sklep.promocja.zapiszObserwatorowPromocji();
     }
 
-    public static void menu(){
-        System.out.println("\nWybierz opcje: ");
-        System.out.println("1. Zaloguj sie");
-        System.out.println("2. Zarejestruj sie");
-        System.out.println("3. Admin");
-        System.out.println("Napisz 'koniec' aby zakonczyc");
-        System.out.print("Wybor: ");
-    }
-
-    public static void menuKlientZalogowany(){
-        System.out.println("\nMENU Wybierz opcje: ");
-        System.out.println("1. Dodaj do koszyka");
-        System.out.println("2. Koszyk");
-        System.out.println("3. Promocje");
-        System.out.println("4. Wyloguj sie");
-        System.out.print("Wybor: ");
-    }
-
-    public static void koszyk(){
-        System.out.println("\nKOSZYK Wybierz opcje: ");
-        System.out.println("1. Usun z koszyka");
-        System.out.println("2. Sprawdz zawartosc koszyka");
-        System.out.println("3. Zloz zamowienie ");
-        System.out.println("4. Wroc");
-        System.out.print("Wybor: ");
-    }
-
-    public static void promocje(){
-        System.out.println("\nPROMOCJE Wybierz opcje: ");
-        System.out.println("1. Zapisz do promocji");
-        System.out.println("2. Wypisz z promocji");
-        System.out.println("3. Wroc");
-        System.out.print("Wybor: ");
-    }
-
-    public static void promocjeZapisz(){
-        System.out.println("\nZAPISZ NA PROMOCJE: Wybierz opcje: ");
-        System.out.println("1. SMS");
-        System.out.println("2. E-MAIL");
-        System.out.println("3. Wroc");
-        System.out.print("Wybor: ");
-    }
-
-    public static void zamawianieDostawa() {
-        System.out.println("\nSposob dostawy: Wybierz opcje: ");
-        System.out.println("1. Paczkomat (15.99 zl)");
-        System.out.println("2. Kurier (19.99 zl)");
-        System.out.println("3. Wroc");
-        System.out.print("Wybor: ");
-    }
-
-    public static void zamawianiePlatnosc() {
-        System.out.println("\nSposob płatności: Wybierz opcje: ");
-        System.out.println("1. BLIK");
-        System.out.println("2. Karta płatnicza");
-        System.out.println("3. Wroc");
-        System.out.print("Wybor: ");
-    }
-
-    public static void admin() {
-        System.out.println("\nMENU ADMIN: Wybierz opcje: ");
-        System.out.println("1. Dodaj promocje");
-        System.out.println("2. Dodaj produkt do sklepu");
-        System.out.println("3. Usun produkt ze sklepu");
-        System.out.println("4. Wroc");
-        System.out.print("Wybor: ");
-    }
+//    public static void menu(){
+//        System.out.println("\nWybierz opcje: ");
+//        System.out.println("1. Zaloguj sie");
+//        System.out.println("2. Zarejestruj sie");
+//        System.out.println("3. Admin");
+//        System.out.println("Napisz 'koniec' aby zakonczyc");
+//        System.out.print("Wybor: ");
+//    }
+//
+//    public static void menuKlientZalogowany(){
+//        System.out.println("\nMENU Wybierz opcje: ");
+//        System.out.println("1. Dodaj do koszyka");
+//        System.out.println("2. Koszyk");
+//        System.out.println("3. Promocje");
+//        System.out.println("4. Wyloguj sie");
+//        System.out.print("Wybor: ");
+//    }
+//
+//    public static void koszyk(){
+//        System.out.println("\nKOSZYK Wybierz opcje: ");
+//        System.out.println("1. Usun z koszyka");
+//        System.out.println("2. Sprawdz zawartosc koszyka");
+//        System.out.println("3. Zloz zamowienie ");
+//        System.out.println("4. Wroc");
+//        System.out.print("Wybor: ");
+//    }
+//
+//    public static void promocje(){
+//        System.out.println("\nPROMOCJE Wybierz opcje: ");
+//        System.out.println("1. Zapisz do promocji");
+//        System.out.println("2. Wypisz z promocji");
+//        System.out.println("3. Wroc");
+//        System.out.print("Wybor: ");
+//    }
+//
+//    public static void promocjeZapisz(){
+//        System.out.println("\nZAPISZ NA PROMOCJE: Wybierz opcje: ");
+//        System.out.println("1. SMS");
+//        System.out.println("2. E-MAIL");
+//        System.out.println("3. Wroc");
+//        System.out.print("Wybor: ");
+//    }
+//
+//    public static void zamawianieDostawa() {
+//        System.out.println("\nSposob dostawy: Wybierz opcje: ");
+//        System.out.println("1. Paczkomat (15.99 zl)");
+//        System.out.println("2. Kurier (19.99 zl)");
+//        System.out.println("3. Wroc");
+//        System.out.print("Wybor: ");
+//    }
+//
+//    public static void zamawianiePlatnosc() {
+//        System.out.println("\nSposob płatności: Wybierz opcje: ");
+//        System.out.println("1. BLIK");
+//        System.out.println("2. Karta płatnicza");
+//        System.out.println("3. Wroc");
+//        System.out.print("Wybor: ");
+//    }
+//
+//    public static void admin() {
+//        System.out.println("\nMENU ADMIN: Wybierz opcje: ");
+//        System.out.println("1. Dodaj promocje");
+//        System.out.println("2. Dodaj produkt do sklepu");
+//        System.out.println("3. Usun produkt ze sklepu");
+//        System.out.println("4. Wroc");
+//        System.out.print("Wybor: ");
+//    }
 }

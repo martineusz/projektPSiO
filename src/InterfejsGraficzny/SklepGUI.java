@@ -51,6 +51,9 @@ public class SklepGUI {
     public static void openSklepGUI(JFrame frame, Sklep sklep) {
         listaProduktowWKoszyku = new ArrayList<>();
         Map<JButton, String> buttonPromocjeMap = new HashMap<>();
+        panelPowiadomienia = new JPanel();
+        JScrollPane scrollPanePowiadomienia = new JScrollPane(panelPowiadomienia);
+        JScrollBar szybkoscScroll = scrollPanePowiadomienia.getVerticalScrollBar();
 
         frame.setSize(1050, 700);
         int liczbaBluz = 0;
@@ -93,61 +96,77 @@ public class SklepGUI {
         scrollPane.setBounds(300, 70, 737, 630);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
-        panelPowiadomienia = new JPanel();
-        panelPowiadomienia.setBounds(800, 70, 300, 400);
+
+        //POWIADOMIENIA!!!!!! DODAWANIE RECZNE DLA TESTU (DO USUNIECIA JAK PIHI SKONCZY SIE OPIERDALAC)
+        sklep.zalogowanyKlient.obs.getPowiadomienia().add("TURN ON SKLEP (usun z kodu)");
+        //POWIADOMIENIA!!!!!! DODAWANIE RECZNE DLA TESTU (DO USUNIECIA JAK PIHI SKONCZY SIE OPIERDALAC)
+
+
+
+            if (sklep.zalogowanyKlient.obs != null) {
+                for (int i = 0; i < sklep.zalogowanyKlient.obs.getPowiadomienia().size(); i++) {
+                    JButton buttonUsun = new JButton();
+                    buttonUsun.setBounds(200, 40, 30, 30);
+                    buttonUsun.setText("X");
+                    buttonUsun.setFocusable(false);
+                    buttonUsun.setFont(new Font(null, Font.BOLD, 20));
+                    buttonUsun.setBackground(Color.WHITE);
+                    buttonUsun.setForeground(Color.RED);
+                    buttonUsun.setBorder(BorderFactory.createEtchedBorder());
+
+                    String promocja = sklep.zalogowanyKlient.obs.getPowiadomienia().get(i);
+
+                    JLabel labelPromocja = new JLabel();
+                    labelPromocja.setBounds(15, 15, 200, 40);
+                    labelPromocja.setText("Promocja: " + promocja);
+                    labelPromocja.setFont(new Font(null, Font.BOLD, 10));
+
+
+                    JPanel panelPromocji = new JPanel();
+                    panelPromocji.setLayout(null);
+                    panelPromocji.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    panelPromocji.setPreferredSize(new Dimension(300, 100));
+
+                    panelPowiadomienia.add(panelPromocji);
+                    panelPromocji.add(buttonUsun);
+                    panelPromocji.add(labelPromocja);
+
+                    buttonPromocjeMap.put(buttonUsun, promocja);
+                    buttonUsun.addActionListener(e -> {
+                        JButton sourceButton = (JButton) e.getSource();
+                        String promocjaToRemove = buttonPromocjeMap.get(sourceButton);
+
+                        if (promocjaToRemove != null) {
+                            sklep.zalogowanyKlient.obs.getPowiadomienia().remove(promocjaToRemove);
+                            panelPowiadomienia.remove(sourceButton.getParent());
+                            panelPowiadomienia.revalidate();
+                            panelPowiadomienia.repaint();
+                            panelPowiadomienia.setPreferredSize(new Dimension(300,panelPowiadomienia.getComponentCount() * 105));
+                        }
+                    });
+                }
+            }
+            else {
+                JLabel brakPromocji = new JLabel("Nie jestes zapisany za zadna promocje!!");
+                brakPromocji.setAlignmentY(100);
+                panelPowiadomienia.add(brakPromocji);
+            }
+
+            //SCROLL DO PANELU POWIADOMIEC NA PIHACZA
         panelPowiadomienia.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panelPowiadomienia.setEnabled(false);
         panelPowiadomienia.setVisible(false);
-        frame.add(panelPowiadomienia);
+        panelPowiadomienia.setPreferredSize(new Dimension(300,panelPowiadomienia.getComponentCount() * 105));
 
+        szybkoscScroll.setUnitIncrement(20);
+        szybkoscScroll.setBlockIncrement(40);
+        scrollPanePowiadomienia.setVisible(false);
+        scrollPanePowiadomienia.setEnabled(false);
+        scrollPanePowiadomienia.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPanePowiadomienia.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPanePowiadomienia.setBounds(700, 70, 300, 450);
+        frame.add(scrollPanePowiadomienia);
 
-        //POWIADOMIENIA!!!!!!
-        sklep.getZalogowanyKlient().zapiszNaPromocje(sklep.promocja, "sms");
-        sklep.getZalogowanyKlient().zapiszNaPromocje(sklep.promocja, "email");
-        sklep.zalogowanyKlient.obs.getPowiadomienia().add("twoj stary1");
-        sklep.zalogowanyKlient.obs.getPowiadomienia().add("twoj stary2");
-        sklep.zalogowanyKlient.obs.getPowiadomienia().add("twoj stary3");
-
-            for (int i = 0; i < sklep.zalogowanyKlient.obs.getPowiadomienia().size(); i++) {
-                JButton buttonUsun = new JButton();
-                buttonUsun.setBounds(200, 40, 30, 30);
-                buttonUsun.setText("X");
-                buttonUsun.setFocusable(false);
-                buttonUsun.setFont(new Font(null, Font.BOLD, 20));
-                buttonUsun.setBackground(Color.WHITE);
-                buttonUsun.setForeground(Color.RED);
-                buttonUsun.setBorder(BorderFactory.createEtchedBorder());
-
-                String promocja = sklep.zalogowanyKlient.obs.getPowiadomienia().get(i);
-
-                JLabel labelPromocja = new JLabel();
-                labelPromocja.setBounds(15, 15, 200, 40);
-                labelPromocja.setText("Promocja: " + promocja);
-                labelPromocja.setFont(new Font(null, Font.BOLD, 10));
-
-
-                JPanel panelPromocji = new JPanel();
-                panelPromocji.setLayout(null);
-                panelPromocji.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                panelPromocji.setPreferredSize(new Dimension(250,100));
-
-                panelPowiadomienia.add(panelPromocji);
-                panelPromocji.add(buttonUsun);
-                panelPromocji.add(labelPromocja);
-
-                buttonPromocjeMap.put(buttonUsun, promocja);
-                buttonUsun.addActionListener(e -> {
-                    JButton sourceButton = (JButton) e.getSource();
-                    String promocjaToRemove = buttonPromocjeMap.get(sourceButton);
-
-                    if (promocjaToRemove != null) {
-                        sklep.zalogowanyKlient.obs.getPowiadomienia().remove(promocjaToRemove);
-                        panelPowiadomienia.remove(sourceButton.getParent());
-                        panelPowiadomienia.revalidate();
-                        panelPowiadomienia.repaint();
-                    }
-                });
-            }
 
 
 
@@ -282,9 +301,17 @@ public class SklepGUI {
                     if (panelPowiadomienia.isVisible()) {
                         panelPowiadomienia.setEnabled(false);
                         panelPowiadomienia.setVisible(false);
+                        scrollPanePowiadomienia.setVisible(false);
+                        scrollPanePowiadomienia.setEnabled(false);
+                        panelPowiadomienia.revalidate();
+                        panelPowiadomienia.repaint();
                     } else {
                         panelPowiadomienia.setEnabled(true);
                         panelPowiadomienia.setVisible(true);
+                        scrollPanePowiadomienia.setVisible(true);
+                        scrollPanePowiadomienia.setEnabled(true);
+                        panelPowiadomienia.revalidate();
+                        panelPowiadomienia.repaint();
                     }
                 }
             }
