@@ -103,7 +103,11 @@ public class SklepGUI {
             Image scaledMailImage = originalMailImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
             ImageIcon scaledMailIcon = new ImageIcon(scaledMailImage);
 
-            //boxPowiadomienia = new JCheckBox();
+            boxPowiadomienia = new JCheckBox();
+            panelGora.add(boxPowiadomienia);
+            boxPowiadomienia.setBounds(400, 17, 375, 40);
+            boxPowiadomienia.setText("Czy chcesz otrzymywać powiadomienia o promocjach?");
+            //boxPowiadomienia.setFocusable(false);
 
 
             buttonKoszyk = new JButton();
@@ -160,6 +164,19 @@ public class SklepGUI {
             frame.add(panelLewy);
             frame.add(panelGora);
             frame.setVisible(true);
+
+            boxPowiadomienia.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(e.getSource() ==  boxPowiadomienia){
+                        if(boxPowiadomienia.isSelected()){
+                            //ZAPISZ NA POWIADOMIENIA O PROMOCJACH
+                        } else {
+                             //WYPISZ Z POWIADOMIEN
+                        }
+                    }
+                }
+            });
 
             buttonKoszyk.addActionListener(new ActionListener() {
                 @Override
