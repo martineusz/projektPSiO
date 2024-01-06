@@ -444,9 +444,23 @@ public class SklepGUI {
 
             addButton.addActionListener(e -> {
                 System.out.println("Dodano " + name);
-                sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt);
-                JOptionPane.showMessageDialog(null, "Dodano do koszyka", "Info",
-                        JOptionPane.INFORMATION_MESSAGE);
+                boolean xd = false;
+                if(sklep.zalogowanyKlient.getKoszyk().getListaProduktow().isEmpty()){
+                    sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt);
+                }
+                else {
+                    for (int i = 0; i < sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size(); i++) {
+                        if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().get(i) != produkt) {
+                            xd = true;
+                        }
+                    }
+                    if (xd){
+                        sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Produkt jest juz w koszyku, bro", "NIE MOZESZ TEGO ZROBIC", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
             });
 
             return productPanel;
