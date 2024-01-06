@@ -64,15 +64,10 @@ public class GUIadmin implements ActionListener {
         panel.add(powrotButton);
 
         panelGlowny.add(BorderLayout.CENTER, panel);
-
-
-
         panel.add(dodajPromocjeButton);
         panel.add(dodajProduktButton);
         panel.add(usunProduktButton);
         panel.add(powrotButton);
-
-
 
         ramka.setLayout(null);
         ramka.setContentPane(panelGlowny);
