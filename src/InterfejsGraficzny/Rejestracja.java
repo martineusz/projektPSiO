@@ -189,6 +189,7 @@ public class Rejestracja  {
                     frame.revalidate();
                     frame.repaint();
                     frame.setSize(1000, 500);
+                    SklepGUI.openSklepGUI(frame,sklep);
                 };
 
             }
