@@ -100,6 +100,8 @@ public class SklepGUI {
             panelPowiadomienia = new JPanel();
             panelPowiadomienia.setBounds(800,70,200,300);
             panelPowiadomienia.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            panelPowiadomienia.setEnabled(false);
+            panelPowiadomienia.setVisible(false);
             frame.add(panelPowiadomienia);
 
 
@@ -224,6 +226,21 @@ public class SklepGUI {
                         frame.repaint();
 
 
+                    }
+                }
+            });
+
+            buttonMail.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(e.getSource() == buttonMail){
+                        if(panelPowiadomienia.isVisible()){
+                            panelPowiadomienia.setEnabled(false);
+                            panelPowiadomienia.setVisible(false);
+                        }else{
+                            panelPowiadomienia.setEnabled(true);
+                            panelPowiadomienia.setVisible(true);
+                        }
                     }
                 }
             });
