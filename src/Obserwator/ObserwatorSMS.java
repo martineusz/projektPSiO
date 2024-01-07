@@ -16,7 +16,7 @@ public class ObserwatorSMS implements Obserwator, Serializable {
 	@Override
 	public void powiadom(String nazwa) {
 		//wyslanie smsa do klienta
-		powiadomienia.add(this.numerTelefonuKlienta + " otrzymal SMS: " + nazwa);
+		this.powiadomienia.add(this.numerTelefonuKlienta + " otrzymal SMS: " + nazwa);
 		System.out.println(this.numerTelefonuKlienta + " otrzymal SMS: " + nazwa);
 	}
 

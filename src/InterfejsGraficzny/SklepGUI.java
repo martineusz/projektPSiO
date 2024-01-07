@@ -96,13 +96,13 @@ public class SklepGUI {
         scrollPane.setLayout(new ScrollPaneLayout());
         scrollPane.setBounds(300, 70, 737, 630);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
-
-
-        //POWIADOMIENIA!!!!!! DODAWANIE RECZNE DLA TESTU (DO USUNIECIA JAK PIHI SKONCZY SIE OPIERDALAC)
-        sklep.getZalogowanyKlient().zapiszNaPromocje(sklep.promocja, "sms");
-        sklep.getZalogowanyKlient().zapiszNaPromocje(sklep.promocja, "email");
-        sklep.zalogowanyKlient.obs.getPowiadomienia().add("TURN ON SKLEP (usun z kodu)");
-        //POWIADOMIENIA!!!!!! DODAWANIE RECZNE DLA TESTU (DO USUNIECIA JAK PIHI SKONCZY SIE OPIERDALAC)
+//
+//
+//        //POWIADOMIENIA!!!!!! DODAWANIE RECZNE DLA TESTU (DO USUNIECIA JAK PIHI SKONCZY SIE OPIERDALAC)
+//        sklep.getZalogowanyKlient().zapiszNaPromocje(sklep.promocja, "sms");
+//        sklep.getZalogowanyKlient().zapiszNaPromocje(sklep.promocja, "email");
+//        sklep.zalogowanyKlient.obs.getPowiadomienia().add("TURN ON SKLEP (usun z kodu)");
+//        //POWIADOMIENIA!!!!!! DODAWANIE RECZNE DLA TESTU (DO USUNIECIA JAK PIHI SKONCZY SIE OPIERDALAC)
 
 
 
@@ -155,7 +155,7 @@ public class SklepGUI {
                 panelPowiadomienia.add(brakPromocji);
             }
 
-            //SCROLL DO PANELU POWIADOMIEC NA PIHACZA
+            //SCROLL DO PANELU POWIADOMIEn
         panelPowiadomienia.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panelPowiadomienia.setEnabled(false);
         panelPowiadomienia.setVisible(false);
@@ -188,7 +188,8 @@ public class SklepGUI {
         boxPowiadomienia.setBounds(100, 17, 340, 40);
         boxPowiadomienia.setText("Czy chcesz otrzymywać powiadomienia o promocjach?");
         boxPowiadomienia.setSelected(false);
-        boxPowiadomienia.setFocusable(false);
+
+
 
         radioSMS = new JRadioButton("sms");
         radioEmail = new JRadioButton("email");
@@ -261,6 +262,43 @@ public class SklepGUI {
             buttons[i].setBounds((300 - buttonWidth) / 4, startY + (buttonHeight + spacing) * i, buttonWidth, buttonHeight);
         }
 
+        if(!sklep.zalogowanyKlient.isCzyPromocja()){
+            boxPowiadomienia.setSelected(false);
+            boxPowiadomienia.setFocusable(false);
+            radioPowiadomienia.clearSelection();
+        } else if(sklep.zalogowanyKlient.obs instanceof ObserwatorEmail) {
+            radioEmail.setSelected(true);
+            boxPowiadomienia.setSelected(true);
+            radioSMS.setEnabled(true);
+            radioEmail.setEnabled(true);
+            buttonMail.setEnabled(true);
+        } else if(sklep.zalogowanyKlient.obs instanceof ObserwatorSMS) {
+            radioSMS.setSelected(true);
+            boxPowiadomienia.setSelected(true);
+            radioSMS.setEnabled(true);
+            radioEmail.setEnabled(true);
+            buttonMail.setEnabled(true);
+        }
+
+        radioSMS.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(radioSMS.isSelected()){
+                    sklep.zalogowanyKlient.wypiszZPromocji(sklep.promocja);
+                    sklep.zalogowanyKlient.zapiszNaPromocje(sklep.promocja, "sms");
+                }
+            }
+        });
+        radioEmail.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(radioEmail.isSelected()){
+                    sklep.zalogowanyKlient.wypiszZPromocji(sklep.promocja);
+                    sklep.zalogowanyKlient.zapiszNaPromocje(sklep.promocja, "email");
+                }
+            }
+        });
+
         pokazWszystkieProdutky(frame, sklep);
         frame.add(panelLewy);
         frame.add(panelGora);
@@ -281,6 +319,7 @@ public class SklepGUI {
                         buttonMail.setEnabled(false);
 
                         radioPowiadomienia.clearSelection();
+                        sklep.zalogowanyKlient.wypiszZPromocji(sklep.promocja);
                     }
                 }
             }

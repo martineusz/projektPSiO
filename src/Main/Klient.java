@@ -77,7 +77,14 @@ public class Klient implements Serializable {
         return haslo;
     }
 
-// W KOSZYKU!!! NIE USUWAC!!!
+    public boolean isCzyPromocja() {
+        return CzyPromocja;
+    }
+
+    public void setCzyPromocja(boolean czyPromocja) {
+        CzyPromocja = czyPromocja;
+    }
+    // W KOSZYKU!!! NIE USUWAC!!!
 //    public void sprawdzKoszyk() {
 //        koszyk.SprawdzZawartosc();
 //    }
