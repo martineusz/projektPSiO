@@ -8,7 +8,7 @@ public class DaneProduktuException extends Exception{
     }
     public static void pusteException(String str) throws DaneProduktuException{
         if(Objects.equals(str, "")){
-            throw new DaneProduktuException("Pole nie moće być puste");
+            throw new DaneProduktuException("Pole nie może być puste");
         }
     }
     public static void notNumericException(String str) throws DaneProduktuException{
