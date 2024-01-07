@@ -382,7 +382,7 @@ public class KoszykFrame extends JPanel implements ActionListener {
         panelPodsumowanie.add(labelCenaKoszyka);
 
         //KOSZYK DOSTAWA CENA LABEL
-        labelCenaDostawy = new JLabel("DOSTAWA" + dostawaCena + " PLN");
+        labelCenaDostawy = new JLabel("DOSTAWA: " + dostawaCena + " PLN");
         labelCenaDostawy.setBounds(25,125,200,100);
         labelCenaDostawy.setFont(new Font(null, Font.BOLD, 15));
         panelPodsumowanie.add(labelCenaDostawy);
@@ -528,7 +528,7 @@ public class KoszykFrame extends JPanel implements ActionListener {
                 boxPaczkomat.setEnabled(false);
                 dostawaCena = 15.99;
                 cenaZaWszystko = cenaKoszyk + dostawaCena;
-                labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
+                labelCenaDostawy.setText("DOSTAWA: " + dostawaCena + " PLN");
                 labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
             }
         } else if (e.getSource() == boxKurier) {
@@ -542,7 +542,7 @@ public class KoszykFrame extends JPanel implements ActionListener {
                 boxKurier.setEnabled(false);
                 dostawaCena = 19.99;
                 cenaZaWszystko = cenaKoszyk + dostawaCena;
-                labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
+                labelCenaDostawy.setText("DOSTAWA: " + dostawaCena + " PLN");
                 labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
             }
         } else if (e.getSource() == boxBlik) {
@@ -658,7 +658,7 @@ public class KoszykFrame extends JPanel implements ActionListener {
                     }
                     cenaZaWszystko = (dostawaCena + cenaKoszyk);
                     labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
-                    labelCenaDostawy.setText("DOSTAWA " + dostawaCena + " PLN");
+                    labelCenaDostawy.setText("DOSTAWA: " + dostawaCena + " PLN");
                     panelPodsumowanie.revalidate();
                     panelPodsumowanie.repaint();
                 }catch(PustyKoszykException e2){
