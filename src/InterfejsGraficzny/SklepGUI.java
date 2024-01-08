@@ -27,8 +27,10 @@ public class SklepGUI {
     private static JScrollPane scrollPaneKoszulki = new JScrollPane();
     private static JScrollPane scrollPaneSpodnie = new JScrollPane();
     private static JScrollPane scrollPane = new JScrollPane();
+    private static JPanel panelBluza = new JPanel();
     private static JPanel panelButy = new JPanel();
     private static JPanel panelKoszulki = new JPanel();
+    private static JPanel panelSpodnie = new JPanel();
     private static JPanel panelGlowny = new JPanel();
     private static JPanel panelPowiadomienia;
     private static JButton buttonKoszulki;
@@ -334,6 +336,8 @@ public class SklepGUI {
                     frame.add(new KoszykFrame(frame, sklep));
                     frame.revalidate();
                     frame.repaint();
+
+
                 }
             }
         });
@@ -372,7 +376,7 @@ public class SklepGUI {
             }
         });
 
-
+        int finalLiczbaBluz = liczbaBluz;
         buttonBluza.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e
@@ -382,7 +386,7 @@ public class SklepGUI {
         });
 
 
-
+        int finalLiczbaButow = liczbaButow;
         buttonButy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -434,7 +438,7 @@ public class SklepGUI {
             }
         });
 
-
+        int finalLiczbaKoszulek = liczbaKoszulek;
         buttonKoszulki.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -453,6 +457,7 @@ public class SklepGUI {
                 for (Produkt produkt : sklep.getListaProduktow()) {
                     if (produkt instanceof Koszulka && !listaKoszulek.contains(produkt)) {
                         listaKoszulek.add((Koszulka) produkt);}}
+
 
                 if (scrollPaneButy != null) {
                     frame.remove(scrollPaneButy);
@@ -502,36 +507,7 @@ public class SklepGUI {
     }
 
 
-    private static JPanel createProductPanel(String name, String iconPath, String price, Sklep sklep, Produkt produkt) {
-        JPanel productPanel = new JPanel();
-        productPanel.setLayout(null);
 
-        ImageIcon icon = new ImageIcon(iconPath);
-        JLabel labelIcon = new JLabel(icon);
-        productPanel.add(labelIcon);
-        labelIcon.setBounds(0, 0, 225, 225);
-
-        JLabel labelName = new JLabel(name);
-        Font myFont = new Font("Serif", Font.BOLD, 9);
-        labelName.setFont(myFont);
-        productPanel.add(labelName);
-        labelName.setBounds(0, 230, 100, 25);
-
-        JLabel labelPrice = new JLabel(price);
-        productPanel.add(labelPrice);
-        labelPrice.setBounds(100, 230, 30, 25);
-
-        JButton addButton = new JButton("Dodaj");
-        productPanel.add(addButton);
-        addButton.setBounds(130, 230, 95, 25);
-
-        addButton.addActionListener(e -> {
-            System.out.println("Dodano " + name);
-
-        });
-
-        return productPanel;
-    }
 
     private static JPanel createProductPanel(String name, ImageIcon icon, String price, Sklep sklep, Produkt produkt) {
         JPanel productPanel = new JPanel();
@@ -560,6 +536,7 @@ public class SklepGUI {
             boolean xd = true;
             if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().isEmpty()) {
                 sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt);
+                JOptionPane.showMessageDialog(null, "Dodano do koszyka", "GRATULACJE", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 for (int i = 0; i < sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size(); i++) {
                     if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().get(i).equals(produkt)) {
@@ -569,8 +546,10 @@ public class SklepGUI {
                 }
                 if (xd) {
                     sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt);
+                    JOptionPane.showMessageDialog(null, "Dodano do koszyka", "GRATULACJE", JOptionPane.INFORMATION_MESSAGE);
+
                 } else {
-                    JOptionPane.showMessageDialog(null, "Produkt jest juz w koszyku, bro", "NIE MOZESZ TEGO ZROBIC", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Produkt jest juz w koszyku", "NIE MOZESZ TEGO ZROBIC", JOptionPane.WARNING_MESSAGE);
                 }
             }
             listaProduktowWKoszyku.add(name);
@@ -664,7 +643,7 @@ public class SklepGUI {
             frame.remove(scrollPaneBluza);
         }
 
-        JPanel panelSpodnie = new JPanel(new GridLayout(0, 3, 0, 0));
+        panelSpodnie = new JPanel(new GridLayout(0, 3, 0, 0));
         panelSpodnie.setPreferredSize(new Dimension(750, policzNewHeight(listaSpodni.size())));
 
         for (Spodnie spodnie : listaSpodni) {
@@ -715,7 +694,7 @@ public class SklepGUI {
         }
 
         // Utwórz nowy panel dla butów
-        JPanel panelBluza = new JPanel(new GridLayout(0, 3, 0, 0));
+        panelBluza = new JPanel(new GridLayout(0, 3, 0, 0));
         panelBluza.setPreferredSize(new Dimension(750, policzNewHeight(listaBluz.size())));
 
         for (Bluza bluza : listaBluz) {
