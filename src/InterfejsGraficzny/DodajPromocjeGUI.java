@@ -202,7 +202,6 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
                         newDat[j][3]=tempList.get(j).getProducent().getMarka();
                     }
                     model.setDataVector(newDat, kolumny2);
-                    break;
                 }
             }
             ramka.getContentPane().removeAll();
