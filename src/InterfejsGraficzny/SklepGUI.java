@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
 import Obserwator.*;
 
 
 import Main.Sklep;
-import Main.Sklep.*;
 import Produkt.Produkt;
 import Produkt.*;
 
@@ -333,7 +333,7 @@ public class SklepGUI {
                     frame.revalidate();
                     frame.repaint();
                     frame.setSize(new Dimension(1920, 1080));
-                    frame.add(new KoszykFrame(frame, sklep));
+                    frame.add(new KoszykPanel(frame, sklep));
                     frame.revalidate();
                     frame.repaint();
 

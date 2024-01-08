@@ -2,6 +2,9 @@ package InterfejsGraficzny;
 
 import DostawaStrategia.DostawaKurier;
 import DostawaStrategia.DostawaPaczkomat;
+import InterfejsGraficzny.PustyKoszykException;
+import InterfejsGraficzny.SklepGUI;
+import InterfejsGraficzny.ZlyAdresException;
 import PlacenieStrategia.placBlikiem;
 import PlacenieStrategia.placKarta;
 import Produkt.*;
@@ -15,7 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class KoszykFrame extends JPanel implements ActionListener {
+public class KoszykPanel extends JPanel implements ActionListener {
     Map<JButton, Produkt> buttonProduktMap;
     Map<JComboBox, Produkt> comboProduktMap;
     ArrayList<JComboBox> comboList;
@@ -85,7 +88,7 @@ public class KoszykFrame extends JPanel implements ActionListener {
     JLabel labelObrazek;
     JFrame frame;
 
-    KoszykFrame(JFrame frame, Sklep sklep) {
+    KoszykPanel(JFrame frame, Sklep sklep) {
         this.frame = frame;
         frame.setResizable(false);
         this.sklep = sklep;
@@ -104,144 +107,112 @@ public class KoszykFrame extends JPanel implements ActionListener {
 
 //        TEXT FIELDY
         textImie = new JTextField();
-        textImie.setPreferredSize(new Dimension(250,40));
         textImie.setBounds(10,100,250,40);
         panelDostawa.add(textImie);
-        labelImie = new JLabel();
+        labelImie = new JLabel("IMIĘ");
         labelImie.setBounds(10,85,50,10);
-        labelImie.setText("IMIĘ");
         panelDostawa.add(labelImie);
 
-
         textNazwisko = new JTextField();
-        textNazwisko.setPreferredSize(new Dimension(250,40));
         textNazwisko.setBounds(10,175,250,40);
         panelDostawa.add(textNazwisko);
-        labelNazwisko = new JLabel();
+        labelNazwisko = new JLabel("NAZWISKO");
         labelNazwisko.setBounds(10,160,150,10);
-        labelNazwisko.setText("NAZWISKO");
         panelDostawa.add(labelNazwisko);
 
         textUlica = new JTextField();
-        textUlica.setPreferredSize(new Dimension(250,40));
         textUlica.setBounds(10,250,150,40);
         panelDostawa.add(textUlica);
-        labelUlica = new JLabel();
+        labelUlica = new JLabel("ULICA");
         labelUlica.setBounds(10,235,50,10);
-        labelUlica.setText("ULICA");
         panelDostawa.add(labelUlica);
 
         textNumerDomu = new JTextField();
-        textNumerDomu.setPreferredSize(new Dimension(250,40));
         textNumerDomu.setBounds(180,250,80,40);
         panelDostawa.add(textNumerDomu);
-        labelNumerDomu = new JLabel();
+        labelNumerDomu = new JLabel("NR. DOMU");
         labelNumerDomu.setBounds(195,235,150,10);
-        labelNumerDomu.setText("NR. DOMU");
         panelDostawa.add(labelNumerDomu);
 
         textKodPocztowy = new JTextField();
-        textKodPocztowy.setPreferredSize(new Dimension(250,40));
         textKodPocztowy.setBounds(10,325,80,40);
         panelDostawa.add(textKodPocztowy);
-        labelKodPocztowy = new JLabel();
+        labelKodPocztowy = new JLabel("KOD POCZTOWY");
         labelKodPocztowy.setBounds(10,310,150,10);
-        labelKodPocztowy.setText("KOD POCZTOWY");
         panelDostawa.add(labelKodPocztowy);
 
         textMiejscowosc = new JTextField();
-        textMiejscowosc.setPreferredSize(new Dimension(250,40));
         textMiejscowosc.setBounds(110,325,150,40);
         panelDostawa.add(textMiejscowosc);
-        labelMiejscowosc = new JLabel();
+        labelMiejscowosc = new JLabel("MIEJSCOWOSC");
         labelMiejscowosc.setBounds(170,310,150,10);
-        labelMiejscowosc.setText("MIEJSCOWOŚĆ");
         panelDostawa.add(labelMiejscowosc);
 
         textKraj = new JTextField();
-        textKraj.setPreferredSize(new Dimension(250,40));
         textKraj.setBounds(280,100,250,40);
         panelDostawa.add(textKraj);
-        labelKraj = new JLabel();
+        labelKraj = new JLabel("KRAJ");
         labelKraj.setBounds(280,85,50,10);
-        labelKraj.setText("KRAJ");
         panelDostawa.add(labelKraj);
 
         textNumerTelefonu = new JTextField();
-        textNumerTelefonu.setPreferredSize(new Dimension(250,40));
         textNumerTelefonu.setBounds(280,175,250,40);
         panelDostawa.add(textNumerTelefonu);
-        labelNumerTelefonu = new JLabel();
+        labelNumerTelefonu = new JLabel("NR TEL");
         labelNumerTelefonu.setBounds(280,160,150,10);
-        labelNumerTelefonu.setText("NR. TELEFONU");
         panelDostawa.add(labelNumerTelefonu);
 
         textEmail = new JTextField();
-        textEmail.setPreferredSize(new Dimension(250,40));
         textEmail.setBounds(280,250,250,40);
         panelDostawa.add(textEmail);
-        labelEmail = new JLabel();
+        labelEmail = new JLabel("EMAIL");
         labelEmail.setBounds(280,235,50,10);
-        labelEmail.setText("EMAIL");
         panelDostawa.add(labelEmail);
 
         textKodBlik = new JTextField();
-        textKodBlik.setPreferredSize(new Dimension(250,40));
         textKodBlik.setBounds(20,70,250,40);
         panelPlatnosc.add(textKodBlik);
-        labelKodBlik = new JLabel();
+        labelKodBlik = new JLabel("KOD BLIK");
         labelKodBlik.setBounds(20,55,120,10);
-        labelKodBlik.setText("KOD BLIK");
         panelPlatnosc.add(labelKodBlik);
 
         textNumerKarty = new JTextField();
-        textNumerKarty.setPreferredSize(new Dimension(250,40));
         textNumerKarty.setBounds(20,210,250,40);
         panelPlatnosc.add(textNumerKarty);
-        labelNumerKarty = new JLabel();
+        labelNumerKarty = new JLabel("NR KARTY");
         labelNumerKarty.setBounds(20,195,120,10);
-        labelNumerKarty.setText("NUMER KARTY");
         panelPlatnosc.add(labelNumerKarty);
 
         textDataWygasniecia = new JTextField();
-        textDataWygasniecia.setPreferredSize(new Dimension(250,40));
         textDataWygasniecia.setBounds(20,275,150,40);
         panelPlatnosc.add(textDataWygasniecia);
-        labelDataWygasniecia = new JLabel();
+        labelDataWygasniecia = new JLabel("DATA WYGASNIECIA");
         labelDataWygasniecia.setBounds(20,260,120,10);
-        labelDataWygasniecia.setText("DATA WYGAŚNIĘCIA");
         panelPlatnosc.add(labelDataWygasniecia);
 
         textCvv = new JTextField();
-        textCvv.setPreferredSize(new Dimension(250,40));
         textCvv.setBounds(190,275,80,40);
         panelPlatnosc.add(textCvv);
-        labelCvv = new JLabel();
+        labelCvv = new JLabel("CVV");
         labelCvv.setBounds(190,260,120,10);
-        labelCvv.setText("CVV");
         panelPlatnosc.add(labelCvv);
 
         textKartaImie = new JTextField();
-        textKartaImie.setPreferredSize(new Dimension(250,40));
         textKartaImie.setBounds(290,210,250,40);
         panelPlatnosc.add(textKartaImie);
-        labelKartaImie = new JLabel();
+        labelKartaImie = new JLabel("IMIĘ");
         labelKartaImie.setBounds(290,195,120,10);
-        labelKartaImie.setText("IMIĘ");
         panelPlatnosc.add(labelKartaImie);
 
         textKartaNazwisko = new JTextField();
-        textKartaNazwisko.setPreferredSize(new Dimension(250,40));
         textKartaNazwisko.setBounds(290,275,250,40);
         panelPlatnosc.add(textKartaNazwisko);
-        labelKartaNazwisko = new JLabel();
+        labelKartaNazwisko = new JLabel("NAZWISKO");
         labelKartaNazwisko.setBounds(290,260,120,10);
-        labelKartaNazwisko.setText("NAZWISKO");
         panelPlatnosc.add(labelKartaNazwisko);
 
         //MOJ KOSZYK label
-        JLabel mojKoszyk = new JLabel();
-        mojKoszyk.setText("MOJ KOSZYK");
+        JLabel mojKoszyk = new JLabel("MOJ KOSZYK");
         mojKoszyk.setIcon(koszykImage);
         mojKoszyk.setHorizontalTextPosition(JLabel.RIGHT);
         mojKoszyk.setVerticalTextPosition(JLabel.CENTER);
@@ -268,9 +239,14 @@ public class KoszykFrame extends JPanel implements ActionListener {
 
         //PANEL PRODUKT
         for (int i = 0; i < koszyk.getListaProduktow().size(); i++) {
-            JButton buttonUsun = new JButton();
+            JButton buttonUsun = new JButton("X");
+            Produkt produkt = koszyk.getListaProduktow().get(i);
+            JLabel labelCena = new JLabel("NAZWA: " + produkt.getNazwa());
+            opcjeWyboru = new String[produkt.getIloscWMagazynie()];
+            comboList.add(ComboBombo = new JComboBox(opcjeWyboru));
+            obrazek = new ImageIcon();
+
             buttonUsun.setBounds(450,40,30,30);
-            buttonUsun.setText("X");
             buttonUsun.addActionListener(this);
             buttonUsun.setFocusable(false);
             buttonUsun.setFont(new Font(null, Font.BOLD, 20));
@@ -278,16 +254,12 @@ public class KoszykFrame extends JPanel implements ActionListener {
             buttonUsun.setForeground(Color.RED);
             buttonUsun.setBorder(BorderFactory.createEtchedBorder());
 
-            Produkt produkt = koszyk.getListaProduktow().get(i);
 
-            JLabel labelNazwa = new JLabel();
+            JLabel labelNazwa = new JLabel("CENA: " + produkt.getCena() + " PLN");
             labelNazwa.setBounds(110,45,400,40);
-            labelNazwa.setText("CENA: " + produkt.getCena() + " PLN");
             labelNazwa.setFont(new Font(null, Font.BOLD, 18));
 
-            JLabel labelCena = new JLabel();
             labelCena.setBounds(110,20,400,40);
-            labelCena.setText("NAZWA: " + produkt.getNazwa());
             labelCena.setFont(new Font(null, Font.BOLD, 18));
 
             JPanel panelProdukt = new JPanel();
@@ -295,17 +267,14 @@ public class KoszykFrame extends JPanel implements ActionListener {
             panelProdukt.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             panelProdukt.setPreferredSize(new Dimension(500,100));
 
-            opcjeWyboru = new String[produkt.getIloscWMagazynie()];
             for (int j = 1; j <= produkt.getIloscWMagazynie(); j++) {
                 opcjeWyboru[j-1] = String.valueOf(j);
             }
 
-            comboList.add(ComboBombo = new JComboBox(opcjeWyboru));
             comboList.get(i).setBounds(400,35,40,40);
             comboList.get(i).addActionListener(this);
             comboList.get(i).setSelectedItem(0);
 
-            obrazek = new ImageIcon();
             obrazek = produkt.getIcon(75,75);
             labelObrazek = new JLabel();
             labelObrazek.setIcon(obrazek);
@@ -358,10 +327,9 @@ public class KoszykFrame extends JPanel implements ActionListener {
         panelPodsumowanie.setLayout(null);
 
         //BUTTON PODSUMOWANIE
-        buttonZamowienie = new JButton();
+        buttonZamowienie = new JButton("ZLOZ ZAMOWIENIE");
         buttonZamowienie.setBounds(25,300,350,80);
         buttonZamowienie.addActionListener(this);
-        buttonZamowienie.setText("ZŁÓŻ ZAMÓWIENIE");
         buttonZamowienie.setFocusable(false);
         buttonZamowienie.setFont(new Font(null, Font.BOLD, 20));
         buttonZamowienie.setBackground(Color.WHITE);
@@ -369,8 +337,7 @@ public class KoszykFrame extends JPanel implements ActionListener {
         panelPodsumowanie.add(buttonZamowienie);
 
         //PODSUMOWANIE LABEL
-        JLabel labelPodsumowanie = new JLabel();
-        labelPodsumowanie.setText("PODSUMOWANIE");
+        JLabel labelPodsumowanie = new JLabel("PODSUMOWANIE");
         labelPodsumowanie.setBounds(75,0,400,100);
         labelPodsumowanie.setFont(new Font(null, Font.BOLD, 30));
         panelPodsumowanie.add(labelPodsumowanie);
@@ -389,15 +356,13 @@ public class KoszykFrame extends JPanel implements ActionListener {
         panelPodsumowanie.add(labelCenaDostawy);
 
         //SUMA CEN WSZYSTKO
-        labelSumaCen = new JLabel();
-        labelSumaCen.setText("SUMA: " + (dostawaCena + koszyk.getWartoscZamowienia()) + " PLN");
+        labelSumaCen = new JLabel("SUMA: " + (dostawaCena + koszyk.getWartoscZamowienia()) + " PLN");
         labelSumaCen.setBounds(25,175,200,100);
         labelSumaCen.setFont(new Font(null, Font.BOLD, 20));
         panelPodsumowanie.add(labelSumaCen);
 
         //BUTTON DOSTAWA
-        buttonDostawa = new JButton();
-        buttonDostawa.setText("FINALIZUJ DOSTAWE");
+        buttonDostawa = new JButton("FINALIZUJ DOSTAWE");
         buttonDostawa.setBounds(25,300,350,80);
         buttonDostawa.setFocusable(false);
         buttonDostawa.addActionListener(this);
@@ -409,8 +374,7 @@ public class KoszykFrame extends JPanel implements ActionListener {
 
 
         //BUTTON PLATNOSC
-        buttonPlatnosc = new JButton();
-        buttonPlatnosc.setText("ZREALIZUJ ZAMÓWIENIE");
+        buttonPlatnosc = new JButton("ZREALIZUJ ZAMÓWIENIE");
         buttonPlatnosc.setBounds(25,300,350,80);
         buttonPlatnosc.setFocusable(false);
         buttonPlatnosc.addActionListener(this);
@@ -422,9 +386,7 @@ public class KoszykFrame extends JPanel implements ActionListener {
 
         ImageIcon cofnijImage = new ImageIcon("src/Obrazki/cofnij.png");
         Image originalImage = cofnijImage.getImage();
-
         cofnijImage = new ImageIcon(originalImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-
 
         //BUTTON COFNIj PLATNOSC
         cofnijPlatnosc = new JButton();
@@ -551,14 +513,10 @@ public class KoszykFrame extends JPanel implements ActionListener {
                 koszyk.ustawMetodePlatnosci(new placBlikiem());
 
                 boxKarta.setSelected(false);
-                boxKarta.setFocusable(true);
                 boxKarta.setEnabled(true);
-                boxBlik.setFocusable(false);
                 boxBlik.setEnabled(false);
-
                 textKodBlik.setEnabled(true);
                 labelKodBlik.setEnabled(true);
-
                 textKartaNazwisko.setEnabled(false);
                 labelKartaNazwisko.setEnabled(false);
                 textKartaImie.setEnabled(false);
@@ -575,14 +533,10 @@ public class KoszykFrame extends JPanel implements ActionListener {
                 koszyk.ustawMetodePlatnosci(new placKarta());
 
                 boxBlik.setSelected(false);
-                boxBlik.setFocusable(true);
                 boxBlik.setEnabled(true);
-                boxKarta.setFocusable(false);
                 boxKarta.setEnabled(false);
-
                 textKodBlik.setEnabled(false);
                 labelKodBlik.setEnabled(false);
-
                 textKartaNazwisko.setEnabled(true);
                 labelKartaNazwisko.setEnabled(true);
                 textKartaImie.setEnabled(true);
@@ -756,31 +710,6 @@ public class KoszykFrame extends JPanel implements ActionListener {
             }
         }
     }
-
-//    public static void main(String[] args) {
-//        Sklep sklep = new Sklep(new ArrayList<>(), null, false, new ArrayList<>());
-//        sklep.wczytajListeProduktow();
-//        sklep.wczytajListeKlientow();
-//
-//        sklep.zalogowanyKlient = sklep.getListaKlientow().get(0);
-//        sklep.zalogowanyKlient.getKoszyk().dodajProdukt(sklep.getListaProduktow().get(0));
-//        sklep.zalogowanyKlient.getKoszyk().dodajProdukt(sklep.getListaProduktow().get(1));
-//
-//        if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size() == 0) {
-//            System.out.println("PUSTY KOSZYK");
-//        } else {
-//            for (int i = 0; i < sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size(); i++) {
-//                System.out.println((i+1) + ".");
-//                System.out.println(sklep.zalogowanyKlient.getKoszyk().getListaProduktow().get(i).toString());
-//            }
-//        }
-//
-//        //new KoszykFrame(sklep.zalogowanyKlient.getKoszyk());
-//
-//        sklep.wczytajListeProduktow();
-//        sklep.wczytajListeKlientow();
-//
-//    }
 }
 
 
