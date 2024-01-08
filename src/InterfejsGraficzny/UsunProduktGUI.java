@@ -98,7 +98,8 @@ public class UsunProduktGUI implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==usunButton){
             int counter=0;
-            for(int i=0; i<sklep.getListaProduktow().size(); i++){
+            int x=sklep.getListaProduktow().size();
+            for(int i=0; i<x; i++){
                 if(checkBox[i].isSelected()){
                     sklep.usunProdukt(i-counter);
                     counter++;
