@@ -376,7 +376,8 @@ public class KoszykFrame extends JPanel implements ActionListener {
         panelPodsumowanie.add(labelPodsumowanie);
 
         //KOSZYK CENA LABEL
-        labelCenaKoszyka = new JLabel("KOSZYK: " + koszyk.getWartoscZamowienia() + " PLN");
+        cenaKoszyk = koszyk.getWartoscZamowienia();
+        labelCenaKoszyka = new JLabel("KOSZYK: " + cenaKoszyk + " PLN");
         labelCenaKoszyka.setBounds(25,75,200,100);
         labelCenaKoszyka.setFont(new Font(null, Font.BOLD, 15));
         panelPodsumowanie.add(labelCenaKoszyka);
@@ -598,7 +599,6 @@ public class KoszykFrame extends JPanel implements ActionListener {
         for (int j = 0; j < comboList.size(); j++) {
             if(e.getSource() == comboList.get(j)){
                 Produkt x;
-                ComboBombo.getSelectedItem();
                 cenaKoszyk = 0;
 
                 for (int i = 0; i < comboList.size(); i++) {
@@ -609,8 +609,6 @@ public class KoszykFrame extends JPanel implements ActionListener {
                 cenaZaWszystko = cenaKoszyk + dostawaCena;
                 labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
                 labelCenaKoszyka.setText("KOSZYK: " + cenaKoszyk + " PLN");
-                panelPodsumowanie.revalidate();
-                panelPodsumowanie.repaint();
             }
         }
 
@@ -620,18 +618,29 @@ public class KoszykFrame extends JPanel implements ActionListener {
             Produkt produktToRemove = buttonProduktMap.get(sourceButton);
 
             if (produktToRemove != null) {
+                Produkt x;
                 koszyk.getListaProduktow().remove(produktToRemove);
                 panelKoszyk.remove(sourceButton.getParent()); // Usunięcie całego panelu produktu
                 panelKoszyk.revalidate();
                 panelKoszyk.repaint();
+
+                for (int i = 0; i < comboList.size(); i++) {
+                    x = comboProduktMap.get(comboList.get(i));
+                    if (x == produktToRemove){
+                        cenaKoszyk -= (x.getCena() * (Integer.parseInt((comboList.get(i).getSelectedItem()).toString())));
+                        comboProduktMap.remove(comboList.get(i));
+                        comboList.remove(i);
+                    }
+                }
+
                 panelKoszyk.setPreferredSize(new Dimension(600, panelKoszyk.getComponentCount() * 110));
+
+
 
 
                 cenaZaWszystko = cenaKoszyk + dostawaCena;
                 labelCenaKoszyka.setText("KOSZYK: " + cenaKoszyk + " PLN");
                 labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
-                panelPodsumowanie.revalidate();
-                panelPodsumowanie.repaint();
 
             }
             if(e.getSource() == buttonZamowienie) {
@@ -652,10 +661,6 @@ public class KoszykFrame extends JPanel implements ActionListener {
                     buttonZamowienie.setVisible(false);
                     scrollPaneKoszyk.setVisible(false);
                     dostawaCena = 15.99;
-
-                    if (cenaKoszyk == 0){
-                        cenaKoszyk = koszyk.getWartoscZamowienia();
-                    }
                     cenaZaWszystko = (dostawaCena + cenaKoszyk);
                     labelSumaCen.setText("SUMA: " + cenaZaWszystko + " PLN");
                     labelCenaDostawy.setText("DOSTAWA: " + dostawaCena + " PLN");
