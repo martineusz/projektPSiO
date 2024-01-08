@@ -27,10 +27,8 @@ public class SklepGUI {
     private static JScrollPane scrollPaneKoszulki = new JScrollPane();
     private static JScrollPane scrollPaneSpodnie = new JScrollPane();
     private static JScrollPane scrollPane = new JScrollPane();
-    private static JPanel panelBluza = new JPanel();
     private static JPanel panelButy = new JPanel();
     private static JPanel panelKoszulki = new JPanel();
-    private static JPanel panelSpodnie = new JPanel();
     private static JPanel panelGlowny = new JPanel();
     private static JPanel panelPowiadomienia;
     private static JButton buttonKoszulki;
@@ -336,8 +334,6 @@ public class SklepGUI {
                     frame.add(new KoszykFrame(frame, sklep));
                     frame.revalidate();
                     frame.repaint();
-
-
                 }
             }
         });
@@ -376,7 +372,7 @@ public class SklepGUI {
             }
         });
 
-        int finalLiczbaBluz = liczbaBluz;
+
         buttonBluza.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e
@@ -386,7 +382,7 @@ public class SklepGUI {
         });
 
 
-        int finalLiczbaButow = liczbaButow;
+
         buttonButy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -399,6 +395,12 @@ public class SklepGUI {
                 buttonBluza.setEnabled(true);
                 buttonSpodnie.setEnabled(true);
                 buttonWszystko.setEnabled(true);
+
+                listaButow.clear();
+
+                for (Produkt produkt : sklep.getListaProduktow()) {
+                    if (produkt instanceof Obuwie && !listaButow.contains(produkt)) {
+                        listaButow.add((Obuwie) produkt);}}
 
                 if (scrollPaneKoszulki != null) {
                     frame.remove(scrollPaneKoszulki);
@@ -432,7 +434,7 @@ public class SklepGUI {
             }
         });
 
-        int finalLiczbaKoszulek = liczbaKoszulek;
+
         buttonKoszulki.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -446,6 +448,11 @@ public class SklepGUI {
                 buttonBluza.setEnabled(true);
                 buttonWszystko.setEnabled(true);
 
+                listaKoszulek.clear();
+
+                for (Produkt produkt : sklep.getListaProduktow()) {
+                    if (produkt instanceof Koszulka && !listaKoszulek.contains(produkt)) {
+                        listaKoszulek.add((Koszulka) produkt);}}
 
                 if (scrollPaneButy != null) {
                     frame.remove(scrollPaneButy);
@@ -638,6 +645,12 @@ public class SklepGUI {
         buttonBluza.setEnabled(true);
         buttonWszystko.setEnabled(true);
 
+        listaSpodni.clear();
+
+        for (Produkt produkt : sklep.getListaProduktow()) {
+            if (produkt instanceof Spodnie && !listaSpodni.contains(produkt)) {
+                listaSpodni.add((Spodnie) produkt);}}
+
         if (scrollPaneButy != null) {
             frame.remove(scrollPaneButy);
         }
@@ -651,7 +664,7 @@ public class SklepGUI {
             frame.remove(scrollPaneBluza);
         }
 
-        panelSpodnie = new JPanel(new GridLayout(0, 3, 0, 0));
+        JPanel panelSpodnie = new JPanel(new GridLayout(0, 3, 0, 0));
         panelSpodnie.setPreferredSize(new Dimension(750, policzNewHeight(listaSpodni.size())));
 
         for (Spodnie spodnie : listaSpodni) {
@@ -682,6 +695,12 @@ public class SklepGUI {
         buttonSpodnie.setEnabled(true);
         buttonWszystko.setEnabled(true);
 
+        listaBluz.clear();
+
+        for (Produkt produkt : sklep.getListaProduktow()) {
+            if (produkt instanceof Bluza && !listaBluz.contains(produkt)) {
+                listaBluz.add((Bluza) produkt);}}
+
         if (scrollPaneButy != null) {
             frame.remove(scrollPaneButy);
         }
@@ -696,7 +715,7 @@ public class SklepGUI {
         }
 
         // Utwórz nowy panel dla butów
-        panelBluza = new JPanel(new GridLayout(0, 3, 0, 0));
+        JPanel panelBluza = new JPanel(new GridLayout(0, 3, 0, 0));
         panelBluza.setPreferredSize(new Dimension(750, policzNewHeight(listaBluz.size())));
 
         for (Bluza bluza : listaBluz) {
