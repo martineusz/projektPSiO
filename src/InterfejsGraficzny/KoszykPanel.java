@@ -90,9 +90,9 @@ public class KoszykPanel extends JPanel implements ActionListener {
 
     KoszykPanel(JFrame frame, Sklep sklep) {
         this.frame = frame;
-        frame.setResizable(false);
         this.sklep = sklep;
         this.koszyk = this.sklep.zalogowanyKlient.getKoszyk();
+        JLabel mojKoszyk = new JLabel("MOJ KOSZYK");
         panelGorny = new JPanel();
         panelGlowny = new JPanel();
         JPanel panelDolny = new JPanel();
@@ -103,7 +103,7 @@ public class KoszykPanel extends JPanel implements ActionListener {
         buttonProduktMap = new HashMap<>();
         comboProduktMap = new HashMap<>();
         comboList = new ArrayList<>();
-        ImageIcon koszykImage = new ImageIcon("src/Obrazki/koszyk.png");
+        ImageIcon koszykImage = new ImageIcon("koszyk.png");
 
 //        TEXT FIELDY
         textImie = new JTextField();
@@ -211,15 +211,6 @@ public class KoszykPanel extends JPanel implements ActionListener {
         labelKartaNazwisko.setBounds(290,260,120,10);
         panelPlatnosc.add(labelKartaNazwisko);
 
-        //MOJ KOSZYK label
-        JLabel mojKoszyk = new JLabel("MOJ KOSZYK");
-        mojKoszyk.setIcon(koszykImage);
-        mojKoszyk.setHorizontalTextPosition(JLabel.RIGHT);
-        mojKoszyk.setVerticalTextPosition(JLabel.CENTER);
-        mojKoszyk.setBounds(25,0,200,100);
-        mojKoszyk.setFont(new Font(null, Font.BOLD, 20));
-
-
         //PANEL GORNY
         panelGorny.setPreferredSize(new Dimension(0,150));
         panelGorny.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -235,50 +226,70 @@ public class KoszykPanel extends JPanel implements ActionListener {
         panelGlowny.add(panelDostawa);
         panelGlowny.add(panelPodsumowanie);
 
+        //PANEL KOSZYK
+        panelGlowny.setBackground(Color.WHITE);
+        panelKoszyk.setBorder(BorderFactory.createLineBorder(new Color(220,220,220)));
+        panelKoszyk.setBackground(Color.WHITE);
+        panelKoszyk.setPreferredSize(new Dimension(600, 450));
 
+        scrollPaneKoszyk = new JScrollPane(panelKoszyk);
+        JScrollBar szybkoscScrollPaneKoszyk = scrollPaneKoszyk.getVerticalScrollBar();
+        szybkoscScrollPaneKoszyk.setUnitIncrement(20);
+        szybkoscScrollPaneKoszyk.setBlockIncrement(40);
+
+        scrollPaneKoszyk.setBackground(Color.WHITE);
+        scrollPaneKoszyk.setBorder(BorderFactory.createLineBorder(new Color(220,220,220)));
+        scrollPaneKoszyk.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPaneKoszyk.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPaneKoszyk.setBounds(200, 150, 700, 450);
 
         //PANEL PRODUKT
         for (int i = 0; i < koszyk.getListaProduktow().size(); i++) {
-            JButton buttonUsun = new JButton("X");
+            JButton buttonUsun = new JButton("x");
             Produkt produkt = koszyk.getListaProduktow().get(i);
-            JLabel labelCena = new JLabel("NAZWA: " + produkt.getNazwa());
-            opcjeWyboru = new String[produkt.getIloscWMagazynie()];
-            comboList.add(ComboBombo = new JComboBox(opcjeWyboru));
+            JLabel labelNazwa = new JLabel(produkt.getNazwa());
+            JLabel labelCena = new JLabel(produkt.getCena() + " PLN");
+            JPanel panelProdukt = new JPanel();
             obrazek = new ImageIcon();
+            int wysokoscPanelProdukt = (scrollPaneKoszyk.getHeight()/4);
 
-            buttonUsun.setBounds(450,40,30,30);
+            panelProdukt.setLayout(null);
+            panelProdukt.setBackground(new Color(242, 242, 242));
+            panelProdukt.setPreferredSize(new Dimension(scrollPaneKoszyk.getWidth()-25,wysokoscPanelProdukt));
+
+            labelNazwa.setBounds(wysokoscPanelProdukt+10,5,scrollPaneKoszyk.getWidth()-50,18);
+            labelNazwa.setFont(new Font(null, Font.BOLD, 16));
+
+            labelCena.setBounds(labelNazwa.getX(),labelNazwa.getY()+22,scrollPaneKoszyk.getWidth()-50,16);
+            labelCena.setFont(new Font(null, Font.BOLD, 16));
+
+
+            obrazek = produkt.getIcon(wysokoscPanelProdukt,wysokoscPanelProdukt);
+            labelObrazek = new JLabel();
+            labelObrazek.setIcon(obrazek);
+            labelObrazek.setBorder(BorderFactory.createLineBorder(new Color(242, 242, 242)));
+            labelObrazek.setBounds(0,0,wysokoscPanelProdukt,wysokoscPanelProdukt);
+
+            int buttonX = scrollPaneKoszyk.getWidth()-50;
+            buttonUsun.setBounds(buttonX, 0,20,20);
             buttonUsun.addActionListener(this);
             buttonUsun.setFocusable(false);
-            buttonUsun.setFont(new Font(null, Font.BOLD, 20));
-            buttonUsun.setBackground(Color.WHITE);
-            buttonUsun.setForeground(Color.RED);
-            buttonUsun.setBorder(BorderFactory.createEtchedBorder());
+            buttonUsun.setFont(new Font(null, Font.PLAIN, 20));
+            buttonUsun.setBorder(null);
+            buttonUsun.setBackground(null);
+            buttonUsun.setForeground(Color.gray);
 
-
-            JLabel labelNazwa = new JLabel("CENA: " + produkt.getCena() + " PLN");
-            labelNazwa.setBounds(110,45,400,40);
-            labelNazwa.setFont(new Font(null, Font.BOLD, 18));
-
-            labelCena.setBounds(110,20,400,40);
-            labelCena.setFont(new Font(null, Font.BOLD, 18));
-
-            JPanel panelProdukt = new JPanel();
-            panelProdukt.setLayout(null);
-            panelProdukt.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            panelProdukt.setPreferredSize(new Dimension(500,100));
-
+            opcjeWyboru = new String[produkt.getIloscWMagazynie()];
             for (int j = 1; j <= produkt.getIloscWMagazynie(); j++) {
                 opcjeWyboru[j-1] = String.valueOf(j);
             }
 
-            comboList.get(i).setBounds(400,35,40,40);
+            comboList.add(ComboBombo = new JComboBox(opcjeWyboru));
+            comboList.get(i).setBounds(labelNazwa.getX(), wysokoscPanelProdukt-40,50,30);
+            comboList.get(i).setBackground(Color.WHITE);
+            comboList.get(i).setBorder(null);
             comboList.get(i).addActionListener(this);
             comboList.get(i).setSelectedItem(0);
-
-            obrazek = produkt.getIcon(75,75);
-            labelObrazek = new JLabel();
-            labelObrazek.setIcon(obrazek);
-            labelObrazek.setBounds(20,15,75,75);
 
             panelProdukt.add(labelObrazek);
             panelProdukt.add(comboList.get(i));
@@ -291,18 +302,7 @@ public class KoszykPanel extends JPanel implements ActionListener {
             buttonProduktMap.put(buttonUsun, produkt);
         }
 
-        //PANEL KOSZYK
-        panelKoszyk.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        panelKoszyk.setPreferredSize(new Dimension(600, panelKoszyk.getComponentCount() * 110));
-
-        scrollPaneKoszyk = new JScrollPane(panelKoszyk);
-        JScrollBar szybkoscScrollPaneKoszyk = scrollPaneKoszyk.getVerticalScrollBar();
-        szybkoscScrollPaneKoszyk.setUnitIncrement(20);
-        szybkoscScrollPaneKoszyk.setBlockIncrement(40);
-
-        scrollPaneKoszyk.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPaneKoszyk.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPaneKoszyk.setBounds(100, 105, 600, 450);
+        panelKoszyk.setPreferredSize(new Dimension(600, panelKoszyk.getComponentCount() * ((scrollPaneKoszyk.getHeight()/4)+10)));
         panelGlowny.add(scrollPaneKoszyk);
 
         //PANEL DOSTAWA
@@ -323,7 +323,7 @@ public class KoszykPanel extends JPanel implements ActionListener {
 
         //PANEL PODSUMOWANIE
         panelPodsumowanie.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        panelPodsumowanie.setBounds(1000,105,400,450);
+        panelPodsumowanie.setBounds(1270,150,450,450);
         panelPodsumowanie.setLayout(null);
 
         //BUTTON PODSUMOWANIE
@@ -469,6 +469,15 @@ public class KoszykPanel extends JPanel implements ActionListener {
         //PANEL DOLNY
         panelDolny.setPreferredSize(new Dimension(0, 180));
         panelDolny.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        //MOJ KOSZYK label
+        mojKoszyk.setIcon(koszykImage);
+        mojKoszyk.setHorizontalTextPosition(JLabel.RIGHT);
+        mojKoszyk.setVerticalTextPosition(JLabel.CENTER);
+        mojKoszyk.setBackground(new Color(242, 242, 242));
+        mojKoszyk.setOpaque(true);
+        mojKoszyk.setBounds(scrollPaneKoszyk.getX(),scrollPaneKoszyk.getY()-40,200,40);
+        mojKoszyk.setFont(new Font(null, Font.BOLD, 20));
 
         this.add(panelGorny);
         this.add(panelGlowny);

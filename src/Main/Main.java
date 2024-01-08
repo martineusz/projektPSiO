@@ -162,7 +162,7 @@ public class Main {
                                                                 break LoopZamawianie;
                                                         }
                                                         if (zamowienie) {
-                                                            zamawianiePlatnosc();
+                                                           zamawianiePlatnosc();
                                                             while (scan.hasNext()) {
                                                                 wybor = scan.nextLine();
                                                                 switch (wybor) {
