@@ -1,26 +1,21 @@
 package Main;
 
+import InterfejsGraficzny.Rejestracja;
+import Produkt.Produkt;
+
+import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
-
-import DostawaStrategia.*;
-import InterfejsGraficzny.GUIadmin;
-import PlacenieStrategia.*;
-import Produkt.*;
-import java.text.DecimalFormat;
-
-import InterfejsGraficzny.*;
-
-import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
         Sklep sklep = new Sklep(new ArrayList<Klient>(), null, false, new ArrayList<Produkt>());
 
         JFrame jFrame = new JFrame();
+        //TODO: Zmienić nazwę aplikacji
+        jFrame.setTitle("Sklep");
         jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         sklep.promocja.wczytajObserwatorowPromocji();

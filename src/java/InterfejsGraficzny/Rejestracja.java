@@ -2,7 +2,6 @@ package InterfejsGraficzny;
 
 
 import Main.Klient;
-import Main.Main;
 import Main.Sklep;
 
 import javax.swing.*;
@@ -11,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
 
 
 public class Rejestracja  {
@@ -182,7 +180,7 @@ public class Rejestracja  {
         buttonRejestr.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (CheckIfCorrect()) {
-                    sklep.getListaKlientow().add(new Klient(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField6.getText()));
+                    sklep.getListaKlientow().add(new Klient(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), Sklep.hashPassword(jTextField4.getText()), jTextField5.getText(), jTextField6.getText()));
                     sklep.setZalogowanyKlient(sklep.getListaKlientow().get(sklep.getListaKlientow().size() - 1));
                     sklep.setCzyZalogowany(true);
                     frame.getContentPane().removeAll();
@@ -282,7 +280,8 @@ public class Rejestracja  {
         }
     }
 
-    public static void loguj(Sklep sklep, JFrame frame) {{if (sklep.zalogujSie(jTextFieldLogowanie.getText(), jTextFieldHaslo.getText())){
+    public static void loguj(Sklep sklep, JFrame frame) {
+        if (sklep.zalogujSie(jTextFieldLogowanie.getText(), jTextFieldHaslo.getText())){
         frame.getContentPane().removeAll();
         frame.revalidate();
         frame.repaint();
@@ -291,7 +290,7 @@ public class Rejestracja  {
     else {jTextFieldLogowanie.setText("");
         jTextFieldHaslo.setText("");}
         error.setText("Niepoprawny login lub hasło");
-    }}
+    }
 
     public static void logujJakoAdmin(JFrame frame, Sklep sklep) {
         if (jTextFieldLogowanie.getText().equals("admin") && jTextFieldHaslo.getText().equals("12345678")) {

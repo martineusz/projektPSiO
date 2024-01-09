@@ -1,6 +1,8 @@
 package Main;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -62,6 +64,7 @@ public class Sklep {
     private static final long serialVersionUID = 1234123563789L;
 
     public boolean zalogujSie(String login, String haslo) {
+        haslo = hashPassword(haslo);
         boolean zalogowano = false;
         for (int i = 0; i < listaKlientow.size(); i++) {
             if (login.equals(listaKlientow.get(i).getLogin()) && haslo.equals(listaKlientow.get(i).getHaslo())) {
@@ -385,5 +388,30 @@ public class Sklep {
             }
         }
         return listaDostepnychProduktow;
+    }
+
+    public static  String hashPassword(String password) {
+
+        String hashedPassword = "";
+
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+
+            StringBuilder hexString = new StringBuilder();
+            for (byte hashByte : hashBytes) {
+                String hex = Integer.toHexString(0xff & hashByte);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+
+            hashedPassword = hexString.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return hashedPassword;
     }
 }
