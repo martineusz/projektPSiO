@@ -1,13 +1,9 @@
 package PlacenieStrategia;
 
-import InterfejsGraficzny.PlatnoscException;
+import inputValidate.PlatnoscException;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
 import javax.swing.*;
-import java.awt.*;
 
 public class placKarta implements PlacenieStrategia, Serializable {
     private static final long serialVersionUID = -9214117519616244433L;

@@ -2,13 +2,12 @@ package InterfejsGraficzny;
 
 import DostawaStrategia.DostawaKurier;
 import DostawaStrategia.DostawaPaczkomat;
-import InterfejsGraficzny.PustyKoszykException;
-import InterfejsGraficzny.SklepGUI;
-import InterfejsGraficzny.ZlyAdresException;
+import inputValidate.PustyKoszykException;
 import PlacenieStrategia.placBlikiem;
 import PlacenieStrategia.placKarta;
 import Produkt.*;
 import Main.*;
+import inputValidate.ZlyAdresException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -103,7 +102,7 @@ public class KoszykPanel extends JPanel implements ActionListener {
         buttonProduktMap = new HashMap<>();
         comboProduktMap = new HashMap<>();
         comboList = new ArrayList<>();
-        ImageIcon koszykImage = new ImageIcon("koszyk.png");
+        ImageIcon koszykImage = new ImageIcon("src/resources/Obrazki/koszyk.png");
 
 //        TEXT FIELDY
         textImie = new JTextField();
@@ -384,7 +383,7 @@ public class KoszykPanel extends JPanel implements ActionListener {
         panelPodsumowanie.add(buttonPlatnosc);
         buttonPlatnosc.setVisible(false);
 
-        ImageIcon cofnijImage = new ImageIcon("src/Obrazki/cofnij.png");
+        ImageIcon cofnijImage = new ImageIcon("src/resources/Obrazki/cofnij.png");
         Image originalImage = cofnijImage.getImage();
         cofnijImage = new ImageIcon(originalImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 

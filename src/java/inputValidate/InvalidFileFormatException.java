@@ -1,6 +1,5 @@
-package InterfejsGraficzny;
+package inputValidate;
 
-import javax.swing.*;
 import java.io.File;
 
 public class InvalidFileFormatException extends Exception {

@@ -1,4 +1,4 @@
-package InterfejsGraficzny;
+package inputValidate;
 
 import java.util.Objects;
 

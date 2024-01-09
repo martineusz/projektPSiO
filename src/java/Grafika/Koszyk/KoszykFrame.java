@@ -40,7 +40,7 @@ public class KoszykFrame extends JFrame implements ActionListener {
 
         //Label twojKoszyk
         JLabel twojKoszyk = new JLabel();
-        ImageIcon koszykImage = new ImageIcon("koszyk.png");
+        ImageIcon koszykImage = new ImageIcon("src/resources/Obrazki/koszyk.png");
 
 
         twojKoszyk.setText("TWOJ KOSZYK");

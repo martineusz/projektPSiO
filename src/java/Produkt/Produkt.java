@@ -1,0 +1,131 @@
+package Produkt;
+import javax.swing.*;
+import java.awt.*;
+import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
+public abstract class Produkt implements Serializable {
+    private String idProduktu;
+    private double cena;
+    private String nazwa;
+    private int iloscWMagazynie;
+    private String opis;
+    private String material;
+    private String kolor;
+    private Producent producent;
+    private ImageIcon icon;
+
+    public Produkt(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material,
+                   String kolor, Producent producent, ImageIcon icon) {
+        this.idProduktu = idProduktu;
+        this.cena = cena;
+        this.nazwa = nazwa;
+        this.iloscWMagazynie = iloscWMagazynie;
+        this.opis = opis;
+        this.material = material;
+        this.kolor = kolor;
+        this.producent = producent;
+        this.icon = icon;
+    }
+    private static final long serialVersionUID = 4362596792216997619L;
+
+    public String getIdProduktu() {
+        return idProduktu;
+    }
+
+    public void setIdProduktu(String idProduktu) {
+        this.idProduktu = idProduktu;
+    }
+
+    public double getCena() {
+        cena = (Math.floor(cena * 100.0) / 100.0);
+        return cena;
+    }
+
+    public void setCena(double cena) {
+        this.cena = cena;
+    }
+
+    public String getNazwa() {
+        return nazwa;
+    }
+
+    public void setNazwa(String nazwa) {
+        this.nazwa = nazwa;
+    }
+
+    public int getIloscWMagazynie() {
+        return iloscWMagazynie;
+    }
+
+    public void setIloscWMagazynie(int iloscWMagazynie) {
+        this.iloscWMagazynie = iloscWMagazynie;
+    }
+
+    public String getOpis() {
+        return opis;
+    }
+
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public String getKolor() {
+        return kolor;
+    }
+
+    public void setKolor(String kolor) {
+        this.kolor = kolor;
+    }
+
+    public Producent getProducent() {
+        return producent;
+    }
+
+    public void setProducent(Producent producent) {
+        this.producent = producent;
+    }
+
+    public ImageIcon getIcon(int x, int y) {
+        Image img = icon.getImage();
+        Image newImg = img.getScaledInstance(x, y, java.awt.Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newImg);
+        return icon;
+    }
+
+    public void setIcon(ImageIcon icon) {
+        this.icon = icon;
+    }
+
+    public boolean sprawdzDostepnoscProduktu(){
+        return this.iloscWMagazynie>0;
+    }
+    
+    public void zwiekszIlosc(Produkt produkt, int zwiekszIlosc){
+        produkt.setIloscWMagazynie(getIloscWMagazynie()+zwiekszIlosc);
+    }
+
+    @Override
+    public String toString() {
+        return "Produkt {" +
+                "ID: '" + idProduktu + '\'' +
+                ", cena: " + cena +
+                ", nazwa: '" + nazwa + '\'' +
+                ", ilość w magazynie: " + iloscWMagazynie +
+                ", opis: '" + opis + '\'' +
+                ", materiał: '" + material + '\'' +
+                ", kolor: '" + kolor + '\'' +
+                ", producent: " + producent +
+                '}';
+    }
+}

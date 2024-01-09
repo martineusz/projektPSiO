@@ -173,12 +173,12 @@ public class SklepGUI {
 
 
 
-        ImageIcon carticon = new ImageIcon("cart.jpg");
+        ImageIcon carticon = new ImageIcon("src/resources/Obrazki/cart.jpg");
         Image originalImage = carticon.getImage();
         Image scaledImage = originalImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
-        ImageIcon mailicon = new ImageIcon("mail.jpg");
+        ImageIcon mailicon = new ImageIcon("src/resources/Obrazki/mail.jpg");
         Image originalMailImage = mailicon.getImage();
         Image scaledMailImage = originalMailImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         ImageIcon scaledMailIcon = new ImageIcon(scaledMailImage);

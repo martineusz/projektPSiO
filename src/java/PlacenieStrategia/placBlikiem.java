@@ -1,12 +1,9 @@
 package PlacenieStrategia;
 
-import InterfejsGraficzny.PlatnoscException;
-import InterfejsGraficzny.ZlyAdresException;
+import inputValidate.PlatnoscException;
 
 import java.io.Serializable;
-import java.util.Scanner;
 import javax.swing.*;
-import java.awt.*;
 
 public class placBlikiem implements PlacenieStrategia, Serializable {
     private String kodBlik;
