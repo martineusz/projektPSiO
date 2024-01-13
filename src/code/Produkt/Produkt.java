@@ -2,6 +2,7 @@ package code.Produkt;
 import javax.swing.*;
 import java.awt.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 public abstract class Produkt implements Serializable {
@@ -35,6 +36,10 @@ public abstract class Produkt implements Serializable {
 
     public TreeMap<String, Integer> getRozmiary() {
         return rozmiary;
+    }
+
+    public ArrayList<String> getRozmiaryAsList() {
+        return new ArrayList<>(rozmiary.keySet());
     }
 
     public boolean sprawdzDostepnosc(String rozmiar) {

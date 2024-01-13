@@ -34,7 +34,7 @@ public class Rejestracja  {
     public static void ShopPage(Sklep sklep, JFrame frame) {
         JPanel shopJpanel = new JPanel();
         JPanel jpanel1 = new JPanel();
-        jpanel1.setBackground(Color.ORANGE);
+        jpanel1.setBackground(Color.RED);
         jpanel1.setBounds(0,0, 400, 500);
         shopJpanel.add(jpanel1);
 
