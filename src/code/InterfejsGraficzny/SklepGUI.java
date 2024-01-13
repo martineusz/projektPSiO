@@ -307,6 +307,8 @@ public class SklepGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == buttonKoszyk) {
+                    sklep.getZalogowanyKlient().getKoszyk().inicjalizujMape();
+
                     frame.getContentPane().removeAll();
                     frame.revalidate();
                     frame.repaint();

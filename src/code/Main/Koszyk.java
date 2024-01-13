@@ -1,8 +1,6 @@
 package code.Main;
 
 
-
-
 import code.DostawaStrategia.DostawaStrategia;
 import code.PlacenieStrategia.PlacenieStrategia;
 import code.PlacenieStrategia.placBlikiem;
@@ -13,6 +11,7 @@ import code.inputValidate.ZlyAdresException;
 import javax.swing.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Koszyk implements Serializable {
@@ -22,16 +21,31 @@ public class Koszyk implements Serializable {
     private PlacenieStrategia placenieStrategia; // = new PlacenieStrategia();
     private DostawaStrategia dostawaStrategia; // -||-||-||-||-||-||-||-||-
     private String adres;
-    //private Map<Produkt,Integer>
+    private Map<Produkt,Integer> mapaProduktow;
 
     public Koszyk() {
         this.listaProduktow = new ArrayList<Produkt>();
+        this.mapaProduktow = new HashMap<>();
+    }
+
+    public void inicjalizujMape(){
+        for(Produkt produkt: this.listaProduktow) {
+            this.mapaProduktow.put(produkt, 1);
+        }
+    }
+
+    public void ustawLiczbeMapa(Produkt produkt, int liczba) {
+        this.mapaProduktow.put(produkt, liczba);
+    }
+
+    public void getLiczbeMapa(Produkt produkt) {
+        this.mapaProduktow.get(produkt);
     }
 
     public double getWartoscZamowienia() {
         wartoscZamowienia = 0.00;
-        for (Produkt produkt : getListaProduktow()) {
-            wartoscZamowienia += produkt.getCena();
+        for (Produkt produkt : this.mapaProduktow.keySet()) {
+            wartoscZamowienia += produkt.getCena()*this.mapaProduktow.get(produkt);
         }
         return wartoscZamowienia;
     }
