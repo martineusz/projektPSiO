@@ -341,12 +341,8 @@ public class Sklep {
             Object obj;
             while ((obj = odczyt.readObject()) != null) {
                 Produkt produkt = (Produkt) obj;
-                /*
-                if (produkt.getIloscWMagazynie() > 0) {
                     listaProduktow.add(produkt);
-                }
 
-                 */
             }
         } catch (EOFException ignored) {
 
@@ -358,12 +354,7 @@ public class Sklep {
         utworzListeDostepnychProduktow();
         try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("ListaProduktow.ser"))){
             for (Produkt produkt : listaProduktow) {
-                /*
-                if (produkt.getIloscWMagazynie() > 0) {
                     zapis.writeObject(produkt);
-                }
-
-                 */
             }
         } catch (IOException e){
             e.printStackTrace();

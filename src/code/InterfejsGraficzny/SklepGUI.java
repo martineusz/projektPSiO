@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import code.InterfejsGraficzny.Koszyk.KoszykPane;
 import code.Main.*;
 import code.Produkt.*;
 import code.Obserwator.*;
@@ -56,6 +57,7 @@ public class SklepGUI {
         JScrollBar szybkoscScroll = scrollPanePowiadomienia.getVerticalScrollBar();
         frame.setResizable(false);
         frame.setSize(950, 770);
+        frame.setLayout(null);
 
         for (Produkt produkt : sklep.getListaProduktow())
             if (produkt instanceof Bluza && !listaBluz.contains(produkt)) {
@@ -306,8 +308,8 @@ public class SklepGUI {
                     frame.getContentPane().removeAll();
                     frame.revalidate();
                     frame.repaint();
-                    frame.setSize(new Dimension(1920, 1080));
-                    frame.add(new KoszykPanel(frame, sklep));
+                    KoszykPane koszykPane = new KoszykPane();
+                    koszykPane.otworzKoszyk(sklep, frame);
                     frame.revalidate();
                     frame.repaint();
 
