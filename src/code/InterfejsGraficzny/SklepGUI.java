@@ -19,6 +19,7 @@ public class SklepGUI {
     private static ArrayList<String> listaProduktowWKoszyku;
     private static int liczbaKolumn;
     private static int wysokoscProduktu;
+    private static Color myColor;
     private static JScrollPane scrollPaneButy = new JScrollPane();
     private static JScrollPane scrollPaneBluza = new JScrollPane();
     private static JScrollPane scrollPaneKoszulki = new JScrollPane();
@@ -55,6 +56,7 @@ public class SklepGUI {
         JScrollPane scrollPanePowiadomienia = new JScrollPane(panelPowiadomienia);
         JScrollBar szybkoscScroll = scrollPanePowiadomienia.getVerticalScrollBar();
         frame.setResizable(false);
+        myColor = new Color(255, 69, 0);
         frame.setSize(950, 770);
 
         for (Produkt produkt : sklep.getListaProduktow())
@@ -84,7 +86,7 @@ public class SklepGUI {
         panelGlowny.setBounds(200, 70, 737, 700);
 
         panelLewy.setLayout(null);
-        panelLewy.setBackground(Color.RED);
+        panelLewy.setBackground(myColor);
         panelGora.setLayout(null);
         panelKoszykButton = new JPanel();
         panelGora.add(panelKoszykButton);
@@ -106,7 +108,7 @@ public class SklepGUI {
                 buttonUsun.setFocusable(false);
                 buttonUsun.setFont(new Font(null, Font.BOLD, 20));
                 buttonUsun.setBackground(Color.WHITE);
-                buttonUsun.setForeground(Color.RED);
+                buttonUsun.setForeground(myColor);
                 buttonUsun.setBorder(BorderFactory.createEtchedBorder());
 
                 String promocja = sklep.zalogowanyKlient.obs.getPowiadomienia().get(i);
@@ -191,7 +193,7 @@ public class SklepGUI {
         buttonKoszyk.setBounds( 0,0, 40, 40);
         panelGora.add(iloscWKoszyku);
         iloscWKoszyku.setBounds(625,47,15,15);
-        iloscWKoszyku.setForeground(Color.RED);
+        iloscWKoszyku.setForeground(myColor);
         buttonKoszyk.setFocusable(false);
 
         ;

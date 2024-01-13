@@ -34,7 +34,9 @@ public class Rejestracja  {
     public static void ShopPage(Sklep sklep, JFrame frame) {
         JPanel shopJpanel = new JPanel();
         JPanel jpanel1 = new JPanel();
-        jpanel1.setBackground(Color.RED);
+
+        Color myColor = new Color(255, 69, 0);
+        jpanel1.setBackground(myColor);
         jpanel1.setBounds(0,0, 400, 500);
         shopJpanel.add(jpanel1);
 
@@ -42,13 +44,20 @@ public class Rejestracja  {
         shopJpanel.setBounds(0,0,1050,500);
 
         JPanel jPanel2 = new JPanel();
-        jPanel2.setBounds(400, 0, 600, 500);
+        jPanel2.setBounds(400, 0, 650, 500);
         shopJpanel.add(jPanel2);
         jPanel2.setLayout(null);
+        jPanel2.setBackground(Color.white);
 
         Label label1 = new Label("LOGIN");
         Label label3 = new Label("Jesteś tu pierwszy raz?");
+        Font myFont = new Font("Serif", Font.BOLD, 17);
+        label3.setFont(myFont);
+        label1.setFont(myFont);
+
         Button rejestrButton = new Button("Zarejestruj się");
+        rejestrButton.setBackground(myColor);
+        rejestrButton.setForeground(Color.white);
 
 
         label1.setForeground(Color.black);
@@ -56,7 +65,12 @@ public class Rejestracja  {
         jTextFieldLogowanie = new JTextField();
         jTextFieldHaslo = new JTextField();
         Label label2 = new Label("HASŁO");
-        Button apllyButton = new Button("Zatwierdź");
+        label2.setFont(myFont);
+
+        Button apllyButton = new Button("Zaloguj się");
+        apllyButton.setBackground(myColor);
+        apllyButton.setForeground(Color.white);
+        ;
         label2.setForeground(Color.black);
 
         error = new JLabel("");
@@ -74,13 +88,21 @@ public class Rejestracja  {
         jPanel2.add(apllyButton);
         jPanel2.add(rejestrButton);
 
-        label1.setBounds(100, 110, 50, 10);
-        label2.setBounds(100,160,50,10);
-        label3.setBounds(185, 350, 130, 20);
+        ImageIcon logoSklepu = SklepGUI.scaleIcon("src/resources/Obrazki/logoSklepu.png", 400);
+        JLabel label = new JLabel();
+        label.setIcon(logoSklepu);
+        jpanel1.add(label);
+        label.setBounds(-15,30, 400,400);
+
+        label1.setBounds(70, 105, 65, 20);
+        label2.setBounds(70,155,65,20);
+        label3.setBounds(160, 350, 190, 40);
         jTextFieldLogowanie.setBounds(150, 100, 300, 30);
         jTextFieldHaslo.setBounds(150, 150, 300,30);
-        apllyButton.setBounds(275, 200, 53, 15);
-        adminBox.setBounds(325,10, 225,30);
+        apllyButton.setBounds(250, 200, 100, 40);
+        adminBox.setBounds(450,10, 180,30);
+        adminBox.setBackground(Color.white);
+        adminBox.setFocusable(false);
         apllyButton.addActionListener(e -> {if (!adminBox.isSelected()){
         loguj(sklep, frame);
         }
@@ -89,7 +111,7 @@ public class Rejestracja  {
         }
         });
         rejestrButton.addActionListener(e -> RejestrPage(sklep, frame));
-        rejestrButton.setBounds(350, 350, 80, 20);
+        rejestrButton.setBounds(350, 350, 100, 40);
 
         shopJpanel.setLayout(null);
         frame.add(shopJpanel);
@@ -132,7 +154,7 @@ public class Rejestracja  {
         int i = 30;
 
         for (JLabel JLabel : errors) {
-            JLabel.setForeground(Color.red);
+            JLabel.setForeground(Color.YELLOW);
             JLabel.setFont(JLabel.getFont().deriveFont(10.0f));
             JLabel.setBounds(160, i,250, 20);
             i += 50;
