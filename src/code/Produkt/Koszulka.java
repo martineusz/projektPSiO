@@ -8,7 +8,7 @@ public class Koszulka extends Produkt implements Serializable {
     private String dekoltKoszulki;
     private String krojKoszulki;
 
-    public Koszulka(String idProduktu, double cena, String nazwa, TreeMap rozmiary, String opis, String material,
+    public Koszulka(String idProduktu, float cena, String nazwa, TreeMap rozmiary, String opis, String material,
                     String kolor, Producent producent, String dekoltKoszulki, String krojKoszulki, ImageIcon icon){
         super(idProduktu, cena, nazwa, rozmiary, opis, material, kolor, producent, icon);
         this.dekoltKoszulki=dekoltKoszulki;

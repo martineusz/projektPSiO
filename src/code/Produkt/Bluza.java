@@ -9,7 +9,7 @@ public class Bluza extends Produkt implements Serializable {
     private String dekoltBluzy;
     private String krojBluzy;
     
-    public Bluza(String idProduktu, double cena, String nazwa, TreeMap rozmiary, String opis, String material,
+    public Bluza(String idProduktu, float cena, String nazwa, TreeMap rozmiary, String opis, String material,
                  String kolor, Producent producent, boolean czyZKapturem, String dekoltBluzy, String krojBluzy, ImageIcon icon){
         super(idProduktu, cena, nazwa, rozmiary, opis, material, kolor, producent, icon);
         this.czyZKapturem=czyZKapturem;

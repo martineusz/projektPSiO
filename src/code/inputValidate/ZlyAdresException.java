@@ -10,8 +10,8 @@ public class ZlyAdresException extends Exception{
         super(message);
     }
 
-    public static void checkIfEmpty(String imie, String nazwisko, String ulica, String nrDomu,
-                                      String miejscowosc, String kraj) throws ZlyAdresException {
+    public static void checkIfEmpty(String imie1, String string, String s, String imie, String nazwisko, String ulica, String nrDomu,
+                                    String miejscowosc, String kraj) throws ZlyAdresException {
 
         if(Objects.equals(imie, "") || Objects.equals(nazwisko, "") || Objects.equals(ulica, "") || Objects.equals(nrDomu, "") || Objects.equals(miejscowosc, "") || Objects.equals(kraj, "")){
             throw new ZlyAdresException("Pola nie moga byc puste");

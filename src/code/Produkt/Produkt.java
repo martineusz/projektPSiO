@@ -7,7 +7,7 @@ import java.util.TreeMap;
 
 public abstract class Produkt implements Serializable {
     private String idProduktu;
-    private double cena;
+    private float cena;
     private String nazwa;
     private String opis;
     private String material;
@@ -16,7 +16,7 @@ public abstract class Produkt implements Serializable {
     private ImageIcon icon;
     private TreeMap<String, Integer> rozmiary;
 
-    public Produkt(String idProduktu, double cena, String nazwa, TreeMap rozmiary, String opis, String material,
+    public Produkt(String idProduktu, float cena, String nazwa, TreeMap rozmiary, String opis, String material,
                    String kolor, Producent producent, ImageIcon icon) {
         this.idProduktu = idProduktu;
         this.cena = cena;
@@ -59,12 +59,12 @@ public abstract class Produkt implements Serializable {
         this.idProduktu = idProduktu;
     }
 
-    public double getCena() {
-        cena = (Math.floor(cena * 100.0) / 100.0);
+    public float getCena() {
+        cena = (float) (Math.floor(cena * 100.0) / 100.0);
         return cena;
     }
 
-    public void setCena(double cena) {
+    public void setCena(float cena) {
         this.cena = cena;
     }
 

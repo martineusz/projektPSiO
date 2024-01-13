@@ -9,7 +9,7 @@ public class Spodnie extends Produkt implements Serializable {
     private String typSpodni;
     private String krojSpodni;
     
-    public Spodnie(String idProduktu, double cena, String nazwa, TreeMap rozmiary, String opis, String material,
+    public Spodnie(String idProduktu, float cena, String nazwa, TreeMap rozmiary, String opis, String material,
                    String kolor, Producent producent, float dlugoscSpodni, String typSpodni, String krojSpodni, ImageIcon icon){
         super(idProduktu, cena, nazwa, rozmiary, opis, material, kolor, producent, icon);
         this.dlugoscSpodni=dlugoscSpodni;

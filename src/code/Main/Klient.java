@@ -96,7 +96,7 @@ public class Klient implements Serializable {
 //        koszyk.dodajProdukt(produkt);
 //    }
 
-    public void zapiszNaPromocje(Promocja promocja, String rodzaj) {
+    public void zapiszNaPromocje(PromocjaLogika promocja, String rodzaj) {
         if (CzyPromocja) {
             System.out.println(this.imie + " jest juz w newsletterze o promocjach");
         } else {
@@ -104,7 +104,7 @@ public class Klient implements Serializable {
         }
     }
 
-    public void wypiszZPromocji(Promocja promocja) {
+    public void wypiszZPromocji(PromocjaLogika promocja) {
         if (CzyPromocja) {
             usunZNewslettera(promocja);
             System.out.println(this.imie + " wypisany z newslettera o promocjach");
