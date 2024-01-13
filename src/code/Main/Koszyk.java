@@ -8,7 +8,9 @@ import code.PlacenieStrategia.PlacenieStrategia;
 import code.PlacenieStrategia.placBlikiem;
 import code.PlacenieStrategia.placKarta;
 import code.Produkt.Produkt;
+import code.inputValidate.ZlyAdresException;
 
+import javax.swing.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -18,6 +20,7 @@ public class Koszyk implements Serializable {
     private ArrayList<Produkt> listaProduktow = null;
     private PlacenieStrategia placenieStrategia; // = new PlacenieStrategia();
     private DostawaStrategia dostawaStrategia; // -||-||-||-||-||-||-||-||-
+    private String adres;
 
     public Koszyk() {
         this.listaProduktow = new ArrayList<Produkt>();
@@ -146,5 +149,34 @@ public class Koszyk implements Serializable {
 
     public void setListaProduktow(ArrayList<Produkt> listaProduktow) {
         this.listaProduktow = listaProduktow;
+    }
+
+    public String getAdres() {
+        return adres;
+    }
+
+    public void setAdres(String adres) {
+        this.adres = adres;
+    }
+
+    public String stworzAdres(String imie, String nazwisko, String kraj, String numerTelefonu, String ulica, String numerDomu, String email, String kodPocztowy, String miejscowosc){
+        try {
+            ZlyAdresException.checkIfEmpty(imie,nazwisko,kraj,numerTelefonu,ulica,numerDomu,email,kodPocztowy,miejscowosc);
+            ZlyAdresException.checkPhoneNumber(numerTelefonu);
+            ZlyAdresException.checkEmail(email);
+            ZlyAdresException.checkKodPocztowy(kodPocztowy);
+
+            adres = imie +
+                    " " + nazwisko +
+                    "\n" + ulica +
+                    " " + numerDomu +
+                    "\n" + kodPocztowy +
+                    " " + miejscowosc +
+                    " " + kraj;
+        }catch (ZlyAdresException e1){
+            JOptionPane.showMessageDialog(null, e1.getMessage(), "Błąd", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+        return adres;
     }
 }
