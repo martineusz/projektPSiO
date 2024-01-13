@@ -1,72 +1,42 @@
 package code.Obserwator;
+
 import code.Produkt.Produkt;
 
-import java.io.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Promocja implements Podmiot, Serializable {
-	ArrayList<Obserwator> obserwatorzy = new ArrayList<Obserwator>();
+public class Promocja implements Serializable {
+    String nazwa;
+    float obnizka;
+    ArrayList<Produkt> produkty;
 
-	public void ustawPromocjeNaProdukt(Produkt produkt, float obnizka, String nazwa) {
+    public Promocja(String nazwa, float obnizka, ArrayList<Produkt> produkty) {
+        this.nazwa = nazwa;
+        this.obnizka = obnizka;
+        this.produkty = produkty;
+    }
 
+    public String getNazwa() {
+        return nazwa;
+    }
 
-		System.out.print("Podaj obnizke (0 - 1): ");
-		if(obnizka > 1 || obnizka < 0) {
-			System.out.println("bledna obnizka");
-			return;
-		}
+    public void setNazwa(String nazwa) {
+        this.nazwa = nazwa;
+    }
 
-		System.out.print("Podaj nazwe promocji: ");
+    public float getObnizka() {
+        return obnizka;
+    }
 
-		produkt.setCena(Math.round(produkt.getCena()*(1-obnizka)*100)/100);
+    public void setObnizka(float obnizka) {
+        this.obnizka = obnizka;
+    }
 
-		powiadomObserwatorow(nazwa);
-	}
-	
-	@Override
-	public void dodajObserwatora(Obserwator obserwator) {
-		obserwatorzy.add(obserwator);
-	}
+    public ArrayList<Produkt> getProdukty() {
+        return produkty;
+    }
 
-	@Override
-	public void usunObserwatora(Obserwator obserwator) {
-		obserwatorzy.remove(obserwator);
-	}
-
-	@Override
-	public void powiadomObserwatorow(String nazwa) {
-		for (Obserwator obserwator : obserwatorzy) {
-			obserwator.powiadom(nazwa);
-		}
-	}
-
-	public void wczytajObserwatorowPromocji() {
-		try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("PromocjaObserwatorzy.ser"))) {
-			Object obj = null;
-			while ((obj = odczyt.readObject()) != null) {
-				if (obj instanceof ObserwatorEmail) {
-					dodajObserwatora((ObserwatorEmail) obj);
-				} else if (obj instanceof ObserwatorSMS) {
-					dodajObserwatora((ObserwatorSMS) obj);
-				}
-			}
-		} catch (EOFException ignored) {
-			// koniec pliku - czyli zakonczyc program
-		} catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void zapiszObserwatorowPromocji(){
-		try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("PromocjaObserwatorzy.ser"))){
-			for(int i=0; i<obserwatorzy.size(); i++){
-				zapis.writeObject(obserwatorzy.get(i));
-			}
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-	
-	
-	
+    public void setProdukty(ArrayList<Produkt> produkty) {
+        this.produkty = produkty;
+    }
 }

@@ -1,7 +1,6 @@
 package code.Main;
 
-import code.Obserwator.Promocja;
-
+import code.Obserwator.PromocjaLogika;
 import code.Produkt.*;
 import code.inputValidate.DaneProduktuException;
 import java.io.*;
@@ -18,7 +17,7 @@ import javax.swing.*;
 public class Sklep {
     public ArrayList<Klient> listaKlientow;
     public Klient zalogowanyKlient;
-    public Promocja promocja;
+    public PromocjaLogika promocja;
     private boolean czyZalogowany;
     private ArrayList<Produkt> listaProduktow;
 
@@ -27,7 +26,7 @@ public class Sklep {
         this.zalogowanyKlient = zalogowanyKlient;
         this.czyZalogowany = czyZalogowany;
         this.listaProduktow = listaProduktow;
-        this.promocja = new Promocja();
+        this.promocja = new PromocjaLogika();
     }
 
     public ArrayList<Klient> getListaKlientow() {
