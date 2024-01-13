@@ -154,7 +154,7 @@ public class Rejestracja  {
         int i = 30;
 
         for (JLabel JLabel : errors) {
-            JLabel.setForeground(Color.YELLOW);
+            JLabel.setForeground(Color.RED);
             JLabel.setFont(JLabel.getFont().deriveFont(10.0f));
             JLabel.setBounds(160, i,250, 20);
             i += 50;
