@@ -13,6 +13,7 @@ import code.inputValidate.ZlyAdresException;
 import javax.swing.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Koszyk implements Serializable {
     private double wartoscZamowienia;
@@ -21,6 +22,7 @@ public class Koszyk implements Serializable {
     private PlacenieStrategia placenieStrategia; // = new PlacenieStrategia();
     private DostawaStrategia dostawaStrategia; // -||-||-||-||-||-||-||-||-
     private String adres;
+    //private Map<Produkt,Integer>
 
     public Koszyk() {
         this.listaProduktow = new ArrayList<Produkt>();
