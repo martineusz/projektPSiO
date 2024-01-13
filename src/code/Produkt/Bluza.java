@@ -2,30 +2,21 @@ package code.Produkt;
 
 import javax.swing.*;
 import java.io.Serializable;
+import java.util.TreeMap;
 
 public class Bluza extends Produkt implements Serializable {
-    private String rozmiarBluzy;
     private boolean czyZKapturem;
     private String dekoltBluzy;
     private String krojBluzy;
     
-    public Bluza(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material,
-                 String kolor, Producent producent, String rozmiarBluzy, boolean czyZKapturem, String dekoltBluzy, String krojBluzy, ImageIcon icon){
-        super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, producent, icon);
-        this.rozmiarBluzy=rozmiarBluzy;
+    public Bluza(String idProduktu, double cena, String nazwa, TreeMap rozmiary, String opis, String material,
+                 String kolor, Producent producent, boolean czyZKapturem, String dekoltBluzy, String krojBluzy, ImageIcon icon){
+        super(idProduktu, cena, nazwa, rozmiary, opis, material, kolor, producent, icon);
         this.czyZKapturem=czyZKapturem;
         this.dekoltBluzy=dekoltBluzy;
         this.krojBluzy=krojBluzy;
     }
     private static final long serialVersionUID = -2576567318809067419L;
-
-    public String getRozmiarBluzy() {
-        return rozmiarBluzy;
-    }
-
-    public void setRozmiarBluzy(String rozmiarBluzy) {
-        this.rozmiarBluzy = rozmiarBluzy;
-    }
 
     public boolean isCzyZKapturem() {
         return czyZKapturem;
@@ -55,7 +46,6 @@ public class Bluza extends Produkt implements Serializable {
     public String toString() {
         return super.toString() +
                 " Bluza {" +
-                "rozmiar: " + rozmiarBluzy +
                 ", kaptur: '" + (czyZKapturem ? "tak" : "nie") + '\'' +
                 ", dekolt: '" + dekoltBluzy + '\'' +
                 ", krój: '" + krojBluzy + '\'' +

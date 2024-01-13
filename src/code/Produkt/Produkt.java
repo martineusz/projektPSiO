@@ -2,24 +2,25 @@ package code.Produkt;
 import javax.swing.*;
 import java.awt.*;
 import java.io.Serializable;
+import java.util.TreeMap;
 
 public abstract class Produkt implements Serializable {
     private String idProduktu;
     private double cena;
     private String nazwa;
-    private int iloscWMagazynie;
     private String opis;
     private String material;
     private String kolor;
     private Producent producent;
     private ImageIcon icon;
+    private TreeMap<String, Integer> rozmiary;
 
-    public Produkt(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material,
+    public Produkt(String idProduktu, double cena, String nazwa, TreeMap rozmiary, String opis, String material,
                    String kolor, Producent producent, ImageIcon icon) {
         this.idProduktu = idProduktu;
         this.cena = cena;
         this.nazwa = nazwa;
-        this.iloscWMagazynie = iloscWMagazynie;
+        this.rozmiary = rozmiary;
         this.opis = opis;
         this.material = material;
         this.kolor = kolor;
@@ -27,6 +28,23 @@ public abstract class Produkt implements Serializable {
         this.icon = icon;
     }
     private static final long serialVersionUID = 4362596792216997619L;
+
+    public void zmienRozmiar(String rozmiar, Integer ilosc) {
+        rozmiary.put(rozmiar, ilosc);
+    }
+
+    public TreeMap<String, Integer> getRozmiary() {
+        return rozmiary;
+    }
+
+    public boolean sprawdzDostepnosc(String rozmiar) {
+        if (rozmiary.get(rozmiar) > 0) return true;
+        else return false;
+    }
+
+    public void setRozmiary(TreeMap<String, Integer> rozmiary) {
+        this.rozmiary = rozmiary;
+    }
 
     public String getIdProduktu() {
         return idProduktu;
@@ -51,14 +69,6 @@ public abstract class Produkt implements Serializable {
 
     public void setNazwa(String nazwa) {
         this.nazwa = nazwa;
-    }
-
-    public int getIloscWMagazynie() {
-        return iloscWMagazynie;
-    }
-
-    public void setIloscWMagazynie(int iloscWMagazynie) {
-        this.iloscWMagazynie = iloscWMagazynie;
     }
 
     public String getOpis() {
@@ -104,13 +114,6 @@ public abstract class Produkt implements Serializable {
         this.icon = icon;
     }
 
-    public boolean sprawdzDostepnoscProduktu(){
-        return this.iloscWMagazynie>0;
-    }
-    
-    public void zwiekszIlosc(Produkt produkt, int zwiekszIlosc){
-        produkt.setIloscWMagazynie(getIloscWMagazynie()+zwiekszIlosc);
-    }
 
     @Override
     public String toString() {
@@ -118,7 +121,6 @@ public abstract class Produkt implements Serializable {
                 "ID: '" + idProduktu + '\'' +
                 ", cena: " + cena +
                 ", nazwa: '" + nazwa + '\'' +
-                ", ilość w magazynie: " + iloscWMagazynie +
                 ", opis: '" + opis + '\'' +
                 ", materiał: '" + material + '\'' +
                 ", kolor: '" + kolor + '\'' +

@@ -11,10 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class SklepGUI {
     private static ArrayList<String> listaProduktowWKoszyku;
@@ -421,7 +418,7 @@ public class SklepGUI {
                 panelButy.setPreferredSize(new Dimension(750, policzNewHeight(listaButow.size())));
 
                 for (Obuwie obuwie : listaButow) {
-                    panelButy.add(createProductPanel(obuwie.getNazwa(), obuwie.getIcon(225, 225), String.valueOf(obuwie.getCena()), sklep, obuwie));
+                    panelButy.add(createProductPanel(obuwie.getNazwa(), obuwie.getIcon(225, 225), String.valueOf(obuwie.getCena()), sklep, obuwie, obuwie.getRozmiary()));
                 }
 
                 scrollPaneButy = new JScrollPane(panelButy);
@@ -474,7 +471,7 @@ public class SklepGUI {
                 panelKoszulki.setPreferredSize(new Dimension(750, policzNewHeight(listaKoszulek.size())));
 
                 for (Koszulka koszulka : listaKoszulek) {
-                    panelKoszulki.add(createProductPanel(koszulka.getNazwa(), koszulka.getIcon(225, 225), String.valueOf(koszulka.getCena()), sklep, koszulka));
+                    panelKoszulki.add(createProductPanel(koszulka.getNazwa(), koszulka.getIcon(225, 225), String.valueOf(koszulka.getCena()), sklep, koszulka, koszulka.getRozmiary()));
                 }
 
                 scrollPaneKoszulki = new JScrollPane(panelKoszulki);
@@ -507,7 +504,7 @@ public class SklepGUI {
 
 
 
-    private static JPanel createProductPanel(String name, ImageIcon icon, String price, Sklep sklep, Produkt produkt) {
+    private static JPanel createProductPanel(String name, ImageIcon icon, String price, Sklep sklep, Produkt produkt, TreeMap rozmiary) {
         JPanel productPanel = new JPanel();
         productPanel.setLayout(null);
 
@@ -577,7 +574,7 @@ public class SklepGUI {
 
         Collections.shuffle(sklep.getListaProduktow());
         for (Produkt produkt : sklep.getListaProduktow()) {
-            panelGlowny.add(createProductPanel(produkt.getNazwa(), produkt.getIcon(225, 225), String.valueOf(produkt.getCena()), sklep, produkt));
+            panelGlowny.add(createProductPanel(produkt.getNazwa(), produkt.getIcon(225, 225), String.valueOf(produkt.getCena()), sklep, produkt, produkt.getRozmiary()));
         }
 
         if (scrollPaneButy != null) {
@@ -597,7 +594,7 @@ public class SklepGUI {
         panelGlowny.setPreferredSize(new Dimension(750, policzNewHeight(sklep.getListaProduktow().size())));
 
         for (Produkt produkt : sklep.getListaProduktow()) {
-            panelGlowny.add(createProductPanel(produkt.getNazwa(), produkt.getIcon(225, 225), String.valueOf(produkt.getCena()), sklep, produkt));
+            panelGlowny.add(createProductPanel(produkt.getNazwa(), produkt.getIcon(225, 225), String.valueOf(produkt.getCena()), sklep, produkt, produkt.getRozmiary()));
         }
 
         scrollPane = new JScrollPane(panelGlowny);
@@ -646,7 +643,7 @@ public class SklepGUI {
 
         for (Spodnie spodnie : listaSpodni) {
             if (spodnie.getIcon(225, 225) != null) {
-                panelSpodnie.add(createProductPanel(spodnie.getNazwa(), spodnie.getIcon(225, 225), String.valueOf(spodnie.getCena()), sklep, spodnie));
+                panelSpodnie.add(createProductPanel(spodnie.getNazwa(), spodnie.getIcon(225, 225), String.valueOf(spodnie.getCena()), sklep, spodnie, spodnie.getRozmiary()));
             }
         }
 
@@ -696,7 +693,7 @@ public class SklepGUI {
         panelBluza.setPreferredSize(new Dimension(750, policzNewHeight(listaBluz.size())));
 
         for (Bluza bluza : listaBluz) {
-            panelBluza.add(createProductPanel(bluza.getNazwa(), bluza.getIcon(225, 225), String.valueOf(bluza.getCena()), sklep, bluza));
+            panelBluza.add(createProductPanel(bluza.getNazwa(), bluza.getIcon(225, 225), String.valueOf(bluza.getCena()), sklep, bluza, bluza.getRozmiary()));
         }
 
         scrollPaneBluza = new JScrollPane(panelBluza);

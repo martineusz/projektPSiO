@@ -8,6 +8,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class DodajProduktGUI implements ActionListener {
 
@@ -20,6 +24,7 @@ public class DodajProduktGUI implements ActionListener {
     private JTextField[] textFieldKoszulka = new JTextField[3];
     private JTextField[] textFieldSpodnie = new JTextField[4];
     JRadioButton czyZKapturem;
+    private int licznik;
 
     private JRadioButton radioButtonObuwie;
     private JRadioButton radioButtonBluza;
@@ -31,7 +36,13 @@ public class DodajProduktGUI implements ActionListener {
     private JButton dodajProdukt;
     private JButton przyciskWyboru;
     private JPanel panelPodstawowy;
+    private JPanel panelWyboru;
+    private JScrollPane scrollPanel;
+    private JButton dodajRozmiar;
     private JPanel panelGlowny;
+    private ArrayList<JTextField> listaPolRozmiarow;
+    private TreeMap<String, Integer> mapaRozmiarow;
+
     private ImageIcon icon;
     public static void openGUI(Sklep sklep, JFrame ramka){
         DodajProduktGUI GUI = new DodajProduktGUI();
@@ -49,15 +60,12 @@ public class DodajProduktGUI implements ActionListener {
         radioButtonKoszulka = new JRadioButton("Koszulka");
         radioButtonSpodnie = new JRadioButton("Spodnie");
 
-        zatwierdzTyp = new JButton("zatwierdz");
+        zatwierdzTyp = new JButton("Zatwierdź");
         zatwierdzTyp.setBackground(Color.WHITE);
         zatwierdzTyp.setMargin(new Insets(10, 20, 10, 20));
         zatwierdzTyp.addActionListener(this);
 
-        JPanel panelWyboru = new JPanel();
-        dodajProduktBaza();
-
-
+        panelWyboru = new JPanel();
 
         panelWyboru.setLayout(new BoxLayout(panelWyboru, BoxLayout.Y_AXIS));
 
@@ -100,68 +108,79 @@ public class DodajProduktGUI implements ActionListener {
         ramka.setLayout(null);
         ramka.setContentPane(panelGlowny);
         ramka.setVisible(true);
+
+        dodajProduktBaza();
     }
     public void dodajProduktBaza(){
+        licznik = 0;
+        listaPolRozmiarow = new ArrayList<>();
+        mapaRozmiarow = new TreeMap<>();
         panelPodstawowy = new JPanel();
+        scrollPanel = new JScrollPane();
+        scrollPanel.setViewportView(panelPodstawowy);
 
-        JLabel[] podstawoweDaneLabel = new JLabel[9];
+        JLabel[] podstawoweDaneLabel = new JLabel[8];
 
         podstawoweDaneLabel[0] = new JLabel("id:");
         podstawoweDaneLabel[1] = new JLabel("cena:");
         podstawoweDaneLabel[2] = new JLabel("nazwa:");
-        podstawoweDaneLabel[3] = new JLabel("ilosc w magazynie:");
-        podstawoweDaneLabel[4] = new JLabel("opis:");
-        podstawoweDaneLabel[5] = new JLabel("material:");
-        podstawoweDaneLabel[6] = new JLabel("kolor:");
-        podstawoweDaneLabel[7] = new JLabel("nazwa producenta:");
-        podstawoweDaneLabel[8] = new JLabel("kraj producnta:");
+        podstawoweDaneLabel[3] = new JLabel("opis:");
+        podstawoweDaneLabel[4] = new JLabel("material:");
+        podstawoweDaneLabel[5] = new JLabel("kolor:");
+        podstawoweDaneLabel[6] = new JLabel("nazwa producenta:");
+        podstawoweDaneLabel[7] = new JLabel("kraj producnta:");
 
 
-        panelGlowny.add(BorderLayout.CENTER, panelPodstawowy);
-        panelPodstawowy.setLayout(new GridLayout(14,2));
+        panelGlowny.add(BorderLayout.CENTER, scrollPanel);
+        panelPodstawowy.setLayout(new GridLayout((14),2));
 
-        for(int i=0; i<9; i++){
+        for(int i=0; i<8; i++){
             panelPodstawowy.add(podstawoweDaneLabel[i]);
             panelPodstawowy.add(podstawoweDaneTextField[i]= new JTextField());
         }
+
+        dodajRozmiar = new JButton("Dodaj rozmiar");
+        dodajRozmiar.addActionListener(this);
+        dodajRozmiar.setBackground(Color.WHITE);
+        dodajRozmiar.setMargin(new Insets(10, 20, 10, 20));
+        panelWyboru.add(dodajRozmiar);
     }
+
     public void dodajObuwie(){
 
-        JLabel[] labelObuwie = new JLabel[3];
+        JLabel[] labelObuwie = new JLabel[2];
 
-        labelObuwie[0] = new JLabel("rozmiar:");
-        labelObuwie[1] = new JLabel("typ obuwia:");
-        labelObuwie[2] = new JLabel("typ podeszwy:");
+        labelObuwie[0] = new JLabel("typ obuwia:");
+        labelObuwie[1] = new JLabel("typ podeszwy:");
 
-        dodajProdukt = new JButton("dodaj produkt");
+        dodajProdukt = new JButton("Dodaj produkt");
+        dodajProdukt.setBackground(Color.WHITE);
+        dodajProdukt.setMargin(new Insets(10, 20, 10, 20));
+        dodajProdukt.addActionListener(this);
+
+        for(int i=0; i<2; i++){
+            panelPodstawowy.add(labelObuwie[i]);
+            panelPodstawowy.add(textFieldObuwie[i] = new JTextField());
+        }
+        panelWyboru.add(dodajProdukt);
+
+    }
+    public void dodajBluze(){
+
+        JLabel[] labelBluza = new JLabel[3];
+
+        czyZKapturem = new JRadioButton("kaptur");
+
+        labelBluza[0] = new JLabel("kaptur:");
+        labelBluza[1] = new JLabel("dekolt:");
+        labelBluza[2] = new JLabel("kroj:");
+
+        dodajProdukt = new JButton("Dodaj produkt");
         dodajProdukt.setBackground(Color.WHITE);
         dodajProdukt.setMargin(new Insets(10, 20, 10, 20));
         dodajProdukt.addActionListener(this);
 
         for(int i=0; i<3; i++){
-            panelPodstawowy.add(labelObuwie[i]);
-            panelPodstawowy.add(textFieldObuwie[i] = new JTextField());
-        }
-        panelPodstawowy.add(dodajProdukt);
-
-    }
-    public void dodajBluze(){
-
-        JLabel[] labelBluza = new JLabel[4];
-
-        czyZKapturem = new JRadioButton("kaptur");
-
-        labelBluza[0] = new JLabel("rozmiar:");
-        labelBluza[1] = new JLabel("kaptur:");
-        labelBluza[2] = new JLabel("dekolt:");
-        labelBluza[3] = new JLabel("kroj:");
-
-        dodajProdukt = new JButton("dodaj produkt");
-        dodajProdukt.setBackground(Color.WHITE);
-        dodajProdukt.setMargin(new Insets(10, 20, 10, 20));
-        dodajProdukt.addActionListener(this);
-
-        for(int i=0; i<4; i++){
             panelPodstawowy.add(labelBluza[i]);
             if(i==1){
                 panelPodstawowy.add(czyZKapturem);
@@ -169,57 +188,57 @@ public class DodajProduktGUI implements ActionListener {
                 panelPodstawowy.add(textFieldBluza[i] = new JTextField());
             }
         }
-        panelPodstawowy.add(dodajProdukt);
+        panelWyboru.add(dodajProdukt);
 
     }
 
     public void dodajKoszulke(){
 
-        JLabel[] labelKoszulka = new JLabel[3];
+        JLabel[] labelKoszulka = new JLabel[2];
 
-        labelKoszulka[0] = new JLabel("rozmiar:");
-        labelKoszulka[1] = new JLabel("dekolt:");
-        labelKoszulka[2] = new JLabel("kroj:");
+        labelKoszulka[0] = new JLabel("dekolt:");
+        labelKoszulka[1] = new JLabel("kroj:");
 
-        dodajProdukt = new JButton("dodaj produkt");
+        dodajProdukt = new JButton("Dodaj produkt");
         dodajProdukt.setBackground(Color.WHITE);
         dodajProdukt.setMargin(new Insets(10, 20, 10, 20));
         dodajProdukt.addActionListener(this);
 
-        for(int i=0; i<3; i++){
+        for(int i=0; i<2; i++){
             panelPodstawowy.add(labelKoszulka[i]);
             panelPodstawowy.add(textFieldKoszulka[i] = new JTextField());
         }
-        panelPodstawowy.add(dodajProdukt);
+        panelWyboru.add(dodajProdukt);
 
     }
 
     public void dodajSpodnie(){
 
-        JLabel[] labelSpodnie = new JLabel[4];
+        JLabel[] labelSpodnie = new JLabel[3];
 
-        labelSpodnie[0] = new JLabel("rozmiar:");
-        labelSpodnie[1] = new JLabel("dlugosc:");
-        labelSpodnie[2] = new JLabel("typ:");
-        labelSpodnie[3] = new JLabel("kroj:");
+        labelSpodnie[0] = new JLabel("dlugosc:");
+        labelSpodnie[1] = new JLabel("typ:");
+        labelSpodnie[2] = new JLabel("kroj:");
 
-        dodajProdukt = new JButton("dodaj produkt");
+        dodajProdukt = new JButton("Dodaj produkt");
         dodajProdukt.setBackground(Color.WHITE);
         dodajProdukt.setMargin(new Insets(10, 20, 10, 20));
         dodajProdukt.addActionListener(this);
 
-        for(int i=0; i<4; i++){
+        for(int i=0; i<3; i++){
             panelPodstawowy.add(labelSpodnie[i]);
             panelPodstawowy.add(textFieldSpodnie[i] = new JTextField());
         }
-        panelPodstawowy.add(dodajProdukt);
+        panelWyboru.add(dodajProdukt);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == zatwierdzTyp) {
-            panelGlowny.remove(panelPodstawowy);
+            panelGlowny.remove(scrollPanel);
+            if (dodajProdukt != null) panelWyboru.remove(dodajProdukt);
+            panelWyboru.remove(dodajRozmiar);
             dodajProduktBaza();
             if (radioButtonObuwie.isSelected()) {
                 dodajObuwie();
@@ -233,21 +252,38 @@ public class DodajProduktGUI implements ActionListener {
             if (radioButtonSpodnie.isSelected()) {
                 dodajSpodnie();
             }
-            panelPodstawowy.revalidate();
-            panelPodstawowy.repaint();
+            panelGlowny.revalidate();
+            panelGlowny.repaint();
         }
         if(e.getSource() == dodajProdukt){
             if (radioButtonObuwie.isSelected()) {
-                sklep.dodajObuwie(podstawoweDaneTextField[0].getText(), podstawoweDaneTextField[1].getText(), podstawoweDaneTextField[2].getText(), podstawoweDaneTextField[3].getText(), podstawoweDaneTextField[4].getText(), podstawoweDaneTextField[5].getText(), podstawoweDaneTextField[6].getText(), podstawoweDaneTextField[7].getText(), podstawoweDaneTextField[8].getText(), textFieldObuwie[0].getText(), textFieldObuwie[1].getText(), textFieldObuwie[2].getText(), icon);
+                for (int i = 0; i < listaPolRozmiarow.size(); i = i+2) {
+                    mapaRozmiarow.put(listaPolRozmiarow.get(i).getText(), Integer.parseInt(listaPolRozmiarow.get(i+1).getText()));
+                }
+                sklep.dodajObuwie(podstawoweDaneTextField[0].getText(), podstawoweDaneTextField[1].getText(), podstawoweDaneTextField[2].getText(), mapaRozmiarow, podstawoweDaneTextField[3].getText(), podstawoweDaneTextField[4].getText(), podstawoweDaneTextField[5].getText(), podstawoweDaneTextField[6].getText(), podstawoweDaneTextField[7].getText(), textFieldObuwie[0].getText(), textFieldObuwie[1].getText(), icon);
             }
             if (radioButtonBluza.isSelected()) {
-                sklep.dodajBluze(podstawoweDaneTextField[0].getText(), podstawoweDaneTextField[1].getText(), podstawoweDaneTextField[2].getText(), podstawoweDaneTextField[3].getText(), podstawoweDaneTextField[4].getText(), podstawoweDaneTextField[5].getText(), podstawoweDaneTextField[6].getText(), podstawoweDaneTextField[7].getText(), podstawoweDaneTextField[8].getText(), textFieldBluza[0].getText(), czyZKapturem.isSelected(), textFieldBluza[2].getText(), textFieldBluza[3].getText(), icon);
+                for (int i = 0; i < listaPolRozmiarow.size(); i = i+2) {
+                    mapaRozmiarow.put(listaPolRozmiarow.get(i).getText(), Integer.parseInt(listaPolRozmiarow.get(i+1).getText()));
+                }
+                sklep.dodajBluze(podstawoweDaneTextField[0].getText(), podstawoweDaneTextField[1].getText(), podstawoweDaneTextField[2].getText(), mapaRozmiarow, podstawoweDaneTextField[3].getText(), podstawoweDaneTextField[4].getText(), podstawoweDaneTextField[5].getText(), podstawoweDaneTextField[6].getText(), podstawoweDaneTextField[7].getText(), czyZKapturem.isSelected(), textFieldBluza[1].getText(), textFieldBluza[2].getText(), icon);
             }
             if (radioButtonKoszulka.isSelected()) {
-                sklep.dodajKoszulke(podstawoweDaneTextField[0].getText(), podstawoweDaneTextField[1].getText(), podstawoweDaneTextField[2].getText(), podstawoweDaneTextField[3].getText(), podstawoweDaneTextField[4].getText(), podstawoweDaneTextField[5].getText(), podstawoweDaneTextField[6].getText(), podstawoweDaneTextField[7].getText(), podstawoweDaneTextField[8].getText(), textFieldKoszulka[0].getText(), textFieldKoszulka[1].getText(), textFieldKoszulka[2].getText(), icon);
+                for (int i = 0; i < listaPolRozmiarow.size(); i = i+2) {
+                    mapaRozmiarow.put(listaPolRozmiarow.get(i).getText(), Integer.parseInt(listaPolRozmiarow.get(i+1).getText()));
+                }
+                sklep.dodajKoszulke(podstawoweDaneTextField[0].getText(), podstawoweDaneTextField[1].getText(), podstawoweDaneTextField[2].getText(), mapaRozmiarow, podstawoweDaneTextField[3].getText(), podstawoweDaneTextField[4].getText(), podstawoweDaneTextField[5].getText(), podstawoweDaneTextField[6].getText(), podstawoweDaneTextField[7].getText(), textFieldKoszulka[0].getText(), textFieldKoszulka[1].getText(), icon);
             }
             if (radioButtonSpodnie.isSelected()) {
-                sklep.dodajSpodnie(podstawoweDaneTextField[0].getText(), podstawoweDaneTextField[1].getText(), podstawoweDaneTextField[2].getText(), podstawoweDaneTextField[3].getText(), podstawoweDaneTextField[4].getText(), podstawoweDaneTextField[5].getText(), podstawoweDaneTextField[6].getText(), podstawoweDaneTextField[7].getText(), podstawoweDaneTextField[8].getText(), textFieldSpodnie[0].getText(), textFieldSpodnie[1].getText(), textFieldSpodnie[2].getText(), textFieldSpodnie[3].getText(), icon);
+                for (int i = 0; i < listaPolRozmiarow.size(); i = i+2) {
+                    mapaRozmiarow.put(listaPolRozmiarow.get(i).getText(), Integer.parseInt(listaPolRozmiarow.get(i+1).getText()));
+                }
+
+                for (Map.Entry<String, Integer> entry : mapaRozmiarow.entrySet()) {
+                    System.out.println(entry.getKey());
+                    System.out.println(entry.getValue());
+                }
+                sklep.dodajSpodnie(podstawoweDaneTextField[0].getText(), podstawoweDaneTextField[1].getText(), podstawoweDaneTextField[2].getText(), mapaRozmiarow, podstawoweDaneTextField[3].getText(), podstawoweDaneTextField[4].getText(), podstawoweDaneTextField[5].getText(), podstawoweDaneTextField[6].getText(), podstawoweDaneTextField[7].getText(), textFieldSpodnie[0].getText(), textFieldSpodnie[1].getText(), textFieldSpodnie[2].getText(), icon);
             }
         }
         if(e.getSource()==returnButton){
@@ -275,6 +311,22 @@ public class DodajProduktGUI implements ActionListener {
                JOptionPane.showMessageDialog(ramka, ex.getMessage(), "Błąd formatu pliku", JOptionPane.ERROR_MESSAGE);
             }
             }
+        }
+        if (e.getSource() == dodajRozmiar) {
+            licznik++;
+            panelPodstawowy.setLayout(new GridLayout((14+(licznik*2)), 2));
+            JLabel rozmiar = new JLabel("rozmiar:");
+            JLabel ilosc = new JLabel("ilość danego rozmiaru w magazynie:");
+            JTextField rozmiarPole = new JTextField();
+            JTextField iloscPole = new JTextField();
+            listaPolRozmiarow.add(rozmiarPole);
+            listaPolRozmiarow.add(iloscPole);
+            panelPodstawowy.add(rozmiar);
+            panelPodstawowy.add(rozmiarPole);
+            panelPodstawowy.add(ilosc);
+            panelPodstawowy.add(iloscPole);
+            panelPodstawowy.revalidate();
+            panelPodstawowy.repaint();
         }
     }
 }

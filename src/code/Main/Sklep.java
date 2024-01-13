@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 
 import javax.swing.*;
@@ -204,14 +205,13 @@ public class Sklep {
         }
     }
 
-    public void dodajObuwie(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material,
-                            String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarObuwia, String typObuwia,
+    public void dodajObuwie(String idProduktu, String cena, String nazwa, TreeMap rozmiary, String opis, String material,
+                            String kolor, String nazwaProducenta, String krajPochodzenia, String typObuwia,
                             String typPodeszwy, ImageIcon icon) {
         try {
             DaneProduktuException.pusteException(idProduktu);
             Float temp = Float.parseFloat(cena);
             DaneProduktuException.pusteException(nazwa);
-            DaneProduktuException.notNumericException(iloscWMagazynie);
             DaneProduktuException.pusteException(opis);
             DaneProduktuException.pusteException(material);
             DaneProduktuException.pusteException(kolor);
@@ -220,8 +220,10 @@ public class Sklep {
             DaneProduktuException.pusteException(typObuwia);
             DaneProduktuException.pusteException(typPodeszwy);
 
-            listaProduktow.add(new Obuwie(idProduktu, temp, nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta,
-                    krajPochodzenia), Float.parseFloat(rozmiarObuwia), typObuwia, typPodeszwy, icon));
+            Obuwie obuwie = new Obuwie(idProduktu, temp, nazwa, rozmiary, opis, material, kolor, new Producent(nazwaProducenta,
+                    krajPochodzenia), typObuwia, typPodeszwy, icon);
+
+            listaProduktow.add(obuwie);
             JOptionPane.showMessageDialog(null, "Produkt dodany pomyślnie", "ADMIN",
                     JOptionPane.INFORMATION_MESSAGE);
 
@@ -231,25 +233,23 @@ public class Sklep {
         }
     }
 
-    public void dodajBluze(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material,
-                           String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarBluzy, boolean czyZKapturem,
+    public void dodajBluze(String idProduktu, String cena, String nazwa, TreeMap rozmiary, String opis, String material,
+                           String kolor, String nazwaProducenta, String krajPochodzenia, boolean czyZKapturem,
                            String dekoltBluzy, String krojBluzy, ImageIcon icon) {
         try {
             DaneProduktuException.pusteException(idProduktu);
             Float temp = Float.parseFloat(cena);
             DaneProduktuException.pusteException(nazwa);
-            DaneProduktuException.notNumericException(iloscWMagazynie);
             DaneProduktuException.pusteException(opis);
             DaneProduktuException.pusteException(material);
             DaneProduktuException.pusteException(kolor);
             DaneProduktuException.pusteException(nazwaProducenta);
             DaneProduktuException.pusteException(krajPochodzenia);
-            DaneProduktuException.pusteException(rozmiarBluzy);
             DaneProduktuException.pusteException(dekoltBluzy);
             DaneProduktuException.pusteException(krojBluzy);
 
-            listaProduktow.add(new Bluza(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta,
-                    krajPochodzenia), rozmiarBluzy, czyZKapturem, dekoltBluzy, krojBluzy, icon));
+            listaProduktow.add(new Bluza(idProduktu, Float.parseFloat(cena), nazwa, rozmiary, opis, material, kolor, new Producent(nazwaProducenta,
+                    krajPochodzenia), czyZKapturem, dekoltBluzy, krojBluzy, icon));
             JOptionPane.showMessageDialog(null, "Produkt dodany pomyślnie", "ADMIN",
                     JOptionPane.INFORMATION_MESSAGE);
 
@@ -259,25 +259,22 @@ public class Sklep {
         }
     }
 
-    public void dodajKoszulke(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material,
-                              String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarKoszulki,
+    public void dodajKoszulke(String idProduktu, String cena, String nazwa, TreeMap rozmiary, String opis, String material,
+                              String kolor, String nazwaProducenta, String krajPochodzenia,
                               String dekoltKoszulki, String krojKoszulki, ImageIcon icon) {
         try {
             DaneProduktuException.pusteException(idProduktu);
             Float temp = Float.parseFloat(cena);
             DaneProduktuException.pusteException(nazwa);
-            DaneProduktuException.notNumericException(iloscWMagazynie);
             DaneProduktuException.pusteException(opis);
             DaneProduktuException.pusteException(material);
             DaneProduktuException.pusteException(kolor);
             DaneProduktuException.pusteException(nazwaProducenta);
             DaneProduktuException.pusteException(krajPochodzenia);
-            DaneProduktuException.pusteException(rozmiarKoszulki);
             DaneProduktuException.pusteException(dekoltKoszulki);
             DaneProduktuException.pusteException(krojKoszulki);
 
-            listaProduktow.add(new Koszulka(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta, krajPochodzenia),
-                    rozmiarKoszulki, dekoltKoszulki, krojKoszulki, icon));
+            listaProduktow.add(new Koszulka(idProduktu, Float.parseFloat(cena), nazwa, rozmiary, opis, material, kolor, new Producent(nazwaProducenta, krajPochodzenia), dekoltKoszulki, krojKoszulki, icon));
             JOptionPane.showMessageDialog(null, "Produkt dodany pomyślnie", "ADMIN",
                     JOptionPane.INFORMATION_MESSAGE);
 
@@ -287,25 +284,21 @@ public class Sklep {
         }
     }
 
-    public void dodajSpodnie(String idProduktu, String cena, String nazwa, String iloscWMagazynie, String opis, String material,
-                             String kolor, String nazwaProducenta, String krajPochodzenia, String rozmiarSpodni,
-                             String dlugoscSpodni, String typSpodni, String krojSpodni, ImageIcon icon) {
+    public void dodajSpodnie(String idProduktu, String cena, String nazwa, TreeMap rozmiary, String opis, String material,
+                             String kolor, String nazwaProducenta, String krajPochodzenia, String dlugoscSpodni, String typSpodni, String krojSpodni, ImageIcon icon) {
         try {
             DaneProduktuException.pusteException(idProduktu);
             Float temp = Float.parseFloat(cena);
             DaneProduktuException.pusteException(nazwa);
-            DaneProduktuException.notNumericException(iloscWMagazynie);
             DaneProduktuException.pusteException(opis);
             DaneProduktuException.pusteException(material);
             DaneProduktuException.pusteException(kolor);
             DaneProduktuException.pusteException(nazwaProducenta);
             DaneProduktuException.pusteException(krajPochodzenia);
-            DaneProduktuException.pusteException(rozmiarSpodni);
             DaneProduktuException.pusteException(typSpodni);
             DaneProduktuException.pusteException(krojSpodni);
 
-            listaProduktow.add(new Spodnie(idProduktu, Float.parseFloat(cena), nazwa, Integer.parseInt(iloscWMagazynie), opis, material, kolor, new Producent(nazwaProducenta, krajPochodzenia),
-                    rozmiarSpodni, Float.parseFloat(dlugoscSpodni), typSpodni, krojSpodni, icon));
+            listaProduktow.add(new Spodnie(idProduktu, Float.parseFloat(cena), nazwa, rozmiary, opis, material, kolor, new Producent(nazwaProducenta, krajPochodzenia), Float.parseFloat(dlugoscSpodni), typSpodni, krojSpodni, icon));
             JOptionPane.showMessageDialog(null, "Produkt dodany pomyślnie", "ADMIN",
                     JOptionPane.INFORMATION_MESSAGE);
 
@@ -348,9 +341,12 @@ public class Sklep {
             Object obj;
             while ((obj = odczyt.readObject()) != null) {
                 Produkt produkt = (Produkt) obj;
+                /*
                 if (produkt.getIloscWMagazynie() > 0) {
                     listaProduktow.add(produkt);
                 }
+
+                 */
             }
         } catch (EOFException ignored) {
 
@@ -362,9 +358,12 @@ public class Sklep {
         utworzListeDostepnychProduktow();
         try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("ListaProduktow.ser"))){
             for (Produkt produkt : listaProduktow) {
+                /*
                 if (produkt.getIloscWMagazynie() > 0) {
                     zapis.writeObject(produkt);
                 }
+
+                 */
             }
         } catch (IOException e){
             e.printStackTrace();
@@ -383,9 +382,12 @@ public class Sklep {
         ArrayList<Produkt> listaDostepnychProduktow = new ArrayList<>();
 
         for (Produkt produkt : listaProduktow) {
+            /*
             if (produkt.getIloscWMagazynie() > 0) {
                 listaDostepnychProduktow.add(produkt);
             }
+
+             */
         }
         return listaDostepnychProduktow;
     }

@@ -281,10 +281,15 @@ public class KoszykPanel extends JPanel implements ActionListener {
             buttonUsun.setBackground(null);
             buttonUsun.setForeground(Color.gray);
 
+            /*  Nieaktualny sposób wyszukiwania ilości dostępnych elementów, do zmiany
+
+            /*
             opcjeWyboru = new String[produkt.getIloscWMagazynie()];
             for (int j = 1; j <= produkt.getIloscWMagazynie(); j++) {
                 opcjeWyboru[j-1] = String.valueOf(j);
             }
+
+             */
 
             comboList.add(ComboBombo = new JComboBox(opcjeWyboru));
             comboList.get(i).setBounds(labelNazwa.getX(), wysokoscPanelProdukt-40,50,30);
@@ -701,6 +706,7 @@ public class KoszykPanel extends JPanel implements ActionListener {
                     warning.showMessageDialog(null,"Wysłano paczkę na adres: " + adres, "ZAMÓWIENIE WYSŁANE", JOptionPane.INFORMATION_MESSAGE);
 
 
+/*  Nieaktualny sposób usuwania zakupionych elementów, do zmiany
 
                     for (int j = 0; j < comboList.size(); j++) {
                             Produkt x = comboProduktMap.get(comboList.get(j));
@@ -710,6 +716,8 @@ public class KoszykPanel extends JPanel implements ActionListener {
                                 sklep.getListaProduktow().remove(x);
                             }
                     }
+
+ */
                     frame.getContentPane().removeAll();
                     frame.revalidate();
                     frame.repaint();

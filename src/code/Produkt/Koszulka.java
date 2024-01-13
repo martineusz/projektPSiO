@@ -2,28 +2,19 @@ package code.Produkt;
 
 import javax.swing.*;
 import java.io.Serializable;
+import java.util.TreeMap;
 
 public class Koszulka extends Produkt implements Serializable {
-    private String rozmiarKoszulki;
     private String dekoltKoszulki;
     private String krojKoszulki;
 
-    public Koszulka(String idProduktu, double cena, String nazwa, int iloscWMagazynie, String opis, String material,
-                  String kolor, Producent producent, String rozmiarKoszulki, String dekoltKoszulki, String krojKoszulki, ImageIcon icon){
-        super(idProduktu, cena, nazwa, iloscWMagazynie, opis, material, kolor, producent, icon);
-        this.rozmiarKoszulki=rozmiarKoszulki;
+    public Koszulka(String idProduktu, double cena, String nazwa, TreeMap rozmiary, String opis, String material,
+                    String kolor, Producent producent, String dekoltKoszulki, String krojKoszulki, ImageIcon icon){
+        super(idProduktu, cena, nazwa, rozmiary, opis, material, kolor, producent, icon);
         this.dekoltKoszulki=dekoltKoszulki;
         this.krojKoszulki=krojKoszulki;
     }
     private static final long serialVersionUID = -4985346083138998214L;
-
-    public String getRozmiarKoszulki() {
-        return rozmiarKoszulki;
-    }
-
-    public void setRozmiarKoszulki(String rozmiarKoszulki) {
-        this.rozmiarKoszulki = rozmiarKoszulki;
-    }
 
     public String getDekoltKoszulki() {
         return dekoltKoszulki;
@@ -45,7 +36,6 @@ public class Koszulka extends Produkt implements Serializable {
     public String toString() {
         return  super.toString()+
                 " Koszulka {" +
-                "rozmiar: " + rozmiarKoszulki +
                 ", dekolt: '" + dekoltKoszulki + '\'' +
                 ", krój: '" + krojKoszulki + '\'' +
                 '}';

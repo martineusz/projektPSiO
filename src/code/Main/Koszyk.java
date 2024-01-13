@@ -63,10 +63,13 @@ public class Koszyk implements Serializable {
     public boolean zrealizujDostawe(String adres, String kodBlik, String numerKarty, String dataWygasniecia,String cvv, String imie, String nazwisko) {
         if(dostawaStrategia != null){
             for (Produkt produkt : this.listaProduktow) {
+                /*
                 if(!produkt.sprawdzDostepnoscProduktu()) {
                     System.out.println("Zamówienie niezrealizowane");
                     return false;
                 }
+
+                 */
             }
 
             dostawaStrategia.dodajKoszt(this);
