@@ -192,7 +192,12 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
             for(int i=0; i<sklep.getListaProduktow().size(); i++) {
                 if(checkBox[i].isSelected()){
                     float cena = (float) (Math.floor(wartoscPromocji * 100.0) / 100.0);
-                    sklep.promocja.ustawPromocjeNaProdukt(sklep.getListaProduktow().get(i), cena, nazwaPromocji.getText());
+
+
+                    //TODO: jesli chcesz to popraw to tak zeby od razu dodawalo cala liste wybranych produktow na promocje
+                    ArrayList<Produkt> tempProdukty = new ArrayList<Produkt>();
+                    tempProdukty.add(sklep.getListaProduktow().get(i));
+                    sklep.promocja.ustawPromocjeNaProdukty(tempProdukty, cena, nazwaPromocji.getText());
 
                     tempList.clear();
 

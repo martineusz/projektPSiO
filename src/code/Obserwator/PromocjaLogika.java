@@ -5,8 +5,8 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class PromocjaLogika implements Podmiot, Serializable {
-	ArrayList<Obserwator> obserwatorzy = new ArrayList<Obserwator>();
-	public static ArrayList<Promocja> promocje;
+	public static ArrayList<Obserwator> obserwatorzy = new ArrayList<Obserwator>();
+	public static ArrayList<Promocja> promocje = new ArrayList<>();
 
 	public void ustawPromocjeNaProdukty(ArrayList<Produkt> produkty, float obnizka, String nazwa) {
 
@@ -17,12 +17,26 @@ public class PromocjaLogika implements Podmiot, Serializable {
 		}
 
 		PromocjaLogika.promocje.add(new Promocja(nazwa,obnizka,produkty));
+		zapiszPromocje();
 
-		for(Produkt produkt : produkty){
+
+		for(Produkt produkt : produkty) {
 			produkt.setCena(Math.round(produkt.getCena()*(1-obnizka)*100)/100);
 		}
 
+
 		powiadomObserwatorow(nazwa);
+	}
+
+	public void usunPromocje(String nazwaPromocji){
+		for(Promocja promocja : PromocjaLogika.promocje){
+			if(promocja.getNazwa().equals(nazwaPromocji)) {
+				for(Produkt produkt : promocja.getProdukty()) {
+					produkt.setCena(produkt.getCena()/(1-promocja.getObnizka()));
+				}
+				PromocjaLogika.promocje.remove(promocja);
+			}
+		}
 	}
 	
 	@Override
@@ -59,7 +73,7 @@ public class PromocjaLogika implements Podmiot, Serializable {
 		}
 	}
 
-	public void zapiszObserwatorowPromocji(){
+	public static void zapiszObserwatorowPromocji() {
 		try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("PromocjaObserwatorzy.ser"))){
 			for(int i=0; i<obserwatorzy.size(); i++){
 				zapis.writeObject(obserwatorzy.get(i));
@@ -68,7 +82,29 @@ public class PromocjaLogika implements Podmiot, Serializable {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
+	public static void wczytajPromocje() {
+		try (ObjectInputStream odczyt = new ObjectInputStream(new FileInputStream("Promocje.ser"))) {
+			Object obj = null;
+			while ((obj = odczyt.readObject()) != null) {
+				if (obj instanceof Promocja) {
+					PromocjaLogika.promocje.add((Promocja)obj);
+				}
+			}
+		} catch (EOFException ignored) {
+			// koniec pliku - czyli zakonczyc program
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void zapiszPromocje() {
+		try (ObjectOutputStream zapis = new ObjectOutputStream(new FileOutputStream("Promocje.ser"))){
+			for(int i=0; i<PromocjaLogika.promocje.size(); i++){
+				zapis.writeObject(PromocjaLogika.promocje.get(i));
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 }

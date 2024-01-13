@@ -2,6 +2,7 @@ package code.Main;
 
 import javax.swing.*;
 import code.InterfejsGraficzny.Rejestracja;
+import code.Obserwator.PromocjaLogika;
 import code.Produkt.Produkt;
 
 import java.awt.event.WindowAdapter;
@@ -20,6 +21,7 @@ public class Main {
         jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         sklep.promocja.wczytajObserwatorowPromocji();
+        sklep.promocja.wczytajPromocje();
         sklep.wczytajListeProduktow();
         sklep.wczytajListeKlientow();
 
@@ -31,7 +33,8 @@ public class Main {
                 System.out.println("Dziala");
                 sklep.zapiszListeProduktow();
                 sklep.zapiszListeKlientow();
-                sklep.promocja.zapiszObserwatorowPromocji();
+                PromocjaLogika.zapiszPromocje();
+                PromocjaLogika.zapiszObserwatorowPromocji();
                 jFrame.setVisible(false);
             }
         });
