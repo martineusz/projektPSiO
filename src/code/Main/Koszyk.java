@@ -49,6 +49,7 @@ public class Koszyk implements Serializable {
         for (int i = 0; i < produktyWKoszyku.size(); i++) {
             if(produktyWKoszyku.get(i).getProdukt() == produkt){
                 produktyWKoszyku.remove(produktyWKoszyku.get(i));
+                return;
             }
         }
     }

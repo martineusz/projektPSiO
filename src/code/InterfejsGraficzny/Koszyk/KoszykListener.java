@@ -4,6 +4,8 @@ import code.DostawaStrategia.DostawaKurier;
 import code.DostawaStrategia.DostawaPaczkomat;
 import code.InterfejsGraficzny.Rejestracja;
 import code.InterfejsGraficzny.SklepGUI;
+import code.PlacenieStrategia.placBlikiem;
+import code.PlacenieStrategia.placKarta;
 import code.Produkt.Produkt;
 import code.Main.*;
 
@@ -34,6 +36,9 @@ public class KoszykListener implements ActionListener {
             koszykPane.getLabelDostawa().setBackground(new Color(210, 255, 255));
             koszykPane.getLabelKoszyk().setText("DOSTAWA");
             koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonDostawa());
+            koszykPane.setCenaDostawa(15.99F);
+            koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia()+koszykPane.getCenaDostawa()) + " PLN");
+            koszykPane.getLabelCenaDostawy().setText("Dostawa: " + koszykPane.getCenaDostawa() + " PLN");
         }
         if (e.getSource() == koszykPane.getButtonKurier()) {
             koszykPane.getSklep().getZalogowanyKlient().getKoszyk().ustawMetodeDostawy(new DostawaKurier());
@@ -62,9 +67,10 @@ public class KoszykListener implements ActionListener {
             if (produktToRemove != null) {
                 koszykPane.getSklep().getZalogowanyKlient().getKoszyk().usunProduktZKoszyka(produktToRemove);
                 koszykPane.getPanelKoszyk().remove(sourceButton.getParent()); // Usunięcie całego panelu produktu
-                koszykPane.getButtonProduktMap().remove(sourceButton);
                 koszykPane.getPanelKoszyk().revalidate();
                 koszykPane.getPanelKoszyk().repaint();
+                koszykPane.getLabelCenaKoszyka().setText("Koszyk: " + koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia() + " PLN");
+                koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia()+koszykPane.getCenaDostawa()) + " PLN");
             }
         }
         if(e.getSource()==koszykPane.getButtonDostawa()) {
@@ -90,6 +96,30 @@ public class KoszykListener implements ActionListener {
             koszykPane.getFrame().repaint();
             koszykPane.getSklep().setZalogowanyKlient(null);
             Rejestracja.ShopPage(koszykPane.getSklep(), koszykPane.getFrame());
+        }
+
+        if (e.getSource() == koszykPane.getButtonBlik()){
+            koszykPane.getSklep().getZalogowanyKlient().getKoszyk().ustawMetodePlatnosci(new placBlikiem());
+        }
+        if (e.getSource() == koszykPane.getButtonKartaKredytowa()){
+            koszykPane.getSklep().getZalogowanyKlient().getKoszyk().ustawMetodePlatnosci(new placKarta());
+        }
+        if (e.getSource() == koszykPane.getButtonPlatnosc()){
+            if(koszykPane.getSklep().getZalogowanyKlient().getKoszyk().zrealizujDostawe(koszykPane.getAdres(), koszykPane.textKodBlik.getText(),koszykPane.textNumerKarty.getText(),koszykPane.textDataWygasniecia.getText(),koszykPane.textCvv.getText(),koszykPane.textKartaImie.getText(),koszykPane.textKartaNazwisko.getText())){
+                JOptionPane warning = new JOptionPane();
+                warning.showMessageDialog(null,"Wysłano paczkę na adres: " + koszykPane.getAdres(), "ZAMÓWIENIE WYSŁANE", JOptionPane.INFORMATION_MESSAGE);
+                koszykPane.getFrame().getContentPane().removeAll();
+                koszykPane.getFrame().revalidate();
+                koszykPane.getFrame().repaint();
+                SklepGUI.openSklepGUI(koszykPane.getFrame(), koszykPane.getSklep());
+            }
+        }
+        for (int i = 0; i < koszykPane.comboList.size(); i++) {
+            if (e.getSource() == koszykPane.comboList.get(i)){
+                koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).setIloscWKoszyku(koszykPane.getComboList().get(i).getSelectedIndex()+1);
+                koszykPane.getLabelCenaKoszyka().setText("Koszyk: " + koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia() + " PLN");
+                koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia()+koszykPane.getCenaDostawa()) + " PLN");
+            }
         }
     }
 }

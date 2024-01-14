@@ -1,10 +1,12 @@
 package code.InterfejsGraficzny.Koszyk;
 
 import code.DostawaStrategia.DostawaPaczkomat;
+import code.InterfejsGraficzny.SklepGUI;
 import code.Main.Klient;
 import code.Main.Koszyk;
 import code.Main.ProduktWKoszyku;
 import code.Main.Sklep;
+import code.PlacenieStrategia.placBlikiem;
 import code.Produkt.Produkt;
 
 import javax.swing.*;
@@ -52,6 +54,8 @@ public class KoszykPane extends JPanel {
     JLabel labelCenaDostawy;
     JLabel labelSumaCen;
     Map<JButton, Produkt> buttonProduktMap;
+    ArrayList<JComboBox> comboList;
+    Map<JComboBox, Produkt> comboProduktMap;
 
     //TEXT FIELDS
     JTextField textImie;
@@ -63,6 +67,52 @@ public class KoszykPane extends JPanel {
     JTextField textKraj;
     JTextField textNumerTelefonu;
     JTextField textEmail;
+    JTextField textKodBlik;
+    JTextField textNumerKarty;
+    JTextField textDataWygasniecia;
+    JTextField textCvv;
+    JTextField textKartaImie;
+    JTextField textKartaNazwisko;
+
+    public ArrayList<JComboBox> getComboList() {
+        return comboList;
+    }
+
+    public Map<JComboBox, Produkt> getComboProduktMap() {
+        return comboProduktMap;
+    }
+
+    public JTextField getTextKodBlik() {
+        return textKodBlik;
+    }
+
+    public JTextField getTextNumerKarty() {
+        return textNumerKarty;
+    }
+
+    public JTextField getTextDataWygasniecia() {
+        return textDataWygasniecia;
+    }
+
+    public JTextField getTextCvv() {
+        return textCvv;
+    }
+
+    public JTextField getTextKartaImie() {
+        return textKartaImie;
+    }
+
+    public JTextField getTextKartaNazwisko() {
+        return textKartaNazwisko;
+    }
+
+    public JRadioButton getButtonBlik() {
+        return buttonBlik;
+    }
+
+    public JRadioButton getButtonKartaKredytowa() {
+        return buttonKartaKredytowa;
+    }
 
     public KoszykListener getKoszykListener() {
         return koszykListener;
@@ -242,7 +292,10 @@ public class KoszykPane extends JPanel {
         ImageIcon koszykImage = new ImageIcon("src/code/InterfejsGraficzny/Koszyk/Images/koszyk.png");
         ImageIcon dostawaImage = new ImageIcon("src/code/InterfejsGraficzny/Koszyk/Images/dostawa.png");
         ImageIcon platnoscImage = new ImageIcon("src/code/InterfejsGraficzny/Koszyk/Images/platnosc.png");
-        ImageIcon logoImage = new ImageIcon("src/code/InterfejsGraficzny/Koszyk/Images/logo100x100.png");
+
+        ImageIcon logoImage;
+        logoImage = SklepGUI.scaleIcon("src/resources/Obrazki/logoSklepu.png",100);
+
         ImageIcon powiadomieniaImage = new ImageIcon("src/code/InterfejsGraficzny/Koszyk/Images/powiadomienia.png");
         ImageIcon konotImage = new ImageIcon("src/code/InterfejsGraficzny/Koszyk/Images/account.png");
 
@@ -438,8 +491,8 @@ public class KoszykPane extends JPanel {
         panelKoszyk.setPreferredSize(new Dimension(700, 700));
         panelKoszyk.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        ArrayList<JComboBox> comboList = new ArrayList<>();
-        Map<JComboBox, Produkt> comboProduktMap = new HashMap<>();
+        comboList = new ArrayList<>();
+        comboProduktMap = new HashMap<>();
 
         // LABELs
         JLabel labelPustyKoszyk = new JLabel();
@@ -459,7 +512,7 @@ public class KoszykPane extends JPanel {
         scrollPaneKoszyk.setBounds(100, 25, 700, 700);
 
         //PANEL PRODUKT
-        if (koszyk.getProduktyWKoszyku().isEmpty()) {
+        if (koszyk.getProduktyWKoszyku() == null || koszyk.getProduktyWKoszyku().isEmpty()) {
             labelPustyKoszyk.setText("TWOJ KOSZYK JEST PUSTY");
             labelPustyKoszyk.setHorizontalAlignment(JLabel.CENTER);
             labelPustyKoszyk.setVerticalAlignment(JLabel.CENTER);
@@ -467,7 +520,7 @@ public class KoszykPane extends JPanel {
             labelPustyKoszyk.setForeground(Color.lightGray);
             labelPustyKoszyk.setFont(new Font(null, Font.BOLD, 25));
             panelKoszyk.add(labelPustyKoszyk);
-        } else {
+        } else{
             for (int i = 0; i < koszyk.getProduktyWKoszyku().size(); i++) {
                 buttonUsun = new JButton("x");
                 ProduktWKoszyku produktWKoszyku = koszyk.getProduktyWKoszyku().get(i);
@@ -575,6 +628,8 @@ public class KoszykPane extends JPanel {
         buttonPaczkomat.setFocusable(false);
         buttonPaczkomat.setBounds(65, 65, 100, 30);
         buttonPaczkomat.addActionListener(koszykListener);
+        buttonPaczkomat.setSelected(true);
+        sklep.getZalogowanyKlient().getKoszyk().ustawMetodeDostawy(new DostawaPaczkomat());
         panelDostawy.add(buttonPaczkomat);
 
         // RADIO BUTTON KURIER
@@ -675,14 +730,6 @@ public class KoszykPane extends JPanel {
         group.add(buttonBlik);
         group.add(buttonKartaKredytowa);
 
-        //TEXT FIELDS
-        JTextField textKodBlik;
-        JTextField textNumerKarty;
-        JTextField textDataWygasniecia;
-        JTextField textCvv;
-        JTextField textKartaImie;
-        JTextField textKartaNazwisko;
-
         //LABELS
         JLabel labelKodBlik;
         JLabel labelNumerKarty;
@@ -698,6 +745,8 @@ public class KoszykPane extends JPanel {
         buttonBlik.setFocusable(false);
         buttonBlik.setBounds(65, 85, 100, 30);
         buttonBlik.addActionListener(koszykListener);
+        buttonBlik.setSelected(true);
+        sklep.getZalogowanyKlient().getKoszyk().ustawMetodePlatnosci(new placBlikiem());
         panelPlatnosci.add(buttonBlik);
 
         // RADIO BUTTON KARTA KREDYTOWA
