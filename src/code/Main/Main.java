@@ -5,6 +5,7 @@ import code.InterfejsGraficzny.Rejestracja;
 import code.Obserwator.PromocjaLogika;
 import code.Produkt.Produkt;
 
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -16,7 +17,8 @@ public class Main {
         Sklep sklep = new Sklep(new ArrayList<Klient>(), null, false, new ArrayList<Produkt>());
 
         JFrame jFrame = new JFrame();
-        //TODO: Zmienić nazwę aplikacji
+        ImageIcon icon = new ImageIcon("src/resources/Obrazki/logoSklepu.png");
+        jFrame.setIconImage(icon.getImage());
         jFrame.setTitle("Sklep");
         jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 

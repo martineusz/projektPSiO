@@ -2,7 +2,6 @@ package code.InterfejsGraficzny.Koszyk;
 
 import code.DostawaStrategia.DostawaPaczkomat;
 import code.InterfejsGraficzny.SklepGUI;
-import code.Main.Klient;
 import code.Main.Koszyk;
 import code.Main.ProduktWKoszyku;
 import code.Main.Sklep;
@@ -16,286 +15,65 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KoszykPane extends JPanel {
-    String adres = null;
-    JFrame frame;
-    KoszykListener koszykListener;
-    Sklep sklep;
-    Koszyk koszyk;
-    float cenaDostawa = 0;
+    private String adres = null;
+    private JFrame frame;
+    private KoszykListener koszykListener;
+    private Sklep sklep;
+    private Koszyk koszyk;
+    private float cenaDostawa = 0;
 
     //BUTTONS
-    JButton buttonZamowienie;
-    JButton buttonLogoSklep;
-    JButton buttonWylogujSie;
-    JButton buutonPowiadomienia;
-    JButton buttonDostawa;
-    JRadioButton buttonPaczkomat;
-    JRadioButton buttonKurier;
-    JRadioButton buttonBlik;
-    JRadioButton buttonKartaKredytowa;
-    JButton buttonUsun;
-    JButton buttonPlatnosc;
-    JButton buttonCofnijDostawa;
-    JButton buttonCofnijPlatnosc;
+    private JButton buttonZamowienie;
+    private JButton buttonLogoSklep;
+    private JButton buttonWylogujSie;
+    private JButton buutonPowiadomienia;
+    private JButton buttonDostawa;
+    private JRadioButton buttonPaczkomat;
+    private JRadioButton buttonKurier;
+    private JRadioButton buttonBlik;
+    private JRadioButton buttonKartaKredytowa;
+    private JButton buttonUsun;
+    private JButton buttonPlatnosc;
+    private JButton buttonCofnijDostawa;
+    private JButton buttonCofnijPlatnosc;
     //PANELS
-    JPanel panelGorny;
-    JPanel panelGorny2;
-    JPanel panelPodsumowanie = new JPanel();
-    JPanel panelKoszyk;
-    JPanel panelGlowny;
-    JPanel panelDostawy;
-    JPanel panelPlatnosci;
-    JScrollPane scrollPaneKoszyk;
+    private JPanel panelGorny;
+    private JPanel panelGorny2;
+    private JPanel panelPodsumowanie;
+    private JPanel panelKoszyk;
+    private JPanel panelGlowny;
+    private JPanel panelDostawy;
+    private JPanel panelPlatnosci;
+    private JScrollPane scrollPaneKoszyk;
     // LABELs
-    JLabel labelKoszyk;
-    JLabel labelKoszyk2;
-    JLabel labelDostawa;
-    JLabel labelPlatnosc;
-    JLabel labelPodsumowanie;
-    JLabel labelCenaKoszyka;
-    JLabel labelCenaDostawy;
-    JLabel labelSumaCen;
-    Map<JButton, Produkt> buttonProduktMap;
-    ArrayList<JComboBox> comboList;
-    Map<JComboBox, Produkt> comboProduktMap;
+    private JLabel labelKoszyk;
+    private JLabel labelKoszyk2;
+    private JLabel labelDostawa;
+    private JLabel labelPlatnosc;
+    private JLabel labelPodsumowanie;
+    private JLabel labelCenaKoszyka;
+    private JLabel labelCenaDostawy;
+    private JLabel labelSumaCen;
+    private Map<JButton, Produkt> buttonProduktMap;
+    private ArrayList<JComboBox> comboList;
+    private Map<JComboBox, Produkt> comboProduktMap;
 
     //TEXT FIELDS
-    JTextField textImie;
-    JTextField textNazwisko;
-    JTextField textUlica;
-    JTextField textNumerDomu;
-    JTextField textKodPocztowy;
-    JTextField textMiejscowosc;
-    JTextField textKraj;
-    JTextField textNumerTelefonu;
-    JTextField textEmail;
-    JTextField textKodBlik;
-    JTextField textNumerKarty;
-    JTextField textDataWygasniecia;
-    JTextField textCvv;
-    JTextField textKartaImie;
-    JTextField textKartaNazwisko;
-
-    public JPanel getPanelPlatnosci() {
-        return panelPlatnosci;
-    }
-
-    public JButton getButtonCofnijPlatnosc() {
-        return buttonCofnijPlatnosc;
-    }
-
-    public JButton getButtonCofnijDostawa() {
-        return buttonCofnijDostawa;
-    }
-
-    public ArrayList<JComboBox> getComboList() {
-        return comboList;
-    }
-
-    public Map<JComboBox, Produkt> getComboProduktMap() {
-        return comboProduktMap;
-    }
-
-    public JTextField getTextKodBlik() {
-        return textKodBlik;
-    }
-
-    public JTextField getTextNumerKarty() {
-        return textNumerKarty;
-    }
-
-    public JTextField getTextDataWygasniecia() {
-        return textDataWygasniecia;
-    }
-
-    public JTextField getTextCvv() {
-        return textCvv;
-    }
-
-    public JTextField getTextKartaImie() {
-        return textKartaImie;
-    }
-
-    public JTextField getTextKartaNazwisko() {
-        return textKartaNazwisko;
-    }
-
-    public JRadioButton getButtonBlik() {
-        return buttonBlik;
-    }
-
-    public JRadioButton getButtonKartaKredytowa() {
-        return buttonKartaKredytowa;
-    }
-
-    public KoszykListener getKoszykListener() {
-        return koszykListener;
-    }
-
-    public JTextField getTextImie() {
-        return textImie;
-    }
-
-    public JTextField getTextNazwisko() {
-        return textNazwisko;
-    }
-
-    public JTextField getTextUlica() {
-        return textUlica;
-    }
-
-    public JTextField getTextNumerDomu() {
-        return textNumerDomu;
-    }
-
-    public JTextField getTextKodPocztowy() {
-        return textKodPocztowy;
-    }
-
-    public JTextField getTextMiejscowosc() {
-        return textMiejscowosc;
-    }
-
-    public JTextField getTextKraj() {
-        return textKraj;
-    }
-
-    public JTextField getTextNumerTelefonu() {
-        return textNumerTelefonu;
-    }
-
-    public JTextField getTextEmail() {
-        return textEmail;
-    }
-
-    public Map<JButton, Produkt> getButtonProduktMap() {
-        return buttonProduktMap;
-    }
-
-    public JButton getButtonLogoSklep() {
-        return buttonLogoSklep;
-    }
-
-    public JButton getButtonPlatnosc() {
-        return buttonPlatnosc;
-    }
-
-    public void setCenaDostawa(float cenaDostawa) {
-        this.cenaDostawa = cenaDostawa;
-    }
-
-    public JButton getButtonWylogujSie() {
-        return buttonWylogujSie;
-    }
-
-    public JButton getBuutonPowiadomienia() {
-        return buutonPowiadomienia;
-    }
-
-    public float getCenaDostawa() {
-        return cenaDostawa;
-    }
-
-    public JPanel getPanelDostawy() {
-        return panelDostawy;
-    }
-
-    public JLabel getLabelKoszyk() {
-        return labelKoszyk;
-    }
-
-    public JLabel getLabelKoszyk2() {
-        return labelKoszyk2;
-    }
-
-    public JLabel getLabelDostawa() {
-        return labelDostawa;
-    }
-
-    public JLabel getLabelPlatnosc() {
-        return labelPlatnosc;
-    }
-
-    public JLabel getLabelPodsumowanie() {
-        return labelPodsumowanie;
-    }
-
-    public JLabel getLabelCenaKoszyka() {
-        return labelCenaKoszyka;
-    }
-
-    public JLabel getLabelCenaDostawy() {
-        return labelCenaDostawy;
-    }
-
-    public JLabel getLabelSumaCen() {
-        return labelSumaCen;
-    }
-
-    public JScrollPane getScrollPaneKoszyk() {
-        return this.scrollPaneKoszyk;
-    }
-
-    public JPanel getPanelGlowny() {
-        return this.panelGlowny;
-    }
-
-    public JPanel getPanelKoszyk() {
-        return this.panelKoszyk;
-    }
-
-    public JButton getButtonZamowienie() {
-        return buttonZamowienie;
-    }
-
-    public Sklep getSklep() {
-        return sklep;
-    }
-
-    public JFrame getFrame() {
-        return frame;
-    }
-
-    public JPanel getPanelGorny() {
-        return panelGorny;
-    }
-
-    public JPanel getPanelGorny2() {
-        return panelGorny2;
-    }
-
-    public JPanel getPanelPodsumowanie() {
-        return panelPodsumowanie;
-    }
-
-    public JButton getButtonDostawa() {
-        return buttonDostawa;
-    }
-
-    public JRadioButton getButtonPaczkomat() {
-        return buttonPaczkomat;
-    }
-
-    public JRadioButton getButtonKurier() {
-        return buttonKurier;
-    }
-
-    public JButton getButtonUsun() {
-        return buttonUsun;
-    }
-
-    public KoszykPane() {
-        super();
-    }
-
-    public String getAdres() {
-        return adres;
-    }
-
-    public void setAdres(String adres) {
-        this.adres = adres;
-    }
-
+    private JTextField textImie;
+    private JTextField textNazwisko;
+    private JTextField textUlica;
+    private JTextField textNumerDomu;
+    private JTextField textKodPocztowy;
+    private JTextField textMiejscowosc;
+    private JTextField textKraj;
+    private JTextField textNumerTelefonu;
+    private JTextField textEmail;
+    private JTextField textKodBlik;
+    private JTextField textNumerKarty;
+    private JTextField textDataWygasniecia;
+    private JTextField textCvv;
+    private JTextField textKartaImie;
+    private JTextField textKartaNazwisko;
     public void otworzKoszyk(Sklep sklep, JFrame frame) {
         this.frame = frame;
         this.sklep = sklep;
@@ -339,10 +117,27 @@ public class KoszykPane extends JPanel {
         buttonPlatnosc = new JButton();
         buttonCofnijPlatnosc = new JButton();
 
+        // PANEL GLOWNY
+        panelGlowny.setPreferredSize(new Dimension(frame.getWidth(), 1620));
+        panelGlowny.setLayout(null);
+        panelGlowny.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        panelGlowny.setBackground(new Color(255,255,255));
+
+        rysujPanelKoszyk(panelGlowny);
+
+        //FRAME
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+        frame.add(panelGorny);
+        frame.add(panelGorny2);
+        frame.add(panelGlowny);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
         // PANEL GORNY
         panelGorny.setPreferredSize(new Dimension(frame.getWidth(), 250));
         panelGorny.setLayout(null);
-        panelGorny.setBackground(new Color(255,255,255));
+        panelGorny.setBackground(new Color(255, 69, 0));
         panelGorny.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         //BUTTON LOGO SKLEP
@@ -358,7 +153,7 @@ public class KoszykPane extends JPanel {
         buttonWylogujSie.setIcon(konotImage);
         buttonWylogujSie.setText("Wyloguj sie");
         buttonWylogujSie.addActionListener(koszykListener);
-        buttonWylogujSie.setBounds(1550, 40, 150, 50);
+        buttonWylogujSie.setBounds(frame.getWidth()-370, 40, 150, 50);
         buttonWylogujSie.setFocusable(false);
         buttonWylogujSie.setBackground(null);
         buttonWylogujSie.setBorder(null);
@@ -368,10 +163,11 @@ public class KoszykPane extends JPanel {
         buutonPowiadomienia.setIcon(powiadomieniaImage);
         buutonPowiadomienia.setText("Powiadomienia");
         buutonPowiadomienia.setIconTextGap(-5);
-        buutonPowiadomienia.setBounds(1400, 40, 150, 50);
+        buutonPowiadomienia.setBounds(frame.getWidth()-520, 40, 150, 50);
         buutonPowiadomienia.setFocusable(false);
         buutonPowiadomienia.setBackground(null);
         buutonPowiadomienia.setBorder(null);
+        buutonPowiadomienia.addActionListener(koszykListener);
         panelGorny.add(buutonPowiadomienia);
 
         // PANEL GORNY2
@@ -388,9 +184,9 @@ public class KoszykPane extends JPanel {
 
         //LABEL KOSZYK 2
         labelKoszyk2.setText("KOSZYK  >");
-        labelKoszyk2.setBounds(1300, 25, 125, 40);
+        labelKoszyk2.setBounds(frame.getWidth()-620, 25, 125, 40);
         labelKoszyk2.setFont(new Font(null, Font.BOLD, 15));
-        labelKoszyk2.setBackground(new Color(210, 255, 255));
+        labelKoszyk2.setBackground(new Color(184, 255, 184));
         labelKoszyk2.setOpaque(true);
         labelKoszyk2.setIcon(koszykImage);
         labelKoszyk2.setHorizontalTextPosition(JLabel.RIGHT);
@@ -399,7 +195,7 @@ public class KoszykPane extends JPanel {
         //LABEL DOSTAWA
         labelDostawa.setText("DOSTAWA  >");
         labelDostawa.setBackground(Color.lightGray);
-        labelDostawa.setBounds(1425, 25, 150, 40);
+        labelDostawa.setBounds(frame.getWidth()-495, 25, 150, 40);
         labelDostawa.setFont(new Font(null, Font.BOLD, 15));
         labelDostawa.setOpaque(true);
         labelDostawa.setIcon(dostawaImage);
@@ -409,7 +205,7 @@ public class KoszykPane extends JPanel {
         //LABEL PLATNOSC
         labelPlatnosc.setText("PLATNOSC");
         labelPlatnosc.setBackground(Color.lightGray);
-        labelPlatnosc.setBounds(1575, 25, 150, 40);
+        labelPlatnosc.setBounds(frame.getWidth()-345, 25, 150, 40);
         labelPlatnosc.setFont(new Font(null, Font.BOLD, 15));
         labelPlatnosc.setOpaque(true);
         labelPlatnosc.setIcon(platnoscImage);
@@ -422,14 +218,10 @@ public class KoszykPane extends JPanel {
         panelGlowny.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panelGlowny.setBackground(new Color(255,255,255));
 
-
-        rysujPanelKoszyk(panelGlowny);
-
-
         //PANEL PODSUMOWANIE
         panelPodsumowanie.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220)));
         panelPodsumowanie.setBackground(new Color(240,252,255));
-        panelPodsumowanie.setBounds(1270, 150, 450, 450);
+        panelPodsumowanie.setBounds(frame.getWidth()-650, 150, 450, 450);
         panelPodsumowanie.setLayout(null);
         panelGlowny.add(panelPodsumowanie);
 
@@ -439,7 +231,7 @@ public class KoszykPane extends JPanel {
         buttonZamowienie.addActionListener(koszykListener);
         buttonZamowienie.setFocusable(false);
         buttonZamowienie.setFont(new Font(null, Font.BOLD, 20));
-        buttonZamowienie.setBackground(new Color(255,0,0));
+        buttonZamowienie.setBackground(new Color(255, 69, 0));
         buttonZamowienie.setForeground(new Color(255, 255, 255));
         buttonZamowienie.setBorder(BorderFactory.createEtchedBorder());
         panelPodsumowanie.add(buttonZamowienie);
@@ -450,12 +242,12 @@ public class KoszykPane extends JPanel {
         buttonDostawa.addActionListener(koszykListener);
         buttonDostawa.setFocusable(false);
         buttonDostawa.setFont(new Font(null, Font.BOLD, 20));
-        buttonDostawa.setBackground(new Color(255,0,0));
+        buttonDostawa.setBackground(new Color(255, 69, 0));
         buttonDostawa.setForeground(new Color(255, 255, 255));
         buttonDostawa.setBorder(BorderFactory.createEtchedBorder());
 
         //BUTTON COFNIJ DOSTAWA
-        buttonCofnijDostawa.setText("BACK1");
+        buttonCofnijDostawa.setText("POWROT");
         buttonCofnijDostawa.setBounds(180,385,100,20);
         buttonCofnijDostawa.addActionListener(koszykListener);
         buttonCofnijDostawa.setFocusable(false);
@@ -468,12 +260,12 @@ public class KoszykPane extends JPanel {
         buttonPlatnosc.addActionListener(koszykListener);
         buttonPlatnosc.setFocusable(false);
         buttonPlatnosc.setFont(new Font(null, Font.BOLD, 20));
-        buttonPlatnosc.setBackground(new Color(255,0,0));
+        buttonPlatnosc.setBackground(new Color(255, 69, 0));
         buttonPlatnosc.setForeground(new Color(255, 255, 255));
         buttonPlatnosc.setBorder(BorderFactory.createEtchedBorder());
 
         //BUTTON COFNIJ PLATNOSC
-        buttonCofnijPlatnosc.setText("BACK2");
+        buttonCofnijPlatnosc.setText("POWROT");
         buttonCofnijPlatnosc.setBounds(180,385,100,20);
         buttonCofnijPlatnosc.addActionListener(koszykListener);
         buttonCofnijPlatnosc.setFocusable(false);
@@ -504,17 +296,7 @@ public class KoszykPane extends JPanel {
         labelSumaCen.setBounds(25, 175, 200, 100);
         labelSumaCen.setFont(new Font(null, Font.BOLD, 20));
         panelPodsumowanie.add(labelSumaCen);
-
-
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-        frame.add(panelGorny);
-        frame.add(panelGorny2);
-        frame.add(panelGlowny);
-        frame.setSize(1920, 1080); // Przeniesione ustawianie rozmiaru
     }
-
 
     public void rysujPanelKoszyk(JPanel panelGlowny) { //METODA RYSUJACA KOSZYK
         panelKoszyk = new JPanel();
@@ -560,7 +342,7 @@ public class KoszykPane extends JPanel {
                 JLabel labelCena = new JLabel("Cena: " +produktWKoszyku.getProdukt().getCena() + " PLN");
                 JLabel labelRozmiar = new JLabel("Rozmiar: " + produktWKoszyku.getRozmiar());
                 JPanel panelProdukt = new JPanel();
-                ImageIcon obrazek = new ImageIcon();
+                ImageIcon obrazek;
                 int wysokoscPanelProdukt = (scrollPaneKoszyk.getHeight() / 4);
 
                 panelProdukt.setLayout(null);
@@ -591,13 +373,8 @@ public class KoszykPane extends JPanel {
                 buttonUsun.setBackground(null);
                 buttonUsun.setForeground(Color.gray);
 
-
                 int iloscWMagazynie = produktWKoszyku.getProdukt().getRozmiary().get(produktWKoszyku.getRozmiar());
-
-
-
-
-           String[] opcjeWyboru = new String[iloscWMagazynie];
+                String[] opcjeWyboru = new String[iloscWMagazynie];
 
                 for (int j = 1; j <= opcjeWyboru.length; j++) {
                     opcjeWyboru[j-1] = String.valueOf(j);
@@ -841,17 +618,235 @@ public class KoszykPane extends JPanel {
         labelKartaNazwisko = new JLabel("NAZWISKO");
         labelKartaNazwisko.setBounds(330, 320, 120, 10);
         panelPlatnosci.add(labelKartaNazwisko);
-
     }
 
+    //GETTERY I SETTERY
+    public JPanel getPanelPlatnosci() {
+        return panelPlatnosci;
+    }
 
+    public JButton getButtonCofnijPlatnosc() {
+        return buttonCofnijPlatnosc;
+    }
 
+    public JButton getButtonCofnijDostawa() {
+        return buttonCofnijDostawa;
+    }
 
+    public ArrayList<JComboBox> getComboList() {
+        return comboList;
+    }
 
+    public Map<JComboBox, Produkt> getComboProduktMap() {
+        return comboProduktMap;
+    }
 
+    public JTextField getTextKodBlik() {
+        return textKodBlik;
+    }
+
+    public JTextField getTextNumerKarty() {
+        return textNumerKarty;
+    }
+
+    public JTextField getTextDataWygasniecia() {
+        return textDataWygasniecia;
+    }
+
+    public JTextField getTextCvv() {
+        return textCvv;
+    }
+
+    public JTextField getTextKartaImie() {
+        return textKartaImie;
+    }
+
+    public JTextField getTextKartaNazwisko() {
+        return textKartaNazwisko;
+    }
+
+    public JRadioButton getButtonBlik() {
+        return buttonBlik;
+    }
+
+    public JRadioButton getButtonKartaKredytowa() {
+        return buttonKartaKredytowa;
+    }
+
+    public KoszykListener getKoszykListener() {
+        return koszykListener;
+    }
+
+    public JTextField getTextImie() {
+        return textImie;
+    }
+
+    public JTextField getTextNazwisko() {
+        return textNazwisko;
+    }
+
+    public JTextField getTextUlica() {
+        return textUlica;
+    }
+
+    public JTextField getTextNumerDomu() {
+        return textNumerDomu;
+    }
+
+    public JTextField getTextKodPocztowy() {
+        return textKodPocztowy;
+    }
+
+    public JTextField getTextMiejscowosc() {
+        return textMiejscowosc;
+    }
+
+    public JTextField getTextKraj() {
+        return textKraj;
+    }
+
+    public JTextField getTextNumerTelefonu() {
+        return textNumerTelefonu;
+    }
+
+    public JTextField getTextEmail() {
+        return textEmail;
+    }
+
+    public Map<JButton, Produkt> getButtonProduktMap() {
+        return buttonProduktMap;
+    }
+
+    public JButton getButtonLogoSklep() {
+        return buttonLogoSklep;
+    }
+
+    public JButton getButtonPlatnosc() {
+        return buttonPlatnosc;
+    }
+
+    public void setCenaDostawa(float cenaDostawa) {
+        this.cenaDostawa = cenaDostawa;
+    }
+
+    public JButton getButtonWylogujSie() {
+        return buttonWylogujSie;
+    }
+
+    public JButton getBuutonPowiadomienia() {
+        return buutonPowiadomienia;
+    }
+
+    public float getCenaDostawa() {
+        return cenaDostawa;
+    }
+
+    public JPanel getPanelDostawy() {
+        return panelDostawy;
+    }
+
+    public JLabel getLabelKoszyk() {
+        return labelKoszyk;
+    }
+
+    public JLabel getLabelKoszyk2() {
+        return labelKoszyk2;
+    }
+
+    public JLabel getLabelDostawa() {
+        return labelDostawa;
+    }
+
+    public JLabel getLabelPlatnosc() {
+        return labelPlatnosc;
+    }
+
+    public JLabel getLabelPodsumowanie() {
+        return labelPodsumowanie;
+    }
+
+    public JLabel getLabelCenaKoszyka() {
+        return labelCenaKoszyka;
+    }
+
+    public JLabel getLabelCenaDostawy() {
+        return labelCenaDostawy;
+    }
+
+    public JLabel getLabelSumaCen() {
+        return labelSumaCen;
+    }
+
+    public JScrollPane getScrollPaneKoszyk() {
+        return this.scrollPaneKoszyk;
+    }
+
+    public JPanel getPanelGlowny() {
+        return this.panelGlowny;
+    }
+
+    public JPanel getPanelKoszyk() {
+        return this.panelKoszyk;
+    }
+
+    public JButton getButtonZamowienie() {
+        return buttonZamowienie;
+    }
+
+    public Sklep getSklep() {
+        return sklep;
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public JPanel getPanelGorny() {
+        return panelGorny;
+    }
+
+    public JPanel getPanelGorny2() {
+        return panelGorny2;
+    }
+
+    public JPanel getPanelPodsumowanie() {
+        return panelPodsumowanie;
+    }
+
+    public JButton getButtonDostawa() {
+        return buttonDostawa;
+    }
+
+    public JRadioButton getButtonPaczkomat() {
+        return buttonPaczkomat;
+    }
+
+    public JRadioButton getButtonKurier() {
+        return buttonKurier;
+    }
+
+    public JButton getButtonUsun() {
+        return buttonUsun;
+    }
+
+    public KoszykPane() {
+        super();
+    }
+
+    public String getAdres() {
+        return adres;
+    }
+
+    public void setAdres(String adres) {
+        this.adres = adres;
+    }
+
+    public Koszyk getKoszyk() {
+        return koszyk;
+    }
 
     public static void main(String[] args) {
-        Sklep sklep = new Sklep(new ArrayList<Klient>(), null, false, new ArrayList<Produkt>());
+        Sklep sklep = new Sklep(new ArrayList<>(), null, false, new ArrayList<>());
 
         JFrame jFrame = new JFrame();
         jFrame.setVisible(true);

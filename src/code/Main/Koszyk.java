@@ -72,16 +72,6 @@ public class Koszyk implements Serializable {
 
     public boolean zrealizujDostawe(String adres, String kodBlik, String numerKarty, String dataWygasniecia,String cvv, String imie, String nazwisko) {
         if(dostawaStrategia != null){
-//            TODO: zamienic na nowa liste
-//            for (Produkt produkt : this.listaProduktow) {
-//
-//                if(!produkt.sprawdzDostepnoscProduktu()) {
-//                    System.out.println("Zamówienie niezrealizowane");
-//                    return false;
-//                }
-//
-//
-//            }
 
             dostawaStrategia.dodajKoszt(this);
 
@@ -92,12 +82,8 @@ public class Koszyk implements Serializable {
             }
 
             if (placenieStrategia.plac()) {
-                /*for (Produkt produkt : this.listaProduktow) {
-                    produkt.setIloscWMagazynie(produkt.getIloscWMagazynie() - 1);
-                }*/
                 dostawaStrategia.wyslijPaczke(adres);
-                //this.listaProduktow.clear();
-                return true; //zakreskowane bo impostor to dodal :)
+                return true;
             }
             else {
                 System.out.println("Płatność zakończona niepowodzeniem. Proszę zweryfikować poprawność danych.");

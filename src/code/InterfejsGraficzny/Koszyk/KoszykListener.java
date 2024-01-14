@@ -7,7 +7,6 @@ import code.InterfejsGraficzny.SklepGUI;
 import code.PlacenieStrategia.placBlikiem;
 import code.PlacenieStrategia.placKarta;
 import code.Produkt.Produkt;
-import code.Main.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class KoszykListener implements ActionListener {
-    private KoszykPane koszykPane;
+    private final KoszykPane koszykPane;
 
     public KoszykListener(KoszykPane koszykPane) {
         this.koszykPane = koszykPane;
@@ -23,6 +22,7 @@ public class KoszykListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         //1
         if (e.getSource() == koszykPane.getButtonZamowienie()) {
             if(!koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getProduktyWKoszyku().isEmpty()) {
@@ -35,7 +35,7 @@ public class KoszykListener implements ActionListener {
 
                 //RYSOWANIE
                 koszykPane.rysujPanelDostawy(koszykPane.getPanelGlowny(), koszykPane.getSklep());
-                koszykPane.getLabelDostawa().setBackground(new Color(210, 255, 255));
+                koszykPane.getLabelDostawa().setBackground(new Color(184, 255, 184));
                 koszykPane.getLabelKoszyk().setText("DOSTAWA");
                 koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonDostawa());
                 koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonCofnijDostawa());
@@ -44,8 +44,7 @@ public class KoszykListener implements ActionListener {
                 koszykPane.getLabelCenaDostawy().setText("Dostawa: " + koszykPane.getCenaDostawa() + " PLN");
             }
             else {
-                JOptionPane warning = new JOptionPane();
-                warning.showMessageDialog(null,"Koszyk jest pusty!", "Blad", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Koszyk jest pusty!", "Blad", JOptionPane.WARNING_MESSAGE);
             }
         }
         if (e.getSource() == koszykPane.getButtonKurier()) {
@@ -68,14 +67,12 @@ public class KoszykListener implements ActionListener {
             koszykPane.getFrame().repaint();
             SklepGUI.openSklepGUI(koszykPane.getFrame(), koszykPane.getSklep());
         }
-        if (e.getSource() instanceof JButton) {
-            JButton sourceButton = (JButton) e.getSource();
+        if (e.getSource() instanceof JButton sourceButton) {
             Produkt produktToRemove = koszykPane.getButtonProduktMap().get(sourceButton);
 
             if (produktToRemove != null) {
                 koszykPane.getSklep().getZalogowanyKlient().getKoszyk().usunProduktZKoszyka(produktToRemove);
-                //koszykPane.getComboList().remove(koszykPane.getComboList().indexOf(produktToRemove));
-                koszykPane.getPanelKoszyk().remove(sourceButton.getParent()); // Usunięcie całego panelu produktu
+                koszykPane.getPanelKoszyk().remove(sourceButton.getParent());
                 koszykPane.getPanelKoszyk().revalidate();
                 koszykPane.getPanelKoszyk().repaint();
                 koszykPane.getLabelCenaKoszyka().setText("Koszyk: " + koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia() + " PLN");
@@ -95,7 +92,7 @@ public class KoszykListener implements ActionListener {
 
                 //RYSOWANIE
                 koszykPane.rysujPanelPlatnosci(koszykPane.getPanelGlowny(), koszykPane.getSklep());
-                koszykPane.getLabelPlatnosc().setBackground(new Color(210, 255, 255));
+                koszykPane.getLabelPlatnosc().setBackground(new Color(184, 255, 184));
                 koszykPane.getLabelKoszyk().setText("PLATNOSC");
                 koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonPlatnosc());
                 koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonCofnijPlatnosc());
@@ -117,16 +114,15 @@ public class KoszykListener implements ActionListener {
             koszykPane.getSklep().getZalogowanyKlient().getKoszyk().ustawMetodePlatnosci(new placKarta());
         }
         if (e.getSource() == koszykPane.getButtonPlatnosc()){
-            if(koszykPane.getSklep().getZalogowanyKlient().getKoszyk().zrealizujDostawe(koszykPane.getAdres(), koszykPane.textKodBlik.getText(),koszykPane.textNumerKarty.getText(),koszykPane.textDataWygasniecia.getText(),koszykPane.textCvv.getText(),koszykPane.textKartaImie.getText(),koszykPane.textKartaNazwisko.getText())){
-                JOptionPane warning = new JOptionPane();
-                warning.showMessageDialog(null,"Wysłano paczkę na adres: " + koszykPane.getAdres(), "ZAMÓWIENIE WYSŁANE", JOptionPane.INFORMATION_MESSAGE);
+            if(koszykPane.getSklep().getZalogowanyKlient().getKoszyk().zrealizujDostawe(koszykPane.getAdres(), koszykPane.getTextKodBlik().getText(),koszykPane.getTextNumerKarty().getText(),koszykPane.getTextDataWygasniecia().getText(),koszykPane.getTextCvv().getText(),koszykPane.getTextKartaImie().getText(),koszykPane.getTextKartaNazwisko().getText())){
+                JOptionPane.showMessageDialog(null,"Wysłano paczkę na adres: " + koszykPane.getAdres(), "ZAMÓWIENIE WYSŁANE", JOptionPane.INFORMATION_MESSAGE);
                 for (int i = 0; i < koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getProduktyWKoszyku().size(); i++) {
                     for (int j = 0; j < koszykPane.getSklep().getListaProduktow().size(); j++) {
-                        if (koszykPane.getSklep().getListaProduktow().get(j).equals(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getProdukt())){
-                            koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().put(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar(),koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().get(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar())-(koszykPane.getComboList().get(i).getSelectedIndex()+1));
-                            if(koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().get(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar()) == 0){
-                                koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().remove(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar());
-                                koszykPane.getSklep().getListaProduktow().get(j).getRozmiaryAsList().remove(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar());
+                        if (koszykPane.getSklep().getListaProduktow().get(j).equals(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getProdukt())){
+                            koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().put(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar(),koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().get(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar())-(koszykPane.getComboList().get(i).getSelectedIndex()+1));
+                            if(koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().get(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar()) == 0){
+                                koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().remove(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar());
+                                koszykPane.getSklep().getListaProduktow().get(j).getRozmiaryAsList().remove(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar());
                                 if(koszykPane.getSklep().getListaProduktow().get(j).getRozmiaryAsList().isEmpty()){
                                     koszykPane.getSklep().getListaProduktow().remove(j);
                                 }
@@ -134,16 +130,16 @@ public class KoszykListener implements ActionListener {
                         }
                     }
                 }
-                koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().clear();
+                koszykPane.getKoszyk().getProduktyWKoszyku().clear();
                 koszykPane.getFrame().getContentPane().removeAll();
                 koszykPane.getFrame().revalidate();
                 koszykPane.getFrame().repaint();
                 SklepGUI.openSklepGUI(koszykPane.getFrame(), koszykPane.getSklep());
             }
         }
-        for (int i = 0; i < koszykPane.comboList.size(); i++) {
-            if (e.getSource() == koszykPane.comboList.get(i)){
-                koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).setIloscWKoszyku(koszykPane.getComboList().get(i).getSelectedIndex()+1);
+        for (int i = 0; i < koszykPane.getComboList().size(); i++) {
+            if (e.getSource() == koszykPane.getComboList().get(i)){
+                koszykPane.getKoszyk().getProduktyWKoszyku().get(i).setIloscWKoszyku(koszykPane.getComboList().get(i).getSelectedIndex()+1);
                 koszykPane.getLabelCenaKoszyka().setText("Koszyk: " + koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia() + " PLN");
                 koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia()+koszykPane.getCenaDostawa()) + " PLN");
             }
@@ -180,7 +176,10 @@ public class KoszykListener implements ActionListener {
             koszykPane.getLabelKoszyk().setText("DOSTAWA");
             koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonDostawa());
             koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonCofnijDostawa());
-
+        }
+        if (e.getSource() == koszykPane.getBuutonPowiadomienia()){
+            //TODO PANEL POWIADOMIEN
+            System.out.println("TRZEBA ZROBIC");
         }
         }
     }
