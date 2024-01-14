@@ -28,12 +28,11 @@ public class Koszyk implements Serializable {
 
     public double getWartoscZamowienia() {
         wartoscZamowienia = 0.00;
-        //TODO szubidibaa
-//        if(mapaProduktow != null){
-//            for (Produkt produkt : this.mapaProduktow.keySet()) {
-//                wartoscZamowienia += produkt.getCena()*this.mapaProduktow.get(produkt);
-//            }
-//        }
+        if(produktyWKoszyku != null){
+            for (ProduktWKoszyku produktWKoszyku : produktyWKoszyku) {
+                wartoscZamowienia += produktWKoszyku.getProdukt().getCena()*produktWKoszyku.getIloscWKoszyku();
+            }
+        }
 
         return wartoscZamowienia;
     }
