@@ -3,6 +3,7 @@ import code.Produkt.Produkt;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class PromocjaLogika implements Podmiot, Serializable {
 	public static ArrayList<Obserwator> obserwatorzy = new ArrayList<Obserwator>();
@@ -28,13 +29,15 @@ public class PromocjaLogika implements Podmiot, Serializable {
 		powiadomObserwatorow(nazwa);
 	}
 
-	public void usunPromocje(String nazwaPromocji){
-		for(Promocja promocja : PromocjaLogika.promocje){
-			if(promocja.getNazwa().equals(nazwaPromocji)) {
-				for(Produkt produkt : promocja.getProdukty()) {
-					produkt.setCena(produkt.getCena()/(1-promocja.getObnizka()));
+	public static void usunPromocje(String nazwaPromocji) {
+		Iterator<Promocja> iterator = PromocjaLogika.promocje.iterator();
+		while (iterator.hasNext()) {
+			Promocja promocja = iterator.next();
+			if (promocja.getNazwa().equals(nazwaPromocji)) {
+				for (Produkt produkt : promocja.getProdukty()) {
+					produkt.setCena(produkt.getCena() / (1 - promocja.getObnizka()));
 				}
-				PromocjaLogika.promocje.remove(promocja);
+				iterator.remove();
 			}
 		}
 	}

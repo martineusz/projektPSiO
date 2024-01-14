@@ -59,7 +59,7 @@ public class DodajProduktGUI implements ActionListener {
         radioButtonBluza = new JRadioButton("Bluza");
         radioButtonKoszulka = new JRadioButton("Koszulka");
         radioButtonSpodnie = new JRadioButton("Spodnie");
-        
+
 
         panelWyboru = new JPanel();
 
@@ -131,6 +131,8 @@ public class DodajProduktGUI implements ActionListener {
         grupa.add(radioButtonKoszulka);
         grupa.add(radioButtonSpodnie);
 
+
+        //return button
         JPanel panelGora = new JPanel();
         panelGora.setLayout(new FlowLayout(FlowLayout.LEFT));
         panelGora.setBackground(new Color(255, 69, 0));
@@ -146,6 +148,12 @@ public class DodajProduktGUI implements ActionListener {
 
         panelGora.add(returnButton);
 
+        JLabel labelNazwa = new JLabel("DODAJ PRODUKT");
+        labelNazwa.setFont(new Font("Serif", Font.BOLD, 17));
+        labelNazwa.setForeground(Color.WHITE);
+        panelGora.add(labelNazwa);
+
+        panelGlowny.add(BorderLayout.NORTH, panelGora);
         //dodawanie ikony
         JPanel dodawanieIkonyPanel = new JPanel();
         dodawanieIkonyPanel.setLayout(new BoxLayout(dodawanieIkonyPanel, BoxLayout.Y_AXIS));
@@ -200,7 +208,6 @@ public class DodajProduktGUI implements ActionListener {
 
         panelGlowny.add(BorderLayout.EAST, dodawanieIkonyPanel);
         panelGlowny.add(BorderLayout.WEST, panelWyboru);
-        panelGlowny.add(BorderLayout.NORTH, panelGora);
 
         ramka.setLayout(null);
         ramka.setContentPane(panelGlowny);

@@ -17,6 +17,7 @@ public class GUIadmin implements ActionListener {
 
     private JPanel panelGlowny;
     private JButton dodajPromocjeButton;
+    private JButton usunPromocjeButton;
     private JButton dodajProduktButton;
     private JButton usunProduktButton;
     private JButton powrotButton;
@@ -34,17 +35,22 @@ public class GUIadmin implements ActionListener {
         panelGlowny.setLayout(new BorderLayout());
 
         dodajPromocjeButton = new JButton("DODAJ PROMOCJE");
+        usunPromocjeButton = new JButton("USUN PROMOCJE");
         dodajProduktButton = new JButton("DODAJ PRODUKT");
         usunProduktButton = new JButton("USUN PRODUKT");
         powrotButton = new JButton("POWROT");
 
         dodajPromocjeButton.addActionListener(this);
+        usunPromocjeButton.addActionListener(this);
         dodajProduktButton.addActionListener(this);
         usunProduktButton.addActionListener(this);
         powrotButton.addActionListener(this);
 
         dodajPromocjeButton.setBackground(Color.WHITE);
         dodajPromocjeButton.setMargin(new Insets(10, 20, 10, 20));
+
+        usunPromocjeButton.setBackground(Color.WHITE);
+        usunPromocjeButton.setMargin(new Insets(10, 20, 10, 20));
 
         dodajProduktButton.setBackground(Color.WHITE);
         dodajProduktButton.setMargin(new Insets(10, 20, 10, 20));
@@ -57,10 +63,11 @@ public class GUIadmin implements ActionListener {
 
         JPanel panel = new JPanel();
 
-        panel.setLayout(new GridLayout(4,1, 20, 20));
+        panel.setLayout(new GridLayout(5,1, 20, 20));
         panel.setBorder(new EmptyBorder(30,30,30,30));
 
         panel.add(dodajPromocjeButton);
+        panel.add(usunPromocjeButton);
         panel.add(dodajProduktButton);
         panel.add(usunProduktButton);
         panel.add(powrotButton);
@@ -101,6 +108,14 @@ public class GUIadmin implements ActionListener {
             ramka.setLayout(null);
 
             DodajPromocjeGUI.openGUI(sklep, ramka);
+        }
+        if(e.getSource()==usunPromocjeButton){
+            ramka.getContentPane().removeAll();
+            ramka.revalidate();
+            ramka.repaint();
+            ramka.setLayout(null);
+
+            UsunPromocjeGUI.openGUI(sklep, ramka);
         }
         if(e.getSource() == dodajProduktButton){
             ramka.getContentPane().removeAll();

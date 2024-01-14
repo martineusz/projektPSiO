@@ -156,10 +156,28 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
         promocjaPolnoc.add(tabelka2Panel, BorderLayout.CENTER);
 
         //powrot
-        returnButton = new JButton("powrot");
-        returnButton.setBackground(Color.WHITE);
-        returnButton.setMargin(new Insets(10, 20, 10, 20));
+        //return button
+        JPanel panelGora = new JPanel();
+        panelGora.setLayout(new FlowLayout(FlowLayout.LEFT));
+        panelGora.setBackground(new Color(255, 69, 0));
+
+
+        returnButton = new JButton();
+        returnButton.setIcon(SklepGUI.scaleIcon("src\\resources\\Obrazki\\cofnij.png", 50));
         returnButton.addActionListener(this);
+        returnButton.setFocusPainted(false);
+        returnButton.setOpaque(false);
+        returnButton.setBackground(new Color(250, 246, 246, 0));
+        returnButton.setBounds(10,10,50,50);
+
+        panelGora.add(returnButton);
+
+        JLabel labelNazwa = new JLabel("DODAJ PROMOCJE");
+        labelNazwa.setFont(new Font("Serif", Font.BOLD, 17));
+        labelNazwa.setForeground(Color.WHITE);
+        panelGora.add(labelNazwa);
+
+        panelGlowny.add(BorderLayout.NORTH, panelGora);
 
         JLabel labelTytul = new JLabel("Produkty do promocji");
 
@@ -178,7 +196,6 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
 
         panelGlowny.add(scrollPane, BorderLayout.CENTER);
         panelGlowny.add(promocjaPolnoc, BorderLayout.EAST);
-        panelGlowny.add(returnButton, BorderLayout.SOUTH);
 
         ramka.setLayout(null);
         ramka.setContentPane(panelGlowny);
@@ -189,17 +206,15 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==zatwierdz){
+            ArrayList<Produkt> tempProdukty = new ArrayList<Produkt>();
+            float obnizka = (float) (Math.floor(wartoscPromocji * 100.0) / 100.0);
             for(int i=0; i<sklep.getListaProduktow().size(); i++) {
                 if(checkBox[i].isSelected()){
-                    float cena = (float) (Math.floor(wartoscPromocji * 100.0) / 100.0);
 
 
                     //TODO: jesli chcesz to popraw to tak zeby od razu dodawalo cala liste wybranych produktow na promocje
-                    ArrayList<Produkt> tempProdukty = new ArrayList<Produkt>();
-                    tempProdukty.add(sklep.getListaProduktow().get(i));
-                    sklep.promocja.ustawPromocjeNaProdukty(tempProdukty, cena, nazwaPromocji.getText());
 
-                    tempList.clear();
+                    tempProdukty.add(sklep.getListaProduktow().get(i));
 
                     Object[][] newDat = new Object[tempList.size()][4];
                     for(int j=0; j<tempList.size(); j++){
@@ -211,6 +226,9 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
                     model.setDataVector(newDat, kolumny2);
                 }
             }
+            sklep.promocja.ustawPromocjeNaProdukty(tempProdukty, obnizka, nazwaPromocji.getText());
+
+            tempList.clear();
             ramka.getContentPane().removeAll();
             ramka.revalidate();
             ramka.repaint();
