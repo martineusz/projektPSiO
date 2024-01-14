@@ -25,22 +25,28 @@ public class KoszykListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //1
         if (e.getSource() == koszykPane.getButtonZamowienie()) {
-            //USUWANIE
-            koszykPane.getPanelGlowny().remove(koszykPane.getPanelKoszyk());
-            koszykPane.getPanelGlowny().remove(koszykPane.getScrollPaneKoszyk());
-            koszykPane.getPanelPodsumowanie().remove(koszykPane.getButtonZamowienie());
-            koszykPane.getPanelGlowny().revalidate();
-            koszykPane.getPanelGlowny().repaint();
+            if(!koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getProduktyWKoszyku().isEmpty()) {
+                //USUWANIE
+                koszykPane.getPanelGlowny().remove(koszykPane.getPanelKoszyk());
+                koszykPane.getPanelGlowny().remove(koszykPane.getScrollPaneKoszyk());
+                koszykPane.getPanelPodsumowanie().remove(koszykPane.getButtonZamowienie());
+                koszykPane.getPanelGlowny().revalidate();
+                koszykPane.getPanelGlowny().repaint();
 
-            //RYSOWANIE
-            koszykPane.rysujPanelDostawy(koszykPane.getPanelGlowny(), koszykPane.getSklep());
-            koszykPane.getLabelDostawa().setBackground(new Color(210, 255, 255));
-            koszykPane.getLabelKoszyk().setText("DOSTAWA");
-            koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonDostawa());
-            koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonCofnijDostawa());
-            koszykPane.setCenaDostawa(15.99F);
-            koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia()+koszykPane.getCenaDostawa()) + " PLN");
-            koszykPane.getLabelCenaDostawy().setText("Dostawa: " + koszykPane.getCenaDostawa() + " PLN");
+                //RYSOWANIE
+                koszykPane.rysujPanelDostawy(koszykPane.getPanelGlowny(), koszykPane.getSklep());
+                koszykPane.getLabelDostawa().setBackground(new Color(210, 255, 255));
+                koszykPane.getLabelKoszyk().setText("DOSTAWA");
+                koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonDostawa());
+                koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonCofnijDostawa());
+                koszykPane.setCenaDostawa(15.99F);
+                koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia() + koszykPane.getCenaDostawa()) + " PLN");
+                koszykPane.getLabelCenaDostawy().setText("Dostawa: " + koszykPane.getCenaDostawa() + " PLN");
+            }
+            else {
+                JOptionPane warning = new JOptionPane();
+                warning.showMessageDialog(null,"Koszyk jest pusty!", "Blad", JOptionPane.WARNING_MESSAGE);
+            }
         }
         if (e.getSource() == koszykPane.getButtonKurier()) {
             koszykPane.getSklep().getZalogowanyKlient().getKoszyk().ustawMetodeDostawy(new DostawaKurier());
