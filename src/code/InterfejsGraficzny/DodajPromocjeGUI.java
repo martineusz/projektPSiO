@@ -171,6 +171,12 @@ public class DodajPromocjeGUI implements ActionListener, ItemListener {
         returnButton.setBounds(10,10,50,50);
 
         panelGora.add(returnButton);
+
+        JLabel labelNazwa = new JLabel("DODAJ PROMOCJE");
+        labelNazwa.setFont(new Font("Serif", Font.BOLD, 17));
+        labelNazwa.setForeground(Color.WHITE);
+        panelGora.add(labelNazwa);
+
         panelGlowny.add(BorderLayout.NORTH, panelGora);
 
         JLabel labelTytul = new JLabel("Produkty do promocji");

@@ -32,7 +32,7 @@ public class UsunPromocjeGUI {
         panelGora.setLayout(new FlowLayout(FlowLayout.LEFT));
         panelGora.setBackground(new Color(255, 69, 0));
 
-        JLabel labelNazwa = new JLabel("USUN PROMOCJE");
+        JLabel labelNazwa = new JLabel("USUŃ PROMOCJE");
         labelNazwa.setFont(new Font("Serif", Font.BOLD, 17));
         labelNazwa.setForeground(Color.WHITE);
 
@@ -100,7 +100,7 @@ public class UsunPromocjeGUI {
 
             for(int i=0; i<promocja.getProdukty().size(); i++){
                 daneProdukty[i][0] =promocja.getProdukty().get(i).getNazwa();
-                daneProdukty[i][1] = promocja.getProdukty().get(i).getCena()/(1-promocja.getObnizka());
+                daneProdukty[i][1] = (float) (Math.floor(promocja.getProdukty().get(i).getCena()/(1-promocja.getObnizka()) * 100.0) / 100.0);
                 daneProdukty[i][2] = promocja.getProdukty().get(i).getCena();
             }
 
@@ -112,6 +112,7 @@ public class UsunPromocjeGUI {
             add(BorderLayout.CENTER, scrollProdukty);
 
             //button usuwania
+            JPanel usunContainer = new JPanel();
 
             JButton buttonUsun = new JButton("USUN PROMOCJE");
             buttonUsun.setBackground(Color.WHITE);
@@ -128,7 +129,8 @@ public class UsunPromocjeGUI {
                 }
             });
             buttonUsun.setPreferredSize(new Dimension(200,50));
-            add(BorderLayout.EAST, buttonUsun);
+            usunContainer.add(buttonUsun);
+            add(BorderLayout.EAST, usunContainer);
         }
     }
 }

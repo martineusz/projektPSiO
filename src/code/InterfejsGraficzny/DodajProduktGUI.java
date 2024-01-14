@@ -147,6 +147,12 @@ public class DodajProduktGUI implements ActionListener {
         returnButton.setBounds(10,10,50,50);
 
         panelGora.add(returnButton);
+
+        JLabel labelNazwa = new JLabel("DODAJ PRODUKT");
+        labelNazwa.setFont(new Font("Serif", Font.BOLD, 17));
+        labelNazwa.setForeground(Color.WHITE);
+        panelGora.add(labelNazwa);
+
         panelGlowny.add(BorderLayout.NORTH, panelGora);
         //dodawanie ikony
         JPanel dodawanieIkonyPanel = new JPanel();
