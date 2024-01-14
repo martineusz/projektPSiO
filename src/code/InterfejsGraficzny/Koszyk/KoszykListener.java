@@ -23,6 +23,7 @@ public class KoszykListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         //1
         if (e.getSource() == koszykPane.getButtonZamowienie()) {
             if(!koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getProduktyWKoszyku().isEmpty()) {
@@ -122,11 +123,11 @@ public class KoszykListener implements ActionListener {
                 warning.showMessageDialog(null,"Wysłano paczkę na adres: " + koszykPane.getAdres(), "ZAMÓWIENIE WYSŁANE", JOptionPane.INFORMATION_MESSAGE);
                 for (int i = 0; i < koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getProduktyWKoszyku().size(); i++) {
                     for (int j = 0; j < koszykPane.getSklep().getListaProduktow().size(); j++) {
-                        if (koszykPane.getSklep().getListaProduktow().get(j).equals(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getProdukt())){
-                            koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().put(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar(),koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().get(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar())-(koszykPane.getComboList().get(i).getSelectedIndex()+1));
-                            if(koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().get(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar()) == 0){
-                                koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().remove(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar());
-                                koszykPane.getSklep().getListaProduktow().get(j).getRozmiaryAsList().remove(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar());
+                        if (koszykPane.getSklep().getListaProduktow().get(j).equals(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getProdukt())){
+                            koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().put(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar(),koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().get(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar())-(koszykPane.getComboList().get(i).getSelectedIndex()+1));
+                            if(koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().get(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar()) == 0){
+                                koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().remove(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar());
+                                koszykPane.getSklep().getListaProduktow().get(j).getRozmiaryAsList().remove(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar());
                                 if(koszykPane.getSklep().getListaProduktow().get(j).getRozmiaryAsList().isEmpty()){
                                     koszykPane.getSklep().getListaProduktow().remove(j);
                                 }
@@ -134,7 +135,7 @@ public class KoszykListener implements ActionListener {
                         }
                     }
                 }
-                koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().clear();
+                koszykPane.getKoszyk().getProduktyWKoszyku().clear();
                 koszykPane.getFrame().getContentPane().removeAll();
                 koszykPane.getFrame().revalidate();
                 koszykPane.getFrame().repaint();
@@ -143,7 +144,7 @@ public class KoszykListener implements ActionListener {
         }
         for (int i = 0; i < koszykPane.comboList.size(); i++) {
             if (e.getSource() == koszykPane.comboList.get(i)){
-                koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).setIloscWKoszyku(koszykPane.getComboList().get(i).getSelectedIndex()+1);
+                koszykPane.getKoszyk().getProduktyWKoszyku().get(i).setIloscWKoszyku(koszykPane.getComboList().get(i).getSelectedIndex()+1);
                 koszykPane.getLabelCenaKoszyka().setText("Koszyk: " + koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia() + " PLN");
                 koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia()+koszykPane.getCenaDostawa()) + " PLN");
             }
@@ -180,7 +181,6 @@ public class KoszykListener implements ActionListener {
             koszykPane.getLabelKoszyk().setText("DOSTAWA");
             koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonDostawa());
             koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonCofnijDostawa());
-
         }
         }
     }

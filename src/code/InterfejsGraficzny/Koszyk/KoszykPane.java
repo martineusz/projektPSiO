@@ -296,6 +296,10 @@ public class KoszykPane extends JPanel {
         this.adres = adres;
     }
 
+    public Koszyk getKoszyk() {
+        return koszyk;
+    }
+
     public void otworzKoszyk(Sklep sklep, JFrame frame) {
         this.frame = frame;
         this.sklep = sklep;
