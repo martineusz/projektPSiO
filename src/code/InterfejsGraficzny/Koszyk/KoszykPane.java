@@ -40,7 +40,7 @@ public class KoszykPane extends JPanel {
     //PANELS
     JPanel panelGorny;
     JPanel panelGorny2;
-    JPanel panelPodsumowanie = new JPanel();
+    JPanel panelPodsumowanie;
     JPanel panelKoszyk;
     JPanel panelGlowny;
     JPanel panelDostawy;
@@ -339,6 +339,23 @@ public class KoszykPane extends JPanel {
         buttonPlatnosc = new JButton();
         buttonCofnijPlatnosc = new JButton();
 
+        // PANEL GLOWNY
+        panelGlowny.setPreferredSize(new Dimension(frame.getWidth(), 1620));
+        panelGlowny.setLayout(null);
+        panelGlowny.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        panelGlowny.setBackground(new Color(255,255,255));
+
+        rysujPanelKoszyk(panelGlowny);
+
+        //FRAME
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+        frame.add(panelGorny);
+        frame.add(panelGorny2);
+        frame.add(panelGlowny);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
         // PANEL GORNY
         panelGorny.setPreferredSize(new Dimension(frame.getWidth(), 250));
         panelGorny.setLayout(null);
@@ -358,7 +375,7 @@ public class KoszykPane extends JPanel {
         buttonWylogujSie.setIcon(konotImage);
         buttonWylogujSie.setText("Wyloguj sie");
         buttonWylogujSie.addActionListener(koszykListener);
-        buttonWylogujSie.setBounds(1550, 40, 150, 50);
+        buttonWylogujSie.setBounds(frame.getWidth()-370, 40, 150, 50);
         buttonWylogujSie.setFocusable(false);
         buttonWylogujSie.setBackground(null);
         buttonWylogujSie.setBorder(null);
@@ -368,7 +385,7 @@ public class KoszykPane extends JPanel {
         buutonPowiadomienia.setIcon(powiadomieniaImage);
         buutonPowiadomienia.setText("Powiadomienia");
         buutonPowiadomienia.setIconTextGap(-5);
-        buutonPowiadomienia.setBounds(1400, 40, 150, 50);
+        buutonPowiadomienia.setBounds(frame.getWidth()-520, 40, 150, 50);
         buutonPowiadomienia.setFocusable(false);
         buutonPowiadomienia.setBackground(null);
         buutonPowiadomienia.setBorder(null);
@@ -388,7 +405,7 @@ public class KoszykPane extends JPanel {
 
         //LABEL KOSZYK 2
         labelKoszyk2.setText("KOSZYK  >");
-        labelKoszyk2.setBounds(1300, 25, 125, 40);
+        labelKoszyk2.setBounds(frame.getWidth()-620, 25, 125, 40);
         labelKoszyk2.setFont(new Font(null, Font.BOLD, 15));
         labelKoszyk2.setBackground(new Color(210, 255, 255));
         labelKoszyk2.setOpaque(true);
@@ -399,7 +416,7 @@ public class KoszykPane extends JPanel {
         //LABEL DOSTAWA
         labelDostawa.setText("DOSTAWA  >");
         labelDostawa.setBackground(Color.lightGray);
-        labelDostawa.setBounds(1425, 25, 150, 40);
+        labelDostawa.setBounds(frame.getWidth()-495, 25, 150, 40);
         labelDostawa.setFont(new Font(null, Font.BOLD, 15));
         labelDostawa.setOpaque(true);
         labelDostawa.setIcon(dostawaImage);
@@ -409,7 +426,7 @@ public class KoszykPane extends JPanel {
         //LABEL PLATNOSC
         labelPlatnosc.setText("PLATNOSC");
         labelPlatnosc.setBackground(Color.lightGray);
-        labelPlatnosc.setBounds(1575, 25, 150, 40);
+        labelPlatnosc.setBounds(frame.getWidth()-345, 25, 150, 40);
         labelPlatnosc.setFont(new Font(null, Font.BOLD, 15));
         labelPlatnosc.setOpaque(true);
         labelPlatnosc.setIcon(platnoscImage);
@@ -422,14 +439,10 @@ public class KoszykPane extends JPanel {
         panelGlowny.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panelGlowny.setBackground(new Color(255,255,255));
 
-
-        rysujPanelKoszyk(panelGlowny);
-
-
         //PANEL PODSUMOWANIE
         panelPodsumowanie.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220)));
         panelPodsumowanie.setBackground(new Color(240,252,255));
-        panelPodsumowanie.setBounds(1270, 150, 450, 450);
+        panelPodsumowanie.setBounds(frame.getWidth()-650, 150, 450, 450);
         panelPodsumowanie.setLayout(null);
         panelGlowny.add(panelPodsumowanie);
 
@@ -506,13 +519,7 @@ public class KoszykPane extends JPanel {
         panelPodsumowanie.add(labelSumaCen);
 
 
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-        frame.add(panelGorny);
-        frame.add(panelGorny2);
-        frame.add(panelGlowny);
-        frame.setSize(1920, 1080); // Przeniesione ustawianie rozmiaru
+
     }
 
 
