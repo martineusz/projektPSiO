@@ -2,7 +2,6 @@ package code.InterfejsGraficzny.Koszyk;
 
 import code.DostawaStrategia.DostawaPaczkomat;
 import code.InterfejsGraficzny.SklepGUI;
-import code.Main.Klient;
 import code.Main.Koszyk;
 import code.Main.ProduktWKoszyku;
 import code.Main.Sklep;
@@ -343,7 +342,7 @@ public class KoszykPane extends JPanel {
                 JLabel labelCena = new JLabel("Cena: " +produktWKoszyku.getProdukt().getCena() + " PLN");
                 JLabel labelRozmiar = new JLabel("Rozmiar: " + produktWKoszyku.getRozmiar());
                 JPanel panelProdukt = new JPanel();
-                ImageIcon obrazek = new ImageIcon();
+                ImageIcon obrazek;
                 int wysokoscPanelProdukt = (scrollPaneKoszyk.getHeight() / 4);
 
                 panelProdukt.setLayout(null);
@@ -847,7 +846,7 @@ public class KoszykPane extends JPanel {
     }
 
     public static void main(String[] args) {
-        Sklep sklep = new Sklep(new ArrayList<Klient>(), null, false, new ArrayList<Produkt>());
+        Sklep sklep = new Sklep(new ArrayList<>(), null, false, new ArrayList<>());
 
         JFrame jFrame = new JFrame();
         jFrame.setVisible(true);

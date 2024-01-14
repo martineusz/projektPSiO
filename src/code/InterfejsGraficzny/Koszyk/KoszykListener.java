@@ -7,7 +7,6 @@ import code.InterfejsGraficzny.SklepGUI;
 import code.PlacenieStrategia.placBlikiem;
 import code.PlacenieStrategia.placKarta;
 import code.Produkt.Produkt;
-import code.Main.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class KoszykListener implements ActionListener {
-    private KoszykPane koszykPane;
+    private final KoszykPane koszykPane;
 
     public KoszykListener(KoszykPane koszykPane) {
         this.koszykPane = koszykPane;
@@ -45,8 +44,7 @@ public class KoszykListener implements ActionListener {
                 koszykPane.getLabelCenaDostawy().setText("Dostawa: " + koszykPane.getCenaDostawa() + " PLN");
             }
             else {
-                JOptionPane warning = new JOptionPane();
-                warning.showMessageDialog(null,"Koszyk jest pusty!", "Blad", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Koszyk jest pusty!", "Blad", JOptionPane.WARNING_MESSAGE);
             }
         }
         if (e.getSource() == koszykPane.getButtonKurier()) {
@@ -69,8 +67,7 @@ public class KoszykListener implements ActionListener {
             koszykPane.getFrame().repaint();
             SklepGUI.openSklepGUI(koszykPane.getFrame(), koszykPane.getSklep());
         }
-        if (e.getSource() instanceof JButton) {
-            JButton sourceButton = (JButton) e.getSource();
+        if (e.getSource() instanceof JButton sourceButton) {
             Produkt produktToRemove = koszykPane.getButtonProduktMap().get(sourceButton);
 
             if (produktToRemove != null) {
@@ -118,8 +115,7 @@ public class KoszykListener implements ActionListener {
         }
         if (e.getSource() == koszykPane.getButtonPlatnosc()){
             if(koszykPane.getSklep().getZalogowanyKlient().getKoszyk().zrealizujDostawe(koszykPane.getAdres(), koszykPane.getTextKodBlik().getText(),koszykPane.getTextNumerKarty().getText(),koszykPane.getTextDataWygasniecia().getText(),koszykPane.getTextCvv().getText(),koszykPane.getTextKartaImie().getText(),koszykPane.getTextKartaNazwisko().getText())){
-                JOptionPane warning = new JOptionPane();
-                warning.showMessageDialog(null,"Wysłano paczkę na adres: " + koszykPane.getAdres(), "ZAMÓWIENIE WYSŁANE", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Wysłano paczkę na adres: " + koszykPane.getAdres(), "ZAMÓWIENIE WYSŁANE", JOptionPane.INFORMATION_MESSAGE);
                 for (int i = 0; i < koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getProduktyWKoszyku().size(); i++) {
                     for (int j = 0; j < koszykPane.getSklep().getListaProduktow().size(); j++) {
                         if (koszykPane.getSklep().getListaProduktow().get(j).equals(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getProdukt())){
