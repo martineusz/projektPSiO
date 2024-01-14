@@ -75,8 +75,7 @@ public class KoszykListener implements ActionListener {
 
             if (produktToRemove != null) {
                 koszykPane.getSklep().getZalogowanyKlient().getKoszyk().usunProduktZKoszyka(produktToRemove);
-                //koszykPane.getComboList().remove(koszykPane.getComboList().indexOf(produktToRemove));
-                koszykPane.getPanelKoszyk().remove(sourceButton.getParent()); // Usunięcie całego panelu produktu
+                koszykPane.getPanelKoszyk().remove(sourceButton.getParent());
                 koszykPane.getPanelKoszyk().revalidate();
                 koszykPane.getPanelKoszyk().repaint();
                 koszykPane.getLabelCenaKoszyka().setText("Koszyk: " + koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia() + " PLN");
@@ -184,6 +183,7 @@ public class KoszykListener implements ActionListener {
         }
         if (e.getSource() == koszykPane.getBuutonPowiadomienia()){
             //TODO PANEL POWIADOMIEN
+            System.out.println("TRZEBA ZROBIC");
         }
         }
     }
