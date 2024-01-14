@@ -35,6 +35,8 @@ public class KoszykPane extends JPanel {
     JRadioButton buttonKartaKredytowa;
     JButton buttonUsun;
     JButton buttonPlatnosc;
+    JButton buttonCofnijDostawa;
+    JButton buttonCofnijPlatnosc;
     //PANELS
     JPanel panelGorny;
     JPanel panelGorny2;
@@ -73,6 +75,18 @@ public class KoszykPane extends JPanel {
     JTextField textCvv;
     JTextField textKartaImie;
     JTextField textKartaNazwisko;
+
+    public JPanel getPanelPlatnosci() {
+        return panelPlatnosci;
+    }
+
+    public JButton getButtonCofnijPlatnosc() {
+        return buttonCofnijPlatnosc;
+    }
+
+    public JButton getButtonCofnijDostawa() {
+        return buttonCofnijDostawa;
+    }
 
     public ArrayList<JComboBox> getComboList() {
         return comboList;
@@ -321,6 +335,9 @@ public class KoszykPane extends JPanel {
         buttonWylogujSie = new JButton();
         buutonPowiadomienia = new JButton();
         buttonDostawa = new JButton();
+        buttonCofnijDostawa = new JButton();
+        buttonPlatnosc = new JButton();
+        buttonCofnijPlatnosc = new JButton();
 
         // PANEL GORNY
         panelGorny.setPreferredSize(new Dimension(frame.getWidth(), 250));
@@ -437,17 +454,14 @@ public class KoszykPane extends JPanel {
         buttonDostawa.setBorder(BorderFactory.createEtchedBorder());
 
         //BUTTON COFNIJ DOSTAWA
-        JButton buttonCofnijDostawa = new JButton();
-        buttonCofnijDostawa.setText("BACK");
-        buttonCofnijDostawa.setBounds(180,375,100,20);
+        buttonCofnijDostawa.setText("BACK1");
+        buttonCofnijDostawa.setBounds(180,385,100,20);
         buttonCofnijDostawa.addActionListener(koszykListener);
         buttonCofnijDostawa.setFocusable(false);
         buttonCofnijDostawa.setBackground(null);
         buttonCofnijDostawa.setBorder(null);
-        panelPodsumowanie.add(buttonCofnijDostawa);
 
         //BUTTON PLATNOSC
-        buttonPlatnosc = new JButton();
         buttonPlatnosc.setText("ZREALIZUJ ZAMOWIENIE");
         buttonPlatnosc.setBounds(50, 300, 350, 80);
         buttonPlatnosc.addActionListener(koszykListener);
@@ -456,6 +470,14 @@ public class KoszykPane extends JPanel {
         buttonPlatnosc.setBackground(Color.RED);
         buttonPlatnosc.setForeground(new Color(255, 255, 255));
         buttonPlatnosc.setBorder(BorderFactory.createEtchedBorder());
+
+        //BUTTON COFNIJ PLATNOSC
+        buttonCofnijPlatnosc.setText("BACK2");
+        buttonCofnijPlatnosc.setBounds(180,385,100,20);
+        buttonCofnijPlatnosc.addActionListener(koszykListener);
+        buttonCofnijPlatnosc.setFocusable(false);
+        buttonCofnijPlatnosc.setBackground(null);
+        buttonCofnijPlatnosc.setBorder(null);
 
         //PODSUMOWANIE LABEL
         labelPodsumowanie.setText("Podsumowanie koszyka");
