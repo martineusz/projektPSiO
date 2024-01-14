@@ -187,14 +187,14 @@ public class SklepGUI {
         radioSMS.setEnabled(false);
 
 
-        buttonKoszyk = new JButton( scaledIcon);
+        buttonKoszyk = new JButton(scaledIcon);
         panelKoszykButton.add(buttonKoszyk);
         iloscWKoszyku = new JLabel(String.valueOf(sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size()));
         buttonKoszyk.setFont(new Font("Arial", Font.BOLD, 15));
         buttonKoszyk.setVerticalTextPosition(JButton.BOTTOM);
-        buttonKoszyk.setBounds( 0,0, 40, 40);
+        buttonKoszyk.setBounds(0, 0, 40, 40);
         panelGora.add(iloscWKoszyku);
-        iloscWKoszyku.setBounds(625,47,15,15);
+        iloscWKoszyku.setBounds(625, 47, 15, 15);
         iloscWKoszyku.setForeground(myColor);
         buttonKoszyk.setFocusable(false);
 
@@ -366,7 +366,7 @@ public class SklepGUI {
         buttonKoszulki.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pokazWszystkieKoszulki(frame,  sklep);
+                pokazWszystkieKoszulki(frame, sklep);
 
             }
         });
@@ -395,7 +395,6 @@ public class SklepGUI {
     }
 
 
-
     private static JPanel createProductPanel(String name, ImageIcon icon, String price, Sklep sklep, Produkt produkt) {
         JPanel productPanel = new JPanel();
         productPanel.setLayout(null);
@@ -420,13 +419,12 @@ public class SklepGUI {
         productPanel.add(labelName);
         labelName.setBounds(10, 360, 180, 30);
 
-        JLabel labelPrice = new JLabel(price  + " zł");
+        JLabel labelPrice = new JLabel(price + " zł");
         productPanel.add(labelPrice);
         labelPrice.setFont(myFont);
         labelPrice.setHorizontalAlignment(SwingConstants.CENTER);
         labelPrice.setVerticalAlignment(SwingConstants.CENTER);
         labelPrice.setBounds(190, 360, 60, 30);
-
 
 
         JComboBox<String> comboBox = new JComboBox<>();
@@ -460,7 +458,7 @@ public class SklepGUI {
 
     public static int policzNewHeight(int liczba) {
         int totalRows = (int) Math.ceil((double) liczba / liczbaKolumn);
-        return totalRows * (wysokoscProduktu+10);
+        return totalRows * (wysokoscProduktu + 10);
     }
 
     public static void pokazWszystkieKoszulki(JFrame frame, Sklep sklep) {
@@ -478,7 +476,9 @@ public class SklepGUI {
 
         for (Produkt produkt : sklep.getListaProduktow()) {
             if (produkt instanceof Koszulka && !listaKoszulek.contains(produkt)) {
-                listaKoszulek.add((Koszulka) produkt);}}
+                listaKoszulek.add((Koszulka) produkt);
+            }
+        }
 
 
         if (scrollPaneButy != null) {
@@ -527,7 +527,9 @@ public class SklepGUI {
 
         for (Produkt produkt : sklep.getListaProduktow()) {
             if (produkt instanceof Bluza && !listaBluz.contains(produkt)) {
-                listaBluz.add((Bluza) produkt);}}
+                listaBluz.add((Bluza) produkt);
+            }
+        }
 
         if (scrollPaneButy != null) {
             frame.remove(scrollPaneButy);
@@ -577,7 +579,9 @@ public class SklepGUI {
 
         for (Produkt produkt : sklep.getListaProduktow()) {
             if (produkt instanceof Spodnie && !listaSpodni.contains(produkt)) {
-                listaSpodni.add((Spodnie) produkt);}}
+                listaSpodni.add((Spodnie) produkt);
+            }
+        }
 
         if (scrollPaneButy != null) {
             frame.remove(scrollPaneButy);
@@ -629,8 +633,6 @@ public class SklepGUI {
         Collections.shuffle(sklep.getListaProduktow());
 
 
-
-
         if (scrollPaneButy != null) {
             frame.remove(scrollPaneButy);
         }
@@ -677,7 +679,9 @@ public class SklepGUI {
 
         for (Produkt produkt : sklep.getListaProduktow()) {
             if (produkt instanceof Obuwie && !listaButow.contains(produkt)) {
-                listaButow.add((Obuwie) produkt);}}
+                listaButow.add((Obuwie) produkt);
+            }
+        }
 
         if (scrollPaneKoszulki != null) {
             frame.remove(scrollPaneKoszulki);
@@ -710,7 +714,7 @@ public class SklepGUI {
         buttonButy.setEnabled(false);
     }
 
-    public static ImageIcon scaleIcon (String path, int size) {
+    public static ImageIcon scaleIcon(String path, int size) {
         ImageIcon icon = new ImageIcon(path);
         Image originalImage = icon.getImage();
         Image scaledImage = originalImage.getScaledInstance(size, size, Image.SCALE_SMOOTH);
@@ -743,27 +747,31 @@ public class SklepGUI {
     public static void dodajProdukt(String name, Sklep sklep, Produkt produkt, JComboBox comboBox) {
         boolean czyProduktWKoszyku = true;
         if (comboBox.getSelectedIndex() != 0) {
-        if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().isEmpty()) {
-            sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt);
-            JOptionPane.showMessageDialog(null, "Dodano do koszyka", "GRATULACJE", JOptionPane.INFORMATION_MESSAGE);
-            iloscWKoszyku.setText(String.valueOf(sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size()));
-        } else {
-            for (int i = 0; i < sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size(); i++) {
-                if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().get(i).equals(produkt)) {
-                    czyProduktWKoszyku = false;
-                    break;
-                }
-            }
-            if (czyProduktWKoszyku) {
+            if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().isEmpty()) {
                 sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt);
                 JOptionPane.showMessageDialog(null, "Dodano do koszyka", "GRATULACJE", JOptionPane.INFORMATION_MESSAGE);
                 iloscWKoszyku.setText(String.valueOf(sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size()));
-
             } else {
-                JOptionPane.showMessageDialog(null, "Produkt jest juz w koszyku", "NIE MOZESZ TEGO ZROBIC", JOptionPane.WARNING_MESSAGE);
+                for (int i = 0; i < sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size(); i++) {
+                    for (int j = 0; j < produkt.getRozmiaryAsList().size(); j++) {
+                        if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().get(i).equals(produkt) && produkt.getRozmiary().get(produkt.getRozmiaryAsList().get(j))!=sklep.getZalogowanyKlient().getKoszyk().getListaProduktow().get(i).getRozmiary().get(sklep.getZalogowanyKlient().getKoszyk().getListaProduktow().get(i).getRozmiaryAsList().get(j))) {
+                            czyProduktWKoszyku = false;
+                            break;
+                        }
+                    }
+                }
+                if (czyProduktWKoszyku) {
+                    sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt);
+                    JOptionPane.showMessageDialog(null, "Dodano do koszyka", "GRATULACJE", JOptionPane.INFORMATION_MESSAGE);
+                    iloscWKoszyku.setText(String.valueOf(sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size()));
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Produkt jest juz w koszyku", "NIE MOZESZ TEGO ZROBIC", JOptionPane.WARNING_MESSAGE);
+                }
             }
+            listaProduktowWKoszyku.add(name);
+        } else {
+            JOptionPane.showMessageDialog(null, "Wybierz rozmiar produktu aby dodać go do koszyka", "Brak rozmiaru", JOptionPane.INFORMATION_MESSAGE);
         }
-        listaProduktowWKoszyku.add(name);}
-        else { JOptionPane.showMessageDialog(null, "Wybierz rozmiar produktu aby dodać go do koszyka", "Brak rozmiaru", JOptionPane.INFORMATION_MESSAGE);}
     }
 }

@@ -7,6 +7,7 @@ import code.InterfejsGraficzny.SklepGUI;
 import code.Produkt.Produkt;
 import code.Main.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,13 +55,14 @@ public class KoszykListener implements ActionListener {
             koszykPane.getFrame().repaint();
             SklepGUI.openSklepGUI(koszykPane.getFrame(), koszykPane.getSklep());
         }
-        if (e.getSource() == koszykPane.getButtonUsun()) {
-            Produkt produktToRemove = koszykPane.getButtonProduktMap().get(koszykPane.getButtonUsun());
+        if (e.getSource() instanceof JButton) {
+            JButton sourceButton = (JButton) e.getSource();
+            Produkt produktToRemove = koszykPane.getButtonProduktMap().get(sourceButton);
 
             if (produktToRemove != null) {
-                Produkt x;
                 koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getListaProduktow().remove(produktToRemove);
-                koszykPane.getPanelKoszyk().remove((koszykPane.getButtonUsun()).getParent()); // Usunięcie całego panelu produktu
+                koszykPane.getPanelKoszyk().remove(sourceButton.getParent()); // Usunięcie całego panelu produktu
+                koszykPane.getButtonProduktMap().remove(sourceButton);
                 koszykPane.getPanelKoszyk().revalidate();
                 koszykPane.getPanelKoszyk().repaint();
             }

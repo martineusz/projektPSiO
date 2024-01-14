@@ -436,6 +436,10 @@ public class KoszykPane extends JPanel {
         panelGlowny.add(panelKoszyk);
         panelKoszyk.setPreferredSize(new Dimension(700, 700));
         panelKoszyk.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        ArrayList<JComboBox> comboList = new ArrayList<>();
+        Map<JComboBox, Produkt> comboProduktMap = new HashMap<>();
+
         // LABELs
         JLabel labelPustyKoszyk = new JLabel();
 
@@ -498,31 +502,46 @@ public class KoszykPane extends JPanel {
                 buttonUsun.setBackground(null);
                 buttonUsun.setForeground(Color.gray);
 
-            /*  Nieaktualny sposób wyszukiwania ilości dostępnych elementów, do zmiany
 
-            /*
-            opcjeWyboru = new String[produkt.getIloscWMagazynie()];
-            for (int j = 1; j <= produkt.getIloscWMagazynie(); j++) {
-            opcjeWyboru[j-1] = String.valueOf(j);
-            }
+                int iloscWMagazynie=0;
+                boolean pom = false;
+                for (int j = 0; j < produkt.getRozmiaryAsList().size(); j++) {
+                    for (int k = 0; k < koszyk.getListaProduktow().size(); k++) {
+                        if (produkt.getRozmiary().get(produkt.getRozmiaryAsList().get(j)).equals(koszyk.getListaProduktow().get(k).getRozmiary().get(koszyk.getListaProduktow().get(k).getRozmiaryAsList().get(j)))) {
+                            pom = true;
+                            break;
+                        }
+                        if (pom) {
+                            iloscWMagazynie = produkt.getRozmiary().get(produkt.getRozmiaryAsList().get(j));
+                            pom = false;
+                            break;
+                        }
+                    }
+                }
 
-            */
 
-            /*comboList.add(ComboBombo = new JComboBox(opcjeWyboru));
-            comboList.get(i).setBounds(labelNazwa.getX(), wysokoscPanelProdukt-40,50,30);
-            comboList.get(i).setBackground(Color.WHITE);
-            comboList.get(i).setBorder(null);
-            comboList.get(i).addActionListener(this);
-            comboList.get(i).setSelectedItem(0);*/
+
+           String[] opcjeWyboru = new String[iloscWMagazynie];
+
+                for (int j = 1; j <= opcjeWyboru.length; j++) {
+                    opcjeWyboru[j-1] = String.valueOf(j);
+                }
+
+                comboList.add(new JComboBox(opcjeWyboru));
+                comboList.get(i).setBounds(labelNazwa.getX(), wysokoscPanelProdukt-40,50,30);
+                comboList.get(i).setBackground(Color.WHITE);
+                comboList.get(i).setBorder(null);
+                comboList.get(i).addActionListener(koszykListener);
+                comboList.get(i).setSelectedItem(0);
 
                 panelProdukt.add(labelObrazek);
-                //panelProdukt.add(comboList.get(i));
+                panelProdukt.add(comboList.get(i));
                 panelProdukt.add(buttonUsun);
                 panelProdukt.add(labelCena);
                 panelProdukt.add(labelNazwa);
                 panelKoszyk.add(panelProdukt);
 
-                //comboProduktMap.put(comboList.get(i), produkt);
+                comboProduktMap.put(comboList.get(i), produkt);
                 buttonProduktMap.put(buttonUsun, produkt);
             }
         }
