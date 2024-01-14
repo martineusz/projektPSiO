@@ -34,7 +34,6 @@ public class DodajProduktGUI implements ActionListener {
     private JRadioButton radioButtonSpodnie;
     private JButton returnButton;
     private JButton ikonaPrzycisk;
-    private JButton zatwierdzTyp;
     private JButton dodajProdukt;
     private JPanel panelPodstawowy;
     private JPanel panelWyboru;
@@ -60,11 +59,7 @@ public class DodajProduktGUI implements ActionListener {
         radioButtonBluza = new JRadioButton("Bluza");
         radioButtonKoszulka = new JRadioButton("Koszulka");
         radioButtonSpodnie = new JRadioButton("Spodnie");
-
-        zatwierdzTyp = new JButton("Zatwierdź");
-        zatwierdzTyp.setBackground(Color.WHITE);
-        zatwierdzTyp.setMargin(new Insets(10, 20, 10, 20));
-        zatwierdzTyp.addActionListener(this);
+        
 
         panelWyboru = new JPanel();
 
@@ -72,12 +67,64 @@ public class DodajProduktGUI implements ActionListener {
 
         ButtonGroup grupa = new ButtonGroup();
 
+        radioButtonObuwie.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelGlowny.remove(scrollPanel);
+                if (dodajProdukt != null) panelWyboru.remove(dodajProdukt);
+                dodajProduktBaza();
+                if (radioButtonObuwie.isSelected()) {
+                    dodajObuwie();
+                }
+                panelGlowny.revalidate();
+                panelGlowny.repaint();
+            }
+        });
+        radioButtonBluza.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelGlowny.remove(scrollPanel);
+                if (dodajProdukt != null) panelWyboru.remove(dodajProdukt);
+                dodajProduktBaza();
+                if (radioButtonBluza.isSelected()) {
+                    dodajBluze();
+                }
+                panelGlowny.revalidate();
+                panelGlowny.repaint();
+            }
+        });
+        radioButtonKoszulka.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelGlowny.remove(scrollPanel);
+                if (dodajProdukt != null) panelWyboru.remove(dodajProdukt);
+                dodajProduktBaza();
+                if (radioButtonKoszulka.isSelected()) {
+                    dodajKoszulke();
+                }
+                panelGlowny.revalidate();
+                panelGlowny.repaint();
+            }
+        });
+        radioButtonSpodnie.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelGlowny.remove(scrollPanel);
+                if (dodajProdukt != null) panelWyboru.remove(dodajProdukt);
+                dodajProduktBaza();
+                if (radioButtonSpodnie.isSelected()) {
+                    dodajSpodnie();
+                }
+                panelGlowny.revalidate();
+                panelGlowny.repaint();
+            }
+        });
 
         panelWyboru.add(radioButtonObuwie);
         panelWyboru.add(radioButtonBluza);
         panelWyboru.add(radioButtonKoszulka);
         panelWyboru.add(radioButtonSpodnie);
-        panelWyboru.add(zatwierdzTyp);
+
 
         grupa.add(radioButtonObuwie);
         grupa.add(radioButtonBluza);
@@ -103,12 +150,13 @@ public class DodajProduktGUI implements ActionListener {
         JPanel dodawanieIkonyPanel = new JPanel();
         dodawanieIkonyPanel.setLayout(new BoxLayout(dodawanieIkonyPanel, BoxLayout.Y_AXIS));
         dodawanieIkonyPanel.setSize(200,600);
-        ikonaLabel = new JLabel();
+        ikonaLabel = new JLabel("podgląd");
+        ikonaLabel.setHorizontalAlignment(SwingConstants.CENTER);
         ikonaLabel.setMaximumSize(new Dimension(200, 200));
         ikonaLabel.setBorder(new LineBorder(Color.BLACK, 5));
 
         ikonaPrzycisk= new JButton("DODAJ OBRAZ");
-        ikonaPrzycisk.setPreferredSize(new Dimension(210,50));
+        ikonaPrzycisk.setPreferredSize(new Dimension(230,50));
         ikonaPrzycisk.setMaximumSize(new Dimension(200,50));
         ikonaPrzycisk.setBackground(Color.WHITE);
         ikonaPrzycisk.addActionListener(this);
@@ -125,7 +173,7 @@ public class DodajProduktGUI implements ActionListener {
         panelRozmiarow.add(new JLabel("ROZMIAR"));
         panelRozmiarow.add(new JLabel("ILOŚĆ"));
 
-        dodajRozmiar = new JButton("DODAJ, ROZMIAR");
+        dodajRozmiar = new JButton("DODAJ ROZMIAR");
         dodajRozmiar.setBackground(Color.WHITE);
         dodajRozmiar.setMargin(new Insets(10, 20, 10, 20));
         dodajRozmiar.addActionListener(new ActionListener() {
@@ -169,20 +217,21 @@ public class DodajProduktGUI implements ActionListener {
 
         JLabel[] podstawoweDaneLabel = new JLabel[8];
 
-        podstawoweDaneLabel[0] = new JLabel("id:");
-        podstawoweDaneLabel[1] = new JLabel("cena:");
-        podstawoweDaneLabel[2] = new JLabel("nazwa:");
-        podstawoweDaneLabel[3] = new JLabel("opis:");
-        podstawoweDaneLabel[4] = new JLabel("material:");
-        podstawoweDaneLabel[5] = new JLabel("kolor:");
-        podstawoweDaneLabel[6] = new JLabel("nazwa producenta:");
-        podstawoweDaneLabel[7] = new JLabel("kraj producnta:");
+        podstawoweDaneLabel[0] = new JLabel("ID:");
+        podstawoweDaneLabel[1] = new JLabel("CENA:");
+        podstawoweDaneLabel[2] = new JLabel("NAZWA:");
+        podstawoweDaneLabel[3] = new JLabel("OPIS:");
+        podstawoweDaneLabel[4] = new JLabel("MATERIAŁ:");
+        podstawoweDaneLabel[5] = new JLabel("KOLOR:");
+        podstawoweDaneLabel[6] = new JLabel("NAZWA PRODUCENTA:");
+        podstawoweDaneLabel[7] = new JLabel("KRAJ PRODUCENTA:");
 
 
         panelGlowny.add(BorderLayout.CENTER, scrollPanel);
         panelPodstawowy.setLayout(new GridLayout((14),2));
 
         for(int i=0; i<8; i++){
+            labelSetup(podstawoweDaneLabel[i]);
             panelPodstawowy.add(podstawoweDaneLabel[i]);
             panelPodstawowy.add(podstawoweDaneTextField[i]= new JTextField());
         }
@@ -193,8 +242,8 @@ public class DodajProduktGUI implements ActionListener {
 
         JLabel[] labelObuwie = new JLabel[2];
 
-        labelObuwie[0] = new JLabel("typ obuwia:");
-        labelObuwie[1] = new JLabel("typ podeszwy:");
+        labelObuwie[0] = new JLabel("TYP OBUWIA:");
+        labelObuwie[1] = new JLabel("TYP PODESZWY:");
 
         dodajProdukt = new JButton("Dodaj produkt");
         dodajProdukt.setBackground(Color.WHITE);
@@ -202,6 +251,7 @@ public class DodajProduktGUI implements ActionListener {
         dodajProdukt.addActionListener(this);
 
         for(int i=0; i<2; i++){
+            labelSetup(labelObuwie[i]);
             panelPodstawowy.add(labelObuwie[i]);
             panelPodstawowy.add(textFieldObuwie[i] = new JTextField());
         }
@@ -214,9 +264,9 @@ public class DodajProduktGUI implements ActionListener {
 
         czyZKapturem = new JRadioButton("kaptur");
 
-        labelBluza[0] = new JLabel("kaptur:");
-        labelBluza[1] = new JLabel("dekolt:");
-        labelBluza[2] = new JLabel("kroj:");
+        labelBluza[0] = new JLabel("KAPTUR:");
+        labelBluza[1] = new JLabel("DEKOLT:");
+        labelBluza[2] = new JLabel("KROJ:");
 
         dodajProdukt = new JButton("Dodaj produkt");
         dodajProdukt.setBackground(Color.WHITE);
@@ -224,6 +274,7 @@ public class DodajProduktGUI implements ActionListener {
         dodajProdukt.addActionListener(this);
 
         for(int i=0; i<3; i++){
+            labelSetup(labelBluza[i]);
             panelPodstawowy.add(labelBluza[i]);
             if(i==0){
                 panelPodstawowy.add(czyZKapturem);
@@ -239,8 +290,8 @@ public class DodajProduktGUI implements ActionListener {
 
         JLabel[] labelKoszulka = new JLabel[2];
 
-        labelKoszulka[0] = new JLabel("dekolt:");
-        labelKoszulka[1] = new JLabel("kroj:");
+        labelKoszulka[0] = new JLabel("DEKOLT:");
+        labelKoszulka[1] = new JLabel("KROJ:");
 
         dodajProdukt = new JButton("Dodaj produkt");
         dodajProdukt.setBackground(Color.WHITE);
@@ -248,6 +299,7 @@ public class DodajProduktGUI implements ActionListener {
         dodajProdukt.addActionListener(this);
 
         for(int i=0; i<2; i++){
+            labelSetup(labelKoszulka[i]);
             panelPodstawowy.add(labelKoszulka[i]);
             panelPodstawowy.add(textFieldKoszulka[i] = new JTextField());
         }
@@ -259,9 +311,9 @@ public class DodajProduktGUI implements ActionListener {
 
         JLabel[] labelSpodnie = new JLabel[3];
 
-        labelSpodnie[0] = new JLabel("dlugosc:");
-        labelSpodnie[1] = new JLabel("typ:");
-        labelSpodnie[2] = new JLabel("kroj:");
+        labelSpodnie[0] = new JLabel("DLUGOS:");
+        labelSpodnie[1] = new JLabel("TYP:");
+        labelSpodnie[2] = new JLabel("KROJ:");
 
         dodajProdukt = new JButton("Dodaj produkt");
         dodajProdukt.setBackground(Color.WHITE);
@@ -269,6 +321,7 @@ public class DodajProduktGUI implements ActionListener {
         dodajProdukt.addActionListener(this);
 
         for(int i=0; i<3; i++){
+            labelSetup(labelSpodnie[i]);
             panelPodstawowy.add(labelSpodnie[i]);
             panelPodstawowy.add(textFieldSpodnie[i] = new JTextField());
         }
@@ -278,25 +331,6 @@ public class DodajProduktGUI implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == zatwierdzTyp) {
-            panelGlowny.remove(scrollPanel);
-            if (dodajProdukt != null) panelWyboru.remove(dodajProdukt);
-            dodajProduktBaza();
-            if (radioButtonObuwie.isSelected()) {
-                dodajObuwie();
-            }
-            if (radioButtonBluza.isSelected()) {
-                dodajBluze();
-            }
-            if (radioButtonKoszulka.isSelected()) {
-                dodajKoszulke();
-            }
-            if (radioButtonSpodnie.isSelected()) {
-                dodajSpodnie();
-            }
-            panelGlowny.revalidate();
-            panelGlowny.repaint();
-        }
         if(e.getSource() == dodajProdukt){
             if (radioButtonObuwie.isSelected()) {
                 for (int i = 0; i < listaPolRozmiarow.size(); i = i+2) {
@@ -355,5 +389,12 @@ public class DodajProduktGUI implements ActionListener {
             }
         }
 
+    }
+    public void labelSetup(JLabel label){
+        label.setFont(new Font("Serif", Font.BOLD, 17));
+        label.setBorder(new LineBorder(Color.BLACK, 1));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setBackground(Color.WHITE);
+        label.setOpaque(true);
     }
 }
