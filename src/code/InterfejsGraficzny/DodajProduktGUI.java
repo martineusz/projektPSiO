@@ -5,6 +5,7 @@ import code.Main.Sklep;
 import code.inputValidate.InvalidFileFormatException;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ public class DodajProduktGUI implements ActionListener {
 
     private Sklep sklep;
     private JFrame ramka;
+    private JLabel ikonaLabel;
 
     private JTextField[] podstawoweDaneTextField = new JTextField[9];
     private JTextField[] textFieldObuwie = new JTextField[3];
@@ -31,10 +33,9 @@ public class DodajProduktGUI implements ActionListener {
     private JRadioButton radioButtonKoszulka;
     private JRadioButton radioButtonSpodnie;
     private JButton returnButton;
-    private JButton dodajzdjecie;
+    private JButton ikonaPrzycisk;
     private JButton zatwierdzTyp;
     private JButton dodajProdukt;
-    private JButton przyciskWyboru;
     private JPanel panelPodstawowy;
     private JPanel panelWyboru;
     private JScrollPane scrollPanel;
@@ -83,33 +84,80 @@ public class DodajProduktGUI implements ActionListener {
         grupa.add(radioButtonKoszulka);
         grupa.add(radioButtonSpodnie);
 
+        JPanel panelGora = new JPanel();
+        panelGora.setLayout(new FlowLayout(FlowLayout.LEFT));
+        panelGora.setBackground(new Color(255, 69, 0));
 
-        returnButton = new JButton("powrot");
-        returnButton.setBackground(Color.WHITE);
-        returnButton.setMargin(new Insets(10, 20, 10, 20));
+
+        returnButton = new JButton();
+        returnButton.setIcon(SklepGUI.scaleIcon("src\\resources\\Obrazki\\cofnij.png", 50));
         returnButton.addActionListener(this);
+        returnButton.setFocusPainted(false);
+        returnButton.setOpaque(false);
+        returnButton.setBackground(new Color(250, 246, 246, 0));
+        returnButton.setBounds(10,10,50,50);
+
+        panelGora.add(returnButton);
 
         //dodawanie ikony
         JPanel dodawanieIkonyPanel = new JPanel();
-        JLabel ikonaLabel = new JLabel("Wybierz obraz");
+        dodawanieIkonyPanel.setLayout(new BoxLayout(dodawanieIkonyPanel, BoxLayout.Y_AXIS));
+        dodawanieIkonyPanel.setSize(200,600);
+        ikonaLabel = new JLabel();
+        ikonaLabel.setMaximumSize(new Dimension(200, 200));
+        ikonaLabel.setBorder(new LineBorder(Color.BLACK, 5));
 
-        przyciskWyboru= new JButton();
-        przyciskWyboru.addActionListener(this);
+        ikonaPrzycisk= new JButton("DODAJ OBRAZ");
+        ikonaPrzycisk.setPreferredSize(new Dimension(210,50));
+        ikonaPrzycisk.setMaximumSize(new Dimension(200,50));
+        ikonaPrzycisk.setBackground(Color.WHITE);
+        ikonaPrzycisk.addActionListener(this);
 
-        dodawanieIkonyPanel.setLayout(new BorderLayout());
-        dodawanieIkonyPanel.add(BorderLayout.CENTER, przyciskWyboru);
-        dodawanieIkonyPanel.add(BorderLayout.SOUTH, ikonaLabel);
+        dodawanieIkonyPanel.add(ikonaPrzycisk);
+        dodawanieIkonyPanel.add(ikonaLabel);
 
+        //dodawanie rozmiarow
+        JPanel panelDodawaniaRozmiarow = new JPanel();
+        panelDodawaniaRozmiarow.setLayout(new BorderLayout());
+
+        JPanel panelRozmiarow = new JPanel();
+        panelRozmiarow.setLayout(new GridLayout(0,2));
+        panelRozmiarow.add(new JLabel("ROZMIAR"));
+        panelRozmiarow.add(new JLabel("ILOŚĆ"));
+
+        dodajRozmiar = new JButton("DODAJ, ROZMIAR");
+        dodajRozmiar.setBackground(Color.WHITE);
+        dodajRozmiar.setMargin(new Insets(10, 20, 10, 20));
+        dodajRozmiar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                licznik++;
+                JTextField rozmiarPole = new JTextField();
+                JTextField iloscPole = new JTextField();
+                listaPolRozmiarow.add(rozmiarPole);
+                listaPolRozmiarow.add(iloscPole);
+                panelRozmiarow.add(rozmiarPole);
+                panelRozmiarow.add(iloscPole);
+                panelRozmiarow.revalidate();
+                panelRozmiarow.repaint();
+            }
+        });
+
+        panelDodawaniaRozmiarow.add(BorderLayout.NORTH, panelRozmiarow);
+        panelDodawaniaRozmiarow.add(BorderLayout.SOUTH, dodajRozmiar);
+        JScrollPane scrollRozmiary = new JScrollPane(panelDodawaniaRozmiarow);
+        panelWyboru.add(scrollRozmiary);
+
+        dodajProduktBaza();
 
         panelGlowny.add(BorderLayout.EAST, dodawanieIkonyPanel);
         panelGlowny.add(BorderLayout.WEST, panelWyboru);
-        panelGlowny.add(BorderLayout.SOUTH, returnButton);
+        panelGlowny.add(BorderLayout.NORTH, panelGora);
 
         ramka.setLayout(null);
         ramka.setContentPane(panelGlowny);
         ramka.setVisible(true);
 
-        dodajProduktBaza();
     }
     public void dodajProduktBaza(){
         licznik = 0;
@@ -139,11 +187,6 @@ public class DodajProduktGUI implements ActionListener {
             panelPodstawowy.add(podstawoweDaneTextField[i]= new JTextField());
         }
 
-        dodajRozmiar = new JButton("Dodaj rozmiar");
-        dodajRozmiar.addActionListener(this);
-        dodajRozmiar.setBackground(Color.WHITE);
-        dodajRozmiar.setMargin(new Insets(10, 20, 10, 20));
-        panelWyboru.add(dodajRozmiar);
     }
 
     public void dodajObuwie(){
@@ -162,7 +205,7 @@ public class DodajProduktGUI implements ActionListener {
             panelPodstawowy.add(labelObuwie[i]);
             panelPodstawowy.add(textFieldObuwie[i] = new JTextField());
         }
-        panelWyboru.add(dodajProdukt);
+        panelPodstawowy.add(dodajProdukt);
 
     }
     public void dodajBluze(){
@@ -182,13 +225,13 @@ public class DodajProduktGUI implements ActionListener {
 
         for(int i=0; i<3; i++){
             panelPodstawowy.add(labelBluza[i]);
-            if(i==1){
+            if(i==0){
                 panelPodstawowy.add(czyZKapturem);
             }else {
                 panelPodstawowy.add(textFieldBluza[i] = new JTextField());
             }
         }
-        panelWyboru.add(dodajProdukt);
+        panelPodstawowy.add(dodajProdukt);
 
     }
 
@@ -208,7 +251,7 @@ public class DodajProduktGUI implements ActionListener {
             panelPodstawowy.add(labelKoszulka[i]);
             panelPodstawowy.add(textFieldKoszulka[i] = new JTextField());
         }
-        panelWyboru.add(dodajProdukt);
+        panelPodstawowy.add(dodajProdukt);
 
     }
 
@@ -229,7 +272,7 @@ public class DodajProduktGUI implements ActionListener {
             panelPodstawowy.add(labelSpodnie[i]);
             panelPodstawowy.add(textFieldSpodnie[i] = new JTextField());
         }
-        panelWyboru.add(dodajProdukt);
+        panelPodstawowy.add(dodajProdukt);
 
     }
 
@@ -238,7 +281,6 @@ public class DodajProduktGUI implements ActionListener {
         if (e.getSource() == zatwierdzTyp) {
             panelGlowny.remove(scrollPanel);
             if (dodajProdukt != null) panelWyboru.remove(dodajProdukt);
-            panelWyboru.remove(dodajRozmiar);
             dodajProduktBaza();
             if (radioButtonObuwie.isSelected()) {
                 dodajObuwie();
@@ -293,7 +335,7 @@ public class DodajProduktGUI implements ActionListener {
             ramka.setLayout(null);
             GUIadmin.openAdmin(sklep, ramka);
         }
-        if (e.getSource() == przyciskWyboru) {
+        if (e.getSource() == ikonaPrzycisk) {
             JFileChooser fileChooser = new JFileChooser();
             int response = fileChooser.showOpenDialog(null);
 
@@ -306,27 +348,12 @@ public class DodajProduktGUI implements ActionListener {
                     Image img = icon.getImage();
                     Image newImg = img.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
                     icon = new ImageIcon(newImg);
-                    przyciskWyboru.setIcon(icon);
+                    ikonaLabel.setIcon(icon);
             } catch (InvalidFileFormatException ex) {
                JOptionPane.showMessageDialog(ramka, ex.getMessage(), "Błąd formatu pliku", JOptionPane.ERROR_MESSAGE);
             }
             }
         }
-        if (e.getSource() == dodajRozmiar) {
-            licznik++;
-            panelPodstawowy.setLayout(new GridLayout((14+(licznik*2)), 2));
-            JLabel rozmiar = new JLabel("rozmiar:");
-            JLabel ilosc = new JLabel("ilość danego rozmiaru w magazynie:");
-            JTextField rozmiarPole = new JTextField();
-            JTextField iloscPole = new JTextField();
-            listaPolRozmiarow.add(rozmiarPole);
-            listaPolRozmiarow.add(iloscPole);
-            panelPodstawowy.add(rozmiar);
-            panelPodstawowy.add(rozmiarPole);
-            panelPodstawowy.add(ilosc);
-            panelPodstawowy.add(iloscPole);
-            panelPodstawowy.revalidate();
-            panelPodstawowy.repaint();
-        }
+
     }
 }
