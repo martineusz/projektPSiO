@@ -490,7 +490,6 @@ public class KoszykPane extends JPanel {
         panelGlowny.add(panelKoszyk);
         panelKoszyk.setPreferredSize(new Dimension(700, 700));
         panelKoszyk.setLayout(new FlowLayout(FlowLayout.CENTER));
-
         comboList = new ArrayList<>();
         comboProduktMap = new HashMap<>();
 
