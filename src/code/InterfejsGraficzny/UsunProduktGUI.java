@@ -68,10 +68,21 @@ public class UsunProduktGUI implements ActionListener {
 
 
         //return button
-        returnButton = new JButton("powrot");
-        returnButton.setBackground(Color.WHITE);
-        returnButton.setMargin(new Insets(10, 20, 10, 20));
+        JPanel panelGora = new JPanel();
+        panelGora.setLayout(new FlowLayout(FlowLayout.LEFT));
+        panelGora.setBackground(new Color(255, 69, 0));
+
+
+        returnButton = new JButton();
+        returnButton.setIcon(SklepGUI.scaleIcon("src\\resources\\Obrazki\\cofnij.png", 50));
         returnButton.addActionListener(this);
+        returnButton.setFocusPainted(false);
+        returnButton.setOpaque(false);
+        returnButton.setBackground(new Color(250, 246, 246, 0));
+        returnButton.setBounds(10,10,50,50);
+
+        panelGora.add(returnButton);
+        panelGlowny.add(BorderLayout.NORTH, panelGora);
 
         JPanel panelTabeli = new JPanel(new BorderLayout());
         panelTabeli.add(tabela.getTableHeader(), BorderLayout.NORTH);
@@ -87,7 +98,6 @@ public class UsunProduktGUI implements ActionListener {
 
         panelGlowny.add(scrollPane, BorderLayout.CENTER);
         panelGlowny.add(usunProduktPanel, BorderLayout.EAST);
-        panelGlowny.add(returnButton, BorderLayout.SOUTH);
 
         ramka.setLayout(null);
         ramka.setContentPane(panelGlowny);
