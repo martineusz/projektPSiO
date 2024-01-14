@@ -3,6 +3,7 @@ package code.InterfejsGraficzny.Koszyk;
 import code.DostawaStrategia.DostawaPaczkomat;
 import code.Main.Klient;
 import code.Main.Koszyk;
+import code.Main.ProduktWKoszyku;
 import code.Main.Sklep;
 import code.Produkt.Produkt;
 
@@ -458,7 +459,7 @@ public class KoszykPane extends JPanel {
         scrollPaneKoszyk.setBounds(100, 25, 700, 700);
 
         //PANEL PRODUKT
-        if (koszyk.getListaProduktow().isEmpty()) {
+        if (koszyk.getProduktyWKoszyku().isEmpty()) {
             labelPustyKoszyk.setText("TWOJ KOSZYK JEST PUSTY");
             labelPustyKoszyk.setHorizontalAlignment(JLabel.CENTER);
             labelPustyKoszyk.setVerticalAlignment(JLabel.CENTER);
@@ -467,11 +468,11 @@ public class KoszykPane extends JPanel {
             labelPustyKoszyk.setFont(new Font(null, Font.BOLD, 25));
             panelKoszyk.add(labelPustyKoszyk);
         } else {
-            for (int i = 0; i < koszyk.getListaProduktow().size(); i++) {
+            for (int i = 0; i < koszyk.getProduktyWKoszyku().size(); i++) {
                 buttonUsun = new JButton("x");
-                Produkt produkt = koszyk.getListaProduktow().get(i);
-                JLabel labelNazwa = new JLabel(produkt.getNazwa());
-                JLabel labelCena = new JLabel(produkt.getCena() + " PLN");
+                ProduktWKoszyku produktWKoszyku = koszyk.getProduktyWKoszyku().get(i);
+                JLabel labelNazwa = new JLabel(produktWKoszyku.getProdukt().getNazwa());
+                JLabel labelCena = new JLabel(produktWKoszyku.getProdukt().getCena() + " PLN");
                 JPanel panelProdukt = new JPanel();
                 ImageIcon obrazek = new ImageIcon();
                 int wysokoscPanelProdukt = (scrollPaneKoszyk.getHeight() / 4);
@@ -487,7 +488,7 @@ public class KoszykPane extends JPanel {
                 labelCena.setFont(new Font(null, Font.BOLD, 16));
 
 
-                obrazek = produkt.getIcon(wysokoscPanelProdukt, wysokoscPanelProdukt);
+                obrazek = produktWKoszyku.getProdukt().getIcon(wysokoscPanelProdukt, wysokoscPanelProdukt);
                 JLabel labelObrazek = new JLabel();
                 labelObrazek.setIcon(obrazek);
                 labelObrazek.setBorder(BorderFactory.createLineBorder(new Color(242, 242, 242)));
@@ -503,21 +504,8 @@ public class KoszykPane extends JPanel {
                 buttonUsun.setForeground(Color.gray);
 
 
-                int iloscWMagazynie=0;
-                boolean pom = false;
-                for (int j = 0; j < produkt.getRozmiaryAsList().size(); j++) {
-                    for (int k = 0; k < koszyk.getListaProduktow().size(); k++) {
-                        if (produkt.getRozmiary().get(produkt.getRozmiaryAsList().get(j)).equals(koszyk.getListaProduktow().get(k).getRozmiary().get(koszyk.getListaProduktow().get(k).getRozmiaryAsList().get(j)))) {
-                            pom = true;
-                            break;
-                        }
-                        if (pom) {
-                            iloscWMagazynie = produkt.getRozmiary().get(produkt.getRozmiaryAsList().get(j));
-                            pom = false;
-                            break;
-                        }
-                    }
-                }
+                int iloscWMagazynie = produktWKoszyku.getProdukt().getRozmiary().get(produktWKoszyku.getRozmiar());
+
 
 
 
@@ -541,8 +529,8 @@ public class KoszykPane extends JPanel {
                 panelProdukt.add(labelNazwa);
                 panelKoszyk.add(panelProdukt);
 
-                comboProduktMap.put(comboList.get(i), produkt);
-                buttonProduktMap.put(buttonUsun, produkt);
+                comboProduktMap.put(comboList.get(i), produktWKoszyku.getProdukt());
+                buttonProduktMap.put(buttonUsun, produktWKoszyku.getProdukt());
             }
         }
 

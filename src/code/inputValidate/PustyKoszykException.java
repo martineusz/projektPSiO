@@ -10,7 +10,7 @@ public class PustyKoszykException extends Exception{
     }
 
     public static void checkIfEmpty(Koszyk koszyk) throws PustyKoszykException {
-        if(koszyk.getListaProduktow().isEmpty()){
+        if(koszyk.getProduktyWKoszyku().isEmpty()){
             throw new PustyKoszykException("Koszyk jest pusty");
         }
     }

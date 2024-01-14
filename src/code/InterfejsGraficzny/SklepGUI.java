@@ -189,7 +189,7 @@ public class SklepGUI {
 
         buttonKoszyk = new JButton(scaledIcon);
         panelKoszykButton.add(buttonKoszyk);
-        iloscWKoszyku = new JLabel(String.valueOf(sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size()));
+        iloscWKoszyku = new JLabel(String.valueOf(sklep.zalogowanyKlient.getKoszyk().getProduktyWKoszyku().size()));
         buttonKoszyk.setFont(new Font("Arial", Font.BOLD, 15));
         buttonKoszyk.setVerticalTextPosition(JButton.BOTTOM);
         buttonKoszyk.setBounds(0, 0, 40, 40);
@@ -307,7 +307,7 @@ public class SklepGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == buttonKoszyk) {
-                    sklep.getZalogowanyKlient().getKoszyk().inicjalizujMape();
+                    //TODO sklep.getZalogowanyKlient().getKoszyk().inicjalizujMape();
 
                     frame.getContentPane().removeAll();
                     frame.revalidate();
@@ -747,23 +747,23 @@ public class SklepGUI {
     public static void dodajProdukt(String name, Sklep sklep, Produkt produkt, JComboBox comboBox) {
         boolean czyProduktWKoszyku = true;
         if (comboBox.getSelectedIndex() != 0) {
-            if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().isEmpty()) {
-                sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt);
+            if (sklep.zalogowanyKlient.getKoszyk().getProduktyWKoszyku().isEmpty()) {
+                sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt, String.valueOf(comboBox.getSelectedItem()));
+
                 JOptionPane.showMessageDialog(null, "Dodano do koszyka", "GRATULACJE", JOptionPane.INFORMATION_MESSAGE);
-                iloscWKoszyku.setText(String.valueOf(sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size()));
+                iloscWKoszyku.setText(String.valueOf(sklep.zalogowanyKlient.getKoszyk().getProduktyWKoszyku().size()));
             } else {
-                for (int i = 0; i < sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size(); i++) {
-                    for (int j = 0; j < produkt.getRozmiaryAsList().size(); j++) {
-                        if (sklep.zalogowanyKlient.getKoszyk().getListaProduktow().get(i).equals(produkt) && produkt.getRozmiary().get(produkt.getRozmiaryAsList().get(j))!=sklep.getZalogowanyKlient().getKoszyk().getListaProduktow().get(i).getRozmiary().get(sklep.getZalogowanyKlient().getKoszyk().getListaProduktow().get(i).getRozmiaryAsList().get(j))) {
-                            czyProduktWKoszyku = false;
-                            break;
-                        }
+                for (int i = 0; i < sklep.zalogowanyKlient.getKoszyk().getProduktyWKoszyku().size(); i++) {
+                    if (sklep.zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getProdukt().equals(produkt)) {
+                        czyProduktWKoszyku = false;
+                        break;
                     }
                 }
                 if (czyProduktWKoszyku) {
-                    sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt);
+                    sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt, String.valueOf(comboBox.getSelectedItem()));
+
                     JOptionPane.showMessageDialog(null, "Dodano do koszyka", "GRATULACJE", JOptionPane.INFORMATION_MESSAGE);
-                    iloscWKoszyku.setText(String.valueOf(sklep.zalogowanyKlient.getKoszyk().getListaProduktow().size()));
+                    iloscWKoszyku.setText(String.valueOf(sklep.zalogowanyKlient.getKoszyk().getProduktyWKoszyku().size()));
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Produkt jest juz w koszyku", "NIE MOZESZ TEGO ZROBIC", JOptionPane.WARNING_MESSAGE);

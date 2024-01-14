@@ -60,7 +60,7 @@ public class KoszykListener implements ActionListener {
             Produkt produktToRemove = koszykPane.getButtonProduktMap().get(sourceButton);
 
             if (produktToRemove != null) {
-                koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getListaProduktow().remove(produktToRemove);
+                koszykPane.getSklep().getZalogowanyKlient().getKoszyk().usunProduktZKoszyka(produktToRemove);
                 koszykPane.getPanelKoszyk().remove(sourceButton.getParent()); // Usunięcie całego panelu produktu
                 koszykPane.getButtonProduktMap().remove(sourceButton);
                 koszykPane.getPanelKoszyk().revalidate();

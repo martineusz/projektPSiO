@@ -17,59 +17,50 @@ import java.util.Map;
 public class Koszyk implements Serializable {
     private double wartoscZamowienia;
     private static final long serialVersionUID = 5580514503487693430L;
-    private ArrayList<Produkt> listaProduktow = null;
-    private PlacenieStrategia placenieStrategia; // = new PlacenieStrategia();
-    private DostawaStrategia dostawaStrategia; // -||-||-||-||-||-||-||-||-
+    private PlacenieStrategia placenieStrategia;
+    private DostawaStrategia dostawaStrategia;
     private String adres;
-    private Map<Produkt,Integer> mapaProduktow;
+    private ArrayList<ProduktWKoszyku> produktyWKoszyku;
 
     public Koszyk() {
-        this.listaProduktow = new ArrayList<Produkt>();
-        this.mapaProduktow = new HashMap<>();
-    }
-
-    public void inicjalizujMape(){
-        for(Produkt produkt: this.listaProduktow) {
-            this.mapaProduktow.put(produkt, 1);
-        }
-    }
-
-    public void ustawLiczbeMapa(Produkt produkt, int liczba) {
-        this.mapaProduktow.put(produkt, liczba);
-    }
-
-    public void getLiczbeMapa(Produkt produkt) {
-        this.mapaProduktow.get(produkt);
+        this.produktyWKoszyku = new ArrayList<>();
     }
 
     public double getWartoscZamowienia() {
         wartoscZamowienia = 0.00;
-        for (Produkt produkt : this.mapaProduktow.keySet()) {
-            wartoscZamowienia += produkt.getCena()*this.mapaProduktow.get(produkt);
-        }
+        //TODO szubidibaa
+//        if(mapaProduktow != null){
+//            for (Produkt produkt : this.mapaProduktow.keySet()) {
+//                wartoscZamowienia += produkt.getCena()*this.mapaProduktow.get(produkt);
+//            }
+//        }
+
         return wartoscZamowienia;
+    }
+
+    public ArrayList<ProduktWKoszyku> getProduktyWKoszyku() {
+        return produktyWKoszyku;
+    }
+
+    public void setProduktyWKoszyku(ArrayList<ProduktWKoszyku> produktyWKoszyku) {
+        this.produktyWKoszyku = produktyWKoszyku;
+    }
+
+    public void usunProduktZKoszyka(Produkt produkt){
+        for (int i = 0; i < produktyWKoszyku.size(); i++) {
+            if(produktyWKoszyku.get(i).getProdukt() == produkt){
+                produktyWKoszyku.remove(produktyWKoszyku.get(i));
+            }
+        }
     }
 
     public void setWartoscZamowienia(double wartoscZamowienia) {
         this.wartoscZamowienia = wartoscZamowienia;
     }
 
-    public boolean czyZawieraProdukt(Produkt produkt) {
-    	return listaProduktow.contains(produkt);
+    public void dodajProdukt(Produkt produkt, String rozmiar) {
+        produktyWKoszyku.add(new ProduktWKoszyku(produkt, rozmiar, 1));
     }
-
-    public void dodajProdukt(Produkt produkt){
-        listaProduktow.add(produkt);
-    }
-
-    public void usunProdukt(int i){
-        listaProduktow.remove(i);
-    }
-
-    public void usunProdukt(Produkt produkt) {
-    	listaProduktow.remove(produkt);
-    }
-
 
     public void ustawMetodePlatnosci(PlacenieStrategia placenieStrategia){
         this.placenieStrategia = placenieStrategia;
@@ -81,15 +72,16 @@ public class Koszyk implements Serializable {
 
     public boolean zrealizujDostawe(String adres, String kodBlik, String numerKarty, String dataWygasniecia,String cvv, String imie, String nazwisko) {
         if(dostawaStrategia != null){
-            for (Produkt produkt : this.listaProduktow) {
-                /*
-                if(!produkt.sprawdzDostepnoscProduktu()) {
-                    System.out.println("Zamówienie niezrealizowane");
-                    return false;
-                }
-
-                 */
-            }
+//            TODO: zamienic na nowa liste
+//            for (Produkt produkt : this.listaProduktow) {
+//
+//                if(!produkt.sprawdzDostepnoscProduktu()) {
+//                    System.out.println("Zamówienie niezrealizowane");
+//                    return false;
+//                }
+//
+//
+//            }
 
             dostawaStrategia.dodajKoszt(this);
 
@@ -116,55 +108,6 @@ public class Koszyk implements Serializable {
             System.out.println("Nie wybrano strategii dostawy!");
             return false;
         }
-    }
-//
-//    public void zlozZamowienie(){
-//        System.out.println("Złożono zamówienie na ");
-//        for (Produkt produkt:this.listaProduktow) {
-//            System.out.println(produkt.toString());
-//        }
-//        if (dostawaStrategia instanceof DostawaPaczkomat) {
-//            System.out.println("Paczka trafi do paczkomatu za 2 dni");
-//        } else if (dostawaStrategia instanceof DostawaKurier) {
-//            System.out.println("Kurier przywiezie paczkę do wskazanego adresu za 3 dni");
-//        }
-//    }
-
-    public void sprawdzZawartosc() {
-        if (listaProduktow.size() == 0) {
-            System.out.println("PUSTY KOSZYK");
-        } else {
-            for (int i = 0; i < listaProduktow.size(); i++) {
-                System.out.println((i+1) + ".");
-                //System.out.println(listaProduktow.get(i).toString());
-                System.out.println("ID produktu: " + listaProduktow.get(i).getIdProduktu());
-                System.out.println("Nazwa produktu: " + listaProduktow.get(i).getNazwa()+"\n");
-            }
-        }
-        System.out.println("LACZNA CENA: " + getWartoscZamowienia());
-    }
-
-/*    public double obliczWartoscZamowienia() {
-        double wartoscZamowienia = 0;
-        for (Produkt produkt : listaProduktow) {
-            wartoscZamowienia += produkt.getCena();
-        }
-        return wartoscZamowienia;
-    }*/
-
-    public boolean czyKoszykMaProdukty() {
-        if (this.listaProduktow.size() > 0) {
-            return true;
-        }
-        else {return false;}
-    }
-
-    public ArrayList<Produkt> getListaProduktow() {
-        return listaProduktow;
-    }
-
-    public void setListaProduktow(ArrayList<Produkt> listaProduktow) {
-        this.listaProduktow = listaProduktow;
     }
 
     public String getAdres() {
