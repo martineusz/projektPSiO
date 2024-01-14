@@ -102,7 +102,7 @@ public class SklepGUI {
         scrollPane.setBounds(300, 70, 737, 700);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
-        if (sklep.zalogowanyKlient.obs != null) {
+        if (sklep.zalogowanyKlient.obs != null && sklep.zalogowanyKlient.obs.getPowiadomienia().size()!=0) {
             for (int i = 0; i < sklep.zalogowanyKlient.obs.getPowiadomienia().size(); i++) {
                 JButton buttonUsun = new JButton();
                 buttonUsun.setBounds(200, 40, 30, 30);
