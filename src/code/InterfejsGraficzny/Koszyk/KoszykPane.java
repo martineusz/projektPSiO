@@ -436,6 +436,16 @@ public class KoszykPane extends JPanel {
         buttonDostawa.setForeground(new Color(255, 255, 255));
         buttonDostawa.setBorder(BorderFactory.createEtchedBorder());
 
+        //BUTTON COFNIJ DOSTAWA
+        JButton buttonCofnijDostawa = new JButton();
+        buttonCofnijDostawa.setText("BACK");
+        buttonCofnijDostawa.setBounds(180,375,100,20);
+        buttonCofnijDostawa.addActionListener(koszykListener);
+        buttonCofnijDostawa.setFocusable(false);
+        buttonCofnijDostawa.setBackground(null);
+        buttonCofnijDostawa.setBorder(null);
+        panelPodsumowanie.add(buttonCofnijDostawa);
+
         //BUTTON PLATNOSC
         buttonPlatnosc = new JButton();
         buttonPlatnosc.setText("ZREALIZUJ ZAMOWIENIE");

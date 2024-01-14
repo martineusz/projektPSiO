@@ -113,6 +113,13 @@ public class KoszykListener implements ActionListener {
                     for (int j = 0; j < koszykPane.getSklep().getListaProduktow().size(); j++) {
                         if (koszykPane.getSklep().getListaProduktow().get(j).equals(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getProdukt())){
                             koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().put(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar(),koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().get(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar())-(koszykPane.getComboList().get(i).getSelectedIndex()+1));
+                            if(koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().get(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar()) == 0){
+                                koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().remove(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar());
+                                koszykPane.getSklep().getListaProduktow().get(j).getRozmiaryAsList().remove(koszykPane.getSklep().zalogowanyKlient.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar());
+                                if(koszykPane.getSklep().getListaProduktow().get(j).getRozmiaryAsList().isEmpty()){
+                                    koszykPane.getSklep().getListaProduktow().remove(j);
+                                }
+                            }
                         }
                     }
                 }
