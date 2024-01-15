@@ -161,7 +161,7 @@ public class SklepGUI {
         scrollPanePowiadomienia.setEnabled(false);
         scrollPanePowiadomienia.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPanePowiadomienia.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPanePowiadomienia.setBounds(700, 70, 300, 450);
+        scrollPanePowiadomienia.setBounds(500, 70, 300, 450);
         frame.add(scrollPanePowiadomienia);
 
         ImageIcon scaledIcon = scaleIcon("src/resources/Obrazki/koszyk.png", 40);
@@ -457,7 +457,7 @@ public class SklepGUI {
 
     public static int policzNewHeight(int liczba) {
         int totalRows = (int) Math.ceil((double) liczba / liczbaKolumn);
-        return totalRows * (wysokoscProduktu + 10);
+        return totalRows * (wysokoscProduktu + 25);
     }
 
     public static void pokazWszystkieKoszulki(JFrame frame, Sklep sklep) {

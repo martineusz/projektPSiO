@@ -73,6 +73,7 @@ public class KoszykListener implements ActionListener {
             if (produktToRemove != null) {
                 koszykPane.getSklep().getZalogowanyKlient().getKoszyk().usunProduktZKoszyka(produktToRemove);
                 koszykPane.getPanelKoszyk().remove(sourceButton.getParent());
+                koszykPane.getComboList().remove(produktToRemove);
                 koszykPane.getPanelKoszyk().revalidate();
                 koszykPane.getPanelKoszyk().repaint();
                 koszykPane.getLabelCenaKoszyka().setText("Koszyk: " + koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia() + " PLN");
