@@ -17,6 +17,7 @@ import code.Produkt.*;
 import code.Obserwator.*;
 
 public class SklepGUI {
+    private static ArrayList<String> listaProduktowWKoszyku;
     private static int liczbaKolumn;
     private static int wysokoscProduktu;
     private static Color myColor;
@@ -50,6 +51,7 @@ public class SklepGUI {
     private static final ArrayList<Spodnie> listaSpodni = new ArrayList<>();
 
     public static void openSklepGUI(JFrame frame, Sklep sklep) {
+        listaProduktowWKoszyku = new ArrayList<>();
         Map<JButton, String> buttonPromocjeMap = new HashMap<>();
         panelPowiadomienia = new JPanel();
         JScrollPane scrollPanePowiadomienia = new JScrollPane(panelPowiadomienia);
@@ -100,7 +102,7 @@ public class SklepGUI {
         scrollPane.setBounds(300, 70, 737, 700);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
-        if (sklep.zalogowanyKlient.obs != null && sklep.zalogowanyKlient.obs.getPowiadomienia().size()!=0) {
+        if (sklep.zalogowanyKlient.obs != null) {
             for (int i = 0; i < sklep.zalogowanyKlient.obs.getPowiadomienia().size(); i++) {
                 JButton buttonUsun = new JButton();
                 buttonUsun.setBounds(200, 40, 30, 30);
@@ -305,6 +307,8 @@ public class SklepGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == buttonKoszyk) {
+                    //TODO sklep.getZalogowanyKlient().getKoszyk().inicjalizujMape();
+
                     frame.getContentPane().removeAll();
                     frame.revalidate();
                     frame.repaint();
@@ -770,6 +774,7 @@ public class SklepGUI {
                     JOptionPane.showMessageDialog(null, "Produkt jest juz w koszyku", "NIE MOZESZ TEGO ZROBIC", JOptionPane.WARNING_MESSAGE);
                 }
             }
+            listaProduktowWKoszyku.add(name);
         } else {
             JOptionPane.showMessageDialog(null, "Wybierz rozmiar produktu aby dodać go do koszyka", "Brak rozmiaru", JOptionPane.INFORMATION_MESSAGE);
         }
