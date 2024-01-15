@@ -21,7 +21,7 @@ public class KoszykPane extends JPanel {
     private KoszykListener koszykListener;
     private Sklep sklep;
     private Koszyk koszyk;
-    private float cenaDostawa = 0;
+    private float cenaDostawa = 0.00F;
 
     //BUTTONS
     private JButton buttonZamowienie;

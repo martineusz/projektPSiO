@@ -33,7 +33,7 @@ public class Koszyk implements Serializable {
                 wartoscZamowienia += produktWKoszyku.getProdukt().getCena()*produktWKoszyku.getIloscWKoszyku();
             }
         }
-
+        wartoscZamowienia = Math.floor(wartoscZamowienia*100)/100;
         return wartoscZamowienia;
     }
 

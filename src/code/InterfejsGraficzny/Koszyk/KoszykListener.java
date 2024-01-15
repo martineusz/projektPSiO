@@ -41,7 +41,7 @@ public class KoszykListener implements ActionListener {
                 koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonDostawa());
                 koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonCofnijDostawa());
                 koszykPane.setCenaDostawa(15.99F);
-                koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia() + koszykPane.getCenaDostawa()) + " PLN");
+                koszykPane.getLabelSumaCen().setText("SUMA: " + Math.ceil((koszykPane.getCenaDostawa() + koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia())*100)/100 + " PLN");
                 koszykPane.getLabelCenaDostawy().setText("Dostawa: " + koszykPane.getCenaDostawa() + " PLN");
             } else {
                 JOptionPane.showMessageDialog(null, "Koszyk jest pusty!", "Blad", JOptionPane.WARNING_MESSAGE);
@@ -49,16 +49,16 @@ public class KoszykListener implements ActionListener {
         }
         if (e.getSource() == koszykPane.getButtonKurier()) {
             koszykPane.getSklep().getZalogowanyKlient().getKoszyk().ustawMetodeDostawy(new DostawaKurier());
-            koszykPane.setCenaDostawa(0);
+            koszykPane.setCenaDostawa(0.00F);
             koszykPane.setCenaDostawa(koszykPane.getCenaDostawa() + 19.99F);
             koszykPane.getLabelCenaDostawy().setText("Dostawa: " + koszykPane.getCenaDostawa() + " PLN");
-            koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getCenaDostawa() + koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia()) + " PLN");
+            koszykPane.getLabelSumaCen().setText("SUMA: " + Math.ceil((koszykPane.getCenaDostawa() + koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia())*100)/100 + " PLN");
         } else if (e.getSource() == koszykPane.getButtonPaczkomat()) {
             koszykPane.getSklep().getZalogowanyKlient().getKoszyk().ustawMetodeDostawy(new DostawaPaczkomat());
-            koszykPane.setCenaDostawa(0);
+            koszykPane.setCenaDostawa(0.00F);
             koszykPane.setCenaDostawa(koszykPane.getCenaDostawa() + 15.99F);
             koszykPane.getLabelCenaDostawy().setText("Dostawa: " + koszykPane.getCenaDostawa() + " PLN");
-            koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getCenaDostawa() + koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia()) + " PLN");
+            koszykPane.getLabelSumaCen().setText("SUMA: " + Math.ceil((koszykPane.getCenaDostawa() + koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia())*100)/100 + " PLN");
         }
 
         if (e.getSource() == koszykPane.getButtonLogoSklep()) {
