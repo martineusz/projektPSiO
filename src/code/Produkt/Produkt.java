@@ -60,7 +60,7 @@ public abstract class Produkt implements Serializable {
     }
 
     public float getCena() {
-        cena = (float) (Math.round(cena * 100.0) / 100.0);
+        cena = (float) (Math.floor(cena * 100.0) / 100.0);
         return cena;
     }
 

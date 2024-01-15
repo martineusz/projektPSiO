@@ -80,6 +80,22 @@ public class Klient implements Serializable {
         return CzyPromocja;
     }
 
+    public void setCzyPromocja(boolean czyPromocja) {
+        CzyPromocja = czyPromocja;
+    }
+    // W KOSZYKU!!! NIE USUWAC!!!
+//    public void sprawdzKoszyk() {
+//        koszyk.SprawdzZawartosc();
+//    }
+//
+//    public void dodajProduktDoKoszyka(Produkt produkt) {
+//        koszyk.dodajProdukt(produkt);
+//    }
+//
+//    public void usunProduktZKoszyka(Produkt produkt) {
+//        koszyk.dodajProdukt(produkt);
+//    }
+
     public void zapiszNaPromocje(PromocjaLogika promocja, String rodzaj) {
         if (CzyPromocja) {
             System.out.println(this.imie + " jest juz w newsletterze o promocjach");

@@ -1,3 +1,4 @@
+
 package code.InterfejsGraficzny.Koszyk;
 
 import code.DostawaStrategia.DostawaKurier;
@@ -25,7 +26,7 @@ public class KoszykListener implements ActionListener {
 
         //1
         if (e.getSource() == koszykPane.getButtonZamowienie()) {
-            if(!koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getProduktyWKoszyku().isEmpty()) {
+            if (!koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getProduktyWKoszyku().isEmpty()) {
                 //USUWANIE
                 koszykPane.getPanelGlowny().remove(koszykPane.getPanelKoszyk());
                 koszykPane.getPanelGlowny().remove(koszykPane.getScrollPaneKoszyk());
@@ -42,9 +43,8 @@ public class KoszykListener implements ActionListener {
                 koszykPane.setCenaDostawa(15.99F);
                 koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia() + koszykPane.getCenaDostawa()) + " PLN");
                 koszykPane.getLabelCenaDostawy().setText("Dostawa: " + koszykPane.getCenaDostawa() + " PLN");
-            }
-            else {
-                JOptionPane.showMessageDialog(null,"Koszyk jest pusty!", "Blad", JOptionPane.WARNING_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Koszyk jest pusty!", "Blad", JOptionPane.WARNING_MESSAGE);
             }
         }
         if (e.getSource() == koszykPane.getButtonKurier()) {
@@ -73,14 +73,15 @@ public class KoszykListener implements ActionListener {
             if (produktToRemove != null) {
                 koszykPane.getSklep().getZalogowanyKlient().getKoszyk().usunProduktZKoszyka(produktToRemove);
                 koszykPane.getPanelKoszyk().remove(sourceButton.getParent());
+                koszykPane.getComboList().remove(produktToRemove);
                 koszykPane.getPanelKoszyk().revalidate();
                 koszykPane.getPanelKoszyk().repaint();
                 koszykPane.getLabelCenaKoszyka().setText("Koszyk: " + koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia() + " PLN");
-                koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia()+koszykPane.getCenaDostawa()) + " PLN");
+                koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia() + koszykPane.getCenaDostawa()) + " PLN");
             }
         }
         //2
-        if(e.getSource()==koszykPane.getButtonDostawa()) {
+        if (e.getSource() == koszykPane.getButtonDostawa()) {
             koszykPane.setAdres(koszykPane.getSklep().getZalogowanyKlient().getKoszyk().stworzAdres(koszykPane.getTextImie().getText(), koszykPane.getTextNazwisko().getText(), koszykPane.getTextKraj().getText(), koszykPane.getTextNumerTelefonu().getText(), koszykPane.getTextUlica().getText(), koszykPane.getTextNumerDomu().getText(), koszykPane.getTextEmail().getText(), koszykPane.getTextKodPocztowy().getText(), koszykPane.getTextMiejscowosc().getText()));
             if (koszykPane.getAdres() != null) {
                 //USUWANIE
@@ -99,7 +100,7 @@ public class KoszykListener implements ActionListener {
             }
         }
 
-        if(e.getSource()==koszykPane.getButtonWylogujSie()){
+        if (e.getSource() == koszykPane.getButtonWylogujSie()) {
             koszykPane.getFrame().getContentPane().removeAll();
             koszykPane.getFrame().revalidate();
             koszykPane.getFrame().repaint();
@@ -107,23 +108,23 @@ public class KoszykListener implements ActionListener {
             Rejestracja.ShopPage(koszykPane.getSklep(), koszykPane.getFrame());
         }
 
-        if (e.getSource() == koszykPane.getButtonBlik()){
+        if (e.getSource() == koszykPane.getButtonBlik()) {
             koszykPane.getSklep().getZalogowanyKlient().getKoszyk().ustawMetodePlatnosci(new placBlikiem());
         }
-        if (e.getSource() == koszykPane.getButtonKartaKredytowa()){
+        if (e.getSource() == koszykPane.getButtonKartaKredytowa()) {
             koszykPane.getSklep().getZalogowanyKlient().getKoszyk().ustawMetodePlatnosci(new placKarta());
         }
-        if (e.getSource() == koszykPane.getButtonPlatnosc()){
-            if(koszykPane.getSklep().getZalogowanyKlient().getKoszyk().zrealizujDostawe(koszykPane.getAdres(), koszykPane.getTextKodBlik().getText(),koszykPane.getTextNumerKarty().getText(),koszykPane.getTextDataWygasniecia().getText(),koszykPane.getTextCvv().getText(),koszykPane.getTextKartaImie().getText(),koszykPane.getTextKartaNazwisko().getText())){
-                JOptionPane.showMessageDialog(null,"Wysłano paczkę na adres: " + koszykPane.getAdres(), "ZAMÓWIENIE WYSŁANE", JOptionPane.INFORMATION_MESSAGE);
+        if (e.getSource() == koszykPane.getButtonPlatnosc()) {
+            if (koszykPane.getSklep().getZalogowanyKlient().getKoszyk().zrealizujDostawe(koszykPane.getAdres(), koszykPane.getTextKodBlik().getText(), koszykPane.getTextNumerKarty().getText(), koszykPane.getTextDataWygasniecia().getText(), koszykPane.getTextCvv().getText(), koszykPane.getTextKartaImie().getText(), koszykPane.getTextKartaNazwisko().getText())) {
+                JOptionPane.showMessageDialog(null, "Wysłano paczkę na adres: " + koszykPane.getAdres(), "ZAMÓWIENIE WYSŁANE", JOptionPane.INFORMATION_MESSAGE);
                 for (int i = 0; i < koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getProduktyWKoszyku().size(); i++) {
                     for (int j = 0; j < koszykPane.getSklep().getListaProduktow().size(); j++) {
-                        if (koszykPane.getSklep().getListaProduktow().get(j).equals(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getProdukt())){
-                            koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().put(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar(),koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().get(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar())-(koszykPane.getComboList().get(i).getSelectedIndex()+1));
-                            if(koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().get(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar()) == 0){
+                        if (koszykPane.getSklep().getListaProduktow().get(j).equals(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getProdukt())) {
+                            koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().put(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar(), koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().get(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar()) - (koszykPane.getComboList().get(i).getSelectedIndex() + 1));
+                            if (koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().get(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar()) == 0) {
                                 koszykPane.getSklep().getListaProduktow().get(j).getRozmiary().remove(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar());
                                 koszykPane.getSklep().getListaProduktow().get(j).getRozmiaryAsList().remove(koszykPane.getKoszyk().getProduktyWKoszyku().get(i).getRozmiar());
-                                if(koszykPane.getSklep().getListaProduktow().get(j).getRozmiaryAsList().isEmpty()){
+                                if (koszykPane.getSklep().getListaProduktow().get(j).getRozmiaryAsList().isEmpty()) {
                                     koszykPane.getSklep().getListaProduktow().remove(j);
                                 }
                             }
@@ -138,14 +139,14 @@ public class KoszykListener implements ActionListener {
             }
         }
         for (int i = 0; i < koszykPane.getComboList().size(); i++) {
-            if (e.getSource() == koszykPane.getComboList().get(i)){
-                koszykPane.getKoszyk().getProduktyWKoszyku().get(i).setIloscWKoszyku(koszykPane.getComboList().get(i).getSelectedIndex()+1);
+            if (e.getSource() == koszykPane.getComboList().get(i)) {
+                koszykPane.getKoszyk().getProduktyWKoszyku().get(i).setIloscWKoszyku(koszykPane.getComboList().get(i).getSelectedIndex() + 1);
                 koszykPane.getLabelCenaKoszyka().setText("Koszyk: " + koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia() + " PLN");
-                koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia()+koszykPane.getCenaDostawa()) + " PLN");
+                koszykPane.getLabelSumaCen().setText("SUMA: " + (koszykPane.getSklep().getZalogowanyKlient().getKoszyk().getWartoscZamowienia() + koszykPane.getCenaDostawa()) + " PLN");
             }
         }
 
-        if (e.getSource() == koszykPane.getButtonCofnijDostawa()){
+        if (e.getSource() == koszykPane.getButtonCofnijDostawa()) {
             //USUWANIE
             koszykPane.getPanelGlowny().remove(koszykPane.getPanelDostawy());
             koszykPane.getPanelPodsumowanie().remove(koszykPane.getButtonCofnijDostawa());
@@ -154,14 +155,13 @@ public class KoszykListener implements ActionListener {
             koszykPane.getPanelGlowny().repaint();
 
 
-
             //RYSOWANIE
             koszykPane.rysujPanelKoszyk(koszykPane.getPanelGlowny());
             koszykPane.getLabelDostawa().setBackground(Color.lightGray);
             koszykPane.getLabelKoszyk().setText("TWOJ KOSZYK");
             koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonZamowienie());
         }
-        if (e.getSource() == koszykPane.getButtonCofnijPlatnosc()){
+        if (e.getSource() == koszykPane.getButtonCofnijPlatnosc()) {
             //USUWANIE
             koszykPane.getPanelGlowny().remove(koszykPane.getPanelPlatnosci());
             koszykPane.getPanelPodsumowanie().remove(koszykPane.getButtonPlatnosc());
@@ -177,10 +177,10 @@ public class KoszykListener implements ActionListener {
             koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonDostawa());
             koszykPane.getPanelPodsumowanie().add(koszykPane.getButtonCofnijDostawa());
         }
-        if (e.getSource() == koszykPane.getBuutonPowiadomienia()){
+        if (e.getSource() == koszykPane.getBuutonPowiadomienia()) {
             //TODO PANEL POWIADOMIEN
             System.out.println("TRZEBA ZROBIC");
         }
-        }
     }
+}
 

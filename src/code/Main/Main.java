@@ -1,11 +1,10 @@
+
 package code.Main;
 
 import javax.swing.*;
 import code.InterfejsGraficzny.Rejestracja;
 import code.Obserwator.PromocjaLogika;
 import code.Produkt.Produkt;
-
-import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -44,9 +43,9 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
         String wybor;
-       // int wyborInt;
+        // int wyborInt;
 
-       // menu();
+        // menu();
         Loop: while(scan.hasNextLine()) {
             wybor = scan.nextLine();
             switch (wybor) {
