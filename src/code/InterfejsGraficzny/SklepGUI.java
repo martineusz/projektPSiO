@@ -15,6 +15,7 @@ import code.InterfejsGraficzny.Koszyk.KoszykPane;
 import code.Main.*;
 import code.Produkt.*;
 import code.Obserwator.*;
+import code.inputValidate.ProduktWKoszykuException;
 
 public class SklepGUI {
     private static ArrayList<String> listaProduktowWKoszyku;
@@ -750,39 +751,11 @@ public class SklepGUI {
     }
 
     public static void dodajProdukt(String name, Sklep sklep, Produkt produkt, JComboBox comboBox) {
-        boolean czyProduktWKoszyku = true;
-        Object selectedRozmiar = comboBox.getSelectedItem();
-        System.out.println(selectedRozmiar);
-
-
-
-        if (comboBox.getSelectedIndex() != 0) {
-            if (sklep.zalogowanyKlient.getKoszyk().getProduktyWKoszyku().isEmpty()) {
-                sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt, String.valueOf(comboBox.getSelectedItem()));
-
-                JOptionPane.showMessageDialog(null, "Dodano do koszyka", "GRATULACJE", JOptionPane.INFORMATION_MESSAGE);
-                iloscWKoszyku.setText(String.valueOf(sklep.zalogowanyKlient.getKoszyk().getProduktyWKoszyku().size()));
-            } else {
-                for(ProduktWKoszyku produkt1: sklep.zalogowanyKlient.getKoszyk().getProduktyWKoszyku()) {
-                    if (produkt1.getProdukt().equals(produkt) && produkt1.getRozmiar().equals(String.valueOf(selectedRozmiar)))
-                    {
-                        czyProduktWKoszyku = false;
-                    };
-                }
-
-                if (czyProduktWKoszyku) {
-                    sklep.zalogowanyKlient.getKoszyk().dodajProdukt(produkt, String.valueOf(comboBox.getSelectedItem()));
-
-                    JOptionPane.showMessageDialog(null, "Dodano do koszyka", "GRATULACJE", JOptionPane.INFORMATION_MESSAGE);
-                    iloscWKoszyku.setText(String.valueOf(sklep.zalogowanyKlient.getKoszyk().getProduktyWKoszyku().size()));
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Produkt jest juz w koszyku", "NIE MOZESZ TEGO ZROBIC", JOptionPane.WARNING_MESSAGE);
-                }
-            }
-            listaProduktowWKoszyku.add(name);
-        } else {
-            JOptionPane.showMessageDialog(null, "Wybierz rozmiar produktu aby dodać go do koszyka", "Brak rozmiaru", JOptionPane.INFORMATION_MESSAGE);
+        try{
+            ProduktWKoszykuException.checkIfEmpty(sklep,produkt,comboBox);
+            iloscWKoszyku.setText(String.valueOf(sklep.zalogowanyKlient.getKoszyk().getProduktyWKoszyku().size()));
+        } catch (ProduktWKoszykuException e){
+            JOptionPane.showMessageDialog(null, "Produkt jest juz w koszyku", "Blad", JOptionPane.WARNING_MESSAGE);
         }
     }
 }
