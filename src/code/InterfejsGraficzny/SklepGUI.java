@@ -104,30 +104,36 @@ public class SklepGUI {
 
         if (sklep.zalogowanyKlient.obs != null) {
             for (int i = 0; i < sklep.zalogowanyKlient.obs.getPowiadomienia().size(); i++) {
-                JButton buttonUsun = new JButton();
-                buttonUsun.setBounds(200, 40, 30, 30);
-                buttonUsun.setText("X");
+                JButton buttonUsun = new JButton("x");
+                buttonUsun.setBounds(270, 5, 20, 20);
                 buttonUsun.setFocusable(false);
-                buttonUsun.setFont(new Font(null, Font.BOLD, 20));
-                buttonUsun.setBackground(Color.WHITE);
-                buttonUsun.setForeground(myColor);
-                buttonUsun.setBorder(BorderFactory.createEtchedBorder());
+                buttonUsun.setFont(new Font(null, Font.PLAIN, 20));
+                buttonUsun.setBorder(null);
+                buttonUsun.setBackground(null);
+                buttonUsun.setForeground(Color.gray);
 
                 String promocja = sklep.zalogowanyKlient.obs.getPowiadomienia().get(i);
 
                 JLabel labelPromocja = new JLabel();
-                labelPromocja.setBounds(15, 15, 200, 40);
-                labelPromocja.setText("Promocja: " + promocja);
+                labelPromocja.setBounds(15, 15, 200, 15);
+                labelPromocja.setText("Promocja: ");
                 labelPromocja.setFont(new Font(null, Font.BOLD, 10));
+
+                JLabel labelPromocja2 = new JLabel();
+                labelPromocja2.setBounds(15, 35, 300, 40);
+                labelPromocja2.setText(" " + promocja);
+                labelPromocja2.setFont(new Font(null, Font.BOLD, 10));
 
                 JPanel panelPromocji = new JPanel();
                 panelPromocji.setLayout(null);
                 panelPromocji.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                panelPromocji.setBackground(Color.white);
                 panelPromocji.setPreferredSize(new Dimension(300, 100));
 
                 panelPowiadomienia.add(panelPromocji);
                 panelPromocji.add(buttonUsun);
                 panelPromocji.add(labelPromocja);
+                panelPromocji.add(labelPromocja2);
 
                 buttonPromocjeMap.put(buttonUsun, promocja);
                 buttonUsun.addActionListener(e -> {

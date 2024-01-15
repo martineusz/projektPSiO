@@ -22,6 +22,7 @@ public class KoszykPane extends JPanel {
     private Sklep sklep;
     private Koszyk koszyk;
     private float cenaDostawa = 0.00F;
+    private float sumaCen = 0.00F;
 
     //BUTTONS
     private JButton buttonZamowienie;
@@ -293,6 +294,7 @@ public class KoszykPane extends JPanel {
         panelPodsumowanie.add(labelCenaDostawy);
 
         //SUMA CEN WSZYSTKO
+        sumaCen = (float) Math.ceil((cenaDostawa+koszyk.getWartoscZamowienia())*100)/100;
         labelSumaCen.setText("SUMA: " + (cenaDostawa + koszyk.getWartoscZamowienia()) + " PLN");
         labelSumaCen.setBounds(25, 175, 200, 100);
         labelSumaCen.setFont(new Font(null, Font.BOLD, 20));
@@ -844,6 +846,11 @@ public class KoszykPane extends JPanel {
 
     public Koszyk getKoszyk() {
         return koszyk;
+    }
+
+    public float getSumaCen() {
+        sumaCen = (float)koszyk.getWartoscZamowienia()+cenaDostawa;
+        return sumaCen;
     }
 
     public static void main(String[] args) {
